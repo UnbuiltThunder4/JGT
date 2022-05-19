@@ -78,8 +78,6 @@ class EvilGauge: SKSpriteNode {
         }
         else {
             
-            print(goblin.age)
-            
             switch goblin.type {
                 
             case .normal:
