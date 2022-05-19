@@ -333,12 +333,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func updateAge() {
+        self.agecounter += 1
         if (self.agecounter % 300 == 0) {
             self.age += 1
             self.agecounter = 0
-        }
-        else {
-            self.agecounter += 1
         }
     }
     

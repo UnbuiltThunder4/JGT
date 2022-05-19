@@ -101,7 +101,6 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             idleUpdate()
             break
         }
-        print(self.state)
     }
     
     private func idleUpdate() {
@@ -145,7 +144,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                 }
             }
             if (distance.dx < 3 && distance.dy < 3) {
-                self.target!.health -= self.attack
+//                self.target!.health -= self.attack
                 //DAMAGE ONLY AT THE END OF ANIMATION
             }
         }

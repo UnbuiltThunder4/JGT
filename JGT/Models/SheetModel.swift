@@ -56,7 +56,7 @@ class Sheet: SKSpriteNode {
                             ATK: \(String(goblin.attack))
                             FER: \(String(goblin.fear))
                             FRZ: \(String(goblin.frenzy))
-                            AGE: \(String(Int(goblin.age)))
+                            AGE: \(String(goblin.age))
                          """
     }
     
