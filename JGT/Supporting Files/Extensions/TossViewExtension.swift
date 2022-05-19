@@ -146,22 +146,33 @@ extension TossScene {
             
             if recognizer.state == .changed {
                 
+                let distanceX = min(abs(cameraNode.position.x - self.background.frame.minX),
+                                    abs(cameraNode.position.x - self.background.frame.maxX))
+                let distanceY = min(abs(cameraNode.position.y - self.background.frame.minY),
+                                    abs(cameraNode.position.y - self.background.frame.maxY))
+                let minDistanceX = (self.size.width/2 * self.currentScale) - self.background.frame.minX
+                let minDistanceY = (self.size.height/2 * self.currentScale) - self.background.frame.minY
+                
                 cameraNode.xScale = (1.0 / scale) * self.lastScale
                 cameraNode.yScale = (1.0 / scale) * self.lastScale
                 
-//                if cameraNode.position.x < background.frame.midX && cameraNode.xScale != maximumZoom && cameraNode.xScale != minimumZoom {
+                if distanceX <= minDistanceX && cameraNode.xScale != maximumZoom && cameraNode.xScale != minimumZoom {
+                    if cameraNode.position.x < self.background.frame.midX {
+                    cameraNode.position.x += 30.0
+//                    cameraNode.position.y += 10.0
+                    } else {
+                        cameraNode.position.x -= 30.0
+                    }
+                }
+                if distanceY <= minDistanceY && cameraNode.xScale != maximumZoom && cameraNode.xScale != minimumZoom {
+                    if cameraNode.position.y < self.background.frame.midY {
 //                    cameraNode.position.x += 10.0
-//                    cameraNode.position.y += 10.0
-//                    print("Position to the right: \(cameraNode.position)")
-//                    print("MidX: \(background.frame.midX)")
-//                    print("Camera Scale: \(cameraNode.xScale)")
-//                }
-//                if cameraNode.position.x > background.frame.midX && cameraNode.xScale != maximumZoom && cameraNode.xScale != minimumZoom {
-//                    cameraNode.position.x -= 10.0
-//                    cameraNode.position.y += 10.0
-//                    print("Position to the left: \(cameraNode.position)")
-//                }
-                
+                    cameraNode.position.y += 30.0
+                    } else {
+                        cameraNode.position.y -= 30.0
+                    }
+                }
+                                
                 if (cameraNode.xScale > maximumZoom) && (cameraNode.yScale > maximumZoom) {
                     cameraNode.xScale = maximumZoom
                     cameraNode.yScale = maximumZoom
