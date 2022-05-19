@@ -88,12 +88,18 @@ class EvilGauge: SKSpriteNode {
                     self.currentFill += amount
                     print(amount)
                     gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+                } else if self.currentFill != self.maxFill {
+                    self.currentFill = self.maxFill
+                    gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
                 }
                 break
             case .rock:
                 amount = goblin.age/2 + 3
                 if (self.currentFill + amount) < self.maxFill {
                     self.currentFill += amount
+                    gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+                } else if self.currentFill != self.maxFill {
+                    self.currentFill = self.maxFill
                     gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
                 }
                 break
@@ -102,12 +108,18 @@ class EvilGauge: SKSpriteNode {
                 if (self.currentFill + amount) < self.maxFill {
                     self.currentFill += amount
                     gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+                } else if self.currentFill != self.maxFill {
+                    self.currentFill = self.maxFill
+                    gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
                 }
                 break
             case .gum:
                 amount = goblin.age/2 + 3
                 if (self.currentFill + amount) < self.maxFill {
                     self.currentFill += amount
+                    gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+                } else if self.currentFill != self.maxFill {
+                    self.currentFill = self.maxFill
                     gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
                 }
                 break
