@@ -97,9 +97,9 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     //MARK: Update
     
     override func update(_ currentTime: TimeInterval) {
-        for i in 0..<population.goblins.count {
-            population.goblins[i].update()
-        }
+        
+        population.update()
+        
         for i in 0..<enemies.count {
             enemies[i].update()
         }

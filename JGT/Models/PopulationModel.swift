@@ -33,9 +33,13 @@ class Population: ObservableObject {
     
     public func update() {
         var hasToUpdateRank = false
+        
         self.goblins.forEach {
             if ($0.update()) {
                 hasToUpdateRank = true
+            }
+            if ($0.health <= 0) {
+                self.kill($0)
             }
         }
         if (hasToUpdateRank) {
@@ -69,7 +73,9 @@ class Population: ObservableObject {
     }
     
     public func kill(_ goblin: Goblin) {
-        self.goblins.remove(at: self.goblins.firstIndex(of: goblin)!)
+        let index = self.goblins.firstIndex(of: goblin)!
+        self.goblins[index].removeFromParent()
+        self.goblins.remove(at: index)
     }
     
     public func rankPerFitness() {

@@ -100,12 +100,9 @@ public enum EnemyType: Int {
 }
 
 let gnomes: [Enemy] = [
-    Enemy(type: .small, x: 1000, y: 150),
-    Enemy(type: .bow, x: 1100, y: 150),
-    Enemy(type: .axe, x: 1200, y: 150),
-    Enemy(type: .small, x: 1500, y: 850),
-    Enemy(type: .bow, x: 1700, y: 850),
-    Enemy(type: .axe, x: 1900, y: 850)
+    Enemy(type: .small, x: 2500, y: 1110),
+    Enemy(type: .bow, x: 2800, y: 1110),
+    Enemy(type: .axe, x: 3100, y: 1110)
 ]
 
 public enum ProficencyType {
@@ -130,7 +127,7 @@ public enum StructureType: Int {
 let levelstructures: [Structure] = [
     Tavern(x: 1100, y: 350),
     Academy(x: 200, y: 650),
-    Village(x: 900, y: 900),
+    Village(x: 1000, y: 1000),
     Structure(type: .tree, x: 450, y: 300),
     Structure(type: .tree, x: 850, y: 500),
     Structure(type: .tree, x: 1000, y: 1000),

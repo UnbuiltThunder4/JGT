@@ -117,39 +117,58 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             }
         }
         else {
-            removeAction(forKey: "walk")
-//            removeAction(forKey: "walk")
-            self.state = .fighting
+            if (self.target!.state != .inhand || self.target!.state != .invillage || self.target!.state != .inacademy || self.target!.state != .intavern) {
+                removeAction(forKey: "walk")
+                self.state = .fighting
+            }
+            else {
+                self.target = nil
+            }
         }
     }
     
     private func attackUpdate() {
-        
-        //ATTACK HERE
         if (self.target != nil) {
-            let dist = CGVector(dx: self.initialx - self.position.x, dy: self.initialy - self.position.y)
-            let distance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
-            if (dist.dx > 100 && dist.dy > 100) {
-                self.state = .idle
-                self.target = nil
-            }
-            else {
-                if let _ = self.action(forKey: "walk") {
-                    
+            if (self.target!.state != .inhand || self.target!.state != .invillage || self.target!.state != .inacademy || self.target!.state != .intavern) {
+                let originalPosDistance = CGVector(dx: self.initialx - self.position.x, dy: self.initialy - self.position.y)
+                let targetDistance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
+                let walkDistance = limitVector(vector: targetDistance, max: 20)
+                if (originalPosDistance.dx > 250 || originalPosDistance.dy > 250) {
+                    self.state = .idle
+                    self.target = nil
+                    removeAction(forKey: "walk")
+                    return
                 }
                 else {
-                    let time = getDuration(distance: distance, speed: self.speed)
-                    let walk = SKAction.move(by: distance, duration: time)
-                    self.run(walk, withKey: "walk")
+                    if let _ = self.action(forKey: "walk") {
+                        if (targetDistance.dx < 25 || targetDistance.dy < 25) {
+                            self.target!.health -= self.attack //DAMAGE ONLY AT THE END OF ANIMATION
+                            if (self.target!.health <= 0) {
+                                self.target = nil
+                                self.state = .idle
+                                removeAction(forKey: "walk")
+                                return
+                            }
+                        }
+                    }
+                    else {
+                        let time = getDuration(distance: walkDistance, speed: self.speed)
+                        let walk = SKAction.move(by: walkDistance, duration: time)
+                        self.run(walk, withKey: "walk")
+                    }
                 }
             }
-            if (distance.dx < 3 && distance.dy < 3) {
-//                self.target!.health -= self.attack
-                //DAMAGE ONLY AT THE END OF ANIMATION
+            else {
+                self.target = nil
+                self.state = .idle
+                removeAction(forKey: "walk")
+                return
             }
         }
         else {
             self.state = .idle
+            removeAction(forKey: "walk")
+            return
         }
     }
     

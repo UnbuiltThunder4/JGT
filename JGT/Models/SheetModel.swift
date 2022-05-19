@@ -52,7 +52,7 @@ class Sheet: SKSpriteNode {
         typeLabel.text = goblinType
         descLabel.text = goblin.backstory
         statLabel.text = """
-                            HP: \(String(goblin.maxHealth))
+                            HP: \(String(goblin.health))/\(String(goblin.maxHealth))
                             ATK: \(String(goblin.attack))
                             FER: \(String(goblin.fear))
                             FRZ: \(String(goblin.frenzy))

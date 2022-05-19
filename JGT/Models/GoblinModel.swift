@@ -309,7 +309,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         if (self.inVillageCounter % 60 == 0) {
             //GIVE EVIL POINTS
             self.inVillageCounter = 0
-            if (Int.random(in: 0...100)<=1) {
+            let randnum = Int.random(in: 0...100)
+            if (randnum <= 5) {
                 self.state = .idle
                 self.alpha = 1.0
                 self.type = .gum
@@ -317,6 +318,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.HWpoints += 15
                 self.fitness = self.getFitness()
                 hasToUpdateRank = true
+            }
+            else if (randnum <= 30) {
+                self.state = .idle
+                self.alpha = 1.0
             }
         }
         return hasToUpdateRank
@@ -345,23 +350,18 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         switch self.closeStructure!.type {
             
         case .academy:
-//            if (input == 2) {
             if (input == 2) {
                 self.enterAcademy()
-//            }
             }
             break
             
         case .tavern:
-            self.enterTavern()
             //self.enterTavern()
             break
             
         case .village:
-//            if (input == 2) {
             if (input == 2) {
                 self.enterVillage()
-//            }
             }
             break
             
