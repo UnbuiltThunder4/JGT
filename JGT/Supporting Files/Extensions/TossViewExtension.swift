@@ -156,22 +156,25 @@ extension TossScene {
                 cameraNode.xScale = (1.0 / scale) * self.lastScale
                 cameraNode.yScale = (1.0 / scale) * self.lastScale
                 
+                var moveX: CGFloat = 0.0
+                var moveY: CGFloat = 0.0
+                
                 if distanceX <= minDistanceX && cameraNode.xScale != maximumZoom && cameraNode.xScale != minimumZoom {
                     if cameraNode.position.x < self.background.frame.midX {
-                    cameraNode.position.x += 30.0
-//                    cameraNode.position.y += 10.0
+                        moveX += 30.0
                     } else {
-                        cameraNode.position.x -= 30.0
+                        moveX -= 30.0
                     }
                 }
                 if distanceY <= minDistanceY && cameraNode.xScale != maximumZoom && cameraNode.xScale != minimumZoom {
                     if cameraNode.position.y < self.background.frame.midY {
-//                    cameraNode.position.x += 10.0
-                    cameraNode.position.y += 30.0
+                        moveY += 30.0
                     } else {
-                        cameraNode.position.y -= 30.0
+                        moveY -= 30.0
                     }
                 }
+                
+                cameraNode.run(SKAction.move(by: CGVector(dx: moveX, dy: moveY), duration: 0.1))
                                 
                 if (cameraNode.xScale > maximumZoom) && (cameraNode.yScale > maximumZoom) {
                     cameraNode.xScale = maximumZoom
