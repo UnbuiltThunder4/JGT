@@ -137,6 +137,20 @@ class GameLogic: ObservableObject {
             let distance = CGVector(dx: destination.x - spawnPoint.x, dy: destination.y - spawnPoint.y)
             
             newGoblin.type = type
+            
+            switch type {
+            case .normal:
+                break
+            case .fire:
+                newGoblin.texture = SKTexture(imageNamed: "fire_goblin")
+                break
+            case .rock:
+                newGoblin.texture = SKTexture(imageNamed: "rock_goblin")
+                break
+            case .gum:
+                newGoblin.texture = SKTexture(imageNamed: "gum_goblin")
+                break
+            }
             newGoblin.run(SKAction.move(by: distance, duration: 3.0))
             
             tossScene.evilGauge.updateGauge(goblin: newGoblin, isShot: true)
