@@ -66,11 +66,12 @@ class HUD: SKNode {
         sheet.typeLabel.position = CGPoint(x: 0,
                                            y: sheet.frame.maxY/1.4)
         sheet.descLabel.position = CGPoint(x: 0,
-                                           y: sheet.frame.maxY / 1.5 - 35)
+                                           y: sheet.frame.maxY / 1.5)
         sheet.statLabel.position = CGPoint(x: 0,
                                            y: sheet.frame.maxY / 20.0 - 50)
         
-        sheet.nameLabel.verticalAlignmentMode = .bottom
+        sheet.nameLabel.verticalAlignmentMode = .center
+        sheet.descLabel.verticalAlignmentMode = .top
         sheet.descLabel.preferredMaxLayoutWidth = sheet.frame.width - 20
         sheet.descLabel.numberOfLines = Int(sheet.descLabel.frame.width / sheet.frame.width)
         
