@@ -154,7 +154,7 @@ class GameLogic: ObservableObject {
             }
             newGoblin.run(SKAction.move(by: distance, duration: 3.0), withKey: "launched")
             
-            tossScene.evilGauge.updateGauge(goblin: newGoblin, isShot: true)
+            tossScene.evilGauge.shootGauge(goblin: newGoblin)
             tossScene.cauldron.updateCauldron(amount: 1)
         }
     }

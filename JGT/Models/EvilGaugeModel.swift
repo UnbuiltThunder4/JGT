@@ -53,34 +53,22 @@ class EvilGauge: SKSpriteNode {
         return false
     }
     
-    func updateGauge(goblin: Goblin, isShot: Bool) {
-        var amount = 0
-        
-        if isShot {
-            switch goblin.type {
-            case .normal:
-                self.currentFill -= 2
-                gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
-                break
-            case .rock:
-                self.currentFill -= 4
-                gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
-                break
-            case .fire:
-                self.currentFill -= 4
-                gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
-                break
-            case .gum:
-                self.currentFill -= 4
-                gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
-                break
-            }
+    func shootGauge(goblin: Goblin) {
+        if goblin.type == .normal {
+            self.currentFill -= 2
+            gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
         }
         else {
+            self.currentFill -= 4
+            gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+        }
+    }
+    
+    func updateGauge(goblin: Goblin?, value: Int?) {
+        var amount = 0
+        if let goblin = goblin {
             
-            switch goblin.type {
-                
-            case .normal:
+            if goblin.type == .normal {
                 amount = goblin.age/2
                 if (self.currentFill + amount) < self.maxFill {
                     self.currentFill += amount
@@ -90,39 +78,27 @@ class EvilGauge: SKSpriteNode {
                     self.currentFill = self.maxFill
                     gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
                 }
-                break
-            case .rock:
-                amount = goblin.age/2 + 3
-                if (self.currentFill + amount) < self.maxFill {
-                    self.currentFill += amount
-                    gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
-                } else if self.currentFill != self.maxFill {
-                    self.currentFill = self.maxFill
-                    gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
-                }
-                break
-            case .fire:
-                amount = goblin.age/2 + 3
-                if (self.currentFill + amount) < self.maxFill {
-                    self.currentFill += amount
-                    gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
-                } else if self.currentFill != self.maxFill {
-                    self.currentFill = self.maxFill
-                    gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
-                }
-                break
-            case .gum:
-                amount = goblin.age/2 + 3
-                if (self.currentFill + amount) < self.maxFill {
-                    self.currentFill += amount
-                    gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
-                } else if self.currentFill != self.maxFill {
-                    self.currentFill = self.maxFill
-                    gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
-                }
-                break
             }
-            
+            else {
+                amount = goblin.age/2 + 3
+                if (self.currentFill + amount) < self.maxFill {
+                    self.currentFill += amount
+                    gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+                } else if self.currentFill != self.maxFill {
+                    self.currentFill = self.maxFill
+                    gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+                }
+            }
+        }
+        else if let value = value {
+            amount = value
+            if (self.currentFill + amount) < self.maxFill {
+                self.currentFill += amount
+                gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+            } else if self.currentFill != self.maxFill {
+                self.currentFill = self.maxFill
+                gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+            }
         }
         
     }

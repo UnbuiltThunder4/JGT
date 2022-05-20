@@ -115,7 +115,7 @@ extension TossScene {
             if selectedNode?.name! == "goblin" {
                 
                 if self.evilGauge.currentFill <= 20 {
-                    self.evilGauge.updateGauge(goblin: selectedNode as! Goblin, isShot: false)
+                    self.evilGauge.updateGauge(goblin: selectedNode as? Goblin, value: nil)
                     print(selectedNode as! Goblin)
                     self.cauldron.updateCauldron(amount: -1)
                 }
