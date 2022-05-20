@@ -44,6 +44,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     public var isFrenzied: Bool = false
     
     public var closeStructure: Structure? = nil
+    public var hasRock: Bool = false
     
     public var target: Enemy? = nil
     public var targetQueue: [Enemy] = []
@@ -507,14 +508,18 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             
         case .rock:
             if (input == 1) {
-                self.pickUpRock()
+                if (!self.hasRock) {
+                    self.pickUpRock()
+                }
             }
             else if (input == 2) {
                 if (self.type == .normal) {
                     self.eatRock()
                 }
                 else {
-                    self.pickUpRock()
+                    if (!self.hasRock) {
+                        self.pickUpRock()
+                    }
                 }
             }
             hasToUpdateRank = true
@@ -560,6 +565,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func pickUpRock() {
         self.closeStructure!.removeFromParent()
         self.HWpoints += 5
+        self.hasRock = true
         self.fitness = self.getFitness()
     }
     

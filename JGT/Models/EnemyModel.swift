@@ -126,7 +126,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             }
         }
         else {
-            if (self.target!.state != .inhand && self.target!.state != .invillage && self.target!.state != .inacademy && self.target!.state != .intavern) {
+            if (self.target!.state != .inhand && self.target!.state != .invillage && self.target!.state != .inacademy && self.target!.state != .intavern && self.target!.state != .flying && self.target!.state != .launched) {
                 removeAction(forKey: "walk")
                 self.state = .fighting
             }
@@ -144,7 +144,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     
     private func attackUpdate() {
         if (self.target != nil) {
-            if (self.target!.state != .inhand && self.target!.state != .invillage && self.target!.state != .inacademy && self.target!.state != .intavern) {
+            if (self.target!.state != .inhand && self.target!.state != .invillage && self.target!.state != .inacademy && self.target!.state != .intavern && self.target!.state != .flying && self.target!.state != .launched) {
                 let originalPosDistance = CGVector(dx: self.initialx - self.position.x, dy: self.initialy - self.position.y)
                 let targetDistance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
                 let walkDistance = limitVector(vector: targetDistance, max: 20)
