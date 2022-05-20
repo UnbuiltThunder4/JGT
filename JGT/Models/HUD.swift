@@ -71,10 +71,10 @@ class HUD: SKNode {
                                            y: sheet.frame.maxY / 20.0 - 50)
         
         sheet.nameLabel.verticalAlignmentMode = .center
+        sheet.statLabel.verticalAlignmentMode = .center
         sheet.descLabel.verticalAlignmentMode = .top
         sheet.descLabel.preferredMaxLayoutWidth = sheet.frame.width - 20
         sheet.descLabel.numberOfLines = Int(sheet.descLabel.frame.width / sheet.frame.width)
-        
         sheet.statLabel.numberOfLines = 5
         
     }
