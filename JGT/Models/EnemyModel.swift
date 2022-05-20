@@ -105,35 +105,35 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     
     private func idleUpdate() {
         if (self.target == nil) {
-            if ((position.x != self.initialx) || (position.y != self.initialy)) {
-                if let _ = self.action(forKey: "walk") {
-                }
-                else {
-                    let distance = CGVector(dx: self.initialx - position.x, dy: self.initialy - position.y)
-                    let time = getDuration(distance: distance, speed: self.speed)
-                    let walk = SKAction.move(by: distance, duration: time)
-                    self.run(walk, withKey: "walk")
-                }
-            }
+            self.walkToOrigin()
+            return
         }
         else {
-            if (self.target!.state != .inhand || self.target!.state != .invillage || self.target!.state != .inacademy || self.target!.state != .intavern) {
+            if (self.target!.state != .inhand && self.target!.state != .invillage && self.target!.state != .inacademy && self.target!.state != .intavern) {
                 removeAction(forKey: "walk")
                 self.state = .fighting
+                return
             }
             else {
-                self.target = nil
+                self.walkToOrigin()
+                let targetDistance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
+                if (abs(targetDistance.dx) > 250 || abs(targetDistance.dy) > 250) {
+                    self.state = .idle
+                    self.target = nil
+                    removeAction(forKey: "walk")
+                    return
+                }
             }
         }
     }
     
     private func attackUpdate() {
         if (self.target != nil) {
-            if (self.target!.state != .inhand || self.target!.state != .invillage || self.target!.state != .inacademy || self.target!.state != .intavern) {
+            if (self.target!.state != .inhand && self.target!.state != .invillage && self.target!.state != .inacademy && self.target!.state != .intavern) {
                 let originalPosDistance = CGVector(dx: self.initialx - self.position.x, dy: self.initialy - self.position.y)
                 let targetDistance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
                 let walkDistance = limitVector(vector: targetDistance, max: 20)
-                if (originalPosDistance.dx > 250 || originalPosDistance.dy > 250) {
+                if (abs(originalPosDistance.dx) > 250 || abs(originalPosDistance.dy) > 250) {
                     self.state = .idle
                     self.target = nil
                     removeAction(forKey: "walk")
@@ -141,7 +141,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                 }
                 else {
                     if let _ = self.action(forKey: "walk") {
-                        if (targetDistance.dx < 25 || targetDistance.dy < 25) {
+                        if (abs(targetDistance.dx) < 25 && abs(targetDistance.dy) < 25) {
                             self.target!.health -= self.attack //DAMAGE ONLY AT THE END OF ANIMATION
                             if (self.target!.health <= 0) {
                                 self.target = nil
@@ -159,7 +159,6 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                 }
             }
             else {
-                self.target = nil
                 self.state = .idle
                 removeAction(forKey: "walk")
                 return
@@ -169,6 +168,19 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             self.state = .idle
             removeAction(forKey: "walk")
             return
+        }
+    }
+    
+    private func walkToOrigin() {
+        if ((position.x != self.initialx) || (position.y != self.initialy)) {
+            if let _ = self.action(forKey: "walk") {
+            }
+            else {
+                let distance = CGVector(dx: self.initialx - position.x, dy: self.initialy - position.y)
+                let time = getDuration(distance: distance, speed: self.speed)
+                let walk = SKAction.move(by: distance, duration: time)
+                self.run(walk, withKey: "walk")
+            }
         }
     }
     
