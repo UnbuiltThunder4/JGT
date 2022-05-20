@@ -25,6 +25,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     public var attack: Int
     
     public var target: Goblin? = nil
+    public var targetQueue: [Goblin] = []
     
     private var initialx: CGFloat
     private var initialy: CGFloat
@@ -105,8 +106,14 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     
     private func idleUpdate() {
         if (self.target == nil) {
-            self.walkToOrigin()
-            return
+            if (!self.targetQueue.isEmpty) {
+                self.target = self.targetQueue[0]
+                self.targetQueue.remove(at: 0)
+            }
+            else {
+                self.walkToOrigin()
+                return
+            }
         }
         else {
             if (self.target!.state != .inhand && self.target!.state != .invillage && self.target!.state != .inacademy && self.target!.state != .intavern) {
@@ -137,7 +144,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                     self.state = .idle
                     self.target = nil
                     removeAction(forKey: "walk")
-                    return
+//                    return
                 }
                 else {
                     if let _ = self.action(forKey: "walk") {
@@ -147,7 +154,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                                 self.target = nil
                                 self.state = .idle
                                 removeAction(forKey: "walk")
-                                return
+//                                return
                             }
                         }
                     }
@@ -161,13 +168,13 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             else {
                 self.state = .idle
                 removeAction(forKey: "walk")
-                return
+//                return
             }
         }
         else {
             self.state = .idle
             removeAction(forKey: "walk")
-            return
+//            return
         }
     }
     
