@@ -100,13 +100,14 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         
         population.update()
         
-        for i in 0..<enemies.count {
-            if(enemies[i].update()) {
-                enemies[i].removeFromParent()
-                enemies.remove(at: i)
-                //ADD 5 EVIL POINTS HERE
+        self.enemies.forEach {
+            if ($0.update()) {
+                let index = self.enemies.firstIndex(of: $0)!
+                $0.removeFromParent()
+                self.enemies.remove(at: index)
             }
         }
+        
     }
     
 }

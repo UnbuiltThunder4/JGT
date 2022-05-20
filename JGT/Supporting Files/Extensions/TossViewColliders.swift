@@ -33,11 +33,13 @@ extension TossScene: SKPhysicsContactDelegate {
             
             if let node = firstBody.node as? Goblin {
                 if let node2 = secondBody.node as? Enemy {
+                    node.targetQueue.append(node2)
                     node2.targetQueue.append(node)
                 }
             }
             if let node = secondBody.node as? Goblin {
                 if let node2 = firstBody.node as? Enemy {
+                    node.targetQueue.append(node2)
                     node2.targetQueue.append(node)
                 }
             }

@@ -155,7 +155,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                 }
                 else {
                     if let _ = self.action(forKey: "walk") {
-                        if (abs(targetDistance.dx) < 30 && abs(targetDistance.dy) < 30) {
+                        if (abs(targetDistance.dx) < 60 && abs(targetDistance.dy) < 60) {
                             self.target!.health -= self.attack //DAMAGE ONLY AT THE END OF ANIMATION
                             if (self.target!.health <= 0) {
                                 self.target = nil
