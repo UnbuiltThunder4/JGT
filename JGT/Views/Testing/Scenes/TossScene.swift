@@ -105,6 +105,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
                 let index = self.enemies.firstIndex(of: $0)!
                 $0.removeFromParent()
                 self.enemies.remove(at: index)
+                evilGauge.updateGauge(goblin: nil, value: 5)
             }
         }
         

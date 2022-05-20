@@ -41,6 +41,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     public var fear: Int
     public var frenzy: Int
     public var currentFrenzyTurn: Int = 0
+    public var isFrenzied: Bool = false
     
     public var closeStructure: Structure? = nil
     
@@ -51,6 +52,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private var inVillageCounter: Int = 0
     private var inAcademyCounter: Int = 0
     private var inTavernCounter: Int = 0
+    private var frenzyCounter: Int = 0
     
     init() {
         let goblinname = GoblinConstants.names.randomElement()! + " " + GoblinConstants.surnames.randomElement()!
@@ -191,6 +193,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             fightingUpdate()
             break
             
+        case .feared:
+            fearedUpdate()
+            break
+            
         case .intavern:
             inTavernUpdate()
             break
@@ -225,99 +231,144 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func idleUpdate() -> Bool {
         var hasToUpdateRank = false
         self.updateAge()
-        if (self.target == nil) {
-            if (!self.targetQueue.isEmpty) {
-                self.target = self.targetQueue[0]
-                self.targetQueue.remove(at: 0)
-            }
-            else {
-                if let _ = self.action(forKey: "walk") {
-                    if (self.closeStructure != nil) {
-                        let targetDistance = CGVector(dx: self.closeStructure!.position.x - self.position.x, dy: self.closeStructure!.position.y - self.position.y)
-                        if (abs(targetDistance.dx) < 200 && abs(targetDistance.dy) < 200) {
-                            if (self.closeStructure!.type != .tavern || !(self.isGraduated && self.closeStructure!.type == .academy)) {
-                                let prediction = self.wit.predict(
-                                    input: .init(size: .init(width: 2),
-                                                 body: [Float(self.type.rawValue), Float(self.closeStructure!.type.rawValue)]))
-                                var output: Int = 0
-                                if (prediction[0] >= prediction[1]) {
-                                    if (prediction[0] > 0.4) {
-                                        output = 1
-                                    }
-                                }
-                                else {
-                                    if (prediction[1] > 0.5) {
-                                        output = 2
-                                    }
-                                }
-                                if(output > 0) {
-                                    print("action \(output): value \(prediction[output-1])")
-                                    hasToUpdateRank = self.checkInterations(input: output)
-                                }
-                                else {
-                                    print("ignored")
-                                }
-                                self.closeStructure = nil
-                            }
-                        }
-                        else {
-                            self.closeStructure = nil
-                        }
-                        self.removeAction(forKey: "walk")
-                    }
+        if (self.isFrenzied) {
+            self.checkFrenzy()
+        }
+        if (!self.checkFear()) {
+            if (self.target == nil) {
+                if (!self.targetQueue.isEmpty) {
+                    self.target = self.targetQueue[0]
+                    self.targetQueue.remove(at: 0)
                 }
                 else {
-                    var distance = CGVector(dx: self.destination.x - position.x, dy: self.destination.y - position.y)
-                    if (distance.dx > 5.0 || distance.dy > 5.0) {
-                        distance.dx = distance.dx * CGFloat.random(in: 0.2...1.8)
-                        distance.dy = distance.dy * CGFloat.random(in: 0.2...1.8)
-                        distance = limitVector(vector: distance, max: 100)
+                    if let _ = self.action(forKey: "walk") {
+                        if (self.closeStructure != nil && self.isFrenzied == false) {
+                            let targetDistance = CGVector(dx: self.closeStructure!.position.x - self.position.x, dy: self.closeStructure!.position.y - self.position.y)
+                            if (abs(targetDistance.dx) < 200 && abs(targetDistance.dy) < 200) {
+                                if (self.closeStructure!.type != .tavern || !(self.isGraduated && self.closeStructure!.type == .academy)) {
+                                    let prediction = self.wit.predict(
+                                        input: .init(size: .init(width: 2),
+                                                     body: [Float(self.type.rawValue), Float(self.closeStructure!.type.rawValue)]))
+                                    var output: Int = 0
+                                    if (prediction[0] >= prediction[1]) {
+                                        if (prediction[0] > 0.4) {
+                                            output = 1
+                                        }
+                                    }
+                                    else {
+                                        if (prediction[1] > 0.5) {
+                                            output = 2
+                                        }
+                                    }
+                                    if(output > 0) {
+                                        print("action \(output): value \(prediction[output-1])")
+                                        hasToUpdateRank = self.checkInterations(input: output)
+                                    }
+                                    else {
+                                        print("ignored")
+                                    }
+                                    self.closeStructure = nil
+                                }
+                            }
+                            else {
+                                self.closeStructure = nil
+                            }
+                            self.removeAction(forKey: "walk")
+                        }
                     }
                     else {
-                        self.destination = CGPoint(
-                            x: Double.random(in: 60...MainScreenProperties.bgwidth - 60),
-                            y: Double.random(in: 60...MainScreenProperties.bgheight - 60))
-                        distance = CGVector(dx: self.destination.x - position.x, dy: self.destination.y - position.y)
-                        distance.dx = distance.dx * CGFloat.random(in: 0.2...1.8)
-                        distance.dy = distance.dy * CGFloat.random(in: 0.2...1.8)
-                        distance = limitVector(vector: distance, max: 100)
+                        var distance = CGVector(dx: self.destination.x - position.x, dy: self.destination.y - position.y)
+                        if (distance.dx > 5.0 || distance.dy > 5.0) {
+                            distance = limitVector(vector: distance, max: 100)
+                            distance.dx = distance.dx * CGFloat.random(in: 0.2...1.8)
+                            distance.dy = distance.dy * CGFloat.random(in: 0.2...1.8)
+                        }
+                        else {
+                            self.destination = CGPoint(
+                                x: Double.random(in: 60...MainScreenProperties.bgwidth - 60),
+                                y: Double.random(in: 60...MainScreenProperties.bgheight - 60))
+                            distance = CGVector(dx: self.destination.x - position.x, dy: self.destination.y - position.y)
+                            distance = limitVector(vector: distance, max: 100)
+                            distance.dx = distance.dx * CGFloat.random(in: 0.2...1.8)
+                            distance.dy = distance.dy * CGFloat.random(in: 0.2...1.8)
+                        }
+                        let time = getDuration(distance: distance, speed: self.speed)
+                        let walk = SKAction.move(by: distance, duration: time)
+                        self.run(walk, withKey: "walk")
                     }
-                    let time = getDuration(distance: distance, speed: self.speed)
-                    let walk = SKAction.move(by: distance, duration: time)
-                    self.run(walk, withKey: "walk")
                 }
+            }
+            else {
+                self.state = .fighting
+                removeAction(forKey: "walk")
             }
         }
         else {
-            self.state = .fighting
+            self.state = .feared
             removeAction(forKey: "walk")
         }
         return hasToUpdateRank
     }
     
     private func fightingUpdate() {
-        if (self.target != nil) {
-            let targetDistance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
-            let walkDistance = limitVector(vector: targetDistance, max: 20)
-            if let _ = self.action(forKey: "walk") {
-                if (abs(targetDistance.dx) < 60 && abs(targetDistance.dy) < 60) {
-                    self.target!.health -= self.attack //DAMAGE ONLY AT THE END OF ANIMATION
-                    if (self.target!.health <= 0) {
-                        self.target = nil
-                        self.state = .idle
-                        removeAction(forKey: "walk")
+        self.updateAge()
+        if (self.isFrenzied) {
+            self.checkFrenzy()
+        }
+        if (!self.checkFear()) {
+            if (self.target != nil) {
+                let targetDistance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
+                let walkDistance = limitVector(vector: targetDistance, max: 20)
+                if let _ = self.action(forKey: "walk") {
+                    if (abs(targetDistance.dx) < 60 && abs(targetDistance.dy) < 60) {
+                        var dmg = self.attack
+                        if (self.isFrenzied) {
+                            dmg += self.attack
+                        }
+                        self.target!.health -= dmg //DAMAGE ONLY AT THE END OF ANIMATION
+                        if (self.target!.health <= 0) {
+                            self.target = nil
+                            self.state = .idle
+                            removeAction(forKey: "walk")
+                        }
                     }
+                }
+                else {
+                    let time = getDuration(distance: walkDistance, speed: self.speed)
+                    let walk = SKAction.move(by: walkDistance, duration: time)
+                    self.run(walk, withKey: "walk")
                 }
             }
             else {
-                let time = getDuration(distance: walkDistance, speed: self.speed)
-                let walk = SKAction.move(by: walkDistance, duration: time)
-                self.run(walk, withKey: "walk")
+                self.state = .idle
+                removeAction(forKey: "walk")
             }
         }
         else {
-            self.state = .idle
+            self.state = .feared
+            self.target = nil
+            self.targetQueue = []
             removeAction(forKey: "walk")
+        }
+    }
+    
+    private func fearedUpdate() {
+        self.updateAge()
+        if let _ = self.action(forKey: "run") {
+        }
+        else {
+            let tavernDistance = CGVector(dx: tavernCoordinates.x - self.position.x, dy: tavernCoordinates.y - self.position.y)
+            if (abs(tavernDistance.dx) < 250 && abs(tavernDistance.dy) < 250) {
+                self.enterTavern()
+            }
+            else {
+                var distance = limitVector(vector: tavernDistance, max: 100)
+                distance.dx = distance.dx * CGFloat.random(in: 0.2...1.8)
+                distance.dy = distance.dy * CGFloat.random(in: 0.2...1.8)
+                let time = getDuration(distance: distance, speed: self.speed * 2)
+                let run = SKAction.move(by: distance, duration: time)
+                self.run(run, withKey: "run")
+            }
         }
     }
     
@@ -332,7 +383,12 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         if (self.inTavernCounter % 60 == 0) {
             self.currentFrenzyTurn += 1
             self.inTavernCounter = 0
+            if (self.health < self.maxHealth) {
+                self.health += 1
+            }
             if (self.currentFrenzyTurn >= self.frenzy) {
+                self.isFrenzied = true
+                self.fear = 0
                 self.state = .idle
                 self.alpha = 1.0
             }
@@ -409,6 +465,30 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
     }
     
+    private func checkFear() -> Bool {
+        let percentage = (Double(self.health) / Double(self.maxHealth)) * 100.0
+        if (percentage <= Double(self.fear)) {
+            return true
+        }
+        else {
+            return false
+        }
+    }
+    
+    private func checkFrenzy() {
+        if (self.currentFrenzyTurn == 0) {
+            self.isFrenzied = false
+            self.fear = self.maxFear
+        }
+        else {
+            self.frenzyCounter += 1
+            if (self.frenzyCounter % 60 == 0) {
+                self.currentFrenzyTurn -= 1
+                self.frenzyCounter = 0
+            }
+        }
+    }
+    
     private func checkInterations(input: Int) -> Bool {
         var hasToUpdateRank = false
         switch self.closeStructure!.type {
@@ -417,10 +497,6 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             if (input == 2) {
                 self.enterAcademy()
             }
-            break
-            
-        case .tavern:
-            //self.enterTavern()
             break
             
         case .village:

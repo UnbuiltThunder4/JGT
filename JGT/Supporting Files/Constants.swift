@@ -71,6 +71,7 @@ struct MainScreenProperties {
 public enum GoblinState {
     case working
     case fighting
+    case feared
     case idle
     case flying
     case launched
@@ -125,13 +126,17 @@ public enum StructureType: Int {
     case wall = 9
 }
 
+let tavernCoordinates = CGPoint(x: 1100, y: 350)
+let academyCoordinates = CGPoint(x: 200, y: 650)
+let villageCoordinates = CGPoint(x: 1000, y: 1000)
+
 let levelstructures: [Structure] = [
-    Tavern(x: 1100, y: 350),
-    Academy(x: 200, y: 650),
-    Village(x: 1000, y: 1000),
+    Tavern(x: tavernCoordinates.x, y: tavernCoordinates.y),
+    Academy(x: academyCoordinates.x, y: academyCoordinates.y),
+    Village(x: villageCoordinates.x, y: villageCoordinates.y),
     Structure(type: .tree, x: 450, y: 300),
     Structure(type: .tree, x: 850, y: 500),
-    Structure(type: .tree, x: 1000, y: 1000),
+    Structure(type: .tree, x: 1250, y: 1000),
     Structure(type: .tree, x: 1750, y: 500),
     Structure(type: .tree, x: 650, y: 370),
     Structure(type: .tree, x: 1250, y: 200),
