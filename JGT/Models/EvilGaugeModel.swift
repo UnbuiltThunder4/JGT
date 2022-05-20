@@ -36,19 +36,11 @@ class EvilGauge: SKSpriteNode {
     }
     
     func checkSpawn(type: GoblinType) -> Bool {
-        switch type {
-        case .normal:
+        if type == .normal {
             if self.currentFill - 2 >= 0 {return true}
-            break
-        case .rock:
+        }
+        else {
             if self.currentFill - 4 >= 0 {return true}
-            break
-        case .fire:
-            if self.currentFill - 4 >= 0 {return true}
-            break
-        case .gum:
-            if self.currentFill - 4 >= 0 {return true}
-            break
         }
         return false
     }
