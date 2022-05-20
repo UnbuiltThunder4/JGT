@@ -48,12 +48,14 @@ class EvilGauge: SKSpriteNode {
     func shootGauge(goblin: Goblin) {
         if goblin.type == .normal {
             self.currentFill -= 2
-            gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+//            gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+            updateHealthBar(self.gaugeFill, withHealthPoints: Int(self.frame.size.height)/(self.maxFill) * (self.currentFill), withMaxHP: self.maxFill)
         }
         else {
             self.currentFill -= 4
-            gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+            self.gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
         }
+        
     }
     
     func updateGauge(goblin: Goblin?, value: Int?) {
@@ -118,4 +120,35 @@ class EvilGauge: SKSpriteNode {
         }
         
     }
+    
+    func updateHealthBar(_ node: SKSpriteNode, withHealthPoints hp: Int, withMaxHP maxHP: Int) {
+            
+            let barSize = CGSize(width: self.size.width, height: self.size.height);
+            
+            let fillColor = UIColor(red: 123.0/255, green: 200.0/255, blue: 30.0/255, alpha:1)
+            
+            let borderColor = UIColor(red: 35.0/255, green: 28.0/255, blue: 40.0/255, alpha:1)
+            
+            // create drawing context
+            UIGraphicsBeginImageContextWithOptions(barSize, false, 0)
+            guard let context = UIGraphicsGetCurrentContext() else { return }
+            
+            // draw the outline for the health bar
+            borderColor.setStroke()
+            let borderRect = CGRect(origin: CGPoint.zero, size: barSize)
+            context.stroke(borderRect, width: 0.5)
+            
+            // draw the health bar with a colored rectangle
+            fillColor.setFill()
+            let barWidth = (barSize.width + 1) * CGFloat(hp) / CGFloat(maxHP)
+            let barRect = CGRect(x: 0.5, y: 0.5, width: barWidth, height: barSize.height - 1)
+            context.fill(barRect)
+            // extract image
+//            guard let spriteImage = UIGraphicsGetImageFromCurrentImageContext() else { return }
+//            UIGraphicsEndImageContext()
+            
+            // set sprite texture and size
+            node.texture = SKTexture(imageNamed: "gauge")
+            node.size = barSize
+        }
 }
