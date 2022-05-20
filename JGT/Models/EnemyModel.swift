@@ -87,7 +87,8 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
         return lhs.id == rhs.id
     }
     
-    public func update() {
+    public func update() -> Bool {
+        let isDead = self.checkHealth()
         switch self.state {
             
         case .idle:
@@ -102,6 +103,16 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             idleUpdate()
             break
         }
+        return isDead
+    }
+    
+    private func checkHealth() -> Bool {
+        if (self.health <= 0){
+            return true
+        }
+        else {
+            return false
+        }
     }
     
     private func idleUpdate() {
@@ -112,23 +123,20 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             }
             else {
                 self.walkToOrigin()
-                return
             }
         }
         else {
             if (self.target!.state != .inhand && self.target!.state != .invillage && self.target!.state != .inacademy && self.target!.state != .intavern) {
                 removeAction(forKey: "walk")
                 self.state = .fighting
-                return
             }
             else {
                 self.walkToOrigin()
                 let targetDistance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
-                if (abs(targetDistance.dx) > 250 || abs(targetDistance.dy) > 250) {
+                if (abs(targetDistance.dx) > 300 || abs(targetDistance.dy) > 300) {
                     self.state = .idle
                     self.target = nil
                     removeAction(forKey: "walk")
-                    return
                 }
             }
         }
@@ -140,21 +148,19 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                 let originalPosDistance = CGVector(dx: self.initialx - self.position.x, dy: self.initialy - self.position.y)
                 let targetDistance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
                 let walkDistance = limitVector(vector: targetDistance, max: 20)
-                if (abs(originalPosDistance.dx) > 250 || abs(originalPosDistance.dy) > 250) {
+                if (abs(originalPosDistance.dx) > 300 || abs(originalPosDistance.dy) > 300) {
                     self.state = .idle
                     self.target = nil
                     removeAction(forKey: "walk")
-//                    return
                 }
                 else {
                     if let _ = self.action(forKey: "walk") {
-                        if (abs(targetDistance.dx) < 25 && abs(targetDistance.dy) < 25) {
+                        if (abs(targetDistance.dx) < 30 && abs(targetDistance.dy) < 30) {
                             self.target!.health -= self.attack //DAMAGE ONLY AT THE END OF ANIMATION
                             if (self.target!.health <= 0) {
                                 self.target = nil
                                 self.state = .idle
                                 removeAction(forKey: "walk")
-//                                return
                             }
                         }
                     }
@@ -168,13 +174,11 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             else {
                 self.state = .idle
                 removeAction(forKey: "walk")
-//                return
             }
         }
         else {
             self.state = .idle
             removeAction(forKey: "walk")
-//            return
         }
     }
     

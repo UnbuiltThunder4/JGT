@@ -73,6 +73,7 @@ public enum GoblinState {
     case fighting
     case idle
     case flying
+    case launched
     case inhand
     case intavern
     case inacademy

@@ -204,6 +204,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             flyingUpdate()
             break
             
+        case .launched:
+            launchedUpdate()
+            break
+            
         default:
             hasToUpdateRank = idleUpdate()
             break
@@ -216,28 +220,34 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.updateAge()
         if let _ = self.action(forKey: "walk") {
             if (self.closeStructure != nil) {
-                if (self.closeStructure!.type != .tavern || !(self.isGraduated && self.closeStructure!.type == .academy)) {
-                    let prediction = self.wit.predict(
-                        input: .init(size: .init(width: 2),
-                                     body: [Float(self.type.rawValue), Float(self.closeStructure!.type.rawValue)]))
-                    var output: Int = 0
-                    if (prediction[0] >= prediction[1]) {
-                        if (prediction[0] > 0.4) {
-                            output = 1
+                let targetDistance = CGVector(dx: self.closeStructure!.position.x - self.position.x, dy: self.closeStructure!.position.y - self.position.y)
+                if (abs(targetDistance.dx) < 200 && abs(targetDistance.dy) < 200) {
+                    if (self.closeStructure!.type != .tavern || !(self.isGraduated && self.closeStructure!.type == .academy)) {
+                        let prediction = self.wit.predict(
+                            input: .init(size: .init(width: 2),
+                                         body: [Float(self.type.rawValue), Float(self.closeStructure!.type.rawValue)]))
+                        var output: Int = 0
+                        if (prediction[0] >= prediction[1]) {
+                            if (prediction[0] > 0.4) {
+                                output = 1
+                            }
                         }
-                    }
-                    else {
-                        if (prediction[1] > 0.5) {
-                            output = 2
+                        else {
+                            if (prediction[1] > 0.5) {
+                                output = 2
+                            }
                         }
+                        if(output > 0) {
+                            print("action \(output): value \(prediction[output-1])")
+                            hasToUpdateRank = self.checkInterations(input: output)
+                        }
+                        else {
+                            print("ignored")
+                        }
+                        self.closeStructure = nil
                     }
-                    if(output > 0) {
-                        print("action \(output): value \(prediction[output-1])")
-                        hasToUpdateRank = self.checkInterations(input: output)
-                    }
-                    else {
-                        print("ignored")
-                    }
+                }
+                else {
                     self.closeStructure = nil
                 }
                 self.removeAction(forKey: "walk")
@@ -331,6 +341,15 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.updateAge()
         if (self.physicsBody!.velocity.dx != 0 || self.physicsBody!.velocity.dy != 0) {
             gameLogic.friction(node: self)
+        }
+        else {
+            self.state = .idle
+        }
+    }
+    
+    private func launchedUpdate() {
+        self.updateAge()
+        if let _ = self.action(forKey: "launched") {
         }
         else {
             self.state = .idle

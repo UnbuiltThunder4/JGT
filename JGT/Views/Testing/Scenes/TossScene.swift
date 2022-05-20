@@ -101,7 +101,11 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         population.update()
         
         for i in 0..<enemies.count {
-            enemies[i].update()
+            if(enemies[i].update()) {
+                enemies[i].removeFromParent()
+                enemies.remove(at: i)
+                //ADD 5 EVIL POINTS HERE
+            }
         }
     }
     
