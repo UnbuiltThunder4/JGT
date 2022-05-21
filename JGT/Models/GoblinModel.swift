@@ -327,6 +327,18 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                             dmg += self.attack
                         }
                         self.target!.health -= dmg //DAMAGE ONLY AT THE END OF ANIMATION
+                        if (self.type == .fire) {
+                            self.targetQueue.forEach {
+                                let aoeDistance = CGVector(dx: $0.position.x - self.position.x, dy: $0.position.y - self.position.y)
+                                if (abs(aoeDistance.dx) < 60 && abs(aoeDistance.dy) < 60) {
+                                    $0.health -= dmg
+                                    if ($0.health <= 0) {
+                                        let index = self.targetQueue.firstIndex(of: $0)!
+                                        self.targetQueue.remove(at: index)
+                                    }
+                                }
+                            }
+                        }
                         if (self.target!.health <= 0) {
                             self.target = nil
                             self.state = .idle
@@ -381,11 +393,14 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.updateAge()
         self.removeAllActions()
         self.inTavernCounter += 1
-        if (self.inTavernCounter % 60 == 0) {
+        if (self.inTavernCounter % 120 == 0) {
             self.currentFrenzyTurn += 1
             self.inTavernCounter = 0
-            if (self.health < self.maxHealth) {
-                self.health += 1
+            if (self.health + 10 <= self.maxHealth) {
+                self.health += 10
+            }
+            else {
+                self.health = self.maxHealth
             }
             if (self.currentFrenzyTurn >= self.frenzy) {
                 self.isFrenzied = true
@@ -586,6 +601,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func setFiretoSelf() {
         self.closeStructure!.removeFromParent()
         self.type = .fire
+        self.fear = 0
+        self.maxFear = 0
         self.texture = SKTexture(imageNamed: "fire_goblin")
         self.HWpoints += 15
         self.fitness = self.getFitness()
