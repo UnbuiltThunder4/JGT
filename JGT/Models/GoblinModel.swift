@@ -437,7 +437,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             //GIVE EVIL POINTS
             self.inVillageCounter = 0
             let randnum = Int.random(in: 0...100)
-            if (randnum <= 5) {
+            if (randnum <= 5 && self.type == .normal) {
                 self.state = .idle
                 self.alpha = 1.0
                 self.type = .gum
@@ -516,7 +516,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         case .village:
-            if (input == 2) {
+            if (input == 2 && self.type != .gum) {
                 self.enterVillage()
             }
             break
