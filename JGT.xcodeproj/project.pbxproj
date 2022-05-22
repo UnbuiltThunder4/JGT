@@ -41,6 +41,7 @@
 		76B061B2282EB2680085F8D3 /* EnemyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B061B1282EB2680085F8D3 /* EnemyModel.swift */; };
 		76BEE61728325DB400E4A610 /* CollisionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BEE61628325DB400E4A610 /* CollisionModel.swift */; };
 		76C24C3B282BB60A00F76B8E /* TossViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C24C3A282BB60A00F76B8E /* TossViewExtension.swift */; };
+		76CF0E04283AD4DA0060F55B /* ProgressBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CF0E03283AD4DA0060F55B /* ProgressBarModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +99,7 @@
 		76B061B1282EB2680085F8D3 /* EnemyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyModel.swift; sourceTree = "<group>"; };
 		76BEE61628325DB400E4A610 /* CollisionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionModel.swift; sourceTree = "<group>"; };
 		76C24C3A282BB60A00F76B8E /* TossViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TossViewExtension.swift; sourceTree = "<group>"; };
+		76CF0E03283AD4DA0060F55B /* ProgressBarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 				76A53504282FE4EC00DEC317 /* SheetModel.swift */,
 				76A534FC282BF15100DEC317 /* HUD.swift */,
 				7656DF2228301C0E004B9B65 /* EvilGaugeModel.swift */,
+				76CF0E03283AD4DA0060F55B /* ProgressBarModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76CF0E04283AD4DA0060F55B /* ProgressBarModel.swift in Sources */,
 				7619080F2823BEC1002A0AE2 /* TestGoblinView.swift in Sources */,
 				763F279128291F7200803BE1 /* StructureModel.swift in Sources */,
 				7656DF2328301C0E004B9B65 /* EvilGaugeModel.swift in Sources */,

@@ -13,6 +13,7 @@ class EvilGauge: SKSpriteNode {
     public var currentFill: Int
     
     let gaugeFill: SKSpriteNode = SKSpriteNode()
+    let progressBar = IMProgressBar(emptyImageName: nil, filledImageName: "gauge")
     
     init(maxFill: Int, currentFill: Int) {
         
@@ -29,6 +30,9 @@ class EvilGauge: SKSpriteNode {
         gaugeFill.alpha = 0.8
         gaugeFill.name = "gaugeFill"
         addChild(gaugeFill)
+        gaugeFill.anchorPoint = CGPoint(x: 0.5, y: 0.0)
+//        gaugeFill.addChild(progressBar)
+//        progressBar.setYProgress(yProgress: 1.0)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,8 +52,8 @@ class EvilGauge: SKSpriteNode {
     func shootGauge(goblin: Goblin) {
         if goblin.type == .normal {
             self.currentFill -= 2
-//            gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
-            updateHealthBar(self.gaugeFill, withHealthPoints: Int(self.frame.size.height)/(self.maxFill) * (self.currentFill), withMaxHP: self.maxFill)
+            gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+//            updateHealthBar(self.gaugeFill, withHealthPoints: Int(self.frame.size.height)/(self.maxFill) * (self.currentFill), withMaxHP: self.maxFill)
         }
         else {
             self.currentFill -= 4
