@@ -14,6 +14,7 @@ struct Collision {
         case enemy
         case building
         case enviroment
+        case projectile
         var bitmask: UInt32 {return 1 << self.rawValue}
     }
     let masks: (first: UInt32, second: UInt32)

@@ -98,7 +98,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         
-        population.update()
+        self.population.update()
         
         self.enemies.forEach {
             if ($0.update()) {
@@ -107,6 +107,10 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
                 self.enemies.remove(at: index)
                 evilGauge.updateGauge(goblin: nil, value: 5)
             }
+        }
+        
+        if let structure = self.structures[3] as? Catapult {
+            structure.update(self)
         }
         
     }

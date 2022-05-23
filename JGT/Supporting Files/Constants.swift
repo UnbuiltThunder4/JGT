@@ -129,29 +129,36 @@ public enum StructureType: Int {
 let tavernCoordinates = CGPoint(x: 1100, y: 350)
 let academyCoordinates = CGPoint(x: 200, y: 650)
 let villageCoordinates = CGPoint(x: 1000, y: 1000)
+let catapultCoordinates = CGPoint(x: 1500, y: 1500)
 
 let levelstructures: [Structure] = [
     Tavern(x: tavernCoordinates.x, y: tavernCoordinates.y),
     Academy(x: academyCoordinates.x, y: academyCoordinates.y),
     Village(x: villageCoordinates.x, y: villageCoordinates.y),
-    Structure(type: .tree, x: 450, y: 300),
-    Structure(type: .tree, x: 850, y: 500),
-    Structure(type: .tree, x: 1250, y: 1000),
-    Structure(type: .tree, x: 1750, y: 500),
-    Structure(type: .tree, x: 650, y: 370),
-    Structure(type: .tree, x: 1250, y: 200),
-    Structure(type: .tree, x: 1250, y: 700),
-    Structure(type: .tree, x: 1550, y: 580),
-    Structure(type: .tree, x: 1150, y: 500),
-    Structure(type: .rock, x: 1600, y: 700),
-    Structure(type: .rock, x: 550, y: 200),
-    Structure(type: .rock, x: 650, y: 350),
-    Structure(type: .rock, x: 1450, y: 350),
-    Structure(type: .rock, x: 1400, y: 660),
-    Structure(type: .rock, x: 1150, y: 80),
-    Structure(type: .rock, x: 190, y: 120),
-    Structure(type: .rock, x: 690, y: 620)
+    Catapult(x: catapultCoordinates.x, y: catapultCoordinates.y),
+    Structure(type: .tree, x: 450, y: 300, rotation: 0),
+    Structure(type: .tree, x: 850, y: 500, rotation: 0),
+    Structure(type: .tree, x: 1250, y: 1000, rotation: 0),
+    Structure(type: .tree, x: 1750, y: 500, rotation: 0),
+    Structure(type: .tree, x: 650, y: 370, rotation: 0),
+    Structure(type: .tree, x: 1250, y: 200, rotation: 0),
+    Structure(type: .tree, x: 1250, y: 700, rotation: 0),
+    Structure(type: .tree, x: 1550, y: 580, rotation: 0),
+    Structure(type: .tree, x: 1150, y: 500, rotation: 0),
+    Structure(type: .rock, x: 1600, y: 700, rotation: 0),
+    Structure(type: .rock, x: 550, y: 200, rotation: 0),
+    Structure(type: .rock, x: 650, y: 350, rotation: 0),
+    Structure(type: .rock, x: 1450, y: 350, rotation: 0),
+    Structure(type: .rock, x: 1400, y: 660, rotation: 0),
+    Structure(type: .rock, x: 1150, y: 80, rotation: 0),
+    Structure(type: .rock, x: 190, y: 120, rotation: 0),
+    Structure(type: .rock, x: 690, y: 620, rotation: 0)
 ]
+
+public enum ProjectileType {
+    case arrow
+    case rock
+}
 
 struct GoblinConstants {
     static let names = [

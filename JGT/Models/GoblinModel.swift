@@ -521,6 +521,16 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             }
             break
             
+        case .catapult:
+            if (input == 1 && self.hasRock == true) {
+                self.throwRock()
+            }
+            else if (input == 2){
+                self.throwSelf()
+            }
+            hasToUpdateRank = true
+            break
+            
         case .rock:
             if (input == 1) {
                 if (!self.hasRock) {
@@ -575,6 +585,29 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func enterVillage() {
         self.state = .invillage
         self.alpha = 0.0
+    }
+    
+    private func throwRock() {
+        self.removeAllActions()
+        self.hasRock = false
+        self.HWpoints += 8
+        self.fitness = self.getFitness()
+        if let structure = self.closeStructure as? Catapult {
+            structure.hasRock = true
+        }
+        
+    }
+    
+    private func throwSelf() {
+        self.removeAllActions()
+        self.run(SKAction.move(to: CGPoint(x: 2000, y: 2000), duration: 1.5), withKey: "thrown")
+        if (self.type != .rock) {
+            self.HWpoints += 5
+        }
+        else {
+            self.HWpoints += 10
+        }
+        self.fitness = self.getFitness()
     }
     
     private func pickUpRock() {

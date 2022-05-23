@@ -16,7 +16,7 @@ class Structure: SKSpriteNode, ObservableObject {
     let width: CGFloat
     let height: CGFloat
     
-    init(type: StructureType, x: CGFloat, y: CGFloat) {
+    init(type: StructureType, x: CGFloat, y: CGFloat, rotation: Double) {
         var img = ""
         self.type = type
         switch type {
@@ -42,6 +42,14 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .building
             self.width = 300
             self.height = 300
+            self.maskmod = 0.9
+            break
+            
+        case .catapult:
+            img = "catapult"
+            self.mask = .enviroment
+            self.width = 250
+            self.height = 250
             self.maskmod = 0.9
             break
         
@@ -73,6 +81,7 @@ class Structure: SKSpriteNode, ObservableObject {
         self.name = img
         self.position.x = x
         self.position.y = y
+        self.zRotation = rotation
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -91,7 +100,7 @@ class Tavern: Structure {
     
     
     init(x: CGFloat, y: CGFloat) {
-        super.init(type: .tavern, x: x, y: y)
+        super.init(type: .tavern, x: x, y: y, rotation: 0)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -114,7 +123,7 @@ class Academy: Structure {
     var proficencies: [Proficency] = []
     
     init(x: CGFloat, y: CGFloat) {
-        super.init(type: .academy, x: x, y: y)
+        super.init(type: .academy, x: x, y: y, rotation: 0)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -136,7 +145,7 @@ class Village: Structure {
     var goblins: [Goblin] = []
     
     init(x: CGFloat, y: CGFloat) {
-        super.init(type: .village, x: x, y: y)
+        super.init(type: .village, x: x, y: y, rotation: 0)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -152,4 +161,39 @@ class Village: Structure {
             self.goblins.remove(at: index)
         }
     }
+}
+
+class Catapult: Structure {
+    
+    @ObservedObject var gameLogic: GameLogic = GameLogic.shared
+    
+    var hasRock: Bool = false
+//    let attackPosition = CGPoint(x: 1200, y: 1200)
+    
+    init(x: CGFloat, y: CGFloat) {
+        super.init(type: .catapult, x: x, y: y, rotation: 0)
+//        self.speed = 5.0
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func update(_ tossScene: TossScene) {
+        if (self.hasRock) {
+            gameLogic.spawnProjectile(tossScene, spawnPoint: CGPoint(x: self.position.x, y: self.position.y), destinationPoint: CGPoint(x: self.position.x + 500, y: self.position.y + 500), type: .rock)
+            self.hasRock = false
+        }
+    }
+    
+//    override func addGoblin(_ goblin: Goblin) {
+//        self.goblins.append(goblin)
+//    }
+//
+//    override func removeGoblin(_ goblin: Goblin) {
+//        if let index = self.goblins.firstIndex(where: { $0.id == goblin.id }) {
+//            self.goblins.remove(at: index)
+//        }
+//    }
+    
 }

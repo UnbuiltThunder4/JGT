@@ -121,6 +121,12 @@ class GameLogic: ObservableObject {
         }
     }
     
+    public func spawnProjectile(_ tossScene: TossScene, spawnPoint: CGPoint, destinationPoint: CGPoint, type: ProjectileType) {
+        let proj = Projectile(type: type, x: spawnPoint.x, y: spawnPoint.y, rotation: 0)
+        proj.run(SKAction.move(to: CGPoint(x: destinationPoint.x, y: destinationPoint.y), duration: 1.5), withKey: "thrown")
+        tossScene.background.addChild(proj)
+    }
+    
     public func spawnGoblin(_ tossScene: TossScene, population: Population, spawnPoint: CGPoint?) -> Goblin {
         let newGoblin = population.generate(1)
         tossScene.setGoblins(newGoblin, spawnPoint: spawnPoint)
