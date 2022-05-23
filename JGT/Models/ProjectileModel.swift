@@ -23,7 +23,7 @@ class Projectile: SKSpriteNode, ObservableObject {
         switch type {
             
         case .arrow:
-            img = ""
+            img = "arrow"
             self.mask = .projectile
             self.width = 20
             self.height = 100
