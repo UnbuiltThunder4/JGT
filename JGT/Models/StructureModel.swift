@@ -21,6 +21,14 @@ class Structure: SKSpriteNode, ObservableObject {
         self.type = type
         switch type {
             
+        case .gate:
+            img = "gate"
+            self.mask = .building
+            self.width = 500
+            self.height = 500
+            self.maskmod = 1.0
+            break
+            
         case .academy:
             img = "academy"
             self.mask = .building
@@ -51,6 +59,14 @@ class Structure: SKSpriteNode, ObservableObject {
             self.width = 250
             self.height = 250
             self.maskmod = 0.9
+            break
+            
+        case .wall:
+            img = "wall"
+            self.mask = .building
+            self.width = 750
+            self.height = 150
+            self.maskmod = 1.0
             break
         
         case .tree:
@@ -195,5 +211,24 @@ class Catapult: Structure {
 //            self.goblins.remove(at: index)
 //        }
 //    }
+}
+
+class Gate: Structure {
     
+    @ObservedObject var gameLogic: GameLogic = GameLogic.shared
+    
+    var health: Int = 40
+    
+    init(x: CGFloat, y: CGFloat) {
+        super.init(type: .gate, x: x, y: y, rotation: 0)
+//        self.speed = 5.0
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func update(_ tossScene: TossScene) {
+        
+    }
 }

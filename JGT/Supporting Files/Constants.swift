@@ -135,7 +135,9 @@ let levelstructures: [Structure] = [
     Tavern(x: tavernCoordinates.x, y: tavernCoordinates.y),
     Academy(x: academyCoordinates.x, y: academyCoordinates.y),
     Village(x: villageCoordinates.x, y: villageCoordinates.y),
-    Catapult(x: catapultCoordinates.x, y: catapultCoordinates.y),
+    Catapult(x: catapultCoordinates.x, y: catapultCoordinates.y), // THIS HAS TO BE ON INDEX 3
+    Structure(type: .wall, x: 2800, y: 3010, rotation: .pi / -4.2),
+    Gate(x: 3275, y: 2940),
     Structure(type: .tree, x: 450, y: 300, rotation: 0),
     Structure(type: .tree, x: 850, y: 500, rotation: 0),
     Structure(type: .tree, x: 1250, y: 1000, rotation: 0),
