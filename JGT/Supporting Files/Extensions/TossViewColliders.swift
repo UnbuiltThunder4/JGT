@@ -45,5 +45,21 @@ extension TossScene: SKPhysicsContactDelegate {
             }
         
         }
+        if (collision.matches(.gate, .darkson)) {
+            
+            if let node = firstBody.node as? DarkSon {
+                if let node2 = secondBody.node as? Gate {
+                    node.target = node2
+                    print("done")
+                }
+            }
+            if let node = secondBody.node as? DarkSon {
+                if let node2 = firstBody.node as? Gate {
+                    node.target = node2
+                    print("done")
+                }
+            }
+        
+        }
     }
 }

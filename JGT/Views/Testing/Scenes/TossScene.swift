@@ -15,6 +15,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     @ObservedObject var population = Population(size: 3, mutationRate: 10)
     
+    var darkson = DarkSon()
     var enemies: [Enemy] = []
     var structures: [Structure] = []
     
@@ -70,7 +71,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         setGoblins(population.goblins, spawnPoint: nil)
         setEnemies(self.enemies)
         setStructures(self.structures)
-        
+        background.addChild(darkson)
     }
     
     override func didMove(to view: SKView) {
@@ -112,6 +113,12 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         if let structure = self.structures[3] as? Catapult {
             structure.update(self)
         }
+        
+        if let structure = self.structures[5] as? Gate {
+            structure.update(self)
+        }
+        
+        darkson.update()
         
     }
     

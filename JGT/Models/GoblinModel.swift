@@ -393,7 +393,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.updateAge()
         self.removeAllActions()
         self.inTavernCounter += 1
-        if (self.inTavernCounter % 120 == 0) {
+        if (self.inTavernCounter % taskTime == 0) {
             self.currentFrenzyTurn += 1
             self.inTavernCounter = 0
             if (self.health + 10 <= self.maxHealth) {
@@ -416,7 +416,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.updateAge()
         self.removeAllActions()
         self.inAcademyCounter += 1
-        if (self.inAcademyCounter % 360 == 0) {
+        if (self.inAcademyCounter % structureTime == 0) {
             self.inAcademyCounter = 0
             self.isGraduated = true
             self.state = .idle
@@ -433,11 +433,11 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.updateAge()
         self.removeAllActions()
         self.inVillageCounter += 1
-        if (self.inVillageCounter % 60 == 0) {
+        if (self.inVillageCounter % structureTime == 0) {
             //GIVE EVIL POINTS
             self.inVillageCounter = 0
             let randnum = Int.random(in: 0...100)
-            if (randnum <= 5 && self.type == .normal) {
+            if (randnum <= 20 && self.type == .normal) {
                 self.state = .idle
                 self.alpha = 1.0
                 self.type = .gum
@@ -446,7 +446,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.fitness = self.getFitness()
                 hasToUpdateRank = true
             }
-            else if (randnum <= 30) {
+            else {
                 self.state = .idle
                 self.alpha = 1.0
             }

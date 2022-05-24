@@ -43,6 +43,7 @@
 		76C24C3B282BB60A00F76B8E /* TossViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C24C3A282BB60A00F76B8E /* TossViewExtension.swift */; };
 		76CF0E04283AD4DA0060F55B /* ProgressBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CF0E03283AD4DA0060F55B /* ProgressBarModel.swift */; };
 		76EE5B48283B7FE300ED6635 /* ProjectileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EE5B47283B7FE300ED6635 /* ProjectileModel.swift */; };
+		76F5FC96283CFF0F00DAD596 /* DarkSonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76F5FC95283CFF0F00DAD596 /* DarkSonModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		76C24C3A282BB60A00F76B8E /* TossViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TossViewExtension.swift; sourceTree = "<group>"; };
 		76CF0E03283AD4DA0060F55B /* ProgressBarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarModel.swift; sourceTree = "<group>"; };
 		76EE5B47283B7FE300ED6635 /* ProjectileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectileModel.swift; sourceTree = "<group>"; };
+		76F5FC95283CFF0F00DAD596 /* DarkSonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkSonModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 				76BEE61628325DB400E4A610 /* CollisionModel.swift */,
 				763F279028291F7200803BE1 /* StructureModel.swift */,
 				761908092823BD8B002A0AE2 /* GoblinModel.swift */,
+				76F5FC95283CFF0F00DAD596 /* DarkSonModel.swift */,
 				76B061B1282EB2680085F8D3 /* EnemyModel.swift */,
 				763F278E2829178600803BE1 /* ProficencyModel.swift */,
 				7619080B2823BDBA002A0AE2 /* PopulationModel.swift */,
@@ -440,6 +443,7 @@
 				761907FD2823B998002A0AE2 /* GameScreenView.swift in Sources */,
 				76EE5B48283B7FE300ED6635 /* ProjectileModel.swift in Sources */,
 				76C24C3B282BB60A00F76B8E /* TossViewExtension.swift in Sources */,
+				76F5FC96283CFF0F00DAD596 /* DarkSonModel.swift in Sources */,
 				761908062823BD13002A0AE2 /* Functions.swift in Sources */,
 				76A53505282FE4EC00DEC317 /* SheetModel.swift in Sources */,
 				7619080A2823BD8B002A0AE2 /* GoblinModel.swift in Sources */,

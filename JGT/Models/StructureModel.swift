@@ -23,10 +23,10 @@ class Structure: SKSpriteNode, ObservableObject {
             
         case .gate:
             img = "gate"
-            self.mask = .building
+            self.mask = .gate
             self.width = 500
             self.height = 500
-            self.maskmod = 1.0
+            self.maskmod = 1.1
             break
             
         case .academy:
@@ -229,6 +229,10 @@ class Gate: Structure {
     }
     
     public func update(_ tossScene: TossScene) {
-        
+        if (self.health <= 0) {
+            self.removeFromParent()
+            tossScene.darkson.gateNumber += 1
+            tossScene.darkson.target = nil
+        }
     }
 }

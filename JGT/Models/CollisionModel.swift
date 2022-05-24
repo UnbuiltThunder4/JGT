@@ -10,9 +10,11 @@ import Foundation
 struct Collision {
     enum Masks: Int {
         case goblin
+        case darkson
         case map
         case enemy
         case building
+        case gate
         case enviroment
         case projectile
         var bitmask: UInt32 {return 1 << self.rawValue}

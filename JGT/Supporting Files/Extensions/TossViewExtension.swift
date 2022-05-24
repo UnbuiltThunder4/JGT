@@ -236,7 +236,7 @@ extension TossScene {
             goblins[i].physicsBody?.angularDamping = 0.0
             goblins[i].physicsBody?.allowsRotation = false
             goblins[i].physicsBody?.categoryBitMask = Collision.Masks.goblin.bitmask
-            goblins[i].physicsBody?.collisionBitMask = Collision.Masks.building.bitmask
+            goblins[i].physicsBody?.collisionBitMask = Collision.Masks.building.bitmask | Collision.Masks.gate.bitmask
             goblins[i].physicsBody?.contactTestBitMask = Collision.Masks.enviroment.bitmask | Collision.Masks.enemy.bitmask
             
             background.addChild(goblins[i])
@@ -255,7 +255,7 @@ extension TossScene {
             enemies[i].physicsBody?.angularDamping = 0.0
             enemies[i].physicsBody?.allowsRotation = false
             enemies[i].physicsBody?.categoryBitMask = Collision.Masks.enemy.bitmask
-            enemies[i].physicsBody?.collisionBitMask = Collision.Masks.building.bitmask
+            enemies[i].physicsBody?.collisionBitMask = Collision.Masks.building.bitmask | Collision.Masks.gate.bitmask
             enemies[i].physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask | Collision.Masks.enviroment.bitmask
             
             background.addChild(enemies[i])
@@ -277,6 +277,9 @@ extension TossScene {
             structures[i].physicsBody?.categoryBitMask = structures[i].mask.bitmask
             if(structures[i].type == .tavern || structures[i].type == .village || structures[i].type == .academy) {
                 structures[i].physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask
+            }
+            else if (structures[i].type == .gate) {
+                structures[i].physicsBody?.contactTestBitMask = Collision.Masks.darkson.bitmask
             }
             else {
                 structures[i].physicsBody?.collisionBitMask = Collision.Masks.goblin.bitmask
