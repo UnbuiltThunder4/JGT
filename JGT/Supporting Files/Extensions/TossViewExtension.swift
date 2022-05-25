@@ -70,6 +70,10 @@ extension TossScene {
             
             gameLogic.selectNodeForTouch(self, touchLocation: touchLocation)
             
+            if selectedNode is SKLabelNode {
+                selectedNode = nil
+            }
+            
             if selectedNode is Cauldron || selectedNode?.name! == "goblinsNumber" {
                 gameLogic.shootGoblin(self, node: cameraNode, type: .normal, population: self.population, destination: cameraNode.position)
             }
