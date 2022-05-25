@@ -173,6 +173,8 @@ class GameLogic: ObservableObject {
             let goblin = node as! Goblin
             if goblin.frame.intersects(tossScene.evilSight.frame) {
                 goblin.isFrenzied = true
+                goblin.fear = 0
+                goblin.currentFrenzyTurn = goblin.frenzy
                 frenziedGoblins.append(goblin)
                 print(goblin.fullName)
                 print(goblin.isFrenzied)
