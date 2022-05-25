@@ -8,31 +8,34 @@
 import Foundation
 import SpriteKit
 
-class EvilGauge: SKSpriteNode {
+class EvilGauge: SKNode {
     let maxFill: Int
     public var currentFill: Int
     
+    let gaugeBorder: SKSpriteNode = SKSpriteNode(imageNamed: "gauge")
     let gaugeFill: SKSpriteNode = SKSpriteNode()
-    let progressBar = IMProgressBar(emptyImageName: nil, filledImageName: "gauge")
     
     init(maxFill: Int, currentFill: Int) {
         
         self.maxFill = maxFill
         self.currentFill = currentFill
         
-        super.init(texture: SKTexture(imageNamed: "gauge"), color: .black, size: CGSize(width: 20, height: 300))
+        super.init()
         self.name = "evilGauge"
         
+        gaugeBorder.zPosition = 100
+        gaugeBorder.name = "gaugeBorder"
+        gaugeBorder.anchorPoint = CGPoint(x: 0.5, y: 0.0)
+        self.addChild(gaugeBorder)
+        
         gaugeFill.zPosition = 100
-        gaugeFill.size = CGSize(width: self.frame.size.width,
-                                height: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill))
+        gaugeFill.size = CGSize(width: 20,
+                                height: 300/CGFloat(self.maxFill) * CGFloat(self.currentFill))
         gaugeFill.color = .green
         gaugeFill.alpha = 0.8
         gaugeFill.name = "gaugeFill"
-        addChild(gaugeFill)
+        self.addChild(gaugeFill)
         gaugeFill.anchorPoint = CGPoint(x: 0.5, y: 0.0)
-//        gaugeFill.addChild(progressBar)
-//        progressBar.setYProgress(yProgress: 1.0)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -52,12 +55,12 @@ class EvilGauge: SKSpriteNode {
     func shootGauge(goblin: Goblin) {
         if goblin.type == .normal {
             self.currentFill -= 2
-            gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
-//            updateHealthBar(self.gaugeFill, withHealthPoints: Int(self.frame.size.height)/(self.maxFill) * (self.currentFill), withMaxHP: self.maxFill)
+            gaugeFill.run(SKAction.resize(toHeight: gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+            print(gaugeFill.size)
         }
         else {
             self.currentFill -= 4
-            self.gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+            self.gaugeFill.run(SKAction.resize(toHeight: gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
         }
         
     }
@@ -71,20 +74,20 @@ class EvilGauge: SKSpriteNode {
                 if (self.currentFill + amount) < self.maxFill {
                     self.currentFill += amount
                     print(amount)
-                    gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+                    gaugeFill.run(SKAction.resize(toHeight: gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
                 } else if self.currentFill != self.maxFill {
                     self.currentFill = self.maxFill
-                    gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+                    gaugeFill.run(SKAction.resize(toHeight: gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
                 }
             }
             else {
                 amount = goblin.age/2 + 3
                 if (self.currentFill + amount) < self.maxFill {
                     self.currentFill += amount
-                    gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+                    gaugeFill.run(SKAction.resize(toHeight: gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
                 } else if self.currentFill != self.maxFill {
                     self.currentFill = self.maxFill
-                    gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+                    gaugeFill.run(SKAction.resize(toHeight: gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
                 }
             }
         }
@@ -92,10 +95,10 @@ class EvilGauge: SKSpriteNode {
             amount = value
             if (self.currentFill + amount) < self.maxFill {
                 self.currentFill += amount
-                gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+                gaugeFill.run(SKAction.resize(toHeight: gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
             } else if self.currentFill != self.maxFill {
                 self.currentFill = self.maxFill
-                gaugeFill.run(SKAction.resize(toHeight: self.frame.size.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+                gaugeFill.run(SKAction.resize(toHeight: gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
             }
         }
         
@@ -125,34 +128,4 @@ class EvilGauge: SKSpriteNode {
         
     }
     
-    func updateHealthBar(_ node: SKSpriteNode, withHealthPoints hp: Int, withMaxHP maxHP: Int) {
-            
-            let barSize = CGSize(width: self.size.width, height: self.size.height);
-            
-            let fillColor = UIColor(red: 123.0/255, green: 200.0/255, blue: 30.0/255, alpha:1)
-            
-            let borderColor = UIColor(red: 35.0/255, green: 28.0/255, blue: 40.0/255, alpha:1)
-            
-            // create drawing context
-            UIGraphicsBeginImageContextWithOptions(barSize, false, 0)
-            guard let context = UIGraphicsGetCurrentContext() else { return }
-            
-            // draw the outline for the health bar
-            borderColor.setStroke()
-            let borderRect = CGRect(origin: CGPoint.zero, size: barSize)
-            context.stroke(borderRect, width: 0.5)
-            
-            // draw the health bar with a colored rectangle
-            fillColor.setFill()
-            let barWidth = (barSize.width + 1) * CGFloat(hp) / CGFloat(maxHP)
-            let barRect = CGRect(x: 0.5, y: 0.5, width: barWidth, height: barSize.height - 1)
-            context.fill(barRect)
-            // extract image
-//            guard let spriteImage = UIGraphicsGetImageFromCurrentImageContext() else { return }
-//            UIGraphicsEndImageContext()
-            
-            // set sprite texture and size
-            node.texture = SKTexture(imageNamed: "gauge")
-            node.size = barSize
-        }
 }
