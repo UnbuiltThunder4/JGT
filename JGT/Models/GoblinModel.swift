@@ -321,6 +321,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func workingUpdate(func: (() -> ())?) -> Bool {
         var hasToUpdateRank = false
+        self.target = nil
         self.taskCounter += 1
         if (self.taskCounter % taskTime == 0) {
             self.currentTask!()
@@ -342,7 +343,12 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 let targetDistance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
                 let walkDistance = limitVector(vector: targetDistance, max: 20)
                 if let _ = self.action(forKey: "walk") {
-                    if (abs(targetDistance.dx) < 60 && abs(targetDistance.dy) < 60) {
+                    if (abs(targetDistance.dx) > 300 || abs(targetDistance.dy) > 300) {
+                        self.state = .idle
+                        self.target = nil
+                        removeAction(forKey: "walk")
+                    }
+                    else if (abs(targetDistance.dx) < 60 && abs(targetDistance.dy) < 60) {
                         var dmg = self.attack
                         if (self.isFrenzied) {
                             dmg += self.attack
@@ -411,6 +417,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func inHandUpdate() {
+        self.target = nil
         self.removeAllActions()
     }
     

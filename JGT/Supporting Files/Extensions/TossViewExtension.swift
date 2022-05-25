@@ -247,8 +247,8 @@ extension TossScene {
         for i in 0..<enemies.count {
             enemies[i].zPosition = 1
 
-            enemies[i].physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: enemies[i].size.width*4,
-                                                                       height: enemies[i].size.height*4))
+            enemies[i].physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: enemies[i].size.width*2.5,
+                                                                       height: enemies[i].size.height*2.5))
             enemies[i].physicsBody?.affectedByGravity = false
             enemies[i].physicsBody?.restitution = 0.0
             enemies[i].physicsBody?.linearDamping = 0.0
