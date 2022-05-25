@@ -10,7 +10,7 @@ import Foundation
 
 enum HUDSettings {
     static let font = "Noteworthy-Bold"
-    static let fontSize: CGFloat = 10
+    static let fontSize: CGFloat = 25
     static let fontColor: UIColor = .red
 }
 

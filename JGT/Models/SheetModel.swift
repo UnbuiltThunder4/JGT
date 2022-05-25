@@ -20,7 +20,7 @@ class Sheet: SKSpriteNode {
         self.typeLabel = SKLabelNode()
         self.descLabel = SKLabelNode()
         self.statLabel = SKLabelNode()
-        super.init(texture: SKTexture(imageNamed: "sheet"), color: .red, size: CGSize(width: 300, height: 320))
+        super.init(texture: SKTexture(imageNamed: "sheet"), color: .red, size: CGSize(width: 550, height: 620))
         self.name = "sheet"
         
         self.addChild(nameLabel)
