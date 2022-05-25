@@ -54,6 +54,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private var inAcademyCounter: Int = 0
     private var inTavernCounter: Int = 0
     private var frenzyCounter: Int = 0
+    private var attackCounter: Int = 0
+    private var taskCounter: Int = 0
+    
+    private var currentTask: (() -> ())? = nil
     
     init() {
         let goblinname = GoblinConstants.names.randomElement()! + " " + GoblinConstants.surnames.randomElement()!
@@ -190,6 +194,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             hasToUpdateRank = idleUpdate()
             break
             
+        case .working:
+            hasToUpdateRank = workingUpdate(func: self.currentTask)
+            break
+            
         case .fighting:
             fightingUpdate()
             break
@@ -267,8 +275,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                                     }
                                     else {
                                         print("ignored")
+                                        self.closeStructure = nil
                                     }
-                                    self.closeStructure = nil
                                 }
                             }
                             else {
@@ -311,6 +319,19 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         return hasToUpdateRank
     }
     
+    private func workingUpdate(func: (() -> ())?) -> Bool {
+        var hasToUpdateRank = false
+        self.taskCounter += 1
+        if (self.taskCounter % taskTime == 0) {
+            self.currentTask!()
+            self.currentTask = nil
+            hasToUpdateRank = true
+            self.state = .idle
+            self.taskCounter = 0
+        }
+        return hasToUpdateRank
+    }
+    
     private func fightingUpdate() {
         self.updateAge()
         if (self.isFrenzied) {
@@ -326,18 +347,22 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                         if (self.isFrenzied) {
                             dmg += self.attack
                         }
-                        self.target!.health -= dmg //DAMAGE ONLY AT THE END OF ANIMATION
-                        if (self.type == .fire) {
-                            self.targetQueue.forEach {
-                                let aoeDistance = CGVector(dx: $0.position.x - self.position.x, dy: $0.position.y - self.position.y)
-                                if (abs(aoeDistance.dx) < 60 && abs(aoeDistance.dy) < 60) {
-                                    $0.health -= dmg
-                                    if ($0.health <= 0) {
-                                        let index = self.targetQueue.firstIndex(of: $0)!
-                                        self.targetQueue.remove(at: index)
+                        self.attackCounter += 1
+                        if (self.attackCounter % attackTime == 0) {
+                            self.target!.health -= dmg
+                            if (self.type == .fire) {
+                                self.targetQueue.forEach {
+                                    let aoeDistance = CGVector(dx: $0.position.x - self.position.x, dy: $0.position.y - self.position.y)
+                                    if (abs(aoeDistance.dx) < 60 && abs(aoeDistance.dy) < 60) {
+                                        $0.health -= dmg
+                                        if ($0.health <= 0) {
+                                            let index = self.targetQueue.firstIndex(of: $0)!
+                                            self.targetQueue.remove(at: index)
+                                        }
                                     }
                                 }
                             }
+                            self.attackCounter = 0
                         }
                         if (self.target!.health <= 0) {
                             self.target = nil
@@ -475,7 +500,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func updateAge() {
         self.agecounter += 1
-        if (self.agecounter % 300 == 0) {
+        if (self.agecounter % ageTime == 0) {
             self.age += 1
             self.agecounter = 0
         }
@@ -498,7 +523,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
         else {
             self.frenzyCounter += 1
-            if (self.frenzyCounter % 60 == 0) {
+            if (self.frenzyCounter % oneSecond == 0) {
                 self.currentFrenzyTurn -= 1
                 self.frenzyCounter = 0
             }
@@ -509,24 +534,43 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         var hasToUpdateRank = false
         switch self.closeStructure!.type {
             
+        case .tavern:
+            self.closeStructure = nil
+            break
+            
         case .academy:
-            if (input == 2) {
+            if (input == 2 && !self.isGraduated) {
+                removeAction(forKey: "walk")
                 self.enterAcademy()
+            }
+            else {
+                self.closeStructure = nil
             }
             break
             
         case .village:
             if (input == 2 && self.type != .gum) {
+                removeAction(forKey: "walk")
                 self.enterVillage()
+            }
+            else {
+                self.closeStructure = nil
             }
             break
             
         case .catapult:
             if (input == 1 && self.hasRock == true) {
-                self.throwRock()
+                removeAction(forKey: "walk")
+                self.state = .working
+                self.currentTask = self.throwRock
             }
             else if (input == 2){
-                self.throwSelf()
+                removeAction(forKey: "walk")
+                self.state = .working
+                self.currentTask = self.throwSelf
+            }
+            else {
+                self.closeStructure = nil
             }
             hasToUpdateRank = true
             break
@@ -534,16 +578,28 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         case .rock:
             if (input == 1) {
                 if (!self.hasRock) {
-                    self.pickUpRock()
+                    removeAction(forKey: "walk")
+                    self.state = .working
+                    self.currentTask = self.pickUpRock
+                }
+                else {
+                    self.closeStructure = nil
                 }
             }
             else if (input == 2) {
                 if (self.type == .normal) {
-                    self.eatRock()
+                    removeAction(forKey: "walk")
+                    self.state = .working
+                    self.currentTask = self.eatRock
                 }
                 else {
                     if (!self.hasRock) {
-                        self.pickUpRock()
+                        removeAction(forKey: "walk")
+                        self.state = .working
+                        self.currentTask = self.pickUpRock
+                    }
+                    else {
+                        self.closeStructure = nil
                     }
                 }
             }
@@ -552,14 +608,20 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             
         case .tree:
             if (input == 1) {
-                self.setFiretoTree()
+                removeAction(forKey: "walk")
+                self.state = .working
+                self.currentTask = self.setFiretoTree
             }
             else if (input == 2) {
                 if (self.type == .normal) {
-                    self.setFiretoSelf()
+                    removeAction(forKey: "walk")
+                    self.state = .working
+                    self.currentTask = self.setFiretoSelf
                 }
                 else {
-                    self.setFiretoTree()
+                    removeAction(forKey: "walk")
+                    self.state = .working
+                    self.currentTask = self.setFiretoTree
                 }
             }
             hasToUpdateRank = true
@@ -595,7 +657,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         if let structure = self.closeStructure as? Catapult {
             structure.hasRock = true
         }
-        
+        self.closeStructure = nil
     }
     
     private func throwSelf() {
@@ -608,6 +670,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             self.HWpoints += 10
         }
         self.fitness = self.getFitness()
+        self.closeStructure = nil
     }
     
     private func pickUpRock() {
@@ -615,6 +678,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.HWpoints += 5
         self.hasRock = true
         self.fitness = self.getFitness()
+        self.closeStructure = nil
     }
     
     private func eatRock() {
@@ -623,12 +687,14 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.texture = SKTexture(imageNamed: "rock_goblin")
         self.HWpoints += 15
         self.fitness = self.getFitness()
+        self.closeStructure = nil
     }
     
     private func setFiretoTree() {
         self.closeStructure!.removeFromParent()
         self.HWpoints += 5
         self.fitness = self.getFitness()
+        self.closeStructure = nil
     }
     
     private func setFiretoSelf() {
@@ -639,6 +705,6 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.texture = SKTexture(imageNamed: "fire_goblin")
         self.HWpoints += 15
         self.fitness = self.getFitness()
+        self.closeStructure = nil
     }
-    
 }

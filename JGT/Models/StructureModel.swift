@@ -10,6 +10,7 @@ import SwiftUI
 import SpriteKit
 
 class Structure: SKSpriteNode, ObservableObject {
+    var goblins: [Goblin] = []
     let type: StructureType
     let mask: Collision.Masks
     let maskmod: CGFloat
@@ -112,8 +113,6 @@ class Structure: SKSpriteNode, ObservableObject {
 }
 
 class Tavern: Structure {
-    var goblins: [Goblin] = []
-    
     
     init(x: CGFloat, y: CGFloat) {
         super.init(type: .tavern, x: x, y: y, rotation: 0)
@@ -135,7 +134,6 @@ class Tavern: Structure {
 }
 
 class Academy: Structure {
-    var goblins: [Goblin] = []
     var proficencies: [Proficency] = []
     
     init(x: CGFloat, y: CGFloat) {
@@ -158,7 +156,6 @@ class Academy: Structure {
 }
 
 class Village: Structure {
-    var goblins: [Goblin] = []
     
     init(x: CGFloat, y: CGFloat) {
         super.init(type: .village, x: x, y: y, rotation: 0)

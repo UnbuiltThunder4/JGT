@@ -30,6 +30,8 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     private var initialx: CGFloat
     private var initialy: CGFloat
     
+    private var attackCounter: Int = 0
+    
     init(type: EnemyType, x: CGFloat, y: CGFloat) {
         var imgname = ""
         var width: CGFloat = 0.0
@@ -156,11 +158,15 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                 else {
                     if let _ = self.action(forKey: "walk") {
                         if (abs(targetDistance.dx) < 60 && abs(targetDistance.dy) < 60) {
-                            if (self.target!.type == .rock) {
-                                self.target!.health -= 1//self.attack/2 //DAMAGE ONLY AT THE END OF ANIMATION
-                            }
-                            else {
-                                self.target!.health -= 2//self.attack //DAMAGE ONLY AT THE END OF ANIMATION
+                            self.attackCounter += 1
+                            if (self.attackCounter % attackTime == 0) {
+                                if (self.target!.type == .rock) {
+                                    self.target!.health -= self.attack / 2
+                                }
+                                else {
+                                    self.target!.health -= self.attack
+                                }
+                                self.attackCounter = 0
                             }
                             if (self.target!.health <= 0) {
                                 self.target = nil

@@ -68,8 +68,12 @@ struct MainScreenProperties {
     static let maxGoblinsNumber = 30
 }
 
+let oneSecond = 60
 let taskTime = 120
+let attackTime = 120
+let ageTime = 300
 let structureTime = 360
+
 
 public enum GoblinState {
     case working
@@ -106,8 +110,8 @@ public enum EnemyType: Int {
 
 let gnomes: [Enemy] = [
     Enemy(type: .small, x: 2500, y: 1110),
-    Enemy(type: .bow, x: 2800, y: 1110),
-    Enemy(type: .axe, x: 3100, y: 1110)
+    Enemy(type: .bow, x: 3000, y: 1110),
+    Enemy(type: .axe, x: 3500, y: 1110)
 ]
 
 public enum ProficencyType {
