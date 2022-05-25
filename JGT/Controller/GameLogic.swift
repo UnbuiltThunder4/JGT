@@ -165,5 +165,26 @@ class GameLogic: ObservableObject {
         }
     }
     
+    public func evilSight(_ tossScene: TossScene, position: CGPoint) {
+        tossScene.evilSight.xScale = tossScene.evilSight.xScale * 1.1
+        tossScene.evilSight.yScale = tossScene.evilSight.yScale * 1.1
+        tossScene.evilSight.position = position
+        var frenziedGoblins: [Goblin] = []
+        tossScene.background.enumerateChildNodes(withName: "goblin") { node, _ in
+            let goblin = node as! Goblin
+            if goblin.frame.intersects(tossScene.evilSight.frame) {
+                goblin.isFrenzied = true
+                frenziedGoblins.append(goblin)
+                print(goblin.fullName)
+                print(goblin.isFrenzied)
+            }
+        }
+    }
+    
+    public func dispatchSight(_ tossScene: TossScene) {
+        tossScene.evilSight.setScale(1.0)
+        tossScene.evilSight.alpha = 0.0
+    }
+    
 }
 

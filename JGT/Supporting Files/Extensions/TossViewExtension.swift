@@ -122,15 +122,21 @@ extension TossScene {
                 population.goblins.remove(at: population.getIndex(of: selectedNode as! Goblin)!)
                 selectedNode!.removeFromParent()
             }
-            if selectedNode?.name! == "background" {}
+            if selectedNode?.name! == "background" {
+                channeling = true
+                touchPoint = touchLocation
+                evilSight.alpha = 1.0
+            }
             
             if selectedNode is Cauldron || selectedNode?.name == "goblinsNumber" {
                 cauldron.spawnSelection(population: population)
             }
-            
         }
         if recognizer.state == .ended {
-
+            if selectedNode?.name! == "background" {
+                channeling = false
+                gameLogic.dispatchSight(self)
+            }
         }
     }
     
