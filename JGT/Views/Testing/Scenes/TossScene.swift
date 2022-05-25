@@ -129,6 +129,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         if channeling == true && evilGauge.currentFill > 0 {
             gameLogic.evilSight(self, position: self.touchPoint)
             evilGauge.updateGauge(goblin: nil, value: -1)
+//            if evilGauge.currentFill == 0 {gameLogic.dispatchSight(self)}
         }
     }
     
