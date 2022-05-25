@@ -166,8 +166,7 @@ class GameLogic: ObservableObject {
     }
     
     public func evilSight(_ tossScene: TossScene, position: CGPoint) {
-        tossScene.evilSight.xScale = tossScene.evilSight.xScale * 1.1
-        tossScene.evilSight.yScale = tossScene.evilSight.yScale * 1.1
+        tossScene.evilSight.run(SKAction.scale(by: 1.1, duration: 0.2))
         tossScene.evilSight.position = position
         var frenziedGoblins: [Goblin] = []
         tossScene.background.enumerateChildNodes(withName: "goblin") { node, _ in

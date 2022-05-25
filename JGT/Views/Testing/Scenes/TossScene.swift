@@ -127,9 +127,9 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         darkson.update()
         
         if channeling == true && evilGauge.currentFill > 0 {
-            gameLogic.evilSight(self, position: self.touchPoint)
             evilGauge.updateGauge(goblin: nil, value: -1)
-//            if evilGauge.currentFill == 0 {gameLogic.dispatchSight(self)}
+            gameLogic.evilSight(self, position: self.touchPoint)
+            if evilGauge.currentFill == 0 {gameLogic.dispatchSight(self)}
         }
     }
     
