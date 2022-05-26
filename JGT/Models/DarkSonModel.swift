@@ -25,6 +25,8 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     public var spawnX: CGFloat = 150
     public var spawnY: CGFloat = 150
     
+    private var attackCounter: Int = 0
+    
     init() {
         super.init(texture: SKTexture(imageNamed: "darkson"), color: .red, size: CGSize(width: 300, height: 300))
         self.name = "darkson"
@@ -54,7 +56,11 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
         if let _ = self.action(forKey: "walk") {
             if (self.target != nil) {
                 removeAction(forKey: "walk")
-                self.target!.health -= 1 //self.attack
+                self.attackCounter += 1
+                if (self.attackCounter % attackTime == 0) {
+                    self.target!.health -= self.attack
+                    self.attackCounter = 0
+                }
             }
         }
         else {

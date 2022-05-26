@@ -30,7 +30,11 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     private var initialx: CGFloat
     private var initialy: CGFloat
     
+    private var canRecoverShield: Bool = true
+    
     private var attackCounter: Int = 0
+    private var shieldCounter: Int = 0
+    private var idleCounter: Int = 1
     
     init(type: EnemyType, x: CGFloat, y: CGFloat) {
         var imgname = ""
@@ -118,6 +122,25 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func idleUpdate() {
+        if (self.idleCounter % threeSeconds == 0) {
+            self.canRecoverShield = true
+            self.idleCounter = 0
+        }
+        if (self.canRecoverShield) {
+            self.shieldCounter += 1
+            if (self.shieldCounter % oneSecond == 0) {
+                self.shieldCounter = 0
+                if (self.shield + 5 <= self.maxShield) {
+                    self.shield += 5
+                }
+                else {
+                    self.shield = self.maxShield
+                }
+            }
+        }
+        else {
+            self.idleCounter += 1
+        }
         if (self.target == nil) {
             if (!self.targetQueue.isEmpty) {
                 self.target = self.targetQueue[0]

@@ -76,6 +76,7 @@ struct MainScreenProperties {
 }
 
 let oneSecond = 60
+let threeSeconds = 180
 let taskTime = 120
 let attackTime = 120
 let ageTime = 300

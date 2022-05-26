@@ -355,12 +355,14 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                         }
                         self.attackCounter += 1
                         if (self.attackCounter % attackTime == 0) {
-                            self.target!.health -= dmg
+                            self.target!.health -= max(0, dmg - self.target!.shield)
+                            self.target!.shield = max(0, self.target!.shield - dmg)
                             if (self.type == .fire) {
                                 self.targetQueue.forEach {
                                     let aoeDistance = CGVector(dx: $0.position.x - self.position.x, dy: $0.position.y - self.position.y)
                                     if (abs(aoeDistance.dx) < 60 && abs(aoeDistance.dy) < 60) {
-                                        $0.health -= dmg
+                                        $0.health -= max(0, dmg - self.target!.shield)
+                                        $0.shield = max(0, self.target!.shield - dmg)
                                         if ($0.health <= 0) {
                                             let index = self.targetQueue.firstIndex(of: $0)!
                                             self.targetQueue.remove(at: index)
