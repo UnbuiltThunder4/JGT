@@ -78,5 +78,8 @@ extension TossScene: SKPhysicsContactDelegate {
             }
         
         }
+//        if (collision.matches(.goblin, .evilSight)) {
+//            
+//        }
     }
 }

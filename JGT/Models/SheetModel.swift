@@ -79,9 +79,9 @@ class Sheet: SKSpriteNode {
         healthLabel.text = "\(String(goblin.health))/\(String(goblin.maxHealth))"
         attackLabel.text = "\(String(goblin.attack))"
         fearLabel.text = "\(String(goblin.fear))%"
-        ageLabel.text = "\(String(goblin.frenzy))"
+        ageLabel.text = "\(String(goblin.age))"
         witLabel.text = "\(String(Int(goblin.HWpoints)/(goblin.age+1)))"
-        frenzyLabel.text = "\(String(goblin.age))"
+        frenzyLabel.text = "\(String(goblin.frenzy))"
     }
     
     func updateSheet(structure: Structure) {

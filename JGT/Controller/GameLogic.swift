@@ -166,9 +166,9 @@ class GameLogic: ObservableObject {
     }
     
     public func evilSight(_ tossScene: TossScene, position: CGPoint) {
-        tossScene.evilSight.run(SKAction.scale(by: 1.1, duration: 0.2))
         tossScene.evilSight.position = position
         var frenziedGoblins: [Goblin] = []
+        
         tossScene.background.enumerateChildNodes(withName: "goblin") { node, _ in
             let goblin = node as! Goblin
             if goblin.frame.intersects(tossScene.evilSight.frame) {

@@ -101,6 +101,8 @@ class EvilGauge: SKNode {
             } else if self.currentFill != self.maxFill {
                 self.currentFill = self.maxFill
                 gaugeFill.run(SKAction.resize(toHeight: gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+            } else if self.currentFill + amount < 0 {
+                gaugeFill.size.height = 0.0
             }
         }
         
