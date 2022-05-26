@@ -303,7 +303,7 @@ extension TossScene {
     func setupHUD() {
       cameraNode.addChild(hud)
         hud.addCauldron(cauldron: cauldron, position: CGPoint(x: cameraNode.position.x - size.width + 50, y: cameraNode.position.y - size.height + 50))
-        hud.addSheet(sheet: sheet, position: CGPoint(x: cameraNode.position.x - size.width/4, y: cameraNode.position.y - size.height/2))
+        hud.addSheet(sheet: sheet, position: CGPoint(x: cameraNode.position.x - size.width/5, y: cameraNode.position.y - size.height/2))
         hud.addEvilGauge(evilGauge: evilGauge, position: CGPoint(x: cameraNode.position.x - size.width + 52, y: cameraNode.position.y - size.height + 245))
     }
     
