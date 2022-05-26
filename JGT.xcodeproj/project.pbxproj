@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		234D35D3283264B100D242E7 /* SpriteKitContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234D35D2283264B100D242E7 /* SpriteKitContainer.swift */; };
+		2373770C283F66D700F9E94C /* axe-gnome-attack (2).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2373770A283F66D700F9E94C /* axe-gnome-attack (2).mp3 */; };
+		2373770D283F66D700F9E94C /* axe-gnome-attack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2373770B283F66D700F9E94C /* axe-gnome-attack.mp3 */; };
 		761907F42823B8F5002A0AE2 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761907F32823B8F5002A0AE2 /* MainScreenView.swift */; };
 		761907F72823B91D002A0AE2 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761907F62823B91D002A0AE2 /* GameView.swift */; };
 		761907F92823B961002A0AE2 /* GameDurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761907F82823B961002A0AE2 /* GameDurationView.swift */; };
@@ -65,6 +67,8 @@
 
 /* Begin PBXFileReference section */
 		234D35D2283264B100D242E7 /* SpriteKitContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitContainer.swift; sourceTree = "<group>"; };
+		2373770A283F66D700F9E94C /* axe-gnome-attack (2).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "axe-gnome-attack (2).mp3"; sourceTree = "<group>"; };
+		2373770B283F66D700F9E94C /* axe-gnome-attack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "axe-gnome-attack.mp3"; sourceTree = "<group>"; };
 		761907F32823B8F5002A0AE2 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		761907F62823B91D002A0AE2 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		761907F82823B961002A0AE2 /* GameDurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDurationView.swift; sourceTree = "<group>"; };
@@ -131,6 +135,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2373770E283F66DE00F9E94C /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				2373770A283F66D700F9E94C /* axe-gnome-attack (2).mp3 */,
+				2373770B283F66D700F9E94C /* axe-gnome-attack.mp3 */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
 		761907F22823B8DC002A0AE2 /* Main Screen */ = {
 			isa = PBXGroup;
 			children = (
@@ -253,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				7692468E2822B5ED003D5D27 /* JGTApp.swift */,
+				2373770E283F66DE00F9E94C /* Sounds */,
 				769246922822B5EE003D5D27 /* Assets.xcassets */,
 				768332F62823B7CD00BA5305 /* Supporting Files */,
 				768332F52823B7B800BA5305 /* Controller */,
@@ -401,6 +415,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2373770D283F66D700F9E94C /* axe-gnome-attack.mp3 in Resources */,
+				2373770C283F66D700F9E94C /* axe-gnome-attack (2).mp3 in Resources */,
 				769246962822B5EE003D5D27 /* Preview Assets.xcassets in Resources */,
 				769246932822B5EE003D5D27 /* Assets.xcassets in Resources */,
 			);
