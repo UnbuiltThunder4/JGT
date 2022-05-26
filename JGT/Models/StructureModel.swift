@@ -30,6 +30,14 @@ class Structure: SKSpriteNode, ObservableObject {
             self.maskmod = 1.1
             break
             
+        case .backdoor:
+            img = "backdoor"
+            self.mask = .backdoor
+            self.width = 250
+            self.height = 250
+            self.maskmod = 1.1
+            break
+            
         case .academy:
             img = "academy"
             self.mask = .building
@@ -229,6 +237,29 @@ class Gate: Structure {
         if (self.health <= 0) {
             self.removeFromParent()
             tossScene.darkson.gateNumber += 1
+            tossScene.darkson.target = nil
+        }
+    }
+}
+
+class Backdoor: Structure {
+    
+    @ObservedObject var gameLogic: GameLogic = GameLogic.shared
+    
+    var health: Int = 600
+    
+    init(x: CGFloat, y: CGFloat) {
+        super.init(type: .gate, x: x, y: y, rotation: 0)
+//        self.speed = 5.0
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func update(_ tossScene: TossScene) {
+        if (self.health <= 0) {
+            self.removeFromParent()
             tossScene.darkson.target = nil
         }
     }

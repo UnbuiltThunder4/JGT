@@ -124,13 +124,14 @@ public enum StructureType: Int {
     case tree = 0
     case rock = 1
     case catapult = 2
-    case passage = 3
-    case trap = 4
-    case tavern = 5
-    case academy = 6
-    case village = 7
-    case gate = 8
-    case wall = 9
+    case backdoor = 3
+    case passage = 4
+    case academy = 5
+    case village = 6
+    case tavern = 7
+    case trap = 8
+    case gate = 9
+    case wall = 10
 }
 
 let tavernCoordinates = CGPoint(x: 1400, y: 300)

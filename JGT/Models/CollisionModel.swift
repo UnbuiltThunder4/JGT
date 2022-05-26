@@ -15,6 +15,7 @@ struct Collision {
         case enemy
         case building
         case gate
+        case backdoor
         case enviroment
         case projectile
         var bitmask: UInt32 {return 1 << self.rawValue}
