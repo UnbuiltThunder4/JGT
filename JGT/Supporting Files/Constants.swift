@@ -23,6 +23,13 @@ import SwiftUI
  * Used for supporting the navigation in the project template.
  */
 
+enum UIUserInterfaceIdiom : Int {
+    case unspecified
+    
+    case phone // iPhone and iPod touch style UI
+    case pad   // iPad style UI (also includes macOS Catalyst)
+}
+
 enum GameState {
     case mainScreen
     case playing

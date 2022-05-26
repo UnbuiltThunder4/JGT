@@ -11,59 +11,83 @@ import SpriteKit
 class Sheet: SKSpriteNode {
     
     var nameLabel: SKLabelNode
-    var typeLabel: SKLabelNode
+    var typeLabel: SKSpriteNode
     var descLabel: SKLabelNode
-    var statLabel: SKLabelNode
+    var healthLabel: SKLabelNode
+    var attackLabel: SKLabelNode
+    var fearLabel: SKLabelNode
+    var ageLabel: SKLabelNode
+    var witLabel: SKLabelNode
+    var frenzyLabel: SKLabelNode
     
     init() {
         self.nameLabel = SKLabelNode()
-        self.typeLabel = SKLabelNode()
+        self.nameLabel.name = "name"
+        self.typeLabel = SKSpriteNode(imageNamed: "normalHead")
+        self.typeLabel.setScale(0.25)
+        self.typeLabel.name = "type"
         self.descLabel = SKLabelNode()
-        self.statLabel = SKLabelNode()
-        super.init(texture: SKTexture(imageNamed: "sheet"), color: .red, size: CGSize(width: 550, height: 620))
+        self.descLabel.name = "description"
+        self.healthLabel = SKLabelNode()
+        self.healthLabel.name = "health"
+        self.attackLabel = SKLabelNode()
+        self.attackLabel.name = "attack"
+        self.fearLabel = SKLabelNode()
+        self.fearLabel.name = "fear"
+        self.ageLabel = SKLabelNode()
+        self.ageLabel.name = "age"
+        self.witLabel = SKLabelNode()
+        self.witLabel.name = "wit"
+        self.frenzyLabel = SKLabelNode()
+        self.frenzyLabel.name = "frenzy"
+        
+        super.init(texture: SKTexture(imageNamed: "sheet"), color: .red, size: CGSize(width: UIScreen.main.bounds.width/2.5, height: UIScreen.main.bounds.height/1.8))
+                
         self.name = "sheet"
         
         self.addChild(nameLabel)
         self.addChild(typeLabel)
         self.addChild(descLabel)
-        self.addChild(statLabel)
+        self.addChild(healthLabel)
+        self.addChild(attackLabel)
+        self.addChild(fearLabel)
+        self.addChild(ageLabel)
+        self.addChild(witLabel)
+        self.addChild(frenzyLabel)
+
     }
     
     func updateSheet(goblin: Goblin) {
-        
-        var goblinType = ""
-        
         switch goblin.type {
         case .normal:
-            goblinType = "Base Goblin"
+            typeLabel.texture = SKTexture(imageNamed: "normalHead")
             break
         case.fire:
-            goblinType = "Flembling"
+            typeLabel.texture = SKTexture(imageNamed: "fireHead")
             break
         case.rock:
-            goblinType = "Rock Goblin"
+            typeLabel.texture = SKTexture(imageNamed: "rockHead")
             break
         case.gum:
-            goblinType = "Gumbling"
+            typeLabel.texture = SKTexture(imageNamed: "gumHead")
             break
         }
         
         nameLabel.text = goblin.fullName
-        typeLabel.text = goblinType
+//        typeLabel.text = goblinType
         descLabel.text = goblin.backstory
-        statLabel.text = """
-                            HP: \(String(goblin.health))/\(String(goblin.maxHealth))
-                            ATK: \(String(goblin.attack))
-                            FER: \(String(goblin.fear))
-                            FRZ: \(String(goblin.frenzy))
-                            AGE: \(String(goblin.age))
-                         """
+        healthLabel.text = "\(String(goblin.health))/\(String(goblin.maxHealth))"
+        attackLabel.text = "\(String(goblin.attack))"
+        fearLabel.text = "\(String(goblin.fear))%"
+        ageLabel.text = "\(String(goblin.frenzy))"
+        witLabel.text = "\(String(Int(goblin.HWpoints)/(goblin.age+1)))"
+        frenzyLabel.text = "\(String(goblin.age))"
     }
     
     func updateSheet(structure: Structure) {
         
         nameLabel.text = structure.name
-        typeLabel.text = ""
+//        typeLabel.text = ""
         descLabel.text = ""
     }
     
