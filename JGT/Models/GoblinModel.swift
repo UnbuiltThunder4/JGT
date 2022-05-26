@@ -58,6 +58,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private var taskCounter: Int = 0
     
     private var currentTask: (() -> ())? = nil
+    private var ignoreThreshold: Float = 0.0
     
     init() {
         let goblinname = GoblinConstants.names.randomElement()! + " " + GoblinConstants.surnames.randomElement()!
@@ -260,21 +261,23 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                                                      body: [Float(self.type.rawValue), Float(self.closeStructure!.type.rawValue)]))
                                     var output: Int = 0
                                     if (prediction[0] >= prediction[1]) {
-                                        if (prediction[0] > 0.4) {
+                                        if (prediction[0] > 0.45 - self.ignoreThreshold) {
                                             output = 1
                                         }
                                     }
                                     else {
-                                        if (prediction[1] > 0.5) {
+                                        if (prediction[1] > 0.55 - self.ignoreThreshold) {
                                             output = 2
                                         }
                                     }
                                     if(output > 0) {
+                                        self.ignoreThreshold = 0.0
                                         print("action \(output): value \(prediction[output-1])")
                                         hasToUpdateRank = self.checkInterations(input: output)
                                     }
                                     else {
                                         print("ignored")
+                                        self.ignoreThreshold += 0.01
                                         self.closeStructure = nil
                                     }
                                 }
