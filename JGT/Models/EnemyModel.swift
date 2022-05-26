@@ -34,7 +34,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     
     private var attackCounter: Int = 0
     private var shieldCounter: Int = 0
-    private var idleCounter: Int = 1
+    private var idleCounter: Int = 0
     
     init(type: EnemyType, x: CGFloat, y: CGFloat) {
         var imgname = ""
@@ -168,6 +168,9 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func attackUpdate() {
+        self.canRecoverShield = false
+        self.shieldCounter = 0
+        self.idleCounter = 0
         if (self.target != nil) {
             if (self.target!.state != .inhand && self.target!.state != .invillage && self.target!.state != .inacademy && self.target!.state != .intavern && self.target!.state != .flying && self.target!.state != .launched) {
                 let originalPosDistance = CGVector(dx: self.initialx - self.position.x, dy: self.initialy - self.position.y)
