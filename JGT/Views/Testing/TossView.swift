@@ -10,10 +10,12 @@ import SpriteKit
 
 struct TossView: View {
     
-    var gameScene = TossScene()
+//    var gameScene = TossScene()
     
     var body: some View {
-        SpriteView(scene: gameScene)
+//        SpriteView(scene: gameScene)
+//            .ignoresSafeArea()
+        SpriteKitContainer()
             .ignoresSafeArea()
     }
 }

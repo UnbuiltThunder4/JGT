@@ -25,12 +25,14 @@ class EvilGauge: SKNode {
         
         gaugeBorder.zPosition = 100
         gaugeBorder.name = "gaugeBorder"
+        gaugeBorder.size = CGSize(width: UIScreen.main.bounds.height/25,
+                                  height: (UIScreen.main.bounds.height/1.7))
         gaugeBorder.anchorPoint = CGPoint(x: 0.5, y: 0.0)
         self.addChild(gaugeBorder)
         
         gaugeFill.zPosition = 100
-        gaugeFill.size = CGSize(width: 20,
-                                height: 300/CGFloat(self.maxFill) * CGFloat(self.currentFill))
+        gaugeFill.size = CGSize(width: UIScreen.main.bounds.height/25,
+                                height: (UIScreen.main.bounds.height/1.7)/CGFloat(self.maxFill) * CGFloat(self.currentFill))
         gaugeFill.color = .green
         gaugeFill.alpha = 0.8
         gaugeFill.name = "gaugeFill"

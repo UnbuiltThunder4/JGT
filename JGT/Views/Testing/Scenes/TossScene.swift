@@ -95,7 +95,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         
         addChild(cameraNode)
         camera = cameraNode
-        cameraNode.position = CGPoint(x: size.width/2, y: size.height/2)
+        cameraNode.position = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
         
         setupHUD()
         
@@ -106,7 +106,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     override func update(_ currentTime: TimeInterval) {
         
         self.population.update()
-        
+                
         self.enemies.forEach {
             if ($0.update()) {
                 let index = self.enemies.firstIndex(of: $0)!
@@ -130,6 +130,12 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             evilGauge.updateGauge(goblin: nil, value: -1)
             gameLogic.evilSight(self, position: self.touchPoint)
             if evilGauge.currentFill == 0 {gameLogic.dispatchSight(self)}
+        }
+        
+        if let goblinSelected = selectedNode as? Goblin {
+            if sheet.alpha == 1 {
+                sheet.updateSheet(goblin: goblinSelected)
+            }
         }
     }
     

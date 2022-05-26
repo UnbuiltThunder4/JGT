@@ -18,13 +18,30 @@ extension TossScene: SKPhysicsContactDelegate {
         if (collision.matches(.building, .goblin) || collision.matches(.enviroment, .goblin)) {
             
             if let node = firstBody.node as? Goblin {
-                if let node2 = secondBody.node as? Structure {
-                    node.closeStructure = node2
+                if let node2 = secondBody.node as? Structure {                    
+                    if (node2.type == .rock || node2.type == .catapult || node2.type == .tree || node2.type == .trap){
+                        if node2.goblins.isEmpty {
+                            node.closeStructure = node2
+                            node2.goblins.append(node)
+                        }
+                    } else {
+                        node.closeStructure = node2
+                        node2.goblins.append(node)
+                    }
                 }
             }
+            
             if let node = secondBody.node as? Goblin {
                 if let node2 = firstBody.node as? Structure {
-                    node.closeStructure = node2
+                    if (node2.type == .rock || node2.type == .catapult || node2.type == .tree || node2.type == .trap){
+                        if node2.goblins.isEmpty {
+                            node.closeStructure = node2
+                            node2.goblins.append(node)
+                        }
+                    } else {
+                        node.closeStructure = node2
+                        node2.goblins.append(node)
+                    }
                 }
             }
         

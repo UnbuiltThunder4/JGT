@@ -70,10 +70,6 @@ extension TossScene {
             
             gameLogic.selectNodeForTouch(self, touchLocation: touchLocation)
             
-            if selectedNode is SKLabelNode {
-                selectedNode = nil
-            }
-            
             if selectedNode is Cauldron || selectedNode?.name! == "goblinsNumber" {
                 gameLogic.shootGoblin(self, node: cameraNode, type: .normal, population: self.population, destination: cameraNode.position)
             }
@@ -302,9 +298,9 @@ extension TossScene {
     
     func setupHUD() {
       cameraNode.addChild(hud)
-        hud.addCauldron(cauldron: cauldron, position: CGPoint(x: cameraNode.position.x - size.width + 50, y: cameraNode.position.y - size.height + 50))
-        hud.addSheet(sheet: sheet, position: CGPoint(x: cameraNode.position.x - size.width/5, y: cameraNode.position.y - size.height/2))
-        hud.addEvilGauge(evilGauge: evilGauge, position: CGPoint(x: cameraNode.position.x - size.width + 52, y: cameraNode.position.y - size.height + 245))
+        hud.addCauldron(cauldron: cauldron, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width + UIScreen.main.bounds.height/10.5, y: cameraNode.position.y - UIScreen.main.bounds.height + UIScreen.main.bounds.height/10.5))
+        hud.addSheet(sheet: sheet, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/5, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
+        hud.addEvilGauge(evilGauge: evilGauge, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width + UIScreen.main.bounds.height/10.5, y: cameraNode.position.y - UIScreen.main.bounds.height + UIScreen.main.bounds.height/5.5))
     }
     
 }

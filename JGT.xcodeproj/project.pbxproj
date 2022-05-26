@@ -10,6 +10,35 @@
 		234D35D3283264B100D242E7 /* SpriteKitContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234D35D2283264B100D242E7 /* SpriteKitContainer.swift */; };
 		2373770C283F66D700F9E94C /* axe-gnome-attack (2).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2373770A283F66D700F9E94C /* axe-gnome-attack (2).mp3 */; };
 		2373770D283F66D700F9E94C /* axe-gnome-attack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2373770B283F66D700F9E94C /* axe-gnome-attack.mp3 */; };
+		2373772D283F76C400F9E94C /* trap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2373770F283F76C400F9E94C /* trap.mp3 */; };
+		2373772E283F76C400F9E94C /* rock-eating.wav in Resources */ = {isa = PBXBuildFile; fileRef = 23737710283F76C400F9E94C /* rock-eating.wav */; };
+		2373772F283F76C400F9E94C /* stoneblin-death.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 23737711283F76C400F9E94C /* stoneblin-death.mp3 */; };
+		23737730283F76C400F9E94C /* goblin-death.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 23737712283F76C400F9E94C /* goblin-death.mp3 */; };
+		23737731283F76C400F9E94C /* gumblin-death.wav in Resources */ = {isa = PBXBuildFile; fileRef = 23737713283F76C400F9E94C /* gumblin-death.wav */; };
+		23737732283F76C400F9E94C /* small-gnome-attack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 23737714283F76C400F9E94C /* small-gnome-attack.mp3 */; };
+		23737733283F76C400F9E94C /* tree-on-fire.wav in Resources */ = {isa = PBXBuildFile; fileRef = 23737715283F76C400F9E94C /* tree-on-fire.wav */; };
+		23737734283F76C400F9E94C /* catapult-launch.wav in Resources */ = {isa = PBXBuildFile; fileRef = 23737716283F76C400F9E94C /* catapult-launch.wav */; };
+		23737735283F76C400F9E94C /* rock-picking.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 23737717283F76C400F9E94C /* rock-picking.mp3 */; };
+		23737736283F76C400F9E94C /* dark-son-grunt.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 23737718283F76C400F9E94C /* dark-son-grunt.mp3 */; };
+		23737737283F76C400F9E94C /* flameblin-attack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 23737719283F76C400F9E94C /* flameblin-attack.mp3 */; };
+		23737738283F76C400F9E94C /* frenzy-tavern.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2373771A283F76C400F9E94C /* frenzy-tavern.wav */; };
+		23737739283F76C400F9E94C /* dark-son-gate-destroyed.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2373771B283F76C400F9E94C /* dark-son-gate-destroyed.mp3 */; };
+		2373773A283F76C400F9E94C /* dark-son-attack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2373771C283F76C400F9E94C /* dark-son-attack.mp3 */; };
+		2373773B283F76C400F9E94C /* flameblin-transform.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2373771D283F76C400F9E94C /* flameblin-transform.mp3 */; };
+		2373773C283F76C400F9E94C /* flameblin-death.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2373771E283F76C400F9E94C /* flameblin-death.mp3 */; };
+		2373773D283F76C400F9E94C /* gumblin-transform.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2373771F283F76C400F9E94C /* gumblin-transform.wav */; };
+		2373773E283F76C400F9E94C /* stoneblin-transform.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 23737720283F76C400F9E94C /* stoneblin-transform.mp3 */; };
+		2373773F283F76C400F9E94C /* catapult-goblin-impact.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 23737721283F76C400F9E94C /* catapult-goblin-impact.mp3 */; };
+		23737740283F76C400F9E94C /* gumblin-attack.wav in Resources */ = {isa = PBXBuildFile; fileRef = 23737722283F76C400F9E94C /* gumblin-attack.wav */; };
+		23737741283F76C400F9E94C /* goblin-flying.wav in Resources */ = {isa = PBXBuildFile; fileRef = 23737723283F76C400F9E94C /* goblin-flying.wav */; };
+		23737742283F76C400F9E94C /* cauldronn.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 23737724283F76C400F9E94C /* cauldronn.mp3 */; };
+		23737743283F76C400F9E94C /* dark-son-rebirth.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 23737725283F76C400F9E94C /* dark-son-rebirth.mp3 */; };
+		23737744283F76C400F9E94C /* goblin-attack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 23737726283F76C400F9E94C /* goblin-attack.mp3 */; };
+		23737745283F76C400F9E94C /* catapult-stretch.wav in Resources */ = {isa = PBXBuildFile; fileRef = 23737727283F76C400F9E94C /* catapult-stretch.wav */; };
+		23737747283F76C400F9E94C /* stoneblin-attack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 23737729283F76C400F9E94C /* stoneblin-attack.mp3 */; };
+		23737748283F76C400F9E94C /* catapult-stone-impact.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2373772A283F76C400F9E94C /* catapult-stone-impact.mp3 */; };
+		23737749283F76C400F9E94C /* level-complete.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2373772B283F76C400F9E94C /* level-complete.mp3 */; };
+		2373774A283F76C400F9E94C /* fear.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2373772C283F76C400F9E94C /* fear.mp3 */; };
 		761907F42823B8F5002A0AE2 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761907F32823B8F5002A0AE2 /* MainScreenView.swift */; };
 		761907F72823B91D002A0AE2 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761907F62823B91D002A0AE2 /* GameView.swift */; };
 		761907F92823B961002A0AE2 /* GameDurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761907F82823B961002A0AE2 /* GameDurationView.swift */; };
@@ -69,6 +98,35 @@
 		234D35D2283264B100D242E7 /* SpriteKitContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitContainer.swift; sourceTree = "<group>"; };
 		2373770A283F66D700F9E94C /* axe-gnome-attack (2).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "axe-gnome-attack (2).mp3"; sourceTree = "<group>"; };
 		2373770B283F66D700F9E94C /* axe-gnome-attack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "axe-gnome-attack.mp3"; sourceTree = "<group>"; };
+		2373770F283F76C400F9E94C /* trap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = trap.mp3; sourceTree = "<group>"; };
+		23737710283F76C400F9E94C /* rock-eating.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "rock-eating.wav"; sourceTree = "<group>"; };
+		23737711283F76C400F9E94C /* stoneblin-death.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "stoneblin-death.mp3"; sourceTree = "<group>"; };
+		23737712283F76C400F9E94C /* goblin-death.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "goblin-death.mp3"; sourceTree = "<group>"; };
+		23737713283F76C400F9E94C /* gumblin-death.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "gumblin-death.wav"; sourceTree = "<group>"; };
+		23737714283F76C400F9E94C /* small-gnome-attack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "small-gnome-attack.mp3"; sourceTree = "<group>"; };
+		23737715283F76C400F9E94C /* tree-on-fire.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "tree-on-fire.wav"; sourceTree = "<group>"; };
+		23737716283F76C400F9E94C /* catapult-launch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "catapult-launch.wav"; sourceTree = "<group>"; };
+		23737717283F76C400F9E94C /* rock-picking.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "rock-picking.mp3"; sourceTree = "<group>"; };
+		23737718283F76C400F9E94C /* dark-son-grunt.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "dark-son-grunt.mp3"; sourceTree = "<group>"; };
+		23737719283F76C400F9E94C /* flameblin-attack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "flameblin-attack.mp3"; sourceTree = "<group>"; };
+		2373771A283F76C400F9E94C /* frenzy-tavern.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "frenzy-tavern.wav"; sourceTree = "<group>"; };
+		2373771B283F76C400F9E94C /* dark-son-gate-destroyed.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "dark-son-gate-destroyed.mp3"; sourceTree = "<group>"; };
+		2373771C283F76C400F9E94C /* dark-son-attack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "dark-son-attack.mp3"; sourceTree = "<group>"; };
+		2373771D283F76C400F9E94C /* flameblin-transform.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "flameblin-transform.mp3"; sourceTree = "<group>"; };
+		2373771E283F76C400F9E94C /* flameblin-death.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "flameblin-death.mp3"; sourceTree = "<group>"; };
+		2373771F283F76C400F9E94C /* gumblin-transform.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "gumblin-transform.wav"; sourceTree = "<group>"; };
+		23737720283F76C400F9E94C /* stoneblin-transform.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "stoneblin-transform.mp3"; sourceTree = "<group>"; };
+		23737721283F76C400F9E94C /* catapult-goblin-impact.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "catapult-goblin-impact.mp3"; sourceTree = "<group>"; };
+		23737722283F76C400F9E94C /* gumblin-attack.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "gumblin-attack.wav"; sourceTree = "<group>"; };
+		23737723283F76C400F9E94C /* goblin-flying.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "goblin-flying.wav"; sourceTree = "<group>"; };
+		23737724283F76C400F9E94C /* cauldronn.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cauldronn.mp3; sourceTree = "<group>"; };
+		23737725283F76C400F9E94C /* dark-son-rebirth.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "dark-son-rebirth.mp3"; sourceTree = "<group>"; };
+		23737726283F76C400F9E94C /* goblin-attack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "goblin-attack.mp3"; sourceTree = "<group>"; };
+		23737727283F76C400F9E94C /* catapult-stretch.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "catapult-stretch.wav"; sourceTree = "<group>"; };
+		23737729283F76C400F9E94C /* stoneblin-attack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "stoneblin-attack.mp3"; sourceTree = "<group>"; };
+		2373772A283F76C400F9E94C /* catapult-stone-impact.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "catapult-stone-impact.mp3"; sourceTree = "<group>"; };
+		2373772B283F76C400F9E94C /* level-complete.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "level-complete.mp3"; sourceTree = "<group>"; };
+		2373772C283F76C400F9E94C /* fear.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = fear.mp3; sourceTree = "<group>"; };
 		761907F32823B8F5002A0AE2 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		761907F62823B91D002A0AE2 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		761907F82823B961002A0AE2 /* GameDurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDurationView.swift; sourceTree = "<group>"; };
@@ -138,6 +196,35 @@
 		2373770E283F66DE00F9E94C /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				23737721283F76C400F9E94C /* catapult-goblin-impact.mp3 */,
+				23737716283F76C400F9E94C /* catapult-launch.wav */,
+				2373772A283F76C400F9E94C /* catapult-stone-impact.mp3 */,
+				23737727283F76C400F9E94C /* catapult-stretch.wav */,
+				23737724283F76C400F9E94C /* cauldronn.mp3 */,
+				2373771C283F76C400F9E94C /* dark-son-attack.mp3 */,
+				2373771B283F76C400F9E94C /* dark-son-gate-destroyed.mp3 */,
+				23737718283F76C400F9E94C /* dark-son-grunt.mp3 */,
+				23737725283F76C400F9E94C /* dark-son-rebirth.mp3 */,
+				2373772C283F76C400F9E94C /* fear.mp3 */,
+				23737719283F76C400F9E94C /* flameblin-attack.mp3 */,
+				2373771E283F76C400F9E94C /* flameblin-death.mp3 */,
+				2373771D283F76C400F9E94C /* flameblin-transform.mp3 */,
+				2373771A283F76C400F9E94C /* frenzy-tavern.wav */,
+				23737726283F76C400F9E94C /* goblin-attack.mp3 */,
+				23737712283F76C400F9E94C /* goblin-death.mp3 */,
+				23737723283F76C400F9E94C /* goblin-flying.wav */,
+				23737722283F76C400F9E94C /* gumblin-attack.wav */,
+				23737713283F76C400F9E94C /* gumblin-death.wav */,
+				2373771F283F76C400F9E94C /* gumblin-transform.wav */,
+				2373772B283F76C400F9E94C /* level-complete.mp3 */,
+				23737710283F76C400F9E94C /* rock-eating.wav */,
+				23737717283F76C400F9E94C /* rock-picking.mp3 */,
+				23737714283F76C400F9E94C /* small-gnome-attack.mp3 */,
+				23737729283F76C400F9E94C /* stoneblin-attack.mp3 */,
+				23737711283F76C400F9E94C /* stoneblin-death.mp3 */,
+				23737720283F76C400F9E94C /* stoneblin-transform.mp3 */,
+				2373770F283F76C400F9E94C /* trap.mp3 */,
+				23737715283F76C400F9E94C /* tree-on-fire.wav */,
 				2373770A283F66D700F9E94C /* axe-gnome-attack (2).mp3 */,
 				2373770B283F66D700F9E94C /* axe-gnome-attack.mp3 */,
 			);
@@ -415,10 +502,39 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23737749283F76C400F9E94C /* level-complete.mp3 in Resources */,
+				23737739283F76C400F9E94C /* dark-son-gate-destroyed.mp3 in Resources */,
 				2373770D283F66D700F9E94C /* axe-gnome-attack.mp3 in Resources */,
+				23737734283F76C400F9E94C /* catapult-launch.wav in Resources */,
+				23737736283F76C400F9E94C /* dark-son-grunt.mp3 in Resources */,
+				2373772E283F76C400F9E94C /* rock-eating.wav in Resources */,
+				2373773A283F76C400F9E94C /* dark-son-attack.mp3 in Resources */,
+				2373773C283F76C400F9E94C /* flameblin-death.mp3 in Resources */,
+				23737733283F76C400F9E94C /* tree-on-fire.wav in Resources */,
+				2373772F283F76C400F9E94C /* stoneblin-death.mp3 in Resources */,
+				23737741283F76C400F9E94C /* goblin-flying.wav in Resources */,
+				2373773D283F76C400F9E94C /* gumblin-transform.wav in Resources */,
+				23737743283F76C400F9E94C /* dark-son-rebirth.mp3 in Resources */,
+				2373772D283F76C400F9E94C /* trap.mp3 in Resources */,
+				23737737283F76C400F9E94C /* flameblin-attack.mp3 in Resources */,
+				2373773F283F76C400F9E94C /* catapult-goblin-impact.mp3 in Resources */,
+				23737738283F76C400F9E94C /* frenzy-tavern.wav in Resources */,
+				2373774A283F76C400F9E94C /* fear.mp3 in Resources */,
+				23737730283F76C400F9E94C /* goblin-death.mp3 in Resources */,
+				2373773E283F76C400F9E94C /* stoneblin-transform.mp3 in Resources */,
+				23737742283F76C400F9E94C /* cauldronn.mp3 in Resources */,
+				2373773B283F76C400F9E94C /* flameblin-transform.mp3 in Resources */,
+				23737745283F76C400F9E94C /* catapult-stretch.wav in Resources */,
+				23737748283F76C400F9E94C /* catapult-stone-impact.mp3 in Resources */,
+				23737740283F76C400F9E94C /* gumblin-attack.wav in Resources */,
+				23737732283F76C400F9E94C /* small-gnome-attack.mp3 in Resources */,
+				23737731283F76C400F9E94C /* gumblin-death.wav in Resources */,
 				2373770C283F66D700F9E94C /* axe-gnome-attack (2).mp3 in Resources */,
 				769246962822B5EE003D5D27 /* Preview Assets.xcassets in Resources */,
 				769246932822B5EE003D5D27 /* Assets.xcassets in Resources */,
+				23737735283F76C400F9E94C /* rock-picking.mp3 in Resources */,
+				23737744283F76C400F9E94C /* goblin-attack.mp3 in Resources */,
+				23737747283F76C400F9E94C /* stoneblin-attack.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

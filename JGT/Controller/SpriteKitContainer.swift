@@ -8,9 +8,9 @@
 import SwiftUI
 import SpriteKit
 
-struct SpriteKitContainer : UIViewRepresentable {
+struct SpriteKitContainer : UIViewRepresentable {    
     class Coordinator: NSObject {
-        var scene: SKScene?
+        var scene: TossScene? = TossScene()
     }
     
     func makeCoordinator() -> Coordinator {

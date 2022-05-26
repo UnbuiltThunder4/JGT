@@ -28,7 +28,7 @@ class Cauldron: SKSpriteNode {
         self.currentGoblinsNumber = currentGoblinsNumber
         self.maxGoblinNumber = maxGoblinNumber
         
-        super.init(texture: SKTexture(imageNamed: "cauldronn"), color: .red, size: CGSize(width: 70, height: 70))
+        super.init(texture: SKTexture(imageNamed: "cauldronn"), color: .red, size: CGSize(width: UIScreen.main.bounds.height/5, height: UIScreen.main.bounds.height/5))
         self.name = "cauldron"
         
         currentGoblinsNumberLabel.name = "goblinsNumber"
