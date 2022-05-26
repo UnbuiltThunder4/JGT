@@ -426,7 +426,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.removeAllActions()
         self.inTavernCounter += 1
         if (self.inTavernCounter % taskTime == 0) {
-            self.currentFrenzyTurn += 1
+            if (self.currentFrenzyTurn < self.frenzy) {
+                self.currentFrenzyTurn += 1
+            }
             self.inTavernCounter = 0
             if (self.health + 10 <= self.maxHealth) {
                 self.health += 10
@@ -434,7 +436,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             else {
                 self.health = self.maxHealth
             }
-            if (self.currentFrenzyTurn >= self.frenzy) {
+            if (self.currentFrenzyTurn >= self.frenzy && self.health == self.maxHealth) {
                 self.isFrenzied = true
                 self.fear = 0
                 self.state = .idle
