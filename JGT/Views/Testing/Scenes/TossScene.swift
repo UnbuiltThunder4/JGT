@@ -35,7 +35,8 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     var sheet = Sheet()
     var cauldron = Cauldron(currentGoblinsNumber: 3, maxGoblinNumber: MainScreenProperties.maxGoblinsNumber)
     var evilGauge = EvilGauge(maxFill: MainScreenProperties.maxFill, currentFill: 20)
-    var evilSight = SKSpriteNode(color: .purple, size: CGSize(width: 50, height: 50))
+//    var evilSight = SKSpriteNode(imageNamed: "evil sight")
+    var evilSight = EvilSight()
     
     var cameraRect: CGRect {
         let x = cameraNode.position.x - size.width/2 + (size.width - playableRect.width)/2
@@ -75,8 +76,6 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         setStructures(self.structures)
         background.addChild(darkson)
         
-        evilSight.alpha = 0.0
-        evilSight.zPosition = 1
         background.addChild(evilSight)
     }
     
@@ -143,16 +142,16 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         darkson.update()
         
         if channeling == true && evilGauge.currentFill > 0 {
-            evilGauge.updateGauge(goblin: nil, value: -1)
-            gameLogic.evilSight(self, position: self.touchPoint)
-            if evilGauge.currentFill == 0 {gameLogic.dispatchSight(self)}
+//            evilGauge.updateGauge(goblin: nil, value: -1)
+//            evilGauge.channelingSight()
+            evilSight.evilSight(position: self.touchPoint)
+            if evilGauge.currentFill == 0 {evilSight.dispatchSight()}
         }
         
         if let goblinSelected = selectedNode as? Goblin {
-            if sheet.alpha == 1 {
                 sheet.updateSheet(goblin: goblinSelected)
-            }
         }
     }
     
 }
+

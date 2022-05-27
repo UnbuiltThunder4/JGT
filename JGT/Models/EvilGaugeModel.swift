@@ -101,10 +101,27 @@ class EvilGauge: SKNode {
             } else if self.currentFill != self.maxFill {
                 self.currentFill = self.maxFill
                 gaugeFill.run(SKAction.resize(toHeight: gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
+            } else if self.currentFill + amount < 0 {
+                gaugeFill.size.height = 0.0
             }
         }
         
     }
+    
+//    func channelingSight(channeling: Bool) {
+//        if (self.currentFill - 1) >= 0 {
+//            if channeling {
+//            gaugeFill.run(SKAction.resize(toHeight: gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill - 1), duration: 1.0))
+//                self.currentFill -= 1
+//            } else {
+//                gaugeFill.size.height = gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill)
+//            }
+//        }
+//    }
+//
+//    func stopChanneling() {
+//        gaugeFill.size.height = gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill)
+//    }
     
     func updateGaugeColor(goblin: Goblin?) {
         if let goblin = goblin {

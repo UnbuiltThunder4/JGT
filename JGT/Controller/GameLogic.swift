@@ -142,6 +142,12 @@ class GameLogic: ObservableObject {
             let newGoblin = spawnGoblin(tossScene, population: population, spawnPoint: spawnPoint)
             let distance = CGVector(dx: destination.x - spawnPoint.x, dy: destination.y - spawnPoint.y)
             
+            let rotateRight = SKAction.rotate(byAngle: -.pi/4, duration: 0.1)
+            let rotateLeft = SKAction.rotate(byAngle: .pi/4, duration: 0.2)
+            let rotateAnimation = SKAction.sequence([rotateRight, rotateLeft])
+            tossScene.cauldron.run(rotateAnimation)
+
+            
             newGoblin.type = type
             newGoblin.state = .launched
             
@@ -162,30 +168,31 @@ class GameLogic: ObservableObject {
             
             tossScene.evilGauge.shootGauge(goblin: newGoblin)
             tossScene.cauldron.updateCauldron(amount: 1)
+                        
         }
     }
     
-    public func evilSight(_ tossScene: TossScene, position: CGPoint) {
-        tossScene.evilSight.run(SKAction.scale(by: 1.1, duration: 0.2))
-        tossScene.evilSight.position = position
-        var frenziedGoblins: [Goblin] = []
-        tossScene.background.enumerateChildNodes(withName: "goblin") { node, _ in
-            let goblin = node as! Goblin
-            if goblin.frame.intersects(tossScene.evilSight.frame) {
-                goblin.isFrenzied = true
-                goblin.fear = 0
-                goblin.currentFrenzyTurn = goblin.frenzy
-                frenziedGoblins.append(goblin)
-                print(goblin.fullName)
-                print(goblin.isFrenzied)
-            }
-        }
-    }
+//    public func evilSight(_ tossScene: TossScene, position: CGPoint) {
+//        tossScene.evilSight.position = position
+//        var frenziedGoblins: [Goblin] = []
+//
+//        tossScene.background.enumerateChildNodes(withName: "goblin") { node, _ in
+//            let goblin = node as! Goblin
+//            if goblin.frame.intersects(tossScene.evilSight.frame) {
+//                goblin.isFrenzied = true
+//                goblin.fear = 0
+//                goblin.currentFrenzyTurn = goblin.frenzy
+//                frenziedGoblins.append(goblin)
+//                print(goblin.fullName)
+//                print(goblin.isFrenzied)
+//            }
+//        }
+//    }
     
-    public func dispatchSight(_ tossScene: TossScene) {
-        tossScene.evilSight.setScale(1.0)
-        tossScene.evilSight.alpha = 0.0
-    }
+//    public func dispatchSight(_ tossScene: TossScene) {
+//        tossScene.evilSight.setScale(1.0)
+//        tossScene.evilSight.alpha = 0.0
+//    }
     
 }
 
