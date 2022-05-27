@@ -142,6 +142,12 @@ class GameLogic: ObservableObject {
             let newGoblin = spawnGoblin(tossScene, population: population, spawnPoint: spawnPoint)
             let distance = CGVector(dx: destination.x - spawnPoint.x, dy: destination.y - spawnPoint.y)
             
+            let rotateRight = SKAction.rotate(byAngle: -.pi/4, duration: 0.1)
+            let rotateLeft = SKAction.rotate(byAngle: .pi/4, duration: 0.2)
+            let rotateAnimation = SKAction.sequence([rotateRight, rotateLeft])
+            tossScene.cauldron.run(rotateAnimation)
+
+            
             newGoblin.type = type
             newGoblin.state = .launched
             
@@ -162,6 +168,7 @@ class GameLogic: ObservableObject {
             
             tossScene.evilGauge.shootGauge(goblin: newGoblin)
             tossScene.cauldron.updateCauldron(amount: 1)
+                        
         }
     }
     
