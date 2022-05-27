@@ -509,7 +509,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
 //                else {
 //                    self.run(SKAction.move(by: CGVector(dx: 0, dy: -200), duration: 1.5), withKey: "climbing")
 //                }
-//                self.position.y += 100
+                self.position.y = passageCoordinates.y
             }
             else {
                 self.attackCounter += 1
@@ -521,7 +521,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                         dmg += self.attack
                     }
                     backdoor.health -= dmg
-                    self.HWpoints += 8
+                    self.HWpoints += 1
                     self.fitness = self.getFitness()
                     hasToUpdateRank = true
                 }

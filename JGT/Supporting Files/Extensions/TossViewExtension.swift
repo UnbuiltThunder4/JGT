@@ -272,10 +272,13 @@ extension TossScene {
     func setStructures(_ structures: [Structure]) {
         for i in 0..<structures.count {
             structures[i].zPosition = 0
+            if (structures[i].type == .passage) {
+                structures[i].zPosition = 1
+            }
 
             structures[i].physicsBody = SKPhysicsBody(rectangleOf:
-                                                        CGSize(width: structures[i].size.width*structures[i].maskmod,
-                                                               height: structures[i].size.height*structures[i].maskmod))
+                                                        CGSize(width: structures[i].size.width*structures[i].maskmodX,
+                                                               height: structures[i].size.height*structures[i].maskmodY))
             structures[i].physicsBody?.affectedByGravity = false
             structures[i].physicsBody?.restitution = 0.0
             structures[i].physicsBody?.linearDamping = 0.0

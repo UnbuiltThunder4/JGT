@@ -139,7 +139,8 @@ public enum StructureType: Int {
     case tavern = 6
     case trap = 7
     case gate = 8
-    case wall = 9
+    case passage = 9
+    case wall = 10
 }
 
 let tavernCoordinates = CGPoint(x: 1400, y: 300)
@@ -148,16 +149,17 @@ let villageCoordinates = CGPoint(x: 1200, y: 1800)
 let catapultCoordinates = CGPoint(x: 1500, y: 1500)
 let gateCoordinates = CGPoint(x: 3275, y: 2950)
 let backdoorCoordinates = CGPoint(x: 2700, y: 2835)
+let passageCoordinates = CGPoint(x: 2700, y: 3300)
 
 let levelstructures: [Structure] = [
     Tavern(x: tavernCoordinates.x, y: tavernCoordinates.y),
     Academy(x: academyCoordinates.x, y: academyCoordinates.y),
     Village(x: villageCoordinates.x, y: villageCoordinates.y),
     Catapult(x: catapultCoordinates.x, y: catapultCoordinates.y), // THIS HAS TO BE ON INDEX 3
-    //Structure(type: .wall, x: 2800, y: 3010, rotation: .pi / -4.2),
     Structure(type: .wall, x: 2800, y: 3100, rotation: 0),
     Gate(x: gateCoordinates.x, y: gateCoordinates.y), // THIS HAS TO BE ON INDEX 5
     Backdoor(x: backdoorCoordinates.x, y: backdoorCoordinates.y),  // THIS HAS TO BE ON INDEX 6
+    Structure(type: .passage, x: passageCoordinates.x, y: passageCoordinates.y, rotation: 0),
     Structure(type: .tree, x: 450, y: 300, rotation: 0),
     Structure(type: .tree, x: 850, y: 500, rotation: 0),
     Structure(type: .tree, x: 1250, y: 1000, rotation: 0),

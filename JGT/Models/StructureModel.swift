@@ -13,7 +13,8 @@ class Structure: SKSpriteNode, ObservableObject {
     var goblins: [Goblin] = []
     let type: StructureType
     let mask: Collision.Masks
-    let maskmod: CGFloat
+    let maskmodX: CGFloat
+    let maskmodY: CGFloat
     let width: CGFloat
     let height: CGFloat
     
@@ -27,7 +28,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .gate
             self.width = 380
             self.height = 380
-            self.maskmod = 1.3
+            self.maskmodX = 1.0
+            self.maskmodY = 1.3
             break
             
         case .backdoor:
@@ -35,7 +37,17 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .enviroment
             self.width = 125
             self.height = 150
-            self.maskmod = 1.3
+            self.maskmodX = 1.0
+            self.maskmodY = 1.3
+            break
+            
+        case .passage:
+            img = "backdoor-up"
+            self.mask = .enviroment
+            self.width = 125
+            self.height = 75
+            self.maskmodX = 1.0
+            self.maskmodY = 1.0
             break
             
         case .academy:
@@ -43,7 +55,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .building
             self.width = 300
             self.height = 300
-            self.maskmod = 0.9
+            self.maskmodX = 0.9
+            self.maskmodY = 0.9
             break
             
         case .tavern:
@@ -51,7 +64,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .building
             self.width = 300
             self.height = 300
-            self.maskmod = 0.9
+            self.maskmodX = 0.9
+            self.maskmodY = 0.9
             break
             
         case .village:
@@ -59,7 +73,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .building
             self.width = 300
             self.height = 300
-            self.maskmod = 0.9
+            self.maskmodX = 0.9
+            self.maskmodY = 0.9
             break
             
         case .catapult:
@@ -67,7 +82,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .enviroment
             self.width = 250
             self.height = 250
-            self.maskmod = 0.9
+            self.maskmodX = 0.9
+            self.maskmodY = 0.9
             break
             
         case .wall:
@@ -75,7 +91,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .building
             self.width = 1700
             self.height = 700
-            self.maskmod = 1.0
+            self.maskmodX = 1.0
+            self.maskmodY = 0.7
             break
         
         case .tree:
@@ -83,7 +100,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .enviroment
             self.width = 150
             self.height = 300
-            self.maskmod = 1.3
+            self.maskmodX = 1.3
+            self.maskmodY = 1.3
             break
             
         case .rock:
@@ -91,7 +109,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .enviroment
             self.width = 80
             self.height = 80
-            self.maskmod = 1.5
+            self.maskmodX = 1.5
+            self.maskmodY = 1.5
             break
             
         default:
@@ -99,7 +118,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .enviroment
             self.width = 300
             self.height = 300
-            self.maskmod = 1.2
+            self.maskmodX = 1.1
+            self.maskmodY = 1.1
             break
         }
         super.init(texture: SKTexture(imageNamed: img), color: .red, size: CGSize(width: self.width, height: self.height))
