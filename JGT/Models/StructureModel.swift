@@ -25,17 +25,17 @@ class Structure: SKSpriteNode, ObservableObject {
         case .gate:
             img = "gate"
             self.mask = .gate
-            self.width = 500
-            self.height = 500
-            self.maskmod = 1.1
+            self.width = 380
+            self.height = 380
+            self.maskmod = 1.3
             break
             
         case .backdoor:
             img = "backdoor"
-            self.mask = .backdoor
-            self.width = 250
-            self.height = 250
-            self.maskmod = 1.1
+            self.mask = .enviroment
+            self.width = 125
+            self.height = 150
+            self.maskmod = 1.3
             break
             
         case .academy:
@@ -73,8 +73,8 @@ class Structure: SKSpriteNode, ObservableObject {
         case .wall:
             img = "wall"
             self.mask = .building
-            self.width = 750
-            self.height = 150
+            self.width = 1700
+            self.height = 700
             self.maskmod = 1.0
             break
         
@@ -226,7 +226,6 @@ class Gate: Structure {
     
     init(x: CGFloat, y: CGFloat) {
         super.init(type: .gate, x: x, y: y, rotation: 0)
-//        self.speed = 5.0
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -247,10 +246,10 @@ class Backdoor: Structure {
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     
     var health: Int = 600
+    var isOpened: Bool = false
     
     init(x: CGFloat, y: CGFloat) {
-        super.init(type: .gate, x: x, y: y, rotation: 0)
-//        self.speed = 5.0
+        super.init(type: .backdoor, x: x, y: y, rotation: 0)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -258,9 +257,10 @@ class Backdoor: Structure {
     }
     
     public func update(_ tossScene: TossScene) {
+        print(self.health)
         if (self.health <= 0) {
-            self.removeFromParent()
-            tossScene.darkson.target = nil
+            self.isOpened = true
+            self.texture = SKTexture(imageNamed: "backdoor-open")
         }
     }
 }

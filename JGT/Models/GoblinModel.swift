@@ -223,6 +223,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             inHandUpdate()
             break
             
+        case .backdooring:
+            hasToUpdateRank = backdooringUpdate()
+            break
+            
         case .flying:
             flyingUpdate()
             break
@@ -493,6 +497,42 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         return hasToUpdateRank
     }
     
+    private func backdooringUpdate() -> Bool {
+        var hasToUpdateRank = false
+        self.updateAge()
+        if let backdoor = self.closeStructure as? Backdoor {
+            if (backdoor.isOpened) {
+//                if let _ = self.action(forKey: "climbing") {
+//                }
+//                else {
+//                    self.run(SKAction.move(by: CGVector(dx: 0, dy: -200), duration: 1.5), withKey: "climbing")
+//                }
+//                self.position.y += 100
+            }
+            else {
+                self.attackCounter += 1
+                if (self.attackCounter % attackTime == 0) {
+                    //GIVE EVIL POINTS
+                    self.attackCounter = 0
+                    
+                    var dmg = self.attack
+                    if (self.isFrenzied) {
+                        dmg += self.attack
+                    }
+                    backdoor.health -= dmg
+                    self.HWpoints += 8
+                    self.fitness = self.getFitness()
+                    hasToUpdateRank = true
+                }
+            }
+        }
+        if (self.target != nil) {
+            self.attackCounter = 0
+            self.state = .idle
+        }
+        return hasToUpdateRank
+    }
+    
     private func flyingUpdate() {
         self.updateAge()
         if (self.physicsBody!.velocity.dx != 0 || self.physicsBody!.velocity.dy != 0) {
@@ -573,12 +613,12 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         case .catapult:
-            if (input == 1 && self.hasRock == true) {
+            if (input == 2 && self.hasRock == true) {
                 removeAction(forKey: "walk")
                 self.state = .working
                 self.currentTask = self.throwRock
             }
-            else if (input == 2){
+            else if (input == 1){
                 removeAction(forKey: "walk")
                 self.state = .working
                 self.currentTask = self.throwSelf
@@ -639,6 +679,11 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 }
             }
             hasToUpdateRank = true
+            break
+            
+        case .backdoor:
+            removeAction(forKey: "walk")
+            self.state = .backdooring
             break
             
         default:

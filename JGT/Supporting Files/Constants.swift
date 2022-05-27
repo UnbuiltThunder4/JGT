@@ -94,6 +94,7 @@ public enum GoblinState {
     case intavern
     case inacademy
     case invillage
+    case backdooring
     case paused
 }
 
@@ -133,28 +134,30 @@ public enum StructureType: Int {
     case rock = 1
     case catapult = 2
     case backdoor = 3
-    case passage = 4
-    case academy = 5
-    case village = 6
-    case tavern = 7
-    case trap = 8
-    case gate = 9
-    case wall = 10
+    case academy = 4
+    case village = 5
+    case tavern = 6
+    case trap = 7
+    case gate = 8
+    case wall = 9
 }
 
 let tavernCoordinates = CGPoint(x: 1400, y: 300)
 let academyCoordinates = CGPoint(x: 250, y: 850)
 let villageCoordinates = CGPoint(x: 1200, y: 1800)
 let catapultCoordinates = CGPoint(x: 1500, y: 1500)
-let gateCoordinates = CGPoint(x: 3275, y: 2940)
+let gateCoordinates = CGPoint(x: 3275, y: 2950)
+let backdoorCoordinates = CGPoint(x: 2700, y: 2835)
 
 let levelstructures: [Structure] = [
     Tavern(x: tavernCoordinates.x, y: tavernCoordinates.y),
     Academy(x: academyCoordinates.x, y: academyCoordinates.y),
     Village(x: villageCoordinates.x, y: villageCoordinates.y),
     Catapult(x: catapultCoordinates.x, y: catapultCoordinates.y), // THIS HAS TO BE ON INDEX 3
-    Structure(type: .wall, x: 2800, y: 3010, rotation: .pi / -4.2),
+    //Structure(type: .wall, x: 2800, y: 3010, rotation: .pi / -4.2),
+    Structure(type: .wall, x: 2800, y: 3100, rotation: 0),
     Gate(x: gateCoordinates.x, y: gateCoordinates.y), // THIS HAS TO BE ON INDEX 5
+    Backdoor(x: backdoorCoordinates.x, y: backdoorCoordinates.y),  // THIS HAS TO BE ON INDEX 6
     Structure(type: .tree, x: 450, y: 300, rotation: 0),
     Structure(type: .tree, x: 850, y: 500, rotation: 0),
     Structure(type: .tree, x: 1250, y: 1000, rotation: 0),

@@ -105,7 +105,19 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         
-        self.population.update()
+        var hasToUpdateRank = false
+        
+        self.population.goblins.forEach {
+            if ($0.update()) {
+                hasToUpdateRank = true
+            }
+            if ($0.health <= 0) {
+                self.population.kill($0)
+            }
+        }
+        if (hasToUpdateRank) {
+            self.population.rankPerFitness()
+        }
                 
         self.enemies.forEach {
             if ($0.update()) {
@@ -121,6 +133,10 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         }
         
         if let structure = self.structures[5] as? Gate {
+            structure.update(self)
+        }
+        
+        if let structure = self.structures[6] as? Backdoor {
             structure.update(self)
         }
         
