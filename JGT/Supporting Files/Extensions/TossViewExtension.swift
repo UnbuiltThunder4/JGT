@@ -92,8 +92,9 @@ extension TossScene {
             }
 
             if let goblinNode = selectedNode as? Goblin {
+                lastSelectedGoblin = goblinNode
                 self.sheet.alpha = 1.0
-                self.sheet.updateSheet(goblin: goblinNode)
+                self.sheet.updateSheet(goblin: lastSelectedGoblin as! Goblin)
                 cauldron.closeSpawn()
             }
             
@@ -120,6 +121,9 @@ extension TossScene {
                     self.cauldron.updateCauldron(amount: -1)
                 }
                 population.goblins.remove(at: population.getIndex(of: selectedNode as! Goblin)!)
+                if selectedNode!.isEqual(to: lastSelectedGoblin!) {
+                    lastSelectedGoblin = nil
+                }
                 selectedNode!.removeFromParent()
             }
             if selectedNode?.name! == "background" {

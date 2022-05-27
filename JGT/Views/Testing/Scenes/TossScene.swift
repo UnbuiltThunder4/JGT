@@ -22,6 +22,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     let background = SKSpriteNode(imageNamed: "forest")
     
     var selectedNode: SKNode?
+    var lastSelectedGoblin: SKNode?
     var touchPoint: CGPoint = CGPoint()
     var panning = false
     var channeling = false
@@ -112,6 +113,9 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             }
             if ($0.health <= 0) {
                 self.population.kill($0)
+                if ($0.isEqual(to: lastSelectedGoblin!)) {
+                    lastSelectedGoblin = nil
+                }
             }
         }
         if (hasToUpdateRank) {
@@ -148,8 +152,10 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             if evilGauge.currentFill == 0 {evilSight.dispatchSight()}
         }
         
-        if let goblinSelected = selectedNode as? Goblin {
-                sheet.updateSheet(goblin: goblinSelected)
+        if let lastSelectedGoblin = lastSelectedGoblin as? Goblin {
+                sheet.updateSheet(goblin: lastSelectedGoblin)
+        } else {
+            sheet.alpha = 0.0
         }
     }
     
