@@ -257,7 +257,6 @@ class Backdoor: Structure {
     }
     
     public func update(_ tossScene: TossScene) {
-        print(self.health)
         if (self.health <= 0) {
             self.isOpened = true
             self.texture = SKTexture(imageNamed: "backdoor-open")
