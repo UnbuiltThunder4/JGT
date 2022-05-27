@@ -70,6 +70,7 @@
 		76A53501282D0CAC00DEC317 /* TossViewColliders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A53500282D0CAB00DEC317 /* TossViewColliders.swift */; };
 		76A53505282FE4EC00DEC317 /* SheetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A53504282FE4EC00DEC317 /* SheetModel.swift */; };
 		76B061B2282EB2680085F8D3 /* EnemyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B061B1282EB2680085F8D3 /* EnemyModel.swift */; };
+		76B5F2F5284089D600E7C071 /* EvilSightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5F2F4284089D600E7C071 /* EvilSightModel.swift */; };
 		76BEE61728325DB400E4A610 /* CollisionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BEE61628325DB400E4A610 /* CollisionModel.swift */; };
 		76C24C3B282BB60A00F76B8E /* TossViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C24C3A282BB60A00F76B8E /* TossViewExtension.swift */; };
 		76CF0E04283AD4DA0060F55B /* ProgressBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CF0E03283AD4DA0060F55B /* ProgressBarModel.swift */; };
@@ -161,6 +162,7 @@
 		76A53500282D0CAB00DEC317 /* TossViewColliders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TossViewColliders.swift; sourceTree = "<group>"; };
 		76A53504282FE4EC00DEC317 /* SheetModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SheetModel.swift; sourceTree = "<group>"; };
 		76B061B1282EB2680085F8D3 /* EnemyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyModel.swift; sourceTree = "<group>"; };
+		76B5F2F4284089D600E7C071 /* EvilSightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvilSightModel.swift; sourceTree = "<group>"; };
 		76BEE61628325DB400E4A610 /* CollisionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionModel.swift; sourceTree = "<group>"; };
 		76C24C3A282BB60A00F76B8E /* TossViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TossViewExtension.swift; sourceTree = "<group>"; };
 		76CF0E03283AD4DA0060F55B /* ProgressBarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarModel.swift; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				7656DF2228301C0E004B9B65 /* EvilGaugeModel.swift */,
 				76CF0E03283AD4DA0060F55B /* ProgressBarModel.swift */,
 				76EE5B47283B7FE300ED6635 /* ProjectileModel.swift */,
+				76B5F2F4284089D600E7C071 /* EvilSightModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -564,6 +567,7 @@
 				763F279128291F7200803BE1 /* StructureModel.swift in Sources */,
 				7656DF2328301C0E004B9B65 /* EvilGaugeModel.swift in Sources */,
 				763F278F2829178600803BE1 /* ProficencyModel.swift in Sources */,
+				76B5F2F5284089D600E7C071 /* EvilSightModel.swift in Sources */,
 				761907F92823B961002A0AE2 /* GameDurationView.swift in Sources */,
 				761908082823BD43002A0AE2 /* NeuralNetworkModel.swift in Sources */,
 				769246912822B5ED003D5D27 /* ContentView.swift in Sources */,

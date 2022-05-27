@@ -78,8 +78,25 @@ extension TossScene: SKPhysicsContactDelegate {
             }
         
         }
-//        if (collision.matches(.goblin, .evilSight)) {
-//            
-//        }
+        if (collision.matches(.goblin, .evilSight)) {
+            if let node = firstBody.node as? Goblin {
+                if let node2 = secondBody.node as? EvilSight {
+                    node.isFrenzied = true
+                    node.fear = 0
+                    node.currentFrenzyTurn = node.frenzy
+                    print(node.fullName)
+                    print(node.isFrenzied)
+                }
+            }
+            if let node = secondBody.node as? Goblin {
+                if let node2 = firstBody.node as? EvilSight {
+                    node.isFrenzied = true
+                    node.fear = 0
+                    node.currentFrenzyTurn = node.frenzy
+                    print(node.fullName)
+                    print(node.isFrenzied)
+                }
+            }
+        }
     }
 }

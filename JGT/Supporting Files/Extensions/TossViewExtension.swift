@@ -125,7 +125,6 @@ extension TossScene {
             if selectedNode?.name! == "background" {
                 channeling = true
                 touchPoint = touchLocation
-                evilSight.alpha = 1.0
             }
             
             if selectedNode is Cauldron || selectedNode?.name == "goblinsNumber" {
@@ -135,7 +134,7 @@ extension TossScene {
         if recognizer.state == .ended {
             if selectedNode?.name! == "background" {
                 channeling = false
-                gameLogic.dispatchSight(self)
+                evilSight.dispatchSight()
             }
         }
     }
