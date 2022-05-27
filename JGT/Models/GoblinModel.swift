@@ -158,7 +158,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     public func mutate(goblin: Goblin, mutationRate: Int) {
         if (Int.random(in: 0..<100) < mutationRate) {
-            goblin.maxHealth = Int.random(in: 10..<101)
+            let randnum = Int.random(in: 10..<101)
+            goblin.maxHealth = randnum
+            goblin.health = randnum
         }
         
         if (Int.random(in: 0..<100) < mutationRate) {
@@ -512,7 +514,6 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             else {
                 self.attackCounter += 1
                 if (self.attackCounter % attackTime == 0) {
-                    //GIVE EVIL POINTS
                     self.attackCounter = 0
                     
                     var dmg = self.attack
