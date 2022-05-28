@@ -279,7 +279,7 @@ extension TossScene {
         for i in 0..<structures.count {
             structures[i].zPosition = 0
             if (structures[i].type == .passage) {
-                structures[i].zPosition = 3
+                structures[i].zPosition = 4
             }
             
             structures[i].physicsBody = SKPhysicsBody(rectangleOf:
