@@ -113,8 +113,10 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             }
             if ($0.health <= 0) {
                 self.population.kill($0)
-                if ($0.isEqual(to: lastSelectedGoblin!)) {
-                    lastSelectedGoblin = nil
+                if let lastSelected = lastSelectedGoblin {
+                    if $0.isEqual(to: lastSelected) {
+                        lastSelectedGoblin = nil
+                    }
                 }
             }
         }
