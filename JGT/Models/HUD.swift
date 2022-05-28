@@ -18,13 +18,16 @@ enum HUDSettings {
 
 class HUD: SKNode {
     
-    override init() {
+    let winSize: CGSize
+    
+    init(winSize: CGSize) {
+        self.winSize = winSize
         super.init()
         name = "HUD"
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        fatalError("init(coder:) has not been implemented")
     }
     
     func addCauldron(cauldron: Cauldron, position: CGPoint) {

@@ -32,7 +32,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     var lastScale = 1.0
     var currentScale = 1.0
     
-    var hud = HUD()
+    var hud = HUD(winSize: CGSize.zero)
     var sheet = Sheet()
     var cauldron = Cauldron(currentGoblinsNumber: 3, maxGoblinNumber: MainScreenProperties.maxGoblinsNumber)
     var evilGauge = EvilGauge(maxFill: MainScreenProperties.maxFill, currentFill: 20)
@@ -97,6 +97,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         camera = cameraNode
         cameraNode.position = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
         
+        hud = HUD(winSize: self.size)
         setupHUD()
         
     }
