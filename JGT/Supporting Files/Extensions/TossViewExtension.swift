@@ -90,7 +90,7 @@ extension TossScene {
                 gameLogic.shootGoblin(self, node: cameraNode, type: .gum, population: self.population, destination: cameraNode.position)
                 cauldron.closeSpawn()
             }
-
+            
             if let goblinNode = selectedNode as? Goblin {
                 lastSelectedGoblin = goblinNode
                 self.sheet.alpha = 1.0
@@ -121,15 +121,17 @@ extension TossScene {
                     self.cauldron.updateCauldron(amount: -1)
                 }
                 population.goblins.remove(at: population.getIndex(of: selectedNode as! Goblin)!)
-                if selectedNode!.isEqual(to: lastSelectedGoblin!) {
-                    lastSelectedGoblin = nil
+                
+                if let lastSelected = lastSelectedGoblin {
+                    if selectedNode!.isEqual(to: lastSelected) {
+                        lastSelectedGoblin = nil
+                    }
                 }
                 selectedNode!.removeFromParent()
             }
             if selectedNode?.name! == "background" {
                 channeling = true
                 touchPoint = touchLocation
-//                evilGauge.channelingSight(channeling: channeling)
             }
             
             if selectedNode is Cauldron || selectedNode?.name == "goblinsNumber" {
@@ -140,7 +142,7 @@ extension TossScene {
             if selectedNode?.name! == "background" {
                 channeling = false
                 evilSight.dispatchSight()
-//                evilGauge.stopChanneling()
+                evilGauge.stopChanneling()
             }
         }
     }
@@ -186,7 +188,7 @@ extension TossScene {
                 }
                 
                 cameraNode.run(SKAction.move(by: CGVector(dx: moveX, dy: moveY), duration: 0.1))
-                                
+                
                 if (cameraNode.xScale > maximumZoom) && (cameraNode.yScale > maximumZoom) {
                     cameraNode.xScale = maximumZoom
                     cameraNode.yScale = maximumZoom
@@ -197,7 +199,7 @@ extension TossScene {
                 }
                 self.currentScale = cameraNode.xScale
             }
-        
+            
         }
     }
     
@@ -238,8 +240,8 @@ extension TossScene {
             else {
                 goblins[i].position = CGPoint(x: Double.random(in: 50...500), y: Double.random(in: 50...300))
             }
-            goblins[i].zPosition = 1
-
+            goblins[i].zPosition = 4
+            
             goblins[i].physicsBody = SKPhysicsBody(rectangleOf: goblins[i].size)
             goblins[i].physicsBody?.affectedByGravity = false
             goblins[i].physicsBody?.restitution = 0.0
@@ -256,8 +258,8 @@ extension TossScene {
     
     func setEnemies(_ enemies: [Enemy]) {
         for i in 0..<enemies.count {
-            enemies[i].zPosition = 1
-
+            enemies[i].zPosition = 4
+            
             enemies[i].physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: enemies[i].size.width*2.5,
                                                                        height: enemies[i].size.height*2.5))
             enemies[i].physicsBody?.affectedByGravity = false
@@ -277,9 +279,9 @@ extension TossScene {
         for i in 0..<structures.count {
             structures[i].zPosition = 0
             if (structures[i].type == .passage) {
-                structures[i].zPosition = 1
+                structures[i].zPosition = 3
             }
-
+            
             structures[i].physicsBody = SKPhysicsBody(rectangleOf:
                                                         CGSize(width: structures[i].size.width*structures[i].maskmodX,
                                                                height: structures[i].size.height*structures[i].maskmodY))
@@ -305,7 +307,7 @@ extension TossScene {
     }
     
     func setupHUD() {
-      cameraNode.addChild(hud)
+        cameraNode.addChild(hud)
         hud.addCauldron(cauldron: cauldron, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width + UIScreen.main.bounds.height/10.5, y: cameraNode.position.y - UIScreen.main.bounds.height + UIScreen.main.bounds.height/10.5))
         hud.addSheet(sheet: sheet, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/5, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
         hud.addEvilGauge(evilGauge: evilGauge, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width + UIScreen.main.bounds.height/10.5, y: cameraNode.position.y - UIScreen.main.bounds.height + UIScreen.main.bounds.height/5.5))

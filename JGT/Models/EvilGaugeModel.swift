@@ -11,6 +11,8 @@ import SpriteKit
 class EvilGauge: SKNode {
     let maxFill: Int
     public var currentFill: Int
+    var sightCounter: Int = 59
+    let oneSecond = 60
     
     let gaugeBorder: SKSpriteNode = SKSpriteNode(imageNamed: "gauge")
     let gaugeFill: SKSpriteNode = SKSpriteNode()
@@ -108,20 +110,21 @@ class EvilGauge: SKNode {
         
     }
     
-//    func channelingSight(channeling: Bool) {
-//        if (self.currentFill - 1) >= 0 {
-//            if channeling {
-//            gaugeFill.run(SKAction.resize(toHeight: gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill - 1), duration: 1.0))
-//                self.currentFill -= 1
-//            } else {
-//                gaugeFill.size.height = gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill)
-//            }
-//        }
-//    }
-//
-//    func stopChanneling() {
-//        gaugeFill.size.height = gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill)
-//    }
+    func channelingSight() {
+        self.sightCounter += 1
+        if (self.sightCounter % oneSecond == 0) {
+            if (self.currentFill) >= 0 {
+                self.sightCounter = 0
+                self.currentFill -= 1
+                gaugeFill.run(SKAction.resize(toHeight: gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 1.0))
+            }
+        }
+    }
+    
+    func stopChanneling() {
+        gaugeFill.size.height = gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill)
+        self.sightCounter = 59
+    }
     
     func updateGaugeColor(goblin: Goblin?) {
         if let goblin = goblin {

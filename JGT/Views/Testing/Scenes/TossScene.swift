@@ -36,7 +36,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     var sheet = Sheet()
     var cauldron = Cauldron(currentGoblinsNumber: 3, maxGoblinNumber: MainScreenProperties.maxGoblinsNumber)
     var evilGauge = EvilGauge(maxFill: MainScreenProperties.maxFill, currentFill: 20)
-//    var evilSight = SKSpriteNode(imageNamed: "evil sight")
+    //    var evilSight = SKSpriteNode(imageNamed: "evil sight")
     var evilSight = EvilSight()
     
     var cameraRect: CGRect {
@@ -66,9 +66,9 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         background.physicsBody = SKPhysicsBody(edgeLoopFrom: background.frame)
         
         background.physicsBody?.restitution = 0.0
-//        background.physicsBody?.categoryBitMask = Collision.Masks.map.bitmask
-//        background.physicsBody?.collisionBitMask = Collision.Masks.goblin.bitmask
-//        background.physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask
+        //        background.physicsBody?.categoryBitMask = Collision.Masks.map.bitmask
+        //        background.physicsBody?.collisionBitMask = Collision.Masks.goblin.bitmask
+        //        background.physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask
         
         physicsWorld.contactDelegate = self
         
@@ -121,7 +121,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         if (hasToUpdateRank) {
             self.population.rankPerFitness()
         }
-                
+        
         self.enemies.forEach {
             if ($0.update()) {
                 let index = self.enemies.firstIndex(of: $0)!
@@ -146,14 +146,13 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         darkson.update()
         
         if channeling == true && evilGauge.currentFill > 0 {
-//            evilGauge.updateGauge(goblin: nil, value: -1)
-//            evilGauge.channelingSight()
+            evilGauge.channelingSight()
             evilSight.evilSight(position: self.touchPoint)
             if evilGauge.currentFill == 0 {evilSight.dispatchSight()}
         }
         
         if let lastSelectedGoblin = lastSelectedGoblin as? Goblin {
-                sheet.updateSheet(goblin: lastSelectedGoblin)
+            sheet.updateSheet(goblin: lastSelectedGoblin)
         } else {
             sheet.alpha = 0.0
         }
