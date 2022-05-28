@@ -50,12 +50,15 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     public var targetQueue: [Enemy] = []
     
     private var destination: CGPoint
+    
     private var inVillageCounter: Int = 0
     private var inAcademyCounter: Int = 0
     private var inTavernCounter: Int = 0
     private var frenzyCounter: Int = 0
     private var attackCounter: Int = 0
     private var taskCounter: Int = 0
+    private var climbCounter: Int = 0
+    private var stunCounter: Int = 0
     
     private var currentTask: (() -> ())? = nil
     private var ignoreThreshold: Float = 0.0
@@ -221,12 +224,20 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             hasToUpdateRank = inVillageUpdate()
             break
             
+        case .intrap:
+            hasToUpdateRank = inTrapUpdate()
+            break
+            
         case .inhand:
             inHandUpdate()
             break
             
         case .backdooring:
             hasToUpdateRank = backdooringUpdate()
+            break
+            
+        case .stunned:
+            stunUpdate()
             break
             
         case .flying:
@@ -499,17 +510,57 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         return hasToUpdateRank
     }
     
+    private func inTrapUpdate() -> Bool {
+        var hasToUpdateRank = false
+        self.updateAge()
+        if let trap = self.closeStructure as? Trap {
+            if (trap.isActive) {
+                if (self.type != .gum) {
+                    self.health -= 80
+                    self.HWpoints -= 5
+                    self.state = .stunned
+                    trap.isActive = false
+                }
+                else {
+                    self.HWpoints += 5
+                }
+                self.fitness = self.getFitness()
+                if (self.health > 0) {
+                    hasToUpdateRank = true
+                }
+            }
+        }
+        return hasToUpdateRank
+    }
+    
+    private func stunUpdate() {
+        self.updateAge()
+        self.stunCounter += 1
+        if (self.stunCounter % taskTime == 0) {
+            self.stunCounter = 0
+            self.state = .idle
+        }
+    }
+    
     private func backdooringUpdate() -> Bool {
         var hasToUpdateRank = false
         self.updateAge()
         if let backdoor = self.closeStructure as? Backdoor {
             if (backdoor.isOpened) {
+                self.alpha = 0.0
 //                if let _ = self.action(forKey: "climbing") {
 //                }
 //                else {
 //                    self.run(SKAction.move(by: CGVector(dx: 0, dy: -200), duration: 1.5), withKey: "climbing")
 //                }
-                self.position.y = passageCoordinates.y
+                self.climbCounter += 1
+                if (self.climbCounter % taskTime == 0) {
+                    self.climbCounter = 0
+                    self.position.y = passageCoordinates.y
+                    self.state = .idle
+                    self.alpha = 1.0
+                }
+                
             }
             else {
                 self.attackCounter += 1
@@ -628,6 +679,11 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.closeStructure = nil
             }
             hasToUpdateRank = true
+            break
+            
+        case .trap:
+            removeAction(forKey: "walk")
+            self.state = .intrap
             break
             
         case .rock:

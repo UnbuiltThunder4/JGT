@@ -133,17 +133,22 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             }
         }
         
+        if let structure = self.structures[1] as? Gate {
+            structure.update(self)
+        }
+        
+        if let structure = self.structures[2] as? Backdoor {
+            structure.update(self)
+        }
+        
         if let structure = self.structures[3] as? Catapult {
             structure.update(self)
         }
         
-        if let structure = self.structures[5] as? Gate {
+        if let structure = self.structures[4] as? Trap {
             structure.update(self)
         }
         
-        if let structure = self.structures[6] as? Backdoor {
-            structure.update(self)
-        }
         
         darkson.update()
         

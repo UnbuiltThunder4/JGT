@@ -77,6 +77,7 @@ struct MainScreenProperties {
 
 let oneSecond = 60
 let threeSeconds = 180
+let twentySeconds = 1200
 let taskTime = 120
 let attackTime = 120
 let ageTime = 300
@@ -94,7 +95,9 @@ public enum GoblinState {
     case intavern
     case inacademy
     case invillage
+    case intrap
     case backdooring
+    case stunned
     case paused
 }
 
@@ -152,13 +155,14 @@ let backdoorCoordinates = CGPoint(x: 2700, y: 2835)
 let passageCoordinates = CGPoint(x: 2700, y: 3300)
 
 let levelstructures: [Structure] = [
+    Structure(type: .wall, x: 2800, y: 3100, rotation: 0),
+    Gate(x: gateCoordinates.x, y: gateCoordinates.y), // THIS HAS TO BE ON INDEX 1
+    Backdoor(x: backdoorCoordinates.x, y: backdoorCoordinates.y),  // THIS HAS TO BE ON INDEX 2
+    Catapult(x: catapultCoordinates.x, y: catapultCoordinates.y), // THIS HAS TO BE ON INDEX 3
+    Trap(x: catapultCoordinates.x + 500, y: catapultCoordinates.y),  // THIS HAS TO BE ON INDEX 4
     Tavern(x: tavernCoordinates.x, y: tavernCoordinates.y),
     Academy(x: academyCoordinates.x, y: academyCoordinates.y),
     Village(x: villageCoordinates.x, y: villageCoordinates.y),
-    Catapult(x: catapultCoordinates.x, y: catapultCoordinates.y), // THIS HAS TO BE ON INDEX 3
-    Structure(type: .wall, x: 2800, y: 3100, rotation: 0),
-    Gate(x: gateCoordinates.x, y: gateCoordinates.y), // THIS HAS TO BE ON INDEX 5
-    Backdoor(x: backdoorCoordinates.x, y: backdoorCoordinates.y),  // THIS HAS TO BE ON INDEX 6
     Structure(type: .passage, x: passageCoordinates.x, y: passageCoordinates.y, rotation: 0),
     Structure(type: .tree, x: 450, y: 300, rotation: 0),
     Structure(type: .tree, x: 850, y: 500, rotation: 0),
