@@ -8,7 +8,7 @@
 import Foundation
 import SpriteKit
 
-class EvilGauge: SKNode {
+class EvilGauge: SKSpriteNode {
     let maxFill: Int
     public var currentFill: Int
     var sightCounter: Int = 59
@@ -16,30 +16,47 @@ class EvilGauge: SKNode {
     
     let gaugeBorder: SKSpriteNode = SKSpriteNode(imageNamed: "gauge")
     let gaugeFill: SKSpriteNode = SKSpriteNode()
+    let bottomGauge: SKSpriteNode = SKSpriteNode(imageNamed: "green-gauge")
+    let gaugeBezel: SKSpriteNode = SKSpriteNode(imageNamed: "green-gauge-bezel")
     
-    init(maxFill: Int, currentFill: Int) {
+    init(maxFill: Int, currentFill: Int, size: CGSize) {
         
         self.maxFill = maxFill
         self.currentFill = currentFill
         
-        super.init()
+//        super.init(texture: SKTexture(imageNamed: "green-gauge"), color: .red, size: CGSize(width: UIScreen.main.bounds.width/4, height: UIScreen.main.bounds.height/1.2))
+        super.init(texture: SKTexture(imageNamed: "green-gauge"), color: .red, size: size)
         self.name = "evilGauge"
+        self.zPosition = 80
         
-        gaugeBorder.zPosition = 100
+//        bottomGauge.zPosition = 80
+//        bottomGauge.name = "bottomGauge"
+//        bottomGauge.anchorPoint = CGPoint(x: 0.5, y: 0.0)
+//        bottomGauge.size = CGSize(width: UIScreen.main.bounds.width/4,
+//                                  height: (UIScreen.main.bounds.height/1.2))
+//        self.addChild(bottomGauge)
+        
+//        gaugeBorder.zPosition = 80
         gaugeBorder.name = "gaugeBorder"
-        gaugeBorder.size = CGSize(width: UIScreen.main.bounds.height/25,
-                                  height: (UIScreen.main.bounds.height/1.7))
+        gaugeBorder.size = CGSize(width: UIScreen.main.bounds.height/31,
+                                  height: (UIScreen.main.bounds.height/2))
         gaugeBorder.anchorPoint = CGPoint(x: 0.5, y: 0.0)
         self.addChild(gaugeBorder)
         
-        gaugeFill.zPosition = 100
-        gaugeFill.size = CGSize(width: UIScreen.main.bounds.height/25,
-                                height: (UIScreen.main.bounds.height/1.7)/CGFloat(self.maxFill) * CGFloat(self.currentFill))
-        gaugeFill.color = .green
-        gaugeFill.alpha = 0.8
+//        gaugeFill.zPosition = 80
+        gaugeFill.size = CGSize(width: UIScreen.main.bounds.height/31,
+                                height: (UIScreen.main.bounds.height/2)/CGFloat(self.maxFill) * CGFloat(self.currentFill))
+        gaugeFill.color = UIColor(red: 11/255, green: 129/255, blue: 80/255, alpha: 1.0)
         gaugeFill.name = "gaugeFill"
         self.addChild(gaugeFill)
         gaugeFill.anchorPoint = CGPoint(x: 0.5, y: 0.0)
+        
+//        gaugeBezel.zPosition = 80
+        gaugeBezel.name = "gaugeBezel"
+//        gaugeBezel.anchorPoint = CGPoint(x: 0.5, y: 0.0)
+        gaugeBezel.size = CGSize(width: UIScreen.main.bounds.width/4,
+                                  height: (UIScreen.main.bounds.height/1.2))
+        self.addChild(gaugeBezel)
     }
     
     required init?(coder aDecoder: NSCoder) {

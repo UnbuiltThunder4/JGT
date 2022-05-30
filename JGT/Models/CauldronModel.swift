@@ -30,6 +30,7 @@ class Cauldron: SKSpriteNode {
         
         super.init(texture: SKTexture(imageNamed: "cauldronn"), color: .red, size: CGSize(width: UIScreen.main.bounds.height/5, height: UIScreen.main.bounds.height/5))
         self.name = "cauldron"
+        self.zPosition = 100
         
         currentGoblinsNumberLabel.name = "goblinsNumber"
         currentGoblinsNumberLabel.position = CGPoint(x: 0, y: -self.size.height/4)

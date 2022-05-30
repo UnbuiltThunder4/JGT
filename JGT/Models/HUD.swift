@@ -135,9 +135,14 @@ class HUD: SKNode {
     }
     
     func addEvilGauge(evilGauge: EvilGauge, position: CGPoint) {
+        evilGauge.zPosition = 80
         evilGauge.position = position
         addChild(evilGauge)
-        evilGauge.zPosition = 100
+        
+        evilGauge.gaugeBorder.position = CGPoint(x: 0, y: evilGauge.frame.midY*1.5)
+        evilGauge.gaugeFill.position = CGPoint(x: 0, y: evilGauge.frame.midY*1.5)
+//        evilGauge.gaugeBezel.position = CGPoint(x: 0, y: evilGauge.frame.maxY)
+        
     }
 
 }

@@ -23,6 +23,11 @@ import SwiftUI
  * Used for supporting the navigation in the project template.
  */
 
+enum GaugeHUDSetting {
+    static let ipadSize = CGSize(width: UIScreen.main.bounds.width/4, height: UIScreen.main.bounds.height/1.2)
+    static let iphoneSize = CGSize(width: UIScreen.main.bounds.width/6, height: UIScreen.main.bounds.height/1.2)
+}
+
 enum UIUserInterfaceIdiom : Int {
     case unspecified
     
