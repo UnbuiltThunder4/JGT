@@ -94,26 +94,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         cameraNode.position = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
         
         setupHUD()
-        
-        switch UIDevice.current.userInterfaceIdiom {
-        case .phone:
-            ZoomProperties.initialScale = 2.0
-            ZoomProperties.maximumZoom = 4.0
-            ZoomProperties.minimumZoom = 1.5
-            cameraNode.xScale = ZoomProperties.initialScale
-            cameraNode.yScale = ZoomProperties.initialScale
-            cameraNode.position = CGPoint(x: UIScreen.main.bounds.width, y: UIScreen.main.bounds.height)
-            break
-        case .pad:
-            ZoomProperties.initialScale = 1.0
-            ZoomProperties.maximumZoom = 2.0
-            ZoomProperties.minimumZoom = 0.8
-            cameraNode.xScale = ZoomProperties.initialScale
-            cameraNode.yScale = ZoomProperties.initialScale
-            break
-        @unknown default:
-            break
-        }
+        setupCamera()
         
     }
     

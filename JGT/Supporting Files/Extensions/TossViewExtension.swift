@@ -174,16 +174,16 @@ extension TossScene {
                 
                 if distanceX <= minDistanceX && cameraNode.xScale != maximumZoom && cameraNode.xScale != minimumZoom {
                     if cameraNode.position.x < self.background.frame.midX {
-                        moveX += 30.0
+                        moveX += ZoomProperties.cameraOffsetx
                     } else {
-                        moveX -= 30.0
+                        moveX -= ZoomProperties.cameraOffsetx
                     }
                 }
                 if distanceY <= minDistanceY && cameraNode.xScale != maximumZoom && cameraNode.xScale != minimumZoom {
                     if cameraNode.position.y < self.background.frame.midY {
-                        moveY += 30.0
+                        moveY += ZoomProperties.cameraOffsety
                     } else {
-                        moveY -= 30.0
+                        moveY -= ZoomProperties.cameraOffsety
                     }
                 }
                 
@@ -312,6 +312,32 @@ extension TossScene {
         hud.addEvilGauge(evilGauge: evilGauge, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width + UIScreen.main.bounds.height/6.5, y: cameraNode.position.y - UIScreen.main.bounds.height + UIScreen.main.bounds.height/2.5))
         evilGauge.zPosition = 80
         hud.addCauldron(cauldron: cauldron, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width + UIScreen.main.bounds.height/6.6, y: cameraNode.position.y - UIScreen.main.bounds.height + UIScreen.main.bounds.height/7.5))
+    }
+    
+    func setupCamera() {
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
+            ZoomProperties.initialScale = 2.0
+            ZoomProperties.maximumZoom = 4.0
+            ZoomProperties.minimumZoom = 1.5
+            ZoomProperties.cameraOffsetx = 70.0
+            ZoomProperties.cameraOffsety = 40.0
+            cameraNode.xScale = ZoomProperties.initialScale
+            cameraNode.yScale = ZoomProperties.initialScale
+            cameraNode.position = CGPoint(x: UIScreen.main.bounds.width, y: UIScreen.main.bounds.height)
+            break
+        case .pad:
+            ZoomProperties.initialScale = 1.0
+            ZoomProperties.maximumZoom = 2.0
+            ZoomProperties.minimumZoom = 0.8
+            ZoomProperties.cameraOffsetx = 30.0
+            ZoomProperties.cameraOffsety = 30.0
+            cameraNode.xScale = ZoomProperties.initialScale
+            cameraNode.yScale = ZoomProperties.initialScale
+            break
+        @unknown default:
+            break
+        }
     }
     
 }

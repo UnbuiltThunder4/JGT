@@ -39,6 +39,8 @@ enum ZoomProperties {
     static var initialScale = 1.0
     static var minimumZoom = 0.8
     static var maximumZoom = 2.0
+    static var cameraOffsetx = 30.0
+    static var cameraOffsety = 30.0
 }
 
 enum GameState {
