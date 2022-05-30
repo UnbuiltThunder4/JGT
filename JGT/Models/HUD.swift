@@ -9,6 +9,7 @@ import SpriteKit
 import Foundation
 
 enum HUDSettings {
+    static var cauldronSize = CGSize()
     static var sheetSize = CGSize()
     static var font = "Noteworthy-Bold"
     static var fontSize: CGFloat = 25
@@ -29,6 +30,19 @@ class HUD: SKNode {
     
     func addCauldron(cauldron: Cauldron, position: CGPoint) {
         
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
+            HUDSettings.cauldronSize = CGSize(width: UIScreen.main.bounds.height/5.4, height: UIScreen.main.bounds.height/5.4)
+            HUDSettings.fontSize = 13
+            break
+        case .pad:
+            HUDSettings.cauldronSize = CGSize(width: UIScreen.main.bounds.height/6, height: UIScreen.main.bounds.height/6)
+            break
+        @unknown default:
+            break
+        }
+        
+        cauldron.size = HUDSettings.cauldronSize
         cauldron.zPosition = 100
         addChild(cauldron)
         cauldron.position = position
@@ -44,7 +58,7 @@ class HUD: SKNode {
     func addSheet(sheet: Sheet, position: CGPoint) {
         switch UIDevice.current.userInterfaceIdiom {
         case .phone:
-            HUDSettings.sheetSize = CGSize(width: 320, height: 340)
+            HUDSettings.sheetSize = CGSize(width: 350, height: 340)
             HUDSettings.fontSize = 15
             HUDSettings.statsFontSize = 8
             break
@@ -64,7 +78,6 @@ class HUD: SKNode {
         sheet.size = HUDSettings.sheetSize
         
         sheet.nameLabel.fontName = HUDSettings.font
-//        sheet.typeLabel.fontName = HUDSettings.font
         sheet.descLabel.fontName = HUDSettings.font
         
         sheet.healthLabel.fontName = HUDSettings.font
@@ -76,7 +89,6 @@ class HUD: SKNode {
 
         
         sheet.nameLabel.fontSize = HUDSettings.fontSize
-//        sheet.typeLabel.fontSize = HUDSettings.fontSize
         sheet.descLabel.fontSize = HUDSettings.fontSize
         
         sheet.healthLabel.fontSize = HUDSettings.statsFontSize
@@ -87,7 +99,6 @@ class HUD: SKNode {
         sheet.frenzyLabel.fontSize = HUDSettings.statsFontSize
         
         sheet.nameLabel.fontColor = HUDSettings.fontColor
-//        sheet.typeLabel.fontColor = HUDSettings.fontColor
         sheet.descLabel.fontColor = HUDSettings.fontColor
         sheet.healthLabel.fontColor = HUDSettings.fontColor
         sheet.attackLabel.fontColor = HUDSettings.fontColor
@@ -96,15 +107,14 @@ class HUD: SKNode {
         sheet.witLabel.fontColor = HUDSettings.fontColor
         sheet.frenzyLabel.fontColor = HUDSettings.fontColor
         
+        sheet.typeLabel.size = CGSize(width: sheet.size.width/4, height: sheet.size.width/7)
         
         sheet.nameLabel.position = CGPoint(x: sheet.frame.maxX * -0.08,
                                            y: sheet.frame.maxY * 0.55)
-        sheet.typeLabel.position = CGPoint(x: sheet.frame.maxX * -0.23,
+        sheet.typeLabel.position = CGPoint(x: sheet.frame.maxX * -0.233,
                                            y: sheet.frame.maxY * 0.42)
         sheet.descLabel.position = CGPoint(x: 0,
                                            y: sheet.frame.minY * 0.08)
-//        sheet.statLabel.position = CGPoint(x: 0,
-//                                           y: sheet.frame.maxY / 20.0 - 50)
         sheet.healthLabel.position = CGPoint(x: sheet.frame.maxX * -0.037, y: sheet.frame.maxY * 0.3)
         sheet.attackLabel.position = CGPoint(x: sheet.frame.maxX * 0.1, y: sheet.frame.maxY * 0.3)
         sheet.fearLabel.position = CGPoint(x: sheet.frame.maxX * 0.23, y: sheet.frame.maxY * 0.3)
@@ -124,13 +134,6 @@ class HUD: SKNode {
         sheet.descLabel.verticalAlignmentMode = .top
         sheet.descLabel.preferredMaxLayoutWidth = sheet.frame.width - sheet.frame.width/6
         sheet.descLabel.numberOfLines = Int(sheet.descLabel.frame.width / sheet.frame.width)
-//        sheet.healthLabel.fontColor = HUDSettings.fontColor
-//        sheet.attackLabel.fontColor = HUDSettings.fontColor
-//        sheet.fearLabel.fontColor = HUDSettings.fontColor
-//        sheet.ageLabel.fontColor = HUDSettings.fontColor
-//        sheet.witLabel.fontColor = HUDSettings.fontColor
-//        sheet.frenzyLabel.fontColor = HUDSettings.fontColor
-//        sheet.statLabel.verticalAlignmentMode = .center
         
     }
     
@@ -141,7 +144,10 @@ class HUD: SKNode {
         
         evilGauge.gaugeBorder.position = CGPoint(x: 0, y: evilGauge.frame.midY*1.5)
         evilGauge.gaugeFill.position = CGPoint(x: 0, y: evilGauge.frame.midY*1.5)
-//        evilGauge.gaugeBezel.position = CGPoint(x: 0, y: evilGauge.frame.maxY)
+        
+        evilGauge.physicsBody = nil
+        evilGauge.physicsBody?.isDynamic = false
+        evilGauge.physicsBody?.categoryBitMask = Collision.Masks.map.bitmask
         
     }
 

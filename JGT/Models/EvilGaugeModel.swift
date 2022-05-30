@@ -28,34 +28,22 @@ class EvilGauge: SKSpriteNode {
         super.init(texture: SKTexture(imageNamed: "green-gauge"), color: .red, size: size)
         self.name = "evilGauge"
         self.zPosition = 80
-        
-//        bottomGauge.zPosition = 80
-//        bottomGauge.name = "bottomGauge"
-//        bottomGauge.anchorPoint = CGPoint(x: 0.5, y: 0.0)
-//        bottomGauge.size = CGSize(width: UIScreen.main.bounds.width/4,
-//                                  height: (UIScreen.main.bounds.height/1.2))
-//        self.addChild(bottomGauge)
-        
-//        gaugeBorder.zPosition = 80
+    
         gaugeBorder.name = "gaugeBorder"
         gaugeBorder.size = CGSize(width: UIScreen.main.bounds.height/31,
                                   height: (UIScreen.main.bounds.height/2))
         gaugeBorder.anchorPoint = CGPoint(x: 0.5, y: 0.0)
         self.addChild(gaugeBorder)
-        
-//        gaugeFill.zPosition = 80
+
         gaugeFill.size = CGSize(width: UIScreen.main.bounds.height/31,
                                 height: (UIScreen.main.bounds.height/2)/CGFloat(self.maxFill) * CGFloat(self.currentFill))
         gaugeFill.color = UIColor(red: 11/255, green: 129/255, blue: 80/255, alpha: 1.0)
         gaugeFill.name = "gaugeFill"
         self.addChild(gaugeFill)
         gaugeFill.anchorPoint = CGPoint(x: 0.5, y: 0.0)
-        
-//        gaugeBezel.zPosition = 80
+
         gaugeBezel.name = "gaugeBezel"
-//        gaugeBezel.anchorPoint = CGPoint(x: 0.5, y: 0.0)
-        gaugeBezel.size = CGSize(width: UIScreen.main.bounds.width/4,
-                                  height: (UIScreen.main.bounds.height/1.2))
+        gaugeBezel.size = size
         self.addChild(gaugeBezel)
     }
     
