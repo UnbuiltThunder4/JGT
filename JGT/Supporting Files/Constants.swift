@@ -97,6 +97,7 @@ public enum GoblinState {
     case invillage
     case intrap
     case backdooring
+    case passaging
     case stunned
     case paused
 }
@@ -129,7 +130,7 @@ let gnomes: [Enemy] = [
 public enum ProficencyType {
     case catapult
     case trap
-    case passage
+    case backdoor
 }
 
 public enum StructureType: Int {

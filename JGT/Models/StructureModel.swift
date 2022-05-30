@@ -37,8 +37,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .enviroment
             self.width = 125
             self.height = 150
-            self.maskmodX = 1.0
-            self.maskmodY = 1.3
+            self.maskmodX = 0.7
+            self.maskmodY = 1.0
             break
             
         case .passage:
@@ -46,8 +46,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .enviroment
             self.width = 125
             self.height = 75
-            self.maskmodX = 1.0
-            self.maskmodY = 1.0
+            self.maskmodX = 0.5
+            self.maskmodY = 0.6
             break
             
         case .trap:

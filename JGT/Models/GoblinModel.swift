@@ -236,6 +236,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             hasToUpdateRank = backdooringUpdate()
             break
             
+        case .passaging:
+            passagingUpdate()
+            break
+            
         case .stunned:
             stunUpdate()
             break
@@ -272,6 +276,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                         if (self.closeStructure != nil && self.isFrenzied == false) {
                             let targetDistance = CGVector(dx: self.closeStructure!.position.x - self.position.x, dy: self.closeStructure!.position.y - self.position.y)
                             if (abs(targetDistance.dx) < 200 && abs(targetDistance.dy) < 200) {
+                                if (self.closeStructure!.type == .trap || self.closeStructure!.type == .backdoor || self.closeStructure!.type == .passage) {
+                                    hasToUpdateRank = self.checkInterations(input: 0)
+                                }
                                 if (self.closeStructure!.type != .tavern || !(self.isGraduated && self.closeStructure!.type == .academy)) {
                                     let prediction = self.wit.predict(
                                         input: .init(size: .init(width: 2),
@@ -548,19 +555,14 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         if let backdoor = self.closeStructure as? Backdoor {
             if (backdoor.isOpened) {
                 self.alpha = 0.0
-//                if let _ = self.action(forKey: "climbing") {
-//                }
-//                else {
-//                    self.run(SKAction.move(by: CGVector(dx: 0, dy: -200), duration: 1.5), withKey: "climbing")
-//                }
                 self.climbCounter += 1
                 if (self.climbCounter % taskTime == 0) {
                     self.climbCounter = 0
-                    self.position.y = passageCoordinates.y
+                    self.position.y = passageCoordinates.y + 50
+                    self.position.x = passageCoordinates.x + 50
                     self.state = .idle
                     self.alpha = 1.0
                 }
-                
             }
             else {
                 self.attackCounter += 1
@@ -583,6 +585,19 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             self.state = .idle
         }
         return hasToUpdateRank
+    }
+    
+    private func passagingUpdate() {
+        self.updateAge()
+        self.removeAllActions()
+        self.alpha = 0.0
+        self.climbCounter += 1
+        if (self.climbCounter % taskTime == 0) {
+            self.climbCounter = 0
+            self.position.y = backdoorCoordinates.y - 100
+            self.state = .idle
+            self.alpha = 1.0
+        }
     }
     
     private func flyingUpdate() {
@@ -741,6 +756,11 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         case .backdoor:
             removeAction(forKey: "walk")
             self.state = .backdooring
+            break
+            
+        case .passage:
+            removeAction(forKey: "walk")
+            self.state = .passaging
             break
             
         default:
