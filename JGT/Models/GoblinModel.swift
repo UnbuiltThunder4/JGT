@@ -470,6 +470,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.fear = 0
                 self.state = .idle
                 self.alpha = 1.0
+                if let tavern = self.closeStructure as? Tavern {
+                    tavern.removeGoblin(self)
+                }
             }
         }
     }
@@ -484,6 +487,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             self.isGraduated = true
             self.state = .idle
             self.alpha = 1.0
+            if let academy = self.closeStructure as? Academy {
+                academy.removeGoblin(self)
+            }
             self.HWpoints += 10
             self.fitness = self.getFitness()
             hasToUpdateRank = true
@@ -503,6 +509,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             if (randnum <= 20 && self.type == .normal) {
                 self.state = .idle
                 self.alpha = 1.0
+                if let village = self.closeStructure as? Village {
+                    village.removeGoblin(self)
+                }
                 self.type = .gum
                 self.texture = SKTexture(imageNamed: "gum_goblin")
                 self.HWpoints += 15
@@ -512,6 +521,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             else {
                 self.state = .idle
                 self.alpha = 1.0
+                if let village = self.closeStructure as? Village {
+                    village.removeGoblin(self)
+                }
             }
         }
         return hasToUpdateRank
@@ -773,16 +785,25 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func enterAcademy() {
         self.state = .inacademy
         self.alpha = 0.0
+        if let academy = self.closeStructure as? Academy {
+            academy.addGoblin(self)
+        }
     }
     
     private func enterTavern() {
         self.state = .intavern
         self.alpha = 0.0
+        if let tavern = self.closeStructure as? Tavern {
+            tavern.addGoblin(self)
+        }
     }
     
     private func enterVillage() {
         self.state = .invillage
         self.alpha = 0.0
+        if let village = self.closeStructure as? Village {
+            village.addGoblin(self)
+        }
     }
     
     private func throwRock() {

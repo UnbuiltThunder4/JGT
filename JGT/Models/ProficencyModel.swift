@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-class Proficency: Identifiable {
+class Proficency: Identifiable, Equatable {
     public let id = UUID()
     public let type: ProficencyType
     public var level: Int
@@ -17,4 +17,13 @@ class Proficency: Identifiable {
         self.type = type
         self.level = level
     }
+    
+    static func ==(lhs: Proficency, rhs: Proficency) -> Bool {
+        return ((lhs.type == rhs.type) && (lhs.level == rhs.level))
+    }
+    
+    static func <(lhs: Proficency, rhs: Proficency) -> Bool {
+        return ((lhs.type == rhs.type) && (lhs.level < rhs.level))
+    }
+    
 }

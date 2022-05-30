@@ -62,8 +62,8 @@ class Structure: SKSpriteNode, ObservableObject {
         case .academy:
             img = "academy"
             self.mask = .building
-            self.width = 300
-            self.height = 300
+            self.width = 400
+            self.height = 400
             self.maskmodX = 0.9
             self.maskmodY = 0.9
             break
@@ -71,8 +71,8 @@ class Structure: SKSpriteNode, ObservableObject {
         case .tavern:
             img = "tavern"
             self.mask = .building
-            self.width = 300
-            self.height = 300
+            self.width = 400
+            self.height = 400
             self.maskmodX = 0.9
             self.maskmodY = 0.9
             break
@@ -80,8 +80,8 @@ class Structure: SKSpriteNode, ObservableObject {
         case .village:
             img = "village"
             self.mask = .building
-            self.width = 300
-            self.height = 300
+            self.width = 400
+            self.height = 400
             self.maskmodX = 0.9
             self.maskmodY = 0.9
             break
@@ -183,6 +183,19 @@ class Academy: Structure {
     
     override func addGoblin(_ goblin: Goblin) {
         self.goblins.append(goblin)
+        if (!goblin.Proficiencies.isEmpty && !self.proficencies.isEmpty) {
+            for i in 0..<goblin.Proficiencies.count {
+                for j in 0..<self.proficencies.count {
+                    if (self.proficencies[j]<goblin.Proficiencies[i]) {
+                        self.proficencies.remove(at: j)
+                        self.proficencies.append(goblin.Proficiencies[i])
+                    }
+                    else if (!self.proficencies.contains(goblin.Proficiencies[i])){
+                        self.proficencies.append(goblin.Proficiencies[i])
+                    }
+                }
+            }
+        }
     }
     
     override func removeGoblin(_ goblin: Goblin) {
@@ -218,11 +231,9 @@ class Catapult: Structure {
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     
     var hasRock: Bool = false
-//    let attackPosition = CGPoint(x: 1200, y: 1200)
     
     init(x: CGFloat, y: CGFloat) {
         super.init(type: .catapult, x: x, y: y, rotation: 0)
-//        self.speed = 5.0
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -235,16 +246,6 @@ class Catapult: Structure {
             self.hasRock = false
         }
     }
-    
-//    override func addGoblin(_ goblin: Goblin) {
-//        self.goblins.append(goblin)
-//    }
-//
-//    override func removeGoblin(_ goblin: Goblin) {
-//        if let index = self.goblins.firstIndex(where: { $0.id == goblin.id }) {
-//            self.goblins.remove(at: index)
-//        }
-//    }
 }
 
 class Gate: Structure {
