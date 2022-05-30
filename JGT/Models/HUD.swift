@@ -18,10 +18,7 @@ enum HUDSettings {
 
 class HUD: SKNode {
     
-    let winSize: CGSize
-    
-    init(winSize: CGSize) {
-        self.winSize = winSize
+    override init() {
         super.init()
         name = "HUD"
     }
@@ -48,12 +45,12 @@ class HUD: SKNode {
         switch UIDevice.current.userInterfaceIdiom {
         case .phone:
             HUDSettings.sheetSize = CGSize(width: 320, height: 340)
-            HUDSettings.fontSize = 25
-            HUDSettings.statsFontSize = 14
+            HUDSettings.fontSize = 15
+            HUDSettings.statsFontSize = 8
             break
         case .pad:
-            HUDSettings.sheetSize = CGSize(width: 550, height: 620)
-            HUDSettings.fontSize = 25
+            HUDSettings.sheetSize = CGSize(width: UIScreen.main.bounds.width/2.5, height: UIScreen.main.bounds.height/1.7)
+            HUDSettings.fontSize = 23
             HUDSettings.statsFontSize = 14
             break
         @unknown default:
