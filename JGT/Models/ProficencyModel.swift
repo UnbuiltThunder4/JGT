@@ -8,7 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct Proficency {
+class Proficency: Identifiable {
+    public let id = UUID()
     public let type: ProficencyType
     public var level: Int
     

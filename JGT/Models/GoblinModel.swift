@@ -788,6 +788,19 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func throwRock() {
         self.removeAllActions()
         self.hasRock = false
+        let prof1 = Proficency(type: .catapult, level: 1)
+        if let index = self.Proficiencies.firstIndex(where: { $0.id == prof1.id }) {
+            self.Proficiencies.remove(at: index)
+            self.addProficency(type: .catapult, level: 2)
+        }
+        else {
+            let prof2 = Proficency(type: .catapult, level: 2)
+            if let _ = self.Proficiencies.firstIndex(where: { $0.id == prof2.id }) {
+            }
+            else {
+                self.addProficency(type: .catapult, level: 2)
+            }
+        }
         self.HWpoints += 8
         self.fitness = self.getFitness()
         if let structure = self.closeStructure as? Catapult {
@@ -804,6 +817,17 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
         else {
             self.HWpoints += 10
+        }
+        let prof2 = Proficency(type: .catapult, level: 2)
+        if let _ = self.Proficiencies.firstIndex(where: { $0.id == prof2.id }) {
+        }
+        else {
+            let prof1 = Proficency(type: .catapult, level: 1)
+            if let _ = self.Proficiencies.firstIndex(where: { $0.id == prof1.id }) {
+            }
+            else {
+                self.addProficency(type: .catapult, level: 1)
+            }
         }
         self.fitness = self.getFitness()
         self.closeStructure = nil
@@ -843,4 +867,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.fitness = self.getFitness()
         self.closeStructure = nil
     }
+    
+    private func addProficency(type: ProficencyType, level: Int) {
+        let prof = Proficency(type: type, level: level)
+        self.Proficiencies.append(prof)
+    }
+    
 }
