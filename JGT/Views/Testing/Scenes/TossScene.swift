@@ -36,7 +36,6 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     var sheet = Sheet()
     var cauldron = Cauldron(currentGoblinsNumber: 3, maxGoblinNumber: MainScreenProperties.maxGoblinsNumber)
     var evilGauge = EvilGauge(maxFill: MainScreenProperties.maxFill, currentFill: 20, size: (UIDevice.current.userInterfaceIdiom == .pad ? GaugeHUDSetting.ipadSize : GaugeHUDSetting.iphoneSize ))
-    //    var evilSight = SKSpriteNode(imageNamed: "evil sight")
     var evilSight = EvilSight()
     
     var cameraRect: CGRect {
@@ -66,9 +65,6 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         background.physicsBody = SKPhysicsBody(edgeLoopFrom: background.frame)
         
         background.physicsBody?.restitution = 0.0
-        //        background.physicsBody?.categoryBitMask = Collision.Masks.map.bitmask
-        //        background.physicsBody?.collisionBitMask = Collision.Masks.goblin.bitmask
-        //        background.physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask
         
         physicsWorld.contactDelegate = self
         
@@ -99,14 +95,31 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         
         setupHUD()
         
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
+            ZoomProperties.initialScale = 2.0
+            ZoomProperties.maximumZoom = 4.0
+            ZoomProperties.minimumZoom = 1.5
+            cameraNode.xScale = ZoomProperties.initialScale
+            cameraNode.yScale = ZoomProperties.initialScale
+            cameraNode.position = CGPoint(x: UIScreen.main.bounds.width, y: UIScreen.main.bounds.height)
+            break
+        case .pad:
+            ZoomProperties.initialScale = 1.0
+            ZoomProperties.maximumZoom = 2.0
+            ZoomProperties.minimumZoom = 0.8
+            cameraNode.xScale = ZoomProperties.initialScale
+            cameraNode.yScale = ZoomProperties.initialScale
+            break
+        @unknown default:
+            break
+        }
+        
     }
     
     //MARK: Update
     
     override func update(_ currentTime: TimeInterval) {
-        
-        print(UIScreen.main.bounds.size)
-        print(UIDevice.current.name)
         
         var hasToUpdateRank = false
         

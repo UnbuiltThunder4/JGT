@@ -150,8 +150,8 @@ extension TossScene {
     @objc func handlePinchFrom(recognizer: UIPinchGestureRecognizer) -> () {
         if panning == false {
             let scale = recognizer.scale
-            let minimumZoom = 0.8
-            let maximumZoom = 2.0
+            let minimumZoom = ZoomProperties.minimumZoom
+            let maximumZoom = ZoomProperties.maximumZoom
             
             if recognizer.state == .began {
                 self.lastScale = cameraNode.xScale

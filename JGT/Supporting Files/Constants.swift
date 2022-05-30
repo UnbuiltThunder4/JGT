@@ -35,6 +35,12 @@ enum UIUserInterfaceIdiom : Int {
     case pad   // iPad style UI (also includes macOS Catalyst)
 }
 
+enum ZoomProperties {
+    static var initialScale = 1.0
+    static var minimumZoom = 0.8
+    static var maximumZoom = 2.0
+}
+
 enum GameState {
     case mainScreen
     case playing
