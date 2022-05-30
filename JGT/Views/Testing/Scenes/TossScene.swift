@@ -36,7 +36,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     var sheet = Sheet()
     var cauldron = Cauldron(currentGoblinsNumber: 3, maxGoblinNumber: MainScreenProperties.maxGoblinsNumber)
     var evilGauge = EvilGauge(maxFill: MainScreenProperties.maxFill, currentFill: 20, size: (UIDevice.current.userInterfaceIdiom == .pad ? GaugeHUDSetting.ipadSize : GaugeHUDSetting.iphoneSize ))
-    var evilSight = EvilSight()
+    var evilSight = EvilSight(currentRadius: 1.0, maxRadius: 26.0)
     
     var cameraRect: CGRect {
         let x = cameraNode.position.x - size.width/2 + (size.width - playableRect.width)/2

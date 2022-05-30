@@ -13,7 +13,6 @@ class EvilGauge: SKSpriteNode {
     public var currentFill: Int
     var sightCounter: Int = 59
     let oneSecond = 60
-    
     let gaugeBorder: SKSpriteNode = SKSpriteNode(imageNamed: "gauge")
     let gaugeFill: SKSpriteNode = SKSpriteNode()
     let bottomGauge: SKSpriteNode = SKSpriteNode(imageNamed: "green-gauge")

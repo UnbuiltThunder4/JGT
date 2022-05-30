@@ -10,10 +10,16 @@ import SpriteKit
 
 class EvilSight: SKSpriteNode {
     
-    var evilCounter: Int = 29
-    let halfSecond = 30
+    var currentRadius: CGFloat
+    let maxRadius: CGFloat
     
-    init() {
+    var evilCounter: Int = 19
+    let halfSecond = 20
+    
+    init(currentRadius: CGFloat, maxRadius: CGFloat) {
+        
+        self.currentRadius = currentRadius
+        self.maxRadius = maxRadius
         
         super.init(texture: SKTexture(imageNamed: "evil sight"), color: .purple, size: CGSize(width: UIScreen.main.bounds.width/17.0, height: UIScreen.main.bounds.width/17.0))
         
@@ -32,17 +38,22 @@ class EvilSight: SKSpriteNode {
     }
     
     public func evilSight(position: CGPoint) {
-        self.alpha = 1.0
+        self.alpha = 0.5
         self.position = position
         self.evilCounter += 1
         if (self.evilCounter % halfSecond == 0) {
             self.evilCounter = 0
-            self.run(SKAction.scale(by: 1.1, duration: 0.5))
+            if self.currentRadius < self.maxRadius {
+            self.run(SKAction.scale(by: 1.1, duration: 0.3))
+                self.currentRadius += 1.0
+                print(self.currentRadius)
+            }
         }
     }
     
     public func dispatchSight() {
         self.setScale(1.0)
         self.alpha = 0.0
+        self.currentRadius = 0.0
     }
 }
