@@ -303,6 +303,9 @@ class Trap: Structure {
     
     init(x: CGFloat, y: CGFloat) {
         super.init(type: .trap, x: x, y: y, rotation: 0)
+        let electricParticle = SKEmitterNode(fileNamed: "ElectricParticle")
+        electricParticle!.position = CGPoint(x: 0, y: 0)
+        addChild(electricParticle!)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2301763928462BB900B41583 /* ElectricParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2301763828462BB900B41583 /* ElectricParticle.sks */; };
+		2301763B28462DBC00B41583 /* SmokeParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2301763A28462DBC00B41583 /* SmokeParticle.sks */; };
+		2301763D28462E8300B41583 /* FireParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2301763C28462E8300B41583 /* FireParticle.sks */; };
 		234D35D3283264B100D242E7 /* SpriteKitContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234D35D2283264B100D242E7 /* SpriteKitContainer.swift */; };
 		2373770C283F66D700F9E94C /* axe-gnome-attack (2).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2373770A283F66D700F9E94C /* axe-gnome-attack (2).mp3 */; };
 		2373770D283F66D700F9E94C /* axe-gnome-attack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2373770B283F66D700F9E94C /* axe-gnome-attack.mp3 */; };
@@ -96,6 +99,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2301763828462BB900B41583 /* ElectricParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ElectricParticle.sks; sourceTree = "<group>"; };
+		2301763A28462DBC00B41583 /* SmokeParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SmokeParticle.sks; sourceTree = "<group>"; };
+		2301763C28462E8300B41583 /* FireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticle.sks; sourceTree = "<group>"; };
 		234D35D2283264B100D242E7 /* SpriteKitContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitContainer.swift; sourceTree = "<group>"; };
 		2373770A283F66D700F9E94C /* axe-gnome-attack (2).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "axe-gnome-attack (2).mp3"; sourceTree = "<group>"; };
 		2373770B283F66D700F9E94C /* axe-gnome-attack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "axe-gnome-attack.mp3"; sourceTree = "<group>"; };
@@ -358,6 +364,9 @@
 				7692468E2822B5ED003D5D27 /* JGTApp.swift */,
 				2373770E283F66DE00F9E94C /* Sounds */,
 				769246922822B5EE003D5D27 /* Assets.xcassets */,
+				2301763C28462E8300B41583 /* FireParticle.sks */,
+				2301763A28462DBC00B41583 /* SmokeParticle.sks */,
+				2301763828462BB900B41583 /* ElectricParticle.sks */,
 				768332F62823B7CD00BA5305 /* Supporting Files */,
 				768332F52823B7B800BA5305 /* Controller */,
 				768332F42823B79C00BA5305 /* Models */,
@@ -510,9 +519,11 @@
 				2373770D283F66D700F9E94C /* axe-gnome-attack.mp3 in Resources */,
 				23737734283F76C400F9E94C /* catapult-launch.wav in Resources */,
 				23737736283F76C400F9E94C /* dark-son-grunt.mp3 in Resources */,
+				2301763D28462E8300B41583 /* FireParticle.sks in Resources */,
 				2373772E283F76C400F9E94C /* rock-eating.wav in Resources */,
 				2373773A283F76C400F9E94C /* dark-son-attack.mp3 in Resources */,
 				2373773C283F76C400F9E94C /* flameblin-death.mp3 in Resources */,
+				2301763928462BB900B41583 /* ElectricParticle.sks in Resources */,
 				23737733283F76C400F9E94C /* tree-on-fire.wav in Resources */,
 				2373772F283F76C400F9E94C /* stoneblin-death.mp3 in Resources */,
 				23737741283F76C400F9E94C /* goblin-flying.wav in Resources */,
@@ -521,6 +532,7 @@
 				2373772D283F76C400F9E94C /* trap.mp3 in Resources */,
 				23737737283F76C400F9E94C /* flameblin-attack.mp3 in Resources */,
 				2373773F283F76C400F9E94C /* catapult-goblin-impact.mp3 in Resources */,
+				2301763B28462DBC00B41583 /* SmokeParticle.sks in Resources */,
 				23737738283F76C400F9E94C /* frenzy-tavern.wav in Resources */,
 				2373774A283F76C400F9E94C /* fear.mp3 in Resources */,
 				23737730283F76C400F9E94C /* goblin-death.mp3 in Resources */,

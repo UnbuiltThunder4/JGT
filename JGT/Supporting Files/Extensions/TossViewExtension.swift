@@ -74,25 +74,25 @@ extension TossScene {
                 gameLogic.shootGoblin(self, node: cameraNode, type: shootType, population: self.population, destination: cameraNode.position)
             }
             
-            if selectedNode?.name == "normalLabel" {
+            if selectedNode?.name == "normalHead" {
                 shootType = .normal
                 gameLogic.shootGoblin(self, node: cameraNode, type: .normal, population: self.population, destination: cameraNode.position)
                 evilGauge.updateGaugeColor(type: .normal)
                 cauldron.closeSpawn()
             }
-            if selectedNode?.name == "rockLabel" {
+            if selectedNode?.name == "rockHead" {
                 shootType = .rock
                 gameLogic.shootGoblin(self, node: cameraNode, type: .rock, population: self.population, destination: cameraNode.position)
                 evilGauge.updateGaugeColor(type: .rock)
                 cauldron.closeSpawn()
             }
-            if selectedNode?.name == "flamblingLabel" {
+            if selectedNode?.name == "flameblinHead" {
                 shootType = .fire
                 gameLogic.shootGoblin(self, node: cameraNode, type: .fire, population: self.population, destination: cameraNode.position)
                 evilGauge.updateGaugeColor(type: .fire)
                 cauldron.closeSpawn()
             }
-            if selectedNode?.name == "gumblingLabel" {
+            if selectedNode?.name == "gumblingHead" {
                 shootType = .gum
                 gameLogic.shootGoblin(self, node: cameraNode, type: .gum, population: self.population, destination: cameraNode.position)
                 evilGauge.updateGaugeColor(type: .gum)
