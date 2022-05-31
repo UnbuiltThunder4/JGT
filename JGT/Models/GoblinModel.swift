@@ -884,6 +884,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.fear = 0
         self.maxFear = 0
         self.texture = SKTexture(imageNamed: "fire_goblin")
+        let flameblinParticle = SKEmitterNode(fileNamed: "FlameblinParticle")
+        flameblinParticle!.position = CGPoint(x: 0, y: 0)
+        self.addChild(flameblinParticle!)
+        flameblinParticle?.zPosition = -1
         self.HWpoints += 15
         self.fitness = self.getFitness()
         self.closeStructure = nil

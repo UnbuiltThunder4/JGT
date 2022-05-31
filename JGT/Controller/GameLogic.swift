@@ -155,7 +155,13 @@ class GameLogic: ObservableObject {
             case .normal:
                 break
             case .fire:
+                newGoblin.fear = 0
+                newGoblin.maxFear = 0
                 newGoblin.texture = SKTexture(imageNamed: "fire_goblin")
+                let flameblinParticle = SKEmitterNode(fileNamed: "FlameblinParticle")
+                flameblinParticle!.position = CGPoint(x: 0, y: 0)
+                newGoblin.addChild(flameblinParticle!)
+                flameblinParticle?.zPosition = -1
                 break
             case .rock:
                 newGoblin.texture = SKTexture(imageNamed: "rock_goblin")
