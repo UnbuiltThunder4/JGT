@@ -10,6 +10,10 @@
 		2301763928462BB900B41583 /* ElectricParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2301763828462BB900B41583 /* ElectricParticle.sks */; };
 		2301763B28462DBC00B41583 /* SmokeParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2301763A28462DBC00B41583 /* SmokeParticle.sks */; };
 		2301763D28462E8300B41583 /* FireParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2301763C28462E8300B41583 /* FireParticle.sks */; };
+		2301764128463DFB00B41583 /* ExplosionParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 2301764028463DFB00B41583 /* ExplosionParticle.sks */; };
+		23017643284641F200B41583 /* FrenzyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 23017642284641F200B41583 /* FrenzyParticle.sks */; };
+		23017645284643ED00B41583 /* AttackParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 23017644284643EC00B41583 /* AttackParticle.sks */; };
+		230176472846488B00B41583 /* StunParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 230176462846488B00B41583 /* StunParticle.sks */; };
 		234D35D3283264B100D242E7 /* SpriteKitContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234D35D2283264B100D242E7 /* SpriteKitContainer.swift */; };
 		2373770C283F66D700F9E94C /* axe-gnome-attack (2).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2373770A283F66D700F9E94C /* axe-gnome-attack (2).mp3 */; };
 		2373770D283F66D700F9E94C /* axe-gnome-attack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2373770B283F66D700F9E94C /* axe-gnome-attack.mp3 */; };
@@ -102,6 +106,10 @@
 		2301763828462BB900B41583 /* ElectricParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ElectricParticle.sks; sourceTree = "<group>"; };
 		2301763A28462DBC00B41583 /* SmokeParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SmokeParticle.sks; sourceTree = "<group>"; };
 		2301763C28462E8300B41583 /* FireParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FireParticle.sks; sourceTree = "<group>"; };
+		2301764028463DFB00B41583 /* ExplosionParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ExplosionParticle.sks; sourceTree = "<group>"; };
+		23017642284641F200B41583 /* FrenzyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FrenzyParticle.sks; sourceTree = "<group>"; };
+		23017644284643EC00B41583 /* AttackParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AttackParticle.sks; sourceTree = "<group>"; };
+		230176462846488B00B41583 /* StunParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StunParticle.sks; sourceTree = "<group>"; };
 		234D35D2283264B100D242E7 /* SpriteKitContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitContainer.swift; sourceTree = "<group>"; };
 		2373770A283F66D700F9E94C /* axe-gnome-attack (2).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "axe-gnome-attack (2).mp3"; sourceTree = "<group>"; };
 		2373770B283F66D700F9E94C /* axe-gnome-attack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "axe-gnome-attack.mp3"; sourceTree = "<group>"; };
@@ -364,8 +372,12 @@
 				7692468E2822B5ED003D5D27 /* JGTApp.swift */,
 				2373770E283F66DE00F9E94C /* Sounds */,
 				769246922822B5EE003D5D27 /* Assets.xcassets */,
+				2301764028463DFB00B41583 /* ExplosionParticle.sks */,
+				23017644284643EC00B41583 /* AttackParticle.sks */,
+				23017642284641F200B41583 /* FrenzyParticle.sks */,
 				2301763C28462E8300B41583 /* FireParticle.sks */,
 				2301763A28462DBC00B41583 /* SmokeParticle.sks */,
+				230176462846488B00B41583 /* StunParticle.sks */,
 				2301763828462BB900B41583 /* ElectricParticle.sks */,
 				768332F62823B7CD00BA5305 /* Supporting Files */,
 				768332F52823B7B800BA5305 /* Controller */,
@@ -515,9 +527,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				23737749283F76C400F9E94C /* level-complete.mp3 in Resources */,
+				2301764128463DFB00B41583 /* ExplosionParticle.sks in Resources */,
 				23737739283F76C400F9E94C /* dark-son-gate-destroyed.mp3 in Resources */,
+				23017645284643ED00B41583 /* AttackParticle.sks in Resources */,
 				2373770D283F66D700F9E94C /* axe-gnome-attack.mp3 in Resources */,
 				23737734283F76C400F9E94C /* catapult-launch.wav in Resources */,
+				23017643284641F200B41583 /* FrenzyParticle.sks in Resources */,
 				23737736283F76C400F9E94C /* dark-son-grunt.mp3 in Resources */,
 				2301763D28462E8300B41583 /* FireParticle.sks in Resources */,
 				2373772E283F76C400F9E94C /* rock-eating.wav in Resources */,
@@ -548,6 +563,7 @@
 				769246962822B5EE003D5D27 /* Preview Assets.xcassets in Resources */,
 				769246932822B5EE003D5D27 /* Assets.xcassets in Resources */,
 				23737735283F76C400F9E94C /* rock-picking.mp3 in Resources */,
+				230176472846488B00B41583 /* StunParticle.sks in Resources */,
 				23737744283F76C400F9E94C /* goblin-attack.mp3 in Resources */,
 				23737747283F76C400F9E94C /* stoneblin-attack.mp3 in Resources */,
 			);
