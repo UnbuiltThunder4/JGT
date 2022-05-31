@@ -12,12 +12,12 @@ import SwiftUI
 class Cauldron: SKSpriteNode {
     
     var currentGoblinsNumberLabel: SKLabelNode = SKLabelNode()
-    let goblinLabel: SKSpriteNode = SKSpriteNode(imageNamed: "normalHead")
-    let flamblingLabel: SKSpriteNode = SKSpriteNode(imageNamed: "fireHead")
-    let rockLabel: SKSpriteNode = SKSpriteNode(imageNamed: "rockHead")
-    let gumblingLabel: SKSpriteNode = SKSpriteNode(imageNamed: "gumHead")
+    let goblinHead: SKSpriteNode = SKSpriteNode(imageNamed: "normalHead")
+    let flameblinHead: SKSpriteNode = SKSpriteNode(imageNamed: "fireHead")
+    let rockHead: SKSpriteNode = SKSpriteNode(imageNamed: "rockHead")
+    let gumblingHead: SKSpriteNode = SKSpriteNode(imageNamed: "gumHead")
     var goblinCount: SKLabelNode = SKLabelNode()
-    var flamblingCount: SKLabelNode = SKLabelNode()
+    var flameblinCount: SKLabelNode = SKLabelNode()
     var rockCount: SKLabelNode = SKLabelNode()
     var gumblingCount: SKLabelNode = SKLabelNode()
     var currentGoblinsNumber: Int
@@ -38,57 +38,57 @@ class Cauldron: SKSpriteNode {
         
         self.addChild(currentGoblinsNumberLabel)
         
-        self.goblinLabel.position = CGPoint(x: self.position.x + self.goblinLabel.size.width/5, y: self.position.y)
-        self.goblinLabel.setScale(0.2)
-        self.goblinLabel.color = .green
-        self.goblinLabel.zPosition = 100
-        self.goblinLabel.alpha = 0
-        self.goblinLabel.name = "normalLabel"
-        self.addChild(goblinLabel)
+        self.goblinHead.position = CGPoint(x: self.position.x + self.goblinHead.size.width/2, y: self.position.y)
+        self.goblinHead.setScale(0.2)
+        self.goblinHead.color = .green
+        self.goblinHead.zPosition = 100
+        self.goblinHead.alpha = 0
+        self.goblinHead.name = "normalHead"
+        self.addChild(goblinHead)
         
-        self.goblinCount.position = CGPoint(x: self.goblinLabel.position.x + 50, y: self.goblinLabel.position.y)
+        self.goblinCount.position = CGPoint(x: self.goblinHead.position.x + self.size.width/2, y: self.goblinHead.position.y)
         self.goblinCount.zPosition = 100
         self.goblinCount.alpha = 0
         self.goblinCount.name = "goblinCount"
         self.addChild(goblinCount)
         
-        self.flamblingLabel.position = CGPoint(x: self.position.x + self.flamblingLabel.size.width/5, y: self.position.y + 50)
-        self.flamblingLabel.setScale(0.2)
-        self.flamblingLabel.color = .red
-        self.flamblingLabel.zPosition = 100
-        self.flamblingLabel.alpha = 0
-        self.flamblingLabel.name = "flamblingLabel"
-        self.addChild(flamblingLabel)
+        self.flameblinHead.position = CGPoint(x: self.position.x + self.flameblinHead.size.width/2, y: self.position.y + 50)
+        self.flameblinHead.setScale(0.2)
+        self.flameblinHead.color = .red
+        self.flameblinHead.zPosition = 100
+        self.flameblinHead.alpha = 0
+        self.flameblinHead.name = "flameblinHead"
+        self.addChild(flameblinHead)
         
-        self.flamblingCount.position = CGPoint(x: self.flamblingLabel.position.x + 50, y: self.flamblingLabel.position.y)
-        self.flamblingCount.zPosition = 100
-        self.flamblingCount.alpha = 0
-        self.flamblingCount.name = "flamblingCount"
-        self.addChild(flamblingCount)
+        self.flameblinCount.position = CGPoint(x: self.flameblinHead.position.x + self.size.width/2, y: self.flameblinHead.position.y)
+        self.flameblinCount.zPosition = 100
+        self.flameblinCount.alpha = 0
+        self.flameblinCount.name = "flameblinCount"
+        self.addChild(flameblinCount)
         
-        self.rockLabel.position = CGPoint(x: self.position.x + self.rockLabel.size.width/5, y: self.position.y + 100)
-        self.rockLabel.setScale(0.2)
-        self.rockLabel.color = .yellow
-        self.rockLabel.zPosition = 100
-        self.rockLabel.alpha = 0
-        self.rockLabel.name = "rockLabel"
-        self.addChild(rockLabel)
+        self.rockHead.position = CGPoint(x: self.position.x + self.rockHead.size.width/2, y: self.position.y + 100)
+        self.rockHead.setScale(0.2)
+        self.rockHead.color = .yellow
+        self.rockHead.zPosition = 100
+        self.rockHead.alpha = 0
+        self.rockHead.name = "rockHead"
+        self.addChild(rockHead)
         
-        self.rockCount.position = CGPoint(x: self.rockLabel.position.x + 50, y: self.rockLabel.position.y)
+        self.rockCount.position = CGPoint(x: self.rockHead.position.x + self.size.width/2, y: self.rockHead.position.y)
         self.rockCount.zPosition = 100
         self.rockCount.alpha = 0
         self.rockCount.name = "rockCount"
         self.addChild(rockCount)
         
-        self.gumblingLabel.position = CGPoint(x: self.position.x + self.gumblingLabel.size.width/5, y: self.position.y + 160)
-        self.gumblingLabel.setScale(0.2)
-        self.gumblingLabel.color = .yellow
-        self.gumblingLabel.zPosition = 100
-        self.gumblingLabel.alpha = 0
-        self.gumblingLabel.name = "gumblingLabel"
-        self.addChild(gumblingLabel)
+        self.gumblingHead.position = CGPoint(x: self.position.x + self.gumblingHead.size.width/2, y: self.position.y + 160)
+        self.gumblingHead.setScale(0.2)
+        self.gumblingHead.color = .yellow
+        self.gumblingHead.zPosition = 100
+        self.gumblingHead.alpha = 0
+        self.gumblingHead.name = "gumblingHead"
+        self.addChild(gumblingHead)
         
-        self.gumblingCount.position = CGPoint(x: self.gumblingLabel.position.x + 50, y: self.gumblingLabel.position.y)
+        self.gumblingCount.position = CGPoint(x: self.gumblingHead.position.x + self.size.width/2, y: self.gumblingHead.position.y)
         self.gumblingCount.zPosition = 100
         self.gumblingCount.alpha = 0
         self.gumblingCount.name = "gumblingCount"
@@ -107,30 +107,30 @@ class Cauldron: SKSpriteNode {
     
     func spawnSelection(population: Population) {
     
-        var flamblingCount = 0
+        var flameblinCount = 0
         var rockCount = 0
         var gumblingCount = 0
         var normalCount = 0
         
-        self.goblinLabel.alpha = 1.0
+        self.goblinHead.alpha = 1.0
         self.goblinCount.alpha = 1.0
         
         print("cauldron")
         
         for i in 0..<population.goblins.count {
             if population.goblins[i].type == .fire {
-                flamblingCount += 1
-                self.flamblingLabel.alpha = 1.0
-                self.flamblingCount.alpha = 1.0
+                flameblinCount += 1
+                self.flameblinHead.alpha = 1.0
+                self.flameblinCount.alpha = 1.0
             }
             if population.goblins[i].type == .rock {
                 rockCount += 1
-                self.rockLabel.alpha = 1.0
+                self.rockHead.alpha = 1.0
                 self.rockCount.alpha = 1.0
             }
             if population.goblins[i].type == .gum {
                 gumblingCount += 1
-                self.gumblingLabel.alpha = 1.0
+                self.gumblingHead.alpha = 1.0
                 self.gumblingCount.alpha = 1.0
             }
             if population.goblins[i].type == .normal {
@@ -140,19 +140,19 @@ class Cauldron: SKSpriteNode {
         
         self.goblinCount.text = String(normalCount)
         self.rockCount.text = String(rockCount)
-        self.flamblingCount.text = String(flamblingCount)
+        self.flameblinCount.text = String(flameblinCount)
         self.gumblingCount.text = String(gumblingCount)
 
     }
     
     func closeSpawn(){
-        self.goblinLabel.alpha = 0.0
+        self.goblinHead.alpha = 0.0
         self.goblinCount.alpha = 0.0
-        self.flamblingLabel.alpha = 0.0
-        self.flamblingCount.alpha = 0.0
-        self.rockLabel.alpha = 0.0
+        self.flameblinHead.alpha = 0.0
+        self.flameblinCount.alpha = 0.0
+        self.rockHead.alpha = 0.0
         self.rockCount.alpha = 0.0
-        self.gumblingLabel.alpha = 0.0
+        self.gumblingHead.alpha = 0.0
         self.gumblingCount.alpha = 0.0
     }
 }
