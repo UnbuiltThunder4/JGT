@@ -74,7 +74,7 @@ class GameLogic: ObservableObject {
         
         let touchedNode = tossScene.atPoint(touchLocation)
         
-        if touchedNode.isEqual(tossScene.cameraNode) {
+        if touchedNode.isEqual(tossScene.cameraNode) || touchedNode is SKEmitterNode {
             tossScene.selectedNode = nil
             return
         }
