@@ -71,23 +71,31 @@ extension TossScene {
             gameLogic.selectNodeForTouch(self, touchLocation: touchLocation)
             
             if selectedNode is Cauldron || selectedNode?.name! == "goblinsNumber" {
-                gameLogic.shootGoblin(self, node: cameraNode, type: .normal, population: self.population, destination: cameraNode.position)
+                gameLogic.shootGoblin(self, node: cameraNode, type: shootType, population: self.population, destination: cameraNode.position)
             }
             
             if selectedNode?.name == "normalLabel" {
+                shootType = .normal
                 gameLogic.shootGoblin(self, node: cameraNode, type: .normal, population: self.population, destination: cameraNode.position)
+                evilGauge.updateGaugeColor(type: .normal)
                 cauldron.closeSpawn()
             }
             if selectedNode?.name == "rockLabel" {
+                shootType = .rock
                 gameLogic.shootGoblin(self, node: cameraNode, type: .rock, population: self.population, destination: cameraNode.position)
+                evilGauge.updateGaugeColor(type: .rock)
                 cauldron.closeSpawn()
             }
             if selectedNode?.name == "flamblingLabel" {
+                shootType = .fire
                 gameLogic.shootGoblin(self, node: cameraNode, type: .fire, population: self.population, destination: cameraNode.position)
+                evilGauge.updateGaugeColor(type: .fire)
                 cauldron.closeSpawn()
             }
             if selectedNode?.name == "gumblingLabel" {
+                shootType = .gum
                 gameLogic.shootGoblin(self, node: cameraNode, type: .gum, population: self.population, destination: cameraNode.position)
+                evilGauge.updateGaugeColor(type: .gum)
                 cauldron.closeSpawn()
             }
             
@@ -324,7 +332,6 @@ extension TossScene {
             ZoomProperties.cameraOffsety = 40.0
             cameraNode.xScale = ZoomProperties.initialScale
             cameraNode.yScale = ZoomProperties.initialScale
-            cameraNode.position = CGPoint(x: UIScreen.main.bounds.width, y: UIScreen.main.bounds.height)
             break
         case .pad:
             ZoomProperties.initialScale = 1.0

@@ -23,6 +23,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     
     var selectedNode: SKNode?
     var lastSelectedGoblin: SKNode?
+    var shootType: GoblinType = .normal
     var touchPoint: CGPoint = CGPoint()
     var panning = false
     var channeling = false

@@ -15,7 +15,6 @@ class EvilGauge: SKSpriteNode {
     let oneSecond = 60
     let gaugeBorder: SKSpriteNode = SKSpriteNode(imageNamed: "gauge")
     let gaugeFill: SKSpriteNode = SKSpriteNode()
-    let bottomGauge: SKSpriteNode = SKSpriteNode(imageNamed: "green-gauge")
     let gaugeBezel: SKSpriteNode = SKSpriteNode(imageNamed: "green-gauge-bezel")
     
     init(maxFill: Int, currentFill: Int, size: CGSize) {
@@ -130,20 +129,28 @@ class EvilGauge: SKSpriteNode {
         self.sightCounter = 59
     }
     
-    func updateGaugeColor(goblin: Goblin?) {
-        if let goblin = goblin {
-            switch goblin.type {
+    func updateGaugeColor(type: GoblinType?) {
+        if let type = type {
+            switch type {
             case .normal:
-                gaugeFill.color = .green
+                self.texture = SKTexture(imageNamed: "green-gauge")
+                gaugeBezel.texture = SKTexture(imageNamed: "green-gauge-bezel")
+                gaugeFill.color = UIColor(red: 11/255, green: 129/255, blue: 80/255, alpha: 1.0)
                 break
             case .fire:
-                gaugeFill.color = .red
+                self.texture = SKTexture(imageNamed: "red-gauge")
+                gaugeBezel.texture = SKTexture(imageNamed: "red-gauge-bezel")
+                gaugeFill.color = UIColor(red: 224/255, green: 53/255, blue: 50/255, alpha: 1.0)
                 break
             case .rock:
-                gaugeFill.color = .yellow
+                self.texture = SKTexture(imageNamed: "gray-gauge")
+                gaugeBezel.texture = SKTexture(imageNamed: "gray-gauge-bezel")
+                gaugeFill.color = UIColor(red: 110/255, green: 110/255, blue: 110/255, alpha: 1.0)
                 break
             case .gum:
-                gaugeFill.color = .systemPink
+                self.texture = SKTexture(imageNamed: "pink-gauge")
+                gaugeBezel.texture = SKTexture(imageNamed: "pink-gauge-bezel")
+                gaugeFill.color = UIColor(red: 255/255, green: 53/255, blue: 50/255, alpha: 1.0)
                 break
             }
             
