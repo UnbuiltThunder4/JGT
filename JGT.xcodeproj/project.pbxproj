@@ -209,6 +209,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2301764828464C0600B41583 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				2301764028463DFB00B41583 /* ExplosionParticle.sks */,
+				23017644284643EC00B41583 /* AttackParticle.sks */,
+				23017642284641F200B41583 /* FrenzyParticle.sks */,
+				2301763C28462E8300B41583 /* FireParticle.sks */,
+				2301763A28462DBC00B41583 /* SmokeParticle.sks */,
+				230176462846488B00B41583 /* StunParticle.sks */,
+				2301763828462BB900B41583 /* ElectricParticle.sks */,
+			);
+			path = Particles;
+			sourceTree = "<group>";
+		};
 		2373770E283F66DE00F9E94C /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,13 +386,7 @@
 				7692468E2822B5ED003D5D27 /* JGTApp.swift */,
 				2373770E283F66DE00F9E94C /* Sounds */,
 				769246922822B5EE003D5D27 /* Assets.xcassets */,
-				2301764028463DFB00B41583 /* ExplosionParticle.sks */,
-				23017644284643EC00B41583 /* AttackParticle.sks */,
-				23017642284641F200B41583 /* FrenzyParticle.sks */,
-				2301763C28462E8300B41583 /* FireParticle.sks */,
-				2301763A28462DBC00B41583 /* SmokeParticle.sks */,
-				230176462846488B00B41583 /* StunParticle.sks */,
-				2301763828462BB900B41583 /* ElectricParticle.sks */,
+				2301764828464C0600B41583 /* Particles */,
 				768332F62823B7CD00BA5305 /* Supporting Files */,
 				768332F52823B7B800BA5305 /* Controller */,
 				768332F42823B79C00BA5305 /* Models */,

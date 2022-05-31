@@ -306,6 +306,19 @@ class Trap: Structure {
         let electricParticle = SKEmitterNode(fileNamed: "ElectricParticle")
         electricParticle!.position = CGPoint(x: 0, y: 0)
         addChild(electricParticle!)
+        
+        let pauseParticle = SKAction.fadeOut(withDuration: 1)
+        let startParticle = SKAction.fadeIn(withDuration: 1)
+        
+        let sequence = SKAction.sequence([
+            startParticle,
+            .wait(forDuration: 1),
+            pauseParticle,
+            .wait(forDuration: 1),
+        ])
+        
+        let infiniteSequence = SKAction.repeatForever(sequence)
+        electricParticle!.run(infiniteSequence)
     }
     
     required init?(coder aDecoder: NSCoder) {
