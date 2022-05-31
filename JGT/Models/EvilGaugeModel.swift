@@ -28,12 +28,12 @@ class EvilGauge: SKSpriteNode {
         self.zPosition = 80
     
         gaugeBorder.name = "gaugeBorder"
-        gaugeBorder.size = CGSize(width: UIScreen.main.bounds.height/31,
+        gaugeBorder.size = CGSize(width: UIScreen.main.bounds.height/22,
                                   height: (UIScreen.main.bounds.height/2))
         gaugeBorder.anchorPoint = CGPoint(x: 0.5, y: 0.0)
         self.addChild(gaugeBorder)
 
-        gaugeFill.size = CGSize(width: UIScreen.main.bounds.height/31,
+        gaugeFill.size = CGSize(width: UIScreen.main.bounds.height/22,
                                 height: (UIScreen.main.bounds.height/2)/CGFloat(self.maxFill) * CGFloat(self.currentFill))
         gaugeFill.color = UIColor(red: 11/255, green: 129/255, blue: 80/255, alpha: 1.0)
         gaugeFill.name = "gaugeFill"
