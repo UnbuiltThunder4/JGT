@@ -216,6 +216,7 @@
 		2301764828464C0600B41583 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
+				230176492846546B00B41583 /* FlameblinParticle.sks */,
 				2301764028463DFB00B41583 /* ExplosionParticle.sks */,
 				23017644284643EC00B41583 /* AttackParticle.sks */,
 				23017642284641F200B41583 /* FrenzyParticle.sks */,
@@ -391,7 +392,6 @@
 				7692468E2822B5ED003D5D27 /* JGTApp.swift */,
 				2373770E283F66DE00F9E94C /* Sounds */,
 				769246922822B5EE003D5D27 /* Assets.xcassets */,
-				230176492846546B00B41583 /* FlameblinParticle.sks */,
 				2301764828464C0600B41583 /* Particles */,
 				768332F62823B7CD00BA5305 /* Supporting Files */,
 				768332F52823B7B800BA5305 /* Controller */,
@@ -797,7 +797,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"JGT/Preview Content\"";
-				DEVELOPMENT_TEAM = J92848C73R;
+				DEVELOPMENT_TEAM = 38F3PD24AD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -828,7 +828,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"JGT/Preview Content\"";
-				DEVELOPMENT_TEAM = J92848C73R;
+				DEVELOPMENT_TEAM = 38F3PD24AD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

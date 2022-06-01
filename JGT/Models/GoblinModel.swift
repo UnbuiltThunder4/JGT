@@ -533,12 +533,14 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         var hasToUpdateRank = false
         self.updateAge()
         if let trap = self.closeStructure as? Trap {
-            if (trap.isActive) {
+            if (!trap.isActive) {
+                trap.isActive = true
+                let closeTrap = SKAction.setTexture(SKTexture(imageNamed: "closed-trap"))
+                trap.run(closeTrap)
                 if (self.type != .gum) {
                     self.health -= 80
                     self.HWpoints -= 5
                     self.state = .stunned
-                    trap.isActive = false
                 }
                 else {
                     self.HWpoints += 5

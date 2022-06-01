@@ -51,12 +51,12 @@ class Structure: SKSpriteNode, ObservableObject {
             break
             
         case .trap:
-            img = "trap"
+            img = "open-trap"
             self.mask = .enviroment
             self.width = 80
             self.height = 80
-            self.maskmodX = 1.1
-            self.maskmodY = 1.1
+            self.maskmodX = 0.2
+            self.maskmodY = 0.2
             break
             
         case .academy:
@@ -300,12 +300,33 @@ class Trap: Structure {
     
     var isActive: Bool = false
     var counter: Int = 0
+    let electricParticle = SKEmitterNode(fileNamed: "ElectricParticle")
     
     init(x: CGFloat, y: CGFloat) {
         super.init(type: .trap, x: x, y: y, rotation: 0)
-        let electricParticle = SKEmitterNode(fileNamed: "ElectricParticle")
+        addParticle()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func update(_ tossScene: TossScene) {
+        if (self.isActive) {
+            self.counter += 1
+            if (self.counter % twentySeconds == 0) {
+                self.counter = 0
+                self.isActive = false
+                let openTrap = SKAction.setTexture(SKTexture(imageNamed: "open-trap"))
+                self.run(openTrap)
+            }
+        }
+    }
+    
+    private func addParticle() {
         electricParticle!.position = CGPoint(x: 0, y: 0)
-        addChild(electricParticle!)
+        electricParticle!.name = "electricParticle"
+        self.addChild(electricParticle!)
         
         let pauseParticle = SKAction.fadeOut(withDuration: 1)
         let startParticle = SKAction.fadeIn(withDuration: 1)
@@ -318,20 +339,7 @@ class Trap: Structure {
         ])
         
         let infiniteSequence = SKAction.repeatForever(sequence)
-        electricParticle!.run(infiniteSequence)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    public func update(_ tossScene: TossScene) {
-        if (!self.isActive) {
-            self.counter += 1
-            if (self.counter % twentySeconds == 0) {
-                self.counter = 0
-                self.isActive = true
-            }
-        }
+        
+        electricParticle!.run(infiniteSequence, withKey: "particle")
     }
 }
