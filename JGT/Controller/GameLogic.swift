@@ -109,11 +109,6 @@ class GameLogic: ObservableObject {
             let aNewPosition = tossScene.scrollableMenu.goblinTable.position.y + translation.y
             tossScene.scrollableMenu.goblinTable.position.y = aNewPosition
             tossScene.scrollableMenu.goblinTable.contentOffset = tossScene.scrollableMenu.goblinTable.position.y
-//            for i in 0..<tossScene.scrollableMenu.goblinTable.rows.count {
-//                print(tossScene.scrollableMenu.goblinTable.rows[i].position)
-//            }
-            print(tossScene.scrollableMenu.goblinTable.position.y)
-            print(tossScene.scrollableMenu.goblinTable.contentOffset)
             tossScene.panning = false
         } else {
             
