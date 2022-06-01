@@ -41,18 +41,33 @@ class ScrollableMenu: SKSpriteNode {
     }
     
     func closeMenu() {
-        self.goblinTable.removeAllChildren()
+        self.goblinTable.clearRows()
+        self.goblinTable.lastRowPosition = self.goblinTable.initialRowPosition
+        self.goblinTable.position = CGPoint.zero
     }
+    
+    func hideRow() {
+        for i in 0..<self.goblinTable.rows.count {
+            if self.goblinTable.rows[i].position.y > 0 {
+                self.goblinTable.rows[i].alpha = 0.0
+            }
+        }
+    }
+    
 }
 
 class GoblinTable: SKNode {
     
     @Published public var rows: [GoblinRow] = []
+    let initialRowPosition = CGPoint.zero
+    var lastRowPosition = CGPoint()
     
     override init() {
         //        super.init(texture: SKTexture(imageNamed: "structures sheet"), color: .yellow, size: CGSize())
         super.init()
         self.name = "table"
+        
+        self.lastRowPosition = self.initialRowPosition
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -60,8 +75,8 @@ class GoblinTable: SKNode {
     }
     
     func addRow(row: GoblinRow) {
-        let lastRowPosition = getLastRowPosition()
-        row.position.y = lastRowPosition.y - row.frame.height
+        self.lastRowPosition = getLastRowPosition()
+        row.position.y = self.lastRowPosition.y - row.frame.height
         rows.append(row)
         row.name = "row"
         self.addChild(row)
@@ -72,6 +87,7 @@ class GoblinTable: SKNode {
         let index = self.rows.firstIndex(where: { $0.id == row.id })
         self.rows[index!].removeFromParent()
         self.rows.remove(at: index!)
+        row.removeFromParent()
         shiftRows(rowHeight: row.frame.height, index: (index)!)
     }
     
@@ -79,6 +95,13 @@ class GoblinTable: SKNode {
         for i in index..<self.rows.count - 1{
             self.rows[i].position.y += rowHeight
         }
+    }
+    
+    func clearRows() {
+        self.removeAllChildren()
+        self.rows.removeAll()
+        self.lastRowPosition = self.initialRowPosition
+        print(self.lastRowPosition)
     }
     
     func getLastRowPosition() -> CGPoint {

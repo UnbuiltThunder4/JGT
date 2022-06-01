@@ -114,8 +114,8 @@ extension TossScene {
             
             if selectedNode?.name! == "background" || selectedNode?.name! == "tree" || selectedNode?.name! == "rock" {
                 self.sheet.alpha = 0.0
-                self.scrollableMenu.alpha = 0.0
                 self.scrollableMenu.closeMenu()
+                self.scrollableMenu.alpha = 0.0
                 cauldron.closeSpawn()
             }
             

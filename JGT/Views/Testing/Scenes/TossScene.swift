@@ -180,6 +180,11 @@ class TossScene: SKScene, UIGestureRecognizerDelegate, UIScrollViewDelegate {
         } else {
             sheet.alpha = 0.0
         }
+        
+        if scrollableMenu.alpha == 1.0 {
+            scrollableMenu.hideRow()
+        }
+        
     }
     
 }

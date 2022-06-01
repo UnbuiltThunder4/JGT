@@ -105,6 +105,11 @@ class GameLogic: ObservableObject {
                 tossScene.selectedNode?.physicsBody!.velocity = velocity
             }
             
+        } else if (tossScene.selectedNode?.name == "row") {
+            let aNewPosition = tossScene.scrollableMenu.goblinTable.position.y + translation.y
+            tossScene.scrollableMenu.goblinTable.position.y = aNewPosition
+            print(tossScene.selectedNode?.position)
+            tossScene.panning = false
         } else {
             
             let aNewPosition = CGPoint(x: tossScene.cameraNode.position.x + (translation.x * -tossScene.currentScale), y: tossScene.cameraNode.position.y - (translation.y * tossScene.currentScale))
