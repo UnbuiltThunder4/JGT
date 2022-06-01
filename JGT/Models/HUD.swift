@@ -159,8 +159,17 @@ class HUD: SKNode {
         
         scrollableMenu.nameLabel.position = CGPoint(x: scrollableMenu.frame.maxX * -0.233,
                                            y: scrollableMenu.frame.maxY * 0.42)
-        scrollableMenu.descLabel.position = CGPoint(x: 0,
-                                           y: scrollableMenu.frame.minY * 0.08)
+        scrollableMenu.descLabel.position = CGPoint(x: scrollableMenu.frame.maxX * -0.233,
+                                           y: scrollableMenu.frame.maxY * 0.30)
+        
+        scrollableMenu.nameLabel.fontName = HUDSettings.font
+        scrollableMenu.descLabel.fontName = HUDSettings.font
+
+        scrollableMenu.nameLabel.fontSize = HUDSettings.fontSize
+        scrollableMenu.descLabel.fontSize = HUDSettings.fontSize
+        
+        scrollableMenu.nameLabel.fontColor = HUDSettings.fontColor
+        scrollableMenu.descLabel.fontColor = HUDSettings.fontColor
     }
 
 }

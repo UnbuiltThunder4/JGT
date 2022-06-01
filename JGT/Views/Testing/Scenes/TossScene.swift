@@ -119,8 +119,8 @@ class TossScene: SKScene, UIGestureRecognizerDelegate, UIScrollViewDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         
-        print(structures[5].goblins.count)
-        print(structures[5].name!)
+//        print(structures[5].goblins.count)
+//        print(structures[5].name!)
         
         var hasToUpdateRank = false
         

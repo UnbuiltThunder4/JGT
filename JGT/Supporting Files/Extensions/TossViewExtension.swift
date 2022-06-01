@@ -71,7 +71,7 @@ extension TossScene {
             gameLogic.selectNodeForTouch(self, touchLocation: touchLocation)
             
             if let structure = selectedNode as? Structure {
-                self.scrollableMenu.updateMenu(structure: structure)
+                self.scrollableMenu.openMenu(structure: structure)
                 print(structure.name!)
                 print(structure.goblins.count)
             }
@@ -115,6 +115,7 @@ extension TossScene {
             if selectedNode?.name! == "background" || selectedNode?.name! == "tree" || selectedNode?.name! == "rock" {
                 self.sheet.alpha = 0.0
                 self.scrollableMenu.alpha = 0.0
+                self.scrollableMenu.closeMenu()
                 cauldron.closeSpawn()
             }
             
