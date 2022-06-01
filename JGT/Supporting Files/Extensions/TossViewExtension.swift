@@ -70,6 +70,12 @@ extension TossScene {
             
             gameLogic.selectNodeForTouch(self, touchLocation: touchLocation)
             
+            if let structure = selectedNode as? Structure {
+                self.scrollableMenu.updateMenu(structure: structure)
+                print(structure.name!)
+                print(structure.goblins.count)
+            }
+            
             if selectedNode is Cauldron || selectedNode?.name! == "goblinsNumber" {
                 gameLogic.shootGoblin(self, node: cameraNode, type: shootType, population: self.population, destination: cameraNode.position)
             }
@@ -106,8 +112,9 @@ extension TossScene {
                 cauldron.closeSpawn()
             }
             
-            if selectedNode?.name! == "background" {
+            if selectedNode?.name! == "background" || selectedNode?.name! == "tree" || selectedNode?.name! == "rock" {
                 self.sheet.alpha = 0.0
+                self.scrollableMenu.alpha = 0.0
                 cauldron.closeSpawn()
             }
             
@@ -320,6 +327,7 @@ extension TossScene {
         hud.addEvilGauge(evilGauge: evilGauge, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width + UIScreen.main.bounds.height/6.5, y: cameraNode.position.y - UIScreen.main.bounds.height + UIScreen.main.bounds.height/2.5))
         evilGauge.zPosition = 80
         hud.addCauldron(cauldron: cauldron, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width + UIScreen.main.bounds.height/6.6, y: cameraNode.position.y - UIScreen.main.bounds.height + UIScreen.main.bounds.height/7.5))
+        hud.addScrollableMenu(scrollableMenu: scrollableMenu, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/4.5, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
     }
     
     func setupCamera() {

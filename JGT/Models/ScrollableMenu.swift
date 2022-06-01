@@ -13,9 +13,12 @@ class ScrollableMenu: SKSpriteNode {
     var descLabel: SKLabelNode = SKLabelNode()
     var goblinTable: GoblinTable = GoblinTable()
     init() {
-        super.init(texture: SKTexture(imageNamed: "structures sheet wide"), color: .yellow, size: CGSize())
-        self.size = size
+        super.init(texture: SKTexture(imageNamed: "structure sheet wide"), color: .yellow, size: CGSize(width: UIScreen.main.bounds.width/2.5, height: UIScreen.main.bounds.height/1.8))
+        self.name = "scrollableMenu"
+        
+        self.nameLabel.name = "scrollableName"
         self.addChild(nameLabel)
+        self.descLabel.name = "scrollableDesc"
         self.addChild(descLabel)
         self.addChild(goblinTable)
     }
@@ -24,8 +27,15 @@ class ScrollableMenu: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func checkRows(table: GoblinTable){
-        
+    func updateMenu(structure: Structure){
+        self.alpha = 1.0
+        self.nameLabel.text = structure.name
+        self.descLabel.text = structure.name
+        for i in 0..<structure.goblins.count {
+            goblinTable.addRow(row: GoblinRow(goblinFaceTexture: SKTexture(imageNamed: "normalHead"), goblinNameText: structure.goblins[i].fullName, goblinStatsText: String(structure.goblins[i].age)))
+        }
+        print(structure.goblins.count)
+        print(structure.name)
     }
 }
 
@@ -59,14 +69,17 @@ class GoblinTable: SKNode {
     }
     
     func shiftRows(rowHeight: CGFloat, index: Int) {
-        for i in index..<self.rows.count{
+        for i in index..<self.rows.count - 1{
             self.rows[i].position.y += rowHeight/2
         }
     }
     
     func getLastRowPosition() -> CGPoint {
-        let position = self.rows.last?.position
-        return position!
+        if let position = self.rows.last?.position {
+            return position
+        } else {
+            return CGPoint(x: 0, y: 0)
+        }
     }
 }
 
@@ -78,17 +91,13 @@ class GoblinRow: SKSpriteNode, Identifiable, ObservableObject {
     var goblinName: SKLabelNode = SKLabelNode()
     var goblinStats: SKLabelNode = SKLabelNode()
     
-    init(goblinFace: SKSpriteNode, goblinName: SKLabelNode, goblinStats: SKLabelNode) {
+    init(goblinFaceTexture: SKTexture, goblinNameText: String, goblinStatsText: String) {
         self.goblinFace.texture = SKTexture(imageNamed: "normalHead")
         self.goblinFace.name = "goblinFace"
         self.goblinName.name = "goblinName"
         self.goblinStats.name = "goblinStats"
         
         super.init(texture: SKTexture(imageNamed: "gauge"), color: .yellow, size: CGSize(width: 200, height: 50))
-        
-        self.goblinFace = goblinFace
-        self.goblinName = goblinName
-        self.goblinStats = goblinStats
         
         self.addChild(goblinFace)
         self.addChild(goblinName)

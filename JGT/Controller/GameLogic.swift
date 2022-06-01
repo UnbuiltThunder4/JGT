@@ -82,7 +82,6 @@ class GameLogic: ObservableObject {
 //            tossScene.selectedNode?.removeAllActions()
             
             tossScene.selectedNode = touchedNode
-        print(tossScene.selectedNode!.name)
             
 //        }
         

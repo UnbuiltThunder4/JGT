@@ -41,6 +41,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate, UIScrollViewDelegate {
     var scrollView: CustomScrollView!
     let moveableNode = SKNode()
     let label1 = SKSpriteNode(imageNamed: "normalHead")
+    var scrollableMenu = ScrollableMenu()
     
     var cameraRect: CGRect {
         let x = cameraNode.position.x - size.width/2 + (size.width - playableRect.width)/2
@@ -117,6 +118,9 @@ class TossScene: SKScene, UIGestureRecognizerDelegate, UIScrollViewDelegate {
     //MARK: Update
     
     override func update(_ currentTime: TimeInterval) {
+        
+        print(structures[5].goblins.count)
+        print(structures[5].name!)
         
         var hasToUpdateRank = false
         
