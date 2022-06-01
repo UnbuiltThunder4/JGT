@@ -193,6 +193,23 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                                     self.target!.health -= self.attack
                                 }
                                 self.attackCounter = 0
+                                let attackParticle = SKEmitterNode(fileNamed: "AttackParticle")
+                                attackParticle!.position = CGPoint(x: 0, y: 0)
+                                attackParticle!.name = "attackParticle"
+                                let addParticle = SKAction.run({
+                                    self.addChild(attackParticle!)
+                                })
+                                let removeParticle = SKAction.run({
+                                    attackParticle!.removeFromParent()
+                                })
+                                
+                                let sequence = SKAction.sequence([
+                                    addParticle,
+                                    .wait(forDuration: 0.5),
+                                    removeParticle
+                                ])
+                                
+                                self.run(sequence, withKey: "attackParticle")
                             }
                             if (self.target!.health <= 0) {
                                 self.target = nil

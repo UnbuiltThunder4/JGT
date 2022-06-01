@@ -396,6 +396,43 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                                         }
                                     }
                                 }
+                                let aoeParticle = SKEmitterNode(fileNamed: "ExplosionParticle")
+                                aoeParticle!.particleScale *= 1.5
+                                aoeParticle!.position = CGPoint(x: 0, y: 0)
+                                aoeParticle!.name = "aoeParticle"
+                                let addParticle = SKAction.run({
+                                    self.addChild(aoeParticle!)
+                                })
+                                let removeParticle = SKAction.run({
+                                    aoeParticle!.removeFromParent()
+                                })
+                                
+                                let sequence = SKAction.sequence([
+                                    addParticle,
+                                    .wait(forDuration: 1.5),
+                                    removeParticle
+                                ])
+                                
+                                self.run(sequence, withKey: "aoeParticle")
+                            }
+                            else {
+                                let attackParticle = SKEmitterNode(fileNamed: "AttackParticle")
+                                attackParticle!.position = CGPoint(x: 0, y: 0)
+                                attackParticle!.name = "attackParticle"
+                                let addParticle = SKAction.run({
+                                    self.addChild(attackParticle!)
+                                })
+                                let removeParticle = SKAction.run({
+                                    attackParticle!.removeFromParent()
+                                })
+                                
+                                let sequence = SKAction.sequence([
+                                    addParticle,
+                                    .wait(forDuration: 0.5),
+                                    removeParticle
+                                ])
+                                
+                                self.run(sequence, withKey: "attackParticle")
                             }
                             self.attackCounter = 0
                         }
