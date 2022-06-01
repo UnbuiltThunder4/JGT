@@ -150,5 +150,17 @@ class HUD: SKNode {
         evilGauge.physicsBody?.categoryBitMask = Collision.Masks.map.bitmask
         
     }
+    
+    func addScrollableMenu(scrollableMenu: ScrollableMenu, position: CGPoint) {
+        scrollableMenu.alpha = 0.0
+        scrollableMenu.zPosition = 100
+        addChild(scrollableMenu)
+        scrollableMenu.position = position
+        
+        scrollableMenu.nameLabel.position = CGPoint(x: scrollableMenu.frame.maxX * -0.233,
+                                           y: scrollableMenu.frame.maxY * 0.42)
+        scrollableMenu.descLabel.position = CGPoint(x: 0,
+                                           y: scrollableMenu.frame.minY * 0.08)
+    }
 
 }

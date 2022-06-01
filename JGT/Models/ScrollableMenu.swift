@@ -15,6 +15,9 @@ class ScrollableMenu: SKSpriteNode {
     init() {
         super.init(texture: SKTexture(imageNamed: "structures sheet wide"), color: .yellow, size: CGSize())
         self.size = size
+        self.addChild(nameLabel)
+        self.addChild(descLabel)
+        self.addChild(goblinTable)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -26,13 +29,14 @@ class ScrollableMenu: SKSpriteNode {
     }
 }
 
-class GoblinTable: SKSpriteNode {
+class GoblinTable: SKNode {
     
-    var rows: [GoblinRow] = []
+    @Published public var rows: [GoblinRow] = []
     
-    init() {
-        super.init(texture: SKTexture(imageNamed: "structures sheet"), color: .yellow, size: CGSize())
-        self.size = size
+    override init() {
+//        super.init(texture: SKTexture(imageNamed: "structures sheet"), color: .yellow, size: CGSize())
+        super.init()
+        self.name = "table"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -40,22 +44,33 @@ class GoblinTable: SKSpriteNode {
     }
     
     func addRow(row: GoblinRow) {
-        self.addChild(row)
+        let lastRowPosition = getLastRowPosition()
+        row.position.y = lastRowPosition.y - row.frame.height/2
         rows.append(row)
+        row.name = "row"
+        self.addChild(row)
     }
     
     func deleteRow(row: GoblinRow) {
         let index = self.rows.firstIndex(where: { $0.id == row.id })
         self.rows[index!].removeFromParent()
         self.rows.remove(at: index!)
+        shiftRows(rowHeight: row.frame.height, index: (index)!)
     }
     
-    func shiftRows(rows: [GoblinRow]) {
-        
+    func shiftRows(rowHeight: CGFloat, index: Int) {
+        for i in index..<self.rows.count{
+            self.rows[i].position.y += rowHeight/2
+        }
+    }
+    
+    func getLastRowPosition() -> CGPoint {
+        let position = self.rows.last?.position
+        return position!
     }
 }
 
-class GoblinRow: SKSpriteNode, Identifiable {
+class GoblinRow: SKSpriteNode, Identifiable, ObservableObject {
     
     public let id = UUID()
     
