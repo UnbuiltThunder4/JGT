@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 import SwiftUI
 
-class TossScene: SKScene, UIGestureRecognizerDelegate {
+class TossScene: SKScene, UIGestureRecognizerDelegate, UIScrollViewDelegate {
     
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     @ObservedObject var population = Population(size: 3, mutationRate: 10)
@@ -38,6 +38,9 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     var cauldron = Cauldron(currentGoblinsNumber: 3, maxGoblinNumber: MainScreenProperties.maxGoblinsNumber)
     var evilGauge = EvilGauge(maxFill: MainScreenProperties.maxFill, currentFill: 20, size: (UIDevice.current.userInterfaceIdiom == .pad ? GaugeHUDSetting.ipadSize : GaugeHUDSetting.iphoneSize ))
     var evilSight = EvilSight(currentRadius: 1.0, maxRadius: 26.0)
+    var scrollView: CustomScrollView!
+    let moveableNode = SKNode()
+    let label1 = SKSpriteNode(imageNamed: "normalHead")
     
     var cameraRect: CGRect {
         let x = cameraNode.position.x - size.width/2 + (size.width - playableRect.width)/2
@@ -93,6 +96,18 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         addChild(cameraNode)
         camera = cameraNode
         cameraNode.position = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
+        
+//        scrollView = CustomScrollView(scene: self, moveableNode: moveableNode)
+////        scrollView.contentSize = CGSize(width: self.frame.size.width, height: self.frame.size.height * 2)
+//        view.addSubview(scrollView)
+//
+//        sheet.addChild(moveableNode)
+//        moveableNode.name = "moveable"
+//        moveableNode.zPosition = 300
+////        label1.position.y = self.sheet.frame.midY - self.sheet.frame.size.height
+//        label1.position = CGPoint(x: moveableNode.frame.width/2, y: moveableNode.frame.height/2)
+//        label1.name = "ktm"
+//        moveableNode.addChild(label1)
         
         setupHUD()
         setupCamera()
