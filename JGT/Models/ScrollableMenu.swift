@@ -44,12 +44,15 @@ class ScrollableMenu: SKSpriteNode {
         self.goblinTable.clearRows()
         self.goblinTable.lastRowPosition = self.goblinTable.initialRowPosition
         self.goblinTable.position = CGPoint.zero
+        self.goblinTable.contentOffset = 0.0
     }
     
     func hideRow() {
         for i in 0..<self.goblinTable.rows.count {
-            if self.goblinTable.rows[i].position.y > 0 {
+            if self.goblinTable.rows[i].position.y + self.goblinTable.contentOffset > 0 {
                 self.goblinTable.rows[i].alpha = 0.0
+            } else {
+                self.goblinTable.rows[i].alpha = 1.0
             }
         }
     }
@@ -61,6 +64,7 @@ class GoblinTable: SKNode {
     @Published public var rows: [GoblinRow] = []
     let initialRowPosition = CGPoint.zero
     var lastRowPosition = CGPoint()
+    var contentOffset = 0.0
     
     override init() {
         //        super.init(texture: SKTexture(imageNamed: "structures sheet"), color: .yellow, size: CGSize())
