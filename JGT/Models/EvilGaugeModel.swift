@@ -63,7 +63,6 @@ class EvilGauge: SKSpriteNode {
         if goblin.type == .normal {
             self.currentFill -= 2
             gaugeFill.run(SKAction.resize(toHeight: gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
-            print(gaugeFill.size)
         }
         else {
             self.currentFill -= 4
@@ -80,7 +79,6 @@ class EvilGauge: SKSpriteNode {
                 amount = goblin.age/2
                 if (self.currentFill + amount) < self.maxFill {
                     self.currentFill += amount
-                    print(amount)
                     gaugeFill.run(SKAction.resize(toHeight: gaugeBorder.frame.height/CGFloat(self.maxFill) * CGFloat(self.currentFill), duration: 0.2))
                 } else if self.currentFill != self.maxFill {
                     self.currentFill = self.maxFill

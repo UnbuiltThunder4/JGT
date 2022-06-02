@@ -46,7 +46,6 @@ class EvilSight: SKSpriteNode {
             if self.currentRadius < self.maxRadius {
             self.run(SKAction.scale(by: 1.1, duration: 0.3))
                 self.currentRadius += 1.0
-                print(self.currentRadius)
             }
         }
     }

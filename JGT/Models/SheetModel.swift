@@ -74,7 +74,6 @@ class Sheet: SKSpriteNode {
         }
         
         nameLabel.text = goblin.fullName
-//        typeLabel.text = goblinType
         descLabel.text = goblin.backstory
         healthLabel.text = "\(String(goblin.health))/\(String(goblin.maxHealth))"
         attackLabel.text = "\(String(goblin.attack))"
@@ -82,13 +81,6 @@ class Sheet: SKSpriteNode {
         ageLabel.text = "\(String(goblin.age))"
         witLabel.text = "\(String(Int(goblin.HWpoints)/(goblin.age+1)))"
         frenzyLabel.text = "\(String(goblin.frenzy))"
-    }
-    
-    func updateSheet(structure: Structure) {
-        
-        nameLabel.text = structure.name
-//        typeLabel.text = ""
-        descLabel.text = ""
     }
     
     required init?(coder aDecoder: NSCoder) {

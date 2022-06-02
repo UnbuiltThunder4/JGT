@@ -67,6 +67,15 @@ class ScrollableMenu: SKSpriteNode {
         self.rowsSize = 0.0
     }
     
+    func updateMenu(table: GoblinTable) {
+        if table.rows.count > 0 {
+            table.rows[0].position.y = 0
+            for i in 1..<table.rows.count {
+                table.rows[i].position.y = table.rows[i-1].position.y - table.rows[i].frame.height
+            }
+        }
+    }
+    
     func hideRow() {
         for i in 0..<self.goblinTable.rows.count {
             if self.goblinTable.rows[i].position.y + self.goblinTable.contentOffset > 0 ||
@@ -107,19 +116,21 @@ class GoblinTable: SKNode {
         rows.append(row)
         row.name = "row"
         self.addChild(row)
-        print(row.goblinName.text)
     }
     
     func deleteRow(row: GoblinRow) {
         let index = self.rows.firstIndex(where: { $0.id == row.id })
         self.rows[index!].removeFromParent()
         self.rows.remove(at: index!)
+        print("index: \(index)")
         row.removeFromParent()
-        shiftRows(rowHeight: row.frame.height, index: (index)!)
+        if index! != self.rows.endIndex {
+            shiftRows(rowHeight: row.frame.height, index: (index)!)
+        }
     }
     
     func shiftRows(rowHeight: CGFloat, index: Int) {
-        for i in index..<self.rows.count - 1{
+        for i in index..<self.rows.count{
             self.rows[i].position.y += rowHeight
         }
     }
@@ -128,7 +139,6 @@ class GoblinTable: SKNode {
         self.removeAllChildren()
         self.rows.removeAll()
         self.lastRowPosition = self.initialRowPosition
-        print(self.lastRowPosition)
     }
     
     func getLastRowPosition() -> CGPoint {

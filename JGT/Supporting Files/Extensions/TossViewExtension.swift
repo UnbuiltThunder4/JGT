@@ -71,10 +71,20 @@ extension TossScene {
             gameLogic.selectNodeForTouch(self, touchLocation: touchLocation)
             
             if let structure = selectedNode as? Structure {
+                self.lastSelectedStructure = structure
                 self.scrollableMenu.closeMenu()
                 self.scrollableMenu.openMenu(structure: structure)
-                print(structure.name!)
-                print(structure.goblins.count)
+                for i in 0..<10 {
+                    self.scrollableMenu.goblinTable.addRow(row: GoblinRow(goblinFaceTexture: SKTexture(imageNamed: "normalHead"), goblinNameText: "Test", goblinStatsText: String(i)))
+                    self.scrollableMenu.rowsSize += self.scrollableMenu.goblinTable.rows[i].frame.height
+                }
+                self.scrollableMenu.hideRow()
+            }
+            
+            if let goblinRow = selectedNode as? GoblinRow {
+                self.scrollableMenu.goblinTable.deleteRow(row: goblinRow)
+                self.scrollableMenu.rowsSize -= 40.0
+                self.scrollableMenu.hideRow()
             }
             
             if selectedNode is Cauldron || selectedNode?.name! == "goblinsNumber" {
@@ -85,39 +95,39 @@ extension TossScene {
                 shootType = .normal
                 gameLogic.shootGoblin(self, node: cameraNode, type: .normal, population: self.population, destination: cameraNode.position)
                 evilGauge.updateGaugeColor(type: .normal)
-                cauldron.closeSpawn()
+                self.cauldron.closeSpawn()
             }
             if selectedNode?.name == "rockHead" {
                 shootType = .rock
                 gameLogic.shootGoblin(self, node: cameraNode, type: .rock, population: self.population, destination: cameraNode.position)
                 evilGauge.updateGaugeColor(type: .rock)
-                cauldron.closeSpawn()
+                self.cauldron.closeSpawn()
             }
             if selectedNode?.name == "flameblinHead" {
                 shootType = .fire
                 gameLogic.shootGoblin(self, node: cameraNode, type: .fire, population: self.population, destination: cameraNode.position)
                 evilGauge.updateGaugeColor(type: .fire)
-                cauldron.closeSpawn()
+                self.cauldron.closeSpawn()
             }
             if selectedNode?.name == "gumblingHead" {
                 shootType = .gum
                 gameLogic.shootGoblin(self, node: cameraNode, type: .gum, population: self.population, destination: cameraNode.position)
-                evilGauge.updateGaugeColor(type: .gum)
-                cauldron.closeSpawn()
+                self.evilGauge.updateGaugeColor(type: .gum)
+                self.cauldron.closeSpawn()
             }
             
             if let goblinNode = selectedNode as? Goblin {
-                lastSelectedGoblin = goblinNode
+                self.lastSelectedGoblin = goblinNode
                 self.sheet.alpha = 1.0
                 self.sheet.updateSheet(goblin: lastSelectedGoblin as! Goblin)
-                cauldron.closeSpawn()
+                self.cauldron.closeSpawn()
             }
             
             if selectedNode?.name! == "background" || selectedNode?.name! == "tree" || selectedNode?.name! == "rock" {
                 self.sheet.alpha = 0.0
                 self.scrollableMenu.closeMenu()
                 self.scrollableMenu.alpha = 0.0
-                cauldron.closeSpawn()
+                self.cauldron.closeSpawn()
             }
             
         }
@@ -134,7 +144,6 @@ extension TossScene {
                 
                 if self.evilGauge.currentFill <= 20 {
                     self.evilGauge.updateGauge(goblin: selectedNode as? Goblin, value: nil)
-                    print(selectedNode as! Goblin)
                     self.cauldron.updateCauldron(amount: -1)
                 }
                 population.goblins.remove(at: population.getIndex(of: selectedNode as! Goblin)!)

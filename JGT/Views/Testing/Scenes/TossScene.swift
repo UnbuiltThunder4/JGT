@@ -23,6 +23,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate, UIScrollViewDelegate {
     
     var selectedNode: SKNode?
     var lastSelectedGoblin: SKNode?
+    var lastSelectedStructure: SKNode?
     var shootType: GoblinType = .normal
     var touchPoint: CGPoint = CGPoint()
     var panning = false
@@ -163,8 +164,8 @@ class TossScene: SKScene, UIGestureRecognizerDelegate, UIScrollViewDelegate {
             sheet.alpha = 0.0
         }
         
-//        if scrollableMenu.alpha == 1.0 {
-//            scrollableMenu.hideRow()
+//        if let lastSelectedStructure = lastSelectedStructure as? Structure {
+//            scrollableMenu.updateMenu(table: scrollableMenu.goblinTable)
 //        }
         
     }

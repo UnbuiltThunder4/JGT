@@ -115,8 +115,6 @@ class Cauldron: SKSpriteNode {
         self.goblinHead.alpha = 1.0
         self.goblinCount.alpha = 1.0
         
-        print("cauldron")
-        
         for i in 0..<population.goblins.count {
             if population.goblins[i].type == .fire {
                 flameblinCount += 1
