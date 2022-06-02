@@ -348,14 +348,22 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func workingUpdate(func: (() -> ())?) -> Bool {
         var hasToUpdateRank = false
-        self.target = nil
-        self.taskCounter += 1
-        if (self.taskCounter % taskTime == 0) {
-            self.currentTask!()
-            self.currentTask = nil
-            hasToUpdateRank = true
+        if (self.closeStructure!.goblins.isEmpty) {
+            self.closeStructure!.goblins.append(self)
+        }
+        if (self.closeStructure!.goblins.contains(self)) {
+            self.target = nil
+            self.taskCounter += 1
+            if (self.taskCounter % taskTime == 0) {
+                self.currentTask!()
+                self.currentTask = nil
+                hasToUpdateRank = true
+                self.state = .idle
+                self.taskCounter = 0
+            }
+        }
+        else {
             self.state = .idle
-            self.taskCounter = 0
         }
         return hasToUpdateRank
     }
