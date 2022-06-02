@@ -32,15 +32,14 @@ class ScrollableMenu: SKSpriteNode {
     }
     
     func openMenu(structure: Structure){
-            self.alpha = 1.0
-            self.nameLabel.text = structure.name
-            self.descLabel.text = structure.name
-            for i in 0..<structure.goblins.count {
-                goblinTable.addRow(row: GoblinRow(goblinFaceTexture: SKTexture(imageNamed: "normalHead"), goblinNameText: structure.goblins[i].fullName, goblinStatsText: String(structure.goblins[i].age)))
-                self.rowsSize += self.goblinTable.rows[i].frame.height
-                print(rowsSize)
-            }
-            print(contentSection)
+        self.alpha = 1.0
+        self.nameLabel.text = structure.name
+        self.descLabel.text = structure.name
+        for i in 0..<structure.goblins.count {
+            goblinTable.addRow(row: GoblinRow(goblinFaceTexture: SKTexture(imageNamed: "normalHead"), goblinNameText: structure.goblins[i].fullName, goblinStatsText: String(structure.goblins[i].age)))
+            self.rowsSize += self.goblinTable.rows[i].frame.height
+        }
+        self.hideRow()
     }
     
     func closeMenu() {
