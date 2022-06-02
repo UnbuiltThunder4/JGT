@@ -71,6 +71,7 @@ extension TossScene {
             gameLogic.selectNodeForTouch(self, touchLocation: touchLocation)
             
             if let structure = selectedNode as? Structure {
+                self.scrollableMenu.closeMenu()
                 self.scrollableMenu.openMenu(structure: structure)
                 print(structure.name!)
                 print(structure.goblins.count)
