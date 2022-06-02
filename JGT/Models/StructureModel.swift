@@ -161,6 +161,7 @@ class Tavern: Structure {
     
     override func addGoblin(_ goblin: Goblin) {
         self.goblins.append(goblin)
+        print("a")
     }
     
     override func removeGoblin(_ goblin: Goblin) {

@@ -10,7 +10,7 @@ import SpriteKit
 import GameplayKit
 import SwiftUI
 
-class TossScene: SKScene, UIGestureRecognizerDelegate, UIScrollViewDelegate {
+class TossScene: SKScene, UIGestureRecognizerDelegate {
     
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     @ObservedObject var population = Population(size: 3, mutationRate: 10)
@@ -163,7 +163,6 @@ class TossScene: SKScene, UIGestureRecognizerDelegate, UIScrollViewDelegate {
         } else {
             sheet.alpha = 0.0
         }
-        
 //        if let lastSelectedStructure = lastSelectedStructure as? Structure {
 //            scrollableMenu.updateMenu(table: scrollableMenu.goblinTable)
 //        }

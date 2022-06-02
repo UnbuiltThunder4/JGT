@@ -53,7 +53,7 @@ class ScrollableMenu: SKSpriteNode {
                 break
             }
             
-            goblinTable.addRow(row: GoblinRow(goblinFaceTexture: goblinTexture, goblinNameText: structure.goblins[i].fullName, goblinStatsText: String(structure.goblins[i].age)))
+            goblinTable.addRow(row: GoblinRow(goblinID: structure.goblins[i].id, goblinFaceTexture: goblinTexture, goblinNameText: structure.goblins[i].fullName, goblinStatsText: String(structure.goblins[i].age)))
             self.rowsSize += self.goblinTable.rows[i].frame.height
         }
         self.hideRow()
@@ -118,11 +118,12 @@ class GoblinTable: SKNode {
         self.addChild(row)
     }
     
-    func deleteRow(row: GoblinRow) {
+    func deleteRow(row: GoblinRow, structure: Structure) {
+        let strIndex = structure.goblins.firstIndex(where: { $0.id == row.goblinID})
+        structure.goblins.remove(at: strIndex!)
         let index = self.rows.firstIndex(where: { $0.id == row.id })
         self.rows[index!].removeFromParent()
         self.rows.remove(at: index!)
-        print("index: \(index)")
         row.removeFromParent()
         if index! != self.rows.endIndex {
             shiftRows(rowHeight: row.frame.height, index: (index)!)
@@ -154,17 +155,19 @@ class GoblinRow: SKSpriteNode, Identifiable, ObservableObject {
     
     public let id = UUID()
     
+    var goblinID: UUID = UUID()
     var goblinFace: SKSpriteNode = SKSpriteNode(imageNamed: "normalHead")
     var goblinName: SKLabelNode = SKLabelNode()
     var goblinStats: SKLabelNode = SKLabelNode()
     
-    init(goblinFaceTexture: SKTexture, goblinNameText: String, goblinStatsText: String) {
+    init(goblinID: UUID, goblinFaceTexture: SKTexture, goblinNameText: String, goblinStatsText: String) {
         self.goblinFace.name = "goblinFace"
         self.goblinName.name = "goblinName"
         self.goblinStats.name = "goblinStats"
         
         super.init(texture: SKTexture(imageNamed: "gauge"), color: .yellow, size: CGSize(width: 400, height: 40))
         
+        self.goblinID = goblinID
         self.goblinFace.texture = goblinFaceTexture
         self.goblinName.text = goblinNameText
         self.goblinStats.text = goblinStatsText

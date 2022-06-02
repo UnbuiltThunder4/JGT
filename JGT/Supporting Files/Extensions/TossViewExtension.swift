@@ -73,16 +73,17 @@ extension TossScene {
             if let structure = selectedNode as? Structure {
                 self.lastSelectedStructure = structure
                 self.scrollableMenu.closeMenu()
-                self.scrollableMenu.openMenu(structure: structure)
-                for i in 0..<10 {
-                    self.scrollableMenu.goblinTable.addRow(row: GoblinRow(goblinFaceTexture: SKTexture(imageNamed: "normalHead"), goblinNameText: "Test", goblinStatsText: String(i)))
-                    self.scrollableMenu.rowsSize += self.scrollableMenu.goblinTable.rows[i].frame.height
-                }
-                self.scrollableMenu.hideRow()
+                self.scrollableMenu.openMenu(structure: lastSelectedStructure as! Structure)
+//                for i in 0..<10 {
+//                    self.scrollableMenu.goblinTable.addRow(row: GoblinRow(goblinID: <#UUID#>, goblinFaceTexture: SKTexture(imageNamed: "normalHead"), goblinNameText: "Test", goblinStatsText: String(i)))
+//                    self.scrollableMenu.rowsSize += self.scrollableMenu.goblinTable.rows[i].frame.height
+//                }
+//                self.scrollableMenu.hideRow()
+//                print(lastSelectedStructure.goblins.count)
             }
             
             if let goblinRow = selectedNode as? GoblinRow {
-                self.scrollableMenu.goblinTable.deleteRow(row: goblinRow)
+                self.scrollableMenu.goblinTable.deleteRow(row: goblinRow, structure: lastSelectedStructure as! Structure)
                 self.scrollableMenu.rowsSize -= 40.0
                 self.scrollableMenu.hideRow()
             }
