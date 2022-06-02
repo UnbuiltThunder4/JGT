@@ -120,6 +120,9 @@ class GoblinTable: SKNode {
     
     func deleteRow(row: GoblinRow, structure: Structure) {
         let strIndex = structure.goblins.firstIndex(where: { $0.id == row.goblinID})
+        structure.goblins[strIndex!].position.y = structure.position.y * 2
+        structure.goblins[strIndex!].state = .idle
+        structure.goblins[strIndex!].alpha = 1.0
         structure.goblins.remove(at: strIndex!)
         let index = self.rows.firstIndex(where: { $0.id == row.id })
         self.rows[index!].removeFromParent()

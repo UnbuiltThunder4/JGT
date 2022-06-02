@@ -163,7 +163,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         } else {
             sheet.alpha = 0.0
         }
-//        if let lastSelectedStructure = lastSelectedStructure as? Structure {
+//        if scrollableMenu.alpha == 1.0 {
 //            scrollableMenu.updateMenu(table: scrollableMenu.goblinTable)
 //        }
         
