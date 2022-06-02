@@ -32,7 +32,6 @@ class ScrollableMenu: SKSpriteNode {
     }
     
     func openMenu(structure: Structure){
-        if self.alpha == 0.0 {
             self.alpha = 1.0
             self.nameLabel.text = structure.name
             self.descLabel.text = structure.name
@@ -42,7 +41,6 @@ class ScrollableMenu: SKSpriteNode {
                 print(rowsSize)
             }
             print(contentSection)
-        }
     }
     
     func closeMenu() {
