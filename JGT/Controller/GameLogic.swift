@@ -105,11 +105,25 @@ class GameLogic: ObservableObject {
                 tossScene.selectedNode?.physicsBody!.velocity = velocity
             }
             
-        } else if (tossScene.selectedNode?.name == "row") {
+        } else if (tossScene.selectedNode?.name == "row") && tossScene.scrollableMenu.rowsSize > -tossScene.scrollableMenu.contentSection {
+            
+            tossScene.scrollableMenu.goblinTable.firstRow = tossScene.scrollableMenu.goblinTable.rows[0]
+            tossScene.scrollableMenu.goblinTable.lastRow = tossScene.scrollableMenu.goblinTable.rows[tossScene.scrollableMenu.goblinTable.rows.count-1]
+            
             let aNewPosition = tossScene.scrollableMenu.goblinTable.position.y + translation.y
+            
+            if aNewPosition < tossScene.scrollableMenu.goblinTable.position.y && (tossScene.scrollableMenu.goblinTable.firstRow?.position.y)! + tossScene.scrollableMenu.goblinTable.contentOffset > 0 {
             tossScene.scrollableMenu.goblinTable.position.y = aNewPosition
             tossScene.scrollableMenu.goblinTable.contentOffset = tossScene.scrollableMenu.goblinTable.position.y
+                
+                print((tossScene.scrollableMenu.goblinTable.firstRow?.position.y)! + tossScene.scrollableMenu.goblinTable.contentOffset)
             tossScene.panning = false
+            } else if aNewPosition > tossScene.scrollableMenu.goblinTable.position.y && (tossScene.scrollableMenu.goblinTable.lastRow?.position.y)! + tossScene.scrollableMenu.goblinTable.contentOffset < tossScene.scrollableMenu.contentSection {
+                tossScene.scrollableMenu.goblinTable.position.y = aNewPosition
+                tossScene.scrollableMenu.goblinTable.contentOffset = tossScene.scrollableMenu.goblinTable.position.y
+                tossScene.panning = false
+            }
+            
         } else {
             
             let aNewPosition = CGPoint(x: tossScene.cameraNode.position.x + (translation.x * -tossScene.currentScale), y: tossScene.cameraNode.position.y - (translation.y * tossScene.currentScale))

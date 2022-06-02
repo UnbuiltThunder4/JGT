@@ -12,9 +12,13 @@ class ScrollableMenu: SKSpriteNode {
     var nameLabel: SKLabelNode = SKLabelNode()
     var descLabel: SKLabelNode = SKLabelNode()
     var goblinTable: GoblinTable = GoblinTable()
+    var contentSection: CGFloat = 0.0
+    var rowsSize: CGFloat = 0.0
     init() {
         super.init(texture: SKTexture(imageNamed: "structure sheet wide"), color: .yellow, size: CGSize(width: UIScreen.main.bounds.width/2.5, height: UIScreen.main.bounds.height/1.8))
         self.name = "scrollableMenu"
+        
+        self.contentSection = self.frame.minY/2
         
         self.nameLabel.name = "scrollableName"
         self.addChild(nameLabel)
@@ -34,9 +38,10 @@ class ScrollableMenu: SKSpriteNode {
             self.descLabel.text = structure.name
             for i in 0..<structure.goblins.count {
                 goblinTable.addRow(row: GoblinRow(goblinFaceTexture: SKTexture(imageNamed: "normalHead"), goblinNameText: structure.goblins[i].fullName, goblinStatsText: String(structure.goblins[i].age)))
+                self.rowsSize += self.goblinTable.rows[i].frame.height
+                print(rowsSize)
             }
-            print(structure.goblins.count)
-            print(structure.name)
+            print(contentSection)
         }
     }
     
@@ -45,11 +50,13 @@ class ScrollableMenu: SKSpriteNode {
         self.goblinTable.lastRowPosition = self.goblinTable.initialRowPosition
         self.goblinTable.position = CGPoint.zero
         self.goblinTable.contentOffset = 0.0
+        self.rowsSize = 0.0
     }
     
     func hideRow() {
         for i in 0..<self.goblinTable.rows.count {
-            if self.goblinTable.rows[i].position.y + self.goblinTable.contentOffset > 0 {
+            if self.goblinTable.rows[i].position.y + self.goblinTable.contentOffset > 0 ||
+                self.goblinTable.rows[i].position.y + self.goblinTable.contentOffset < self.frame.minY/1.5 {
                 self.goblinTable.rows[i].alpha = 0.0
             } else {
                 self.goblinTable.rows[i].alpha = 1.0
@@ -65,6 +72,8 @@ class GoblinTable: SKNode {
     let initialRowPosition = CGPoint.zero
     var lastRowPosition = CGPoint()
     var contentOffset = 0.0
+    var firstRow: GoblinRow?
+    var lastRow: GoblinRow?
     
     override init() {
         //        super.init(texture: SKTexture(imageNamed: "structures sheet"), color: .yellow, size: CGSize())
