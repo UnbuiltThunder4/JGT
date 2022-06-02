@@ -142,27 +142,20 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             self.idleCounter += 1
         }
         if (self.target == nil) {
-            if (!self.targetQueue.isEmpty) {
+            if (self.targetQueue.isEmpty) {
+                self.walkToOrigin()
+            }
+            else {
                 self.target = self.targetQueue[0]
                 self.targetQueue.remove(at: 0)
             }
-            else {
-                self.walkToOrigin()
-            }
         }
         else {
-            if (self.target!.state != .inhand && self.target!.state != .invillage && self.target!.state != .inacademy && self.target!.state != .intavern && self.target!.state != .flying && self.target!.state != .launched) {
-                removeAction(forKey: "walk")
+            if (self.target!.state != .invillage && self.target!.state != .inacademy && self.target!.state != .intavern) {
                 self.state = .fighting
             }
             else {
-                self.walkToOrigin()
-                let targetDistance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
-                if (abs(targetDistance.dx) > 300 || abs(targetDistance.dy) > 300) {
-                    self.state = .idle
-                    self.target = nil
-                    removeAction(forKey: "walk")
-                }
+                self.target = nil
             }
         }
     }
@@ -172,7 +165,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
         self.shieldCounter = 0
         self.idleCounter = 0
         if (self.target != nil) {
-            if (self.target!.state != .inhand && self.target!.state != .invillage && self.target!.state != .inacademy && self.target!.state != .intavern && self.target!.state != .flying && self.target!.state != .launched) {
+            if (self.target!.state != .invillage && self.target!.state != .inacademy && self.target!.state != .intavern) {
                 let originalPosDistance = CGVector(dx: self.initialx - self.position.x, dy: self.initialy - self.position.y)
                 let targetDistance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
                 let walkDistance = limitVector(vector: targetDistance, max: 20)
@@ -226,6 +219,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                 }
             }
             else {
+                self.target = nil
                 self.state = .idle
                 removeAction(forKey: "walk")
             }

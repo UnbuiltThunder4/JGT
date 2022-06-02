@@ -363,6 +363,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             }
         }
         else {
+            self.closeStructure = nil
+            self.currentTask = nil
             self.state = .idle
         }
         return hasToUpdateRank
@@ -443,6 +445,11 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                                 self.run(sequence, withKey: "attackParticle")
                             }
                             self.attackCounter = 0
+                            if (self.target!.target != self) {
+                                if (!self.target!.targetQueue.contains(self)) {
+                                    self.target!.targetQueue.append(self)
+                                }
+                            }
                         }
                         if (self.target!.health <= 0) {
                             self.target = nil
