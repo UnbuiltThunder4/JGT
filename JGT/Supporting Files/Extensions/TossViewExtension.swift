@@ -72,20 +72,12 @@ extension TossScene {
             
             if let structure = selectedNode as? Structure {
                 self.lastSelectedStructure = structure
+                self.sheet.alpha = 0.0
                 self.scrollableMenu.closeMenu()
                 self.scrollableMenu.openMenu(structure: lastSelectedStructure as! Structure)
-//                for i in 0..<10 {
-//                    self.scrollableMenu.goblinTable.addRow(row: GoblinRow(goblinID: <#UUID#>, goblinFaceTexture: SKTexture(imageNamed: "normalHead"), goblinNameText: "Test", goblinStatsText: String(i)))
-//                    self.scrollableMenu.rowsSize += self.scrollableMenu.goblinTable.rows[i].frame.height
-//                }
-//                self.scrollableMenu.hideRow()
-//                print(lastSelectedStructure.goblins.count)
             }
             
             if let goblinRow = selectedNode as? GoblinRow {
-//                self.scrollableMenu.goblinTable.deleteRow(row: goblinRow, structure: lastSelectedStructure as! Structure)
-//                self.scrollableMenu.rowsSize -= 40.0
-//                self.scrollableMenu.hideRow()
                 gameLogic.ejectGoblin(scrollableMenu: scrollableMenu, goblinRow: goblinRow, structure: lastSelectedStructure as! Structure)
             }
             
@@ -119,13 +111,14 @@ extension TossScene {
             }
             
             if let goblinNode = selectedNode as? Goblin {
+                self.scrollableMenu.alpha = 0.0
                 self.lastSelectedGoblin = goblinNode
                 self.sheet.alpha = 1.0
                 self.sheet.updateSheet(goblin: lastSelectedGoblin as! Goblin)
                 self.cauldron.closeSpawn()
             }
             
-            if selectedNode?.name! == "background" || selectedNode?.name! == "tree" || selectedNode?.name! == "rock" {
+            if selectedNode?.name! == "background" || selectedNode?.name! == "tree" || selectedNode?.name! == "rock" || selectedNode?.name! == "goblinmancy-circle" || selectedNode?.name! == "wall" || selectedNode?.name! == "backdoor" || selectedNode?.name! == "backdoor-up" {
                 self.sheet.alpha = 0.0
                 self.scrollableMenu.closeMenu()
                 self.scrollableMenu.alpha = 0.0
