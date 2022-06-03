@@ -172,5 +172,47 @@ class HUD: SKNode {
         scrollableMenu.descLabel.fontColor = HUDSettings.fontColor
         
     }
+    
+    func addPauseScreen(pauseScreen: PauseScreen, position: CGPoint) {
+        pauseScreen.alpha = 0.0
+        
+        pauseScreen.zPosition = 300
+        addChild(pauseScreen)
+        pauseScreen.position = position
+        
+        pauseScreen.pauseSign.zPosition = 5
+        pauseScreen.pauseSign.position = CGPoint.zero
+        
+        pauseScreen.continueButton.zPosition = 5
+        pauseScreen.continueButton.position = CGPoint(x: 0, y: ((-pauseScreen.size.height)/3.5)/1.7)
+        
+        pauseScreen.quitButton.size = pauseScreen.littleButtonsSize
+        pauseScreen.quitButton.position = CGPoint(x: pauseScreen.continueButton.position.x - 120, y: ((-pauseScreen.size.height)/3.5)/1.7)
+        pauseScreen.quitButton.zPosition = 10
+    
+        pauseScreen.restartButton.size = pauseScreen.littleButtonsSize
+        pauseScreen.restartButton.position = CGPoint(x: pauseScreen.continueButton.position.x + 120, y: ((-pauseScreen.size.height)/3.5)/1.7)
+        pauseScreen.restartButton.zPosition = 5
+        
+        pauseScreen.pauseMessage.position = CGPoint(x: 0, y: ((pauseScreen.size.height / 3.5)/1.7) - 25)
+        pauseScreen.pauseMessage.zPosition = 5
+
+        pauseScreen.continueMessage.position = CGPoint(x: 0, y: ((pauseScreen.size.height / 3.5)/1.7) - 90)
+        pauseScreen.continueMessage.zPosition = 5
+
+        pauseScreen.exitMessage.position = CGPoint(x: pauseScreen.quitButton.position.x, y: ((pauseScreen.size.height / 3.5)/1.7) - 90)
+        pauseScreen.exitMessage.zPosition = 5
+
+        pauseScreen.restartMessage.position = CGPoint(x: pauseScreen.restartButton.position.x, y: ((pauseScreen.size.height / 3.5)/1.7) - 90)
+        pauseScreen.restartMessage.zPosition = 5
+    }
+    
+    func addPauseButton(pauseButton: PauseButton, position: CGPoint){
+        pauseButton.alpha = 1.0
+        pauseButton.zPosition = 20
+        pauseButton.position = position
+        
+        addChild(pauseButton)
+    }
 
 }

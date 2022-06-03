@@ -81,6 +81,8 @@
 		76B5F2F5284089D600E7C071 /* EvilSightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5F2F4284089D600E7C071 /* EvilSightModel.swift */; };
 		76B5F2FF2847635500E7C071 /* ScrollableMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5F2FE2847635500E7C071 /* ScrollableMenu.swift */; };
 		76B5F303284A3A2100E7C071 /* Psycho Katana - Instrumental.wav in Resources */ = {isa = PBXBuildFile; fileRef = 76B5F302284A3A2100E7C071 /* Psycho Katana - Instrumental.wav */; };
+		76B5F305284A54F900E7C071 /* PauseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5F304284A54F900E7C071 /* PauseScreen.swift */; };
+		76B5F307284A5ADF00E7C071 /* PauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5F306284A5ADF00E7C071 /* PauseButton.swift */; };
 		76BEE61728325DB400E4A610 /* CollisionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BEE61628325DB400E4A610 /* CollisionModel.swift */; };
 		76C24C3B282BB60A00F76B8E /* TossViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C24C3A282BB60A00F76B8E /* TossViewExtension.swift */; };
 		76EE5B48283B7FE300ED6635 /* ProjectileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EE5B47283B7FE300ED6635 /* ProjectileModel.swift */; };
@@ -182,6 +184,8 @@
 		76B5F2F4284089D600E7C071 /* EvilSightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvilSightModel.swift; sourceTree = "<group>"; };
 		76B5F2FE2847635500E7C071 /* ScrollableMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableMenu.swift; sourceTree = "<group>"; };
 		76B5F302284A3A2100E7C071 /* Psycho Katana - Instrumental.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Psycho Katana - Instrumental.wav"; sourceTree = "<group>"; };
+		76B5F304284A54F900E7C071 /* PauseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseScreen.swift; sourceTree = "<group>"; };
+		76B5F306284A5ADF00E7C071 /* PauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseButton.swift; sourceTree = "<group>"; };
 		76BEE61628325DB400E4A610 /* CollisionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionModel.swift; sourceTree = "<group>"; };
 		76C24C3A282BB60A00F76B8E /* TossViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TossViewExtension.swift; sourceTree = "<group>"; };
 		76EE5B47283B7FE300ED6635 /* ProjectileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectileModel.swift; sourceTree = "<group>"; };
@@ -343,6 +347,8 @@
 				76EE5B47283B7FE300ED6635 /* ProjectileModel.swift */,
 				76B5F2F4284089D600E7C071 /* EvilSightModel.swift */,
 				76B5F2FE2847635500E7C071 /* ScrollableMenu.swift */,
+				76B5F304284A54F900E7C071 /* PauseScreen.swift */,
+				76B5F306284A5ADF00E7C071 /* PauseButton.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -618,6 +624,8 @@
 				234D35D3283264B100D242E7 /* SpriteKitContainer.swift in Sources */,
 				761908112823BEF6002A0AE2 /* TestView.swift in Sources */,
 				761907FF2823B9AC002A0AE2 /* GameLogic.swift in Sources */,
+				76B5F305284A54F900E7C071 /* PauseScreen.swift in Sources */,
+				76B5F307284A5ADF00E7C071 /* PauseButton.swift in Sources */,
 				76A534F9282BA32100DEC317 /* TossScene.swift in Sources */,
 				761907FD2823B998002A0AE2 /* GameScreenView.swift in Sources */,
 				76EE5B48283B7FE300ED6635 /* ProjectileModel.swift in Sources */,

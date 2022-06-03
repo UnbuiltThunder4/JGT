@@ -209,9 +209,5 @@ class GameLogic: ObservableObject {
         scrollableMenu.hideRow()
     }
     
-    public func goblinExit() {
-        
-    }
-    
 }
 

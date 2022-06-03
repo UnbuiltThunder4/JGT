@@ -125,6 +125,20 @@ extension TossScene {
                 self.cauldron.closeSpawn()
             }
             
+            if selectedNode?.name! == "PauseBtn" {
+                paws = true
+                pauseButton.alpha = 0.0
+                self.pauseChilds(isPaused: true)
+                pauseScreen.alpha = 1.0
+            }
+            
+            if selectedNode?.name! == "ContinueBtn" {
+                paws = false
+                pauseScreen.alpha = 0.0
+                pauseButton.alpha = 1.0
+                pauseChilds(isPaused: false)
+            }
+            
         }
     }
     
@@ -334,6 +348,8 @@ extension TossScene {
         evilGauge.zPosition = 80
         hud.addCauldron(cauldron: cauldron, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width + UIScreen.main.bounds.height/6.6, y: cameraNode.position.y - UIScreen.main.bounds.height + UIScreen.main.bounds.height/7.5))
         hud.addScrollableMenu(scrollableMenu: scrollableMenu, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/4.5, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
+        hud.addPauseScreen(pauseScreen: pauseScreen, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/2, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
+        hud.addPauseButton(pauseButton: pauseButton, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/4.5, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
     }
     
     func setupCamera() {
@@ -358,6 +374,22 @@ extension TossScene {
             break
         @unknown default:
             break
+        }
+    }
+    
+    @objc func pauseGame() {
+        if self.paws == true {
+        self.run(SKAction.wait(forDuration: 0.0001)){
+            self.pauseChilds(isPaused: true)
+        }
+        
+        pauseScreen.zPosition = 30
+        }
+    }
+    
+    func pauseChilds(isPaused: Bool){
+        for child in children {
+            child.isPaused = isPaused
         }
     }
     

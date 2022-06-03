@@ -9,6 +9,7 @@ import Foundation
 import SpriteKit
 import GameplayKit
 import SwiftUI
+import NotificationCenter
 
 class TossScene: SKScene, UIGestureRecognizerDelegate {
     
@@ -29,6 +30,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     var touchPoint: CGPoint = CGPoint()
     var panning = false
     var channeling = false
+    var paws = false
     
     let playableRect: CGRect
     let cameraNode = SKCameraNode()
@@ -40,7 +42,10 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     var cauldron = Cauldron(currentGoblinsNumber: 3, maxGoblinNumber: MainScreenProperties.maxGoblinsNumber)
     var evilGauge = EvilGauge(maxFill: MainScreenProperties.maxFill, currentFill: 20, size: (UIDevice.current.userInterfaceIdiom == .pad ? GaugeHUDSetting.ipadSize : GaugeHUDSetting.iphoneSize ))
     var evilSight = EvilSight(currentRadius: 1.0, maxRadius: 26.0)
-//    var scrollableMenu = ScrollableMenu()
+    var pauseScreen = PauseScreen()
+    var pauseButton = PauseButton()
+    
+    let notificationCenter = NotificationCenter.default
     
     var cameraRect: CGRect {
         let x = cameraNode.position.x - size.width/2 + (size.width - playableRect.width)/2
@@ -88,6 +93,8 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         let tapGestureRecognizer = self.setTapGestureRecognizer()
         let longPressGestureRecognizer = self.setLongPressGestureRecognizer(duration: 0.5)
         let pinchGestureRecognizer = self.setPinchGestureRecognizer()
+        
+        notificationCenter.addObserver(self, selector: #selector(pauseGame), name: UIApplication.didBecomeActiveNotification, object: nil)
         
         tapGestureRecognizer.require(toFail: panGestureRecognizer)
         tapGestureRecognizer.require(toFail: longPressGestureRecognizer)
@@ -174,9 +181,6 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         } else {
             sheet.alpha = 0.0
         }
-//        if scrollableMenu.alpha == 1.0 {
-//            scrollableMenu.updateMenu(table: scrollableMenu.goblinTable)
-//        }
         
     }
     
