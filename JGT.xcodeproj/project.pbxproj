@@ -80,7 +80,7 @@
 		76B061B2282EB2680085F8D3 /* EnemyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B061B1282EB2680085F8D3 /* EnemyModel.swift */; };
 		76B5F2F5284089D600E7C071 /* EvilSightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5F2F4284089D600E7C071 /* EvilSightModel.swift */; };
 		76B5F2FF2847635500E7C071 /* ScrollableMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5F2FE2847635500E7C071 /* ScrollableMenu.swift */; };
-		76B5F301284A323A00E7C071 /* Psycho Katana - Instrumental.wav in Resources */ = {isa = PBXBuildFile; fileRef = 76B5F300284A323A00E7C071 /* Psycho Katana - Instrumental.wav */; };
+		76B5F303284A3A2100E7C071 /* Psycho Katana - Instrumental.wav in Resources */ = {isa = PBXBuildFile; fileRef = 76B5F302284A3A2100E7C071 /* Psycho Katana - Instrumental.wav */; };
 		76BEE61728325DB400E4A610 /* CollisionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BEE61628325DB400E4A610 /* CollisionModel.swift */; };
 		76C24C3B282BB60A00F76B8E /* TossViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C24C3A282BB60A00F76B8E /* TossViewExtension.swift */; };
 		76EE5B48283B7FE300ED6635 /* ProjectileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EE5B47283B7FE300ED6635 /* ProjectileModel.swift */; };
@@ -181,7 +181,7 @@
 		76B061B1282EB2680085F8D3 /* EnemyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnemyModel.swift; sourceTree = "<group>"; };
 		76B5F2F4284089D600E7C071 /* EvilSightModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvilSightModel.swift; sourceTree = "<group>"; };
 		76B5F2FE2847635500E7C071 /* ScrollableMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableMenu.swift; sourceTree = "<group>"; };
-		76B5F300284A323A00E7C071 /* Psycho Katana - Instrumental.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "Psycho Katana - Instrumental.wav"; path = "../../../../../../Downloads/Psycho Katana - Instrumental.wav"; sourceTree = "<group>"; };
+		76B5F302284A3A2100E7C071 /* Psycho Katana - Instrumental.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Psycho Katana - Instrumental.wav"; sourceTree = "<group>"; };
 		76BEE61628325DB400E4A610 /* CollisionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionModel.swift; sourceTree = "<group>"; };
 		76C24C3A282BB60A00F76B8E /* TossViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TossViewExtension.swift; sourceTree = "<group>"; };
 		76EE5B47283B7FE300ED6635 /* ProjectileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectileModel.swift; sourceTree = "<group>"; };
@@ -231,7 +231,7 @@
 		2373770E283F66DE00F9E94C /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				76B5F300284A323A00E7C071 /* Psycho Katana - Instrumental.wav */,
+				76B5F302284A3A2100E7C071 /* Psycho Katana - Instrumental.wav */,
 				23737721283F76C400F9E94C /* catapult-goblin-impact.mp3 */,
 				23737716283F76C400F9E94C /* catapult-launch.wav */,
 				2373772A283F76C400F9E94C /* catapult-stone-impact.mp3 */,
@@ -578,7 +578,7 @@
 				769246932822B5EE003D5D27 /* Assets.xcassets in Resources */,
 				23737735283F76C400F9E94C /* rock-picking.mp3 in Resources */,
 				2301764A2846546B00B41583 /* FlameblinParticle.sks in Resources */,
-				76B5F301284A323A00E7C071 /* Psycho Katana - Instrumental.wav in Resources */,
+				76B5F303284A3A2100E7C071 /* Psycho Katana - Instrumental.wav in Resources */,
 				230176472846488B00B41583 /* StunParticle.sks in Resources */,
 				23737744283F76C400F9E94C /* goblin-attack.mp3 in Resources */,
 				23737747283F76C400F9E94C /* stoneblin-attack.mp3 in Resources */,
