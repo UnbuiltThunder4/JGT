@@ -97,6 +97,15 @@ class Structure: SKSpriteNode, ObservableObject {
             self.maskmodY = 0.9
             break
             
+        case .goblincircle:
+            img = "goblinmancy-circle"
+            self.mask = .enviroment
+            self.width = 350
+            self.height = 350
+            self.maskmodX = 0
+            self.maskmodY = 0
+            break
+            
         case .wall:
             img = "wall"
             self.mask = .building
@@ -285,8 +294,8 @@ class Gate: Structure {
     public func update(_ tossScene: TossScene) {
         if (self.health <= 0) {
             self.removeFromParent()
-            tossScene.darkson.gateNumber += 1
             tossScene.darkson.target = nil
+            //HERE YOU WIN
         }
     }
 }

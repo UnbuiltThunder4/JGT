@@ -20,12 +20,14 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     public let attack: Int = 10
     
     public var target: Gate?  = nil
-    public var gateNumber: Int = 1
     
-    public var spawnX: CGFloat = 150
-    public var spawnY: CGFloat = 150
+    public var spawnX: CGFloat = goblinmancyCircleCoordinates.x
+    public var spawnY: CGFloat = goblinmancyCircleCoordinates.y + 300
+    
+    public var isDead: Bool = false
     
     private var attackCounter: Int = 0
+    private var respawnCounter: Int = 0
     
     init() {
         super.init(texture: SKTexture(imageNamed: "darkson"), color: .red, size: CGSize(width: 300, height: 300))
@@ -52,22 +54,41 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     func update() {
-        var distance = CGVector(dx: gateCoordinates.x - position.x, dy: gateCoordinates.y - 400 - position.y)
-        if let _ = self.action(forKey: "walk") {
-            if (self.target != nil) {
-                removeAction(forKey: "walk")
-                self.attackCounter += 1
-                if (self.attackCounter % attackTime == 0) {
-                    self.target!.health -= self.attack
-                    self.attackCounter = 0
+        if (self.health > 0) {
+            var distance = CGVector(dx: gateCoordinates.x - position.x, dy: gateCoordinates.y - 400 - position.y)
+            if let _ = self.action(forKey: "walk") {
+                if (self.target != nil) {
+                    removeAction(forKey: "walk")
+                    self.attackCounter += 1
+                    if (self.attackCounter % attackTime == 0) {
+                        self.target!.health -= self.attack
+                        self.attackCounter = 0
+                    }
                 }
+            }
+            else {
+                distance = limitVector(vector: distance, max: 100)
+                let time = getDuration(distance: distance, speed: self.speed)
+                let walk = SKAction.move(by: distance, duration: time)
+                self.run(walk, withKey: "walk")
             }
         }
         else {
-            distance = limitVector(vector: distance, max: 100)
-            let time = getDuration(distance: distance, speed: self.speed)
-            let walk = SKAction.move(by: distance, duration: time)
-            self.run(walk, withKey: "walk")
+            if (!self.isDead) {
+                self.isDead = true
+                self.position.x = self.spawnX
+                self.position.y = self.spawnY
+                self.alpha = 0.0
+                self.respawnCounter += 1
+            }
+            else {
+                self.respawnCounter += 1
+                if (self.respawnCounter % tenSeconds == 0) {
+                    self.alpha = 1.0
+                    self.health = self.maxHealth
+                    self.isDead = false
+                }
+            }
         }
     }
     

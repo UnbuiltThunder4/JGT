@@ -90,6 +90,7 @@ struct MainScreenProperties {
 
 let oneSecond = 60
 let threeSeconds = 180
+let tenSeconds = 600
 let twentySeconds = 1200
 let taskTime = 120
 let attackTime = 120
@@ -139,7 +140,7 @@ let gnomes: [Enemy] = [
     Enemy(type: .small, x: 1200, y: 2300),
     Enemy(type: .bow, x: 1400, y: 3850),
     Enemy(type: .bow, x: 1800, y: 3850),
-    Enemy(type: .axe, x: 1800, y: 2900),
+    Enemy(type: .axe, x: 1350, y: 2800),
     Enemy(type: .axe, x: 2500, y: 1450)
 ]
 
@@ -160,13 +161,15 @@ public enum StructureType: Int {
     case trap = 7
     case gate = 8
     case passage = 9
-    case wall = 10
+    case goblincircle = 10
+    case wall = 11
 }
 
-let tavernCoordinates = CGPoint(x: 1250, y: 1000)
+let goblinmancyCircleCoordinates = CGPoint(x: 1600, y: 550)
+let tavernCoordinates = CGPoint(x: 1100, y: 1000)
 let academyCoordinates = CGPoint(x: 2650, y: 1550)
 let villageCoordinates = CGPoint(x: 1000, y: 2500)
-let catapultCoordinates = CGPoint(x: 1600, y: 3000)
+let catapultCoordinates = CGPoint(x: 1350, y: 3000)
 let gateCoordinates = CGPoint(x: 1600, y: 3550)
 let backdoorCoordinates = CGPoint(x: 600, y: 3435)
 let passageCoordinates = CGPoint(x: 600, y: 3900)
@@ -176,27 +179,28 @@ let levelstructures: [Structure] = [
     Gate(x: gateCoordinates.x, y: gateCoordinates.y), // THIS HAS TO BE ON INDEX 1
     Backdoor(x: backdoorCoordinates.x, y: backdoorCoordinates.y),  // THIS HAS TO BE ON INDEX 2
     Catapult(x: catapultCoordinates.x, y: catapultCoordinates.y), // THIS HAS TO BE ON INDEX 3
-    Trap(x: catapultCoordinates.x + 500, y: catapultCoordinates.y),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: catapultCoordinates.x + 1000, y: catapultCoordinates.y),  // THIS HAS TO BE ON INDEX 4
     Tavern(x: tavernCoordinates.x, y: tavernCoordinates.y),
     Academy(x: academyCoordinates.x, y: academyCoordinates.y),
     Village(x: villageCoordinates.x, y: villageCoordinates.y),
     Structure(type: .passage, x: passageCoordinates.x, y: passageCoordinates.y, rotation: 0),
+    Structure(type: .goblincircle, x: goblinmancyCircleCoordinates.x, y: goblinmancyCircleCoordinates.y, rotation: 0),
     Structure(type: .tree, x: 450, y: 1300, rotation: 0),
-    Structure(type: .tree, x: 1850, y: 800, rotation: 0),
-    Structure(type: .tree, x: 1750, y: 1000, rotation: 0),
-    Structure(type: .tree, x: 1750, y: 500, rotation: 0),
+    Structure(type: .tree, x: 1950, y: 800, rotation: 0),
+    Structure(type: .tree, x: 750, y: 1000, rotation: 0),
+    Structure(type: .tree, x: 1850, y: 500, rotation: 0),
     Structure(type: .tree, x: 2650, y: 370, rotation: 0),
     Structure(type: .tree, x: 1250, y: 2500, rotation: 0),
     Structure(type: .tree, x: 1250, y: 1700, rotation: 0),
     Structure(type: .tree, x: 550, y: 1580, rotation: 0),
     Structure(type: .tree, x: 650, y: 800, rotation: 0),
-    Structure(type: .rock, x: 1600, y: 700, rotation: 0),
+    Structure(type: .rock, x: 2100, y: 700, rotation: 0),
     Structure(type: .rock, x: 950, y: 1200, rotation: 0),
-    Structure(type: .rock, x: 1650, y: 1350, rotation: 0),
-    Structure(type: .rock, x: 1450, y: 350, rotation: 0),
-    Structure(type: .rock, x: 1400, y: 2660, rotation: 0),
+    Structure(type: .rock, x: 1950, y: 1350, rotation: 0),
+    Structure(type: .rock, x: 1400, y: 350, rotation: 0),
+    Structure(type: .rock, x: 1300, y: 2660, rotation: 0),
     Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
-    Structure(type: .rock, x: 1790, y: 1720, rotation: 0),
+    Structure(type: .rock, x: 1890, y: 1720, rotation: 0),
     Structure(type: .rock, x: 2690, y: 2620, rotation: 0)
 ]
 
