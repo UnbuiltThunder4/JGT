@@ -726,7 +726,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         case .academy:
-            if (input == 2 && !self.isGraduated) {
+            if (!self.isGraduated) {
                 removeAction(forKey: "walk")
                 self.enterAcademy()
             }
@@ -736,7 +736,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         case .village:
-            if (input == 2 && self.type != .gum) {
+            if (self.type != .gum) {
                 removeAction(forKey: "walk")
                 self.enterVillage()
             }
@@ -751,7 +751,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.state = .working
                 self.currentTask = self.throwRock
             }
-            else if (input == 1){
+            else if (input == 1) {
                 removeAction(forKey: "walk")
                 self.state = .working
                 self.currentTask = self.throwSelf
