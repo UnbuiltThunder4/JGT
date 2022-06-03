@@ -205,7 +205,7 @@ class GameLogic: ObservableObject {
         structure.goblins[strIndex!].alpha = 1.0
         structure.goblins.remove(at: strIndex!)
         scrollableMenu.goblinTable.deleteRow(row: goblinRow, structure: structure)
-        scrollableMenu.tableSize -= 40.0
+        scrollableMenu.tableSize -= scrollableMenu.rowsSize.height
         scrollableMenu.hideRow()
     }
     
