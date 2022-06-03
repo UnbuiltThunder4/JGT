@@ -165,8 +165,8 @@ class Tavern: Structure {
     
     override func addGoblin(_ goblin: Goblin) {
         self.goblins.append(goblin)
-        scrollableMenu.goblinTable.addRow(row: GoblinRow(goblinID: goblin.id, goblinFaceTexture: SKTexture(imageNamed: "normalHead"), goblinNameText: goblin.fullName, goblinStatsText: String(goblin.age))) //fixare i valori
-        scrollableMenu.rowsSize += 40.0
+        scrollableMenu.goblinTable.addRow(row: GoblinRow(goblin: goblin))
+        scrollableMenu.tableSize += scrollableMenu.rowsSize.height
         scrollableMenu.hideRow()
     }
     
@@ -211,6 +211,9 @@ class Academy: Structure {
     
     override func removeGoblin(_ goblin: Goblin) {
         if let index = self.goblins.firstIndex(where: { $0.id == goblin.id }) {
+            if let scrollIndex = scrollableMenu.goblinTable.rows.firstIndex(where: { $0.goblinID == goblin.id }) {
+                scrollableMenu.goblinTable.deleteRow(row: scrollableMenu.goblinTable.rows[scrollIndex], structure: self)
+            }
             self.goblins.remove(at: index)
         }
     }
@@ -228,10 +231,16 @@ class Village: Structure {
     
     override func addGoblin(_ goblin: Goblin) {
         self.goblins.append(goblin)
+        scrollableMenu.goblinTable.addRow(row: GoblinRow(goblin: goblin))
+        scrollableMenu.tableSize += scrollableMenu.rowsSize.height
+        scrollableMenu.hideRow()
     }
     
     override func removeGoblin(_ goblin: Goblin) {
         if let index = self.goblins.firstIndex(where: { $0.id == goblin.id }) {
+            if let scrollIndex = scrollableMenu.goblinTable.rows.firstIndex(where: { $0.goblinID == goblin.id }) {
+                scrollableMenu.goblinTable.deleteRow(row: scrollableMenu.goblinTable.rows[scrollIndex], structure: self)
+            }
             self.goblins.remove(at: index)
         }
     }

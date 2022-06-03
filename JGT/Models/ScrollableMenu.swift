@@ -7,6 +7,7 @@
 
 import Foundation
 import SpriteKit
+import SwiftUI
 
 class ScrollableMenu: SKSpriteNode, ObservableObject {
     static let shared: ScrollableMenu = ScrollableMenu()
@@ -15,12 +16,15 @@ class ScrollableMenu: SKSpriteNode, ObservableObject {
     var descLabel: SKLabelNode = SKLabelNode()
     var goblinTable: GoblinTable = GoblinTable()
     var contentSection: CGFloat = 0.0
-    var rowsSize: CGFloat = 0.0
+    var tableSize: CGFloat = 0.0
+    var rowsSize: CGSize = CGSize()
     init() {
         super.init(texture: SKTexture(imageNamed: "structure sheet wide"), color: .yellow, size: CGSize(width: UIScreen.main.bounds.width/2.5, height: UIScreen.main.bounds.height/1.8))
         self.name = "scrollableMenu"
         
         self.contentSection = self.frame.minY/2
+        
+        self.rowsSize = CGSize(width: self.frame.width/1.2, height: self.frame.height/10)
         
         self.nameLabel.name = "scrollableName"
         self.addChild(nameLabel)
@@ -34,29 +38,13 @@ class ScrollableMenu: SKSpriteNode, ObservableObject {
     }
     
     func openMenu(structure: Structure){
-        var goblinTexture: SKTexture = SKTexture(imageNamed: "normalHead")
         self.alpha = 1.0
         self.nameLabel.text = structure.name
         self.descLabel.text = structure.name
+        
         for i in 0..<structure.goblins.count {
-            
-            switch structure.goblins[i].type {
-            case .normal:
-                goblinTexture = SKTexture(imageNamed: "normalHead")
-                break
-            case .fire:
-                goblinTexture = SKTexture(imageNamed: "fireHead")
-                break
-            case .rock:
-                goblinTexture = SKTexture(imageNamed: "rockHead")
-                break
-            case .gum:
-                goblinTexture = SKTexture(imageNamed: "gumHead")
-                break
-            }
-            
-            goblinTable.addRow(row: GoblinRow(goblinID: structure.goblins[i].id, goblinFaceTexture: goblinTexture, goblinNameText: structure.goblins[i].fullName, goblinStatsText: String(structure.goblins[i].age)))
-            self.rowsSize += self.goblinTable.rows[i].frame.height
+            goblinTable.addRow(row: GoblinRow(goblin: structure.goblins[i]))
+            self.tableSize += self.goblinTable.rows[i].frame.height
         }
         self.hideRow()
     }
@@ -66,7 +54,7 @@ class ScrollableMenu: SKSpriteNode, ObservableObject {
         self.goblinTable.lastRowPosition = self.goblinTable.initialRowPosition
         self.goblinTable.position = CGPoint.zero
         self.goblinTable.contentOffset = 0.0
-        self.rowsSize = 0.0
+        self.tableSize = 0.0
     }
     
     func updateMenu(table: GoblinTable) {
@@ -101,7 +89,6 @@ class GoblinTable: SKNode, ObservableObject {
     var lastRow: GoblinRow?
     
     override init() {
-        //        super.init(texture: SKTexture(imageNamed: "structures sheet"), color: .yellow, size: CGSize())
         super.init()
         self.name = "table"
         
@@ -121,11 +108,6 @@ class GoblinTable: SKNode, ObservableObject {
     }
     
     func deleteRow(row: GoblinRow, structure: Structure) {
-//        let strIndex = structure.goblins.firstIndex(where: { $0.id == row.goblinID})
-//        structure.goblins[strIndex!].position.y = structure.position.y * 2
-//        structure.goblins[strIndex!].state = .idle
-//        structure.goblins[strIndex!].alpha = 1.0
-//        structure.goblins.remove(at: strIndex!)
         let index = self.rows.firstIndex(where: { $0.id == row.id })
         self.rows[index!].removeFromParent()
         self.rows.remove(at: index!)
@@ -157,7 +139,8 @@ class GoblinTable: SKNode, ObservableObject {
 }
 
 class GoblinRow: SKSpriteNode, Identifiable, ObservableObject {
-    
+    @ObservedObject var scrollableMenu: ScrollableMenu = ScrollableMenu.shared
+
     public let id = UUID()
     
     var goblinID: UUID = UUID()
@@ -165,17 +148,33 @@ class GoblinRow: SKSpriteNode, Identifiable, ObservableObject {
     var goblinName: SKLabelNode = SKLabelNode()
     var goblinStats: SKLabelNode = SKLabelNode()
     
-    init(goblinID: UUID, goblinFaceTexture: SKTexture, goblinNameText: String, goblinStatsText: String) {
+    init(goblin: Goblin) {
         self.goblinFace.name = "goblinFace"
         self.goblinName.name = "goblinName"
         self.goblinStats.name = "goblinStats"
         
-        super.init(texture: SKTexture(imageNamed: "gauge"), color: .yellow, size: CGSize(width: 400, height: 40))
+        super.init(texture: SKTexture(imageNamed: "gauge"), color: .yellow, size: CGSize())
         
-        self.goblinID = goblinID
-        self.goblinFace.texture = goblinFaceTexture
-        self.goblinName.text = goblinNameText
-        self.goblinStats.text = goblinStatsText
+        self.size = CGSize(width: scrollableMenu.rowsSize.width, height: scrollableMenu.rowsSize.height)
+        
+        self.goblinID = goblin.id
+        self.goblinName.text = goblin.fullName
+        self.goblinStats.text = String(goblin.currentFrenzyTurn)
+        
+        switch goblin.type {
+        case .normal:
+            self.goblinFace.texture = SKTexture(imageNamed: "normalHead")
+            break
+        case .fire:
+            self.goblinFace.texture = SKTexture(imageNamed: "fireHead")
+            break
+        case .rock:
+            self.goblinFace.texture = SKTexture(imageNamed: "rockHead")
+            break
+        case .gum:
+            self.goblinFace.texture = SKTexture(imageNamed: "gumHead")
+            break
+        }
         
         self.goblinFace.setScale(0.1)
         self.goblinFace.position.x = self.frame.minX + goblinFace.size.width
