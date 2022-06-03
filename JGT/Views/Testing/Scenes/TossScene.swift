@@ -100,14 +100,16 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         setupHUD()
         setupCamera()
         
-        for _ in 0..<10 {
-        structures[5].addGoblin(Goblin(health: 1, attack: 1, wit: NeuralNetwork(
-            layers: [
-                DenseLayer(inputSize: 2, neuronsCount: 2, functionRaw: .sigmoid), //INPUTS  1) GOBLIN TYPE          2) OBJECT
-                DenseLayer(inputSize: 2, neuronsCount: 4, functionRaw: .sigmoid),
-                DenseLayer(inputSize: 4, neuronsCount: 2, functionRaw: .sigmoid)  //OUTPUTS 1) 1ST INTERACTION      2) 2ND INTERACTION
-            ]), fear: 1, frenzy: 1, randomGoblin1: "", randomGoblin2: ""))
-        }
+        playBackgroundMusic(filename: "Psycho Katana - Instrumental.wav")
+        
+//        for _ in 0..<10 {
+//        structures[5].addGoblin(Goblin(health: 1, attack: 1, wit: NeuralNetwork(
+//            layers: [
+//                DenseLayer(inputSize: 2, neuronsCount: 2, functionRaw: .sigmoid), //INPUTS  1) GOBLIN TYPE          2) OBJECT
+//                DenseLayer(inputSize: 2, neuronsCount: 4, functionRaw: .sigmoid),
+//                DenseLayer(inputSize: 4, neuronsCount: 2, functionRaw: .sigmoid)  //OUTPUTS 1) 1ST INTERACTION      2) 2ND INTERACTION
+//            ]), fear: 1, frenzy: 1, randomGoblin1: "", randomGoblin2: ""))
+//        }
     }
     
     //MARK: Update

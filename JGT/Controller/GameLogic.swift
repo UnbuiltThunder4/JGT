@@ -200,7 +200,7 @@ class GameLogic: ObservableObject {
     
     public func ejectGoblin(scrollableMenu: ScrollableMenu, goblinRow: GoblinRow, structure: Structure) {
         let strIndex = structure.goblins.firstIndex(where: { $0.id == goblinRow.goblinID})
-        structure.goblins[strIndex!].position.y = structure.position.y * 2
+        structure.goblins[strIndex!].position.y = structure.position.y * 1.5
         structure.goblins[strIndex!].state = .idle
         structure.goblins[strIndex!].alpha = 1.0
         structure.goblins.remove(at: strIndex!)

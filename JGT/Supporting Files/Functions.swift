@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import AVFoundation
 
 func weightedRandom<Value>(weightedValues: [(Value, Double)]) -> Value {
     let rnd = Double.random(in: 0.0...100.0)
@@ -67,3 +68,23 @@ func getDuration(distance: CGVector, speed: CGFloat) -> TimeInterval {
     let dist = sqrt((distance.dx * distance.dx) + (distance.dy * distance.dy))
     return TimeInterval(dist/speed)
 }
+
+var backgroundMusicPlayer: AVAudioPlayer!
+
+func playBackgroundMusic(filename: String) {
+  let resourceUrl = Bundle.main.url(forResource:
+    filename, withExtension: nil)
+  guard let url = resourceUrl else {
+    print("Could not find file: \(filename)")
+return
+}
+  do {
+    try backgroundMusicPlayer =
+      AVAudioPlayer(contentsOf: url)
+          backgroundMusicPlayer.numberOfLoops = -1
+          backgroundMusicPlayer.prepareToPlay()
+          backgroundMusicPlayer.play()
+        } catch {
+          print("Could not create audio player!")
+      return
+      } }
