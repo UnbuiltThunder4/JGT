@@ -83,9 +83,10 @@ extension TossScene {
             }
             
             if let goblinRow = selectedNode as? GoblinRow {
-                self.scrollableMenu.goblinTable.deleteRow(row: goblinRow, structure: lastSelectedStructure as! Structure)
-                self.scrollableMenu.rowsSize -= 40.0
-                self.scrollableMenu.hideRow()
+//                self.scrollableMenu.goblinTable.deleteRow(row: goblinRow, structure: lastSelectedStructure as! Structure)
+//                self.scrollableMenu.rowsSize -= 40.0
+//                self.scrollableMenu.hideRow()
+                gameLogic.ejectGoblin(scrollableMenu: scrollableMenu, goblinRow: goblinRow, structure: lastSelectedStructure as! Structure)
             }
             
             if selectedNode is Cauldron || selectedNode?.name! == "goblinsNumber" {

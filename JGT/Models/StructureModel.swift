@@ -151,6 +151,8 @@ class Structure: SKSpriteNode, ObservableObject {
 
 class Tavern: Structure {
     
+    @ObservedObject var gameLogic: GameLogic = GameLogic.shared
+    
     init(x: CGFloat, y: CGFloat) {
         super.init(type: .tavern, x: x, y: y, rotation: 0)
     }
@@ -172,6 +174,9 @@ class Tavern: Structure {
 }
 
 class Academy: Structure {
+    
+    @ObservedObject var gameLogic: GameLogic = GameLogic.shared
+    
     var proficencies: [Proficency] = []
     
     init(x: CGFloat, y: CGFloat) {
@@ -207,6 +212,8 @@ class Academy: Structure {
 }
 
 class Village: Structure {
+    
+    @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     
     init(x: CGFloat, y: CGFloat) {
         super.init(type: .village, x: x, y: y, rotation: 0)
