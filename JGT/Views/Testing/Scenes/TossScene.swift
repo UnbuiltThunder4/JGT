@@ -14,6 +14,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     @ObservedObject var population = Population(size: 3, mutationRate: 10)
+    @ObservedObject var scrollableMenu: ScrollableMenu = ScrollableMenu.shared
     
     var darkson = DarkSon()
     var enemies: [Enemy] = []
@@ -39,7 +40,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     var cauldron = Cauldron(currentGoblinsNumber: 3, maxGoblinNumber: MainScreenProperties.maxGoblinsNumber)
     var evilGauge = EvilGauge(maxFill: MainScreenProperties.maxFill, currentFill: 20, size: (UIDevice.current.userInterfaceIdiom == .pad ? GaugeHUDSetting.ipadSize : GaugeHUDSetting.iphoneSize ))
     var evilSight = EvilSight(currentRadius: 1.0, maxRadius: 26.0)
-    var scrollableMenu = ScrollableMenu()
+//    var scrollableMenu = ScrollableMenu()
     
     var cameraRect: CGRect {
         let x = cameraNode.position.x - size.width/2 + (size.width - playableRect.width)/2

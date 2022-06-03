@@ -13,6 +13,7 @@ class GameLogic: ObservableObject {
     // Single instance of the class
     static let shared: GameLogic = GameLogic()
     
+    
     // Function responsible to set up the game before it starts.
     func setUpGame() {
         

@@ -8,7 +8,9 @@
 import Foundation
 import SpriteKit
 
-class ScrollableMenu: SKSpriteNode {
+class ScrollableMenu: SKSpriteNode, ObservableObject {
+    static let shared: ScrollableMenu = ScrollableMenu()
+    
     var nameLabel: SKLabelNode = SKLabelNode()
     var descLabel: SKLabelNode = SKLabelNode()
     var goblinTable: GoblinTable = GoblinTable()
@@ -89,7 +91,7 @@ class ScrollableMenu: SKSpriteNode {
     
 }
 
-class GoblinTable: SKNode {
+class GoblinTable: SKNode, ObservableObject {
     
     @Published public var rows: [GoblinRow] = []
     let initialRowPosition = CGPoint.zero

@@ -10,6 +10,8 @@ import SwiftUI
 import SpriteKit
 
 class Structure: SKSpriteNode, ObservableObject {
+    @ObservedObject var scrollableMenu: ScrollableMenu = ScrollableMenu.shared
+
     var goblins: [Goblin] = []
     let type: StructureType
     let mask: Collision.Masks
@@ -163,20 +165,23 @@ class Tavern: Structure {
     
     override func addGoblin(_ goblin: Goblin) {
         self.goblins.append(goblin)
-        print("a")
+        scrollableMenu.goblinTable.addRow(row: GoblinRow(goblinID: goblin.id, goblinFaceTexture: SKTexture(imageNamed: "normalHead"), goblinNameText: goblin.fullName, goblinStatsText: String(goblin.age))) //fixare i valori
+        scrollableMenu.rowsSize += 40.0
+        scrollableMenu.hideRow()
     }
     
     override func removeGoblin(_ goblin: Goblin) {
         if let index = self.goblins.firstIndex(where: { $0.id == goblin.id }) {
+            if let scrollIndex = scrollableMenu.goblinTable.rows.firstIndex(where: { $0.goblinID == goblin.id }) {
+                scrollableMenu.goblinTable.deleteRow(row: scrollableMenu.goblinTable.rows[scrollIndex], structure: self)
+            }
             self.goblins.remove(at: index)
         }
     }
 }
 
 class Academy: Structure {
-    
-    @ObservedObject var gameLogic: GameLogic = GameLogic.shared
-    
+        
     var proficencies: [Proficency] = []
     
     init(x: CGFloat, y: CGFloat) {
@@ -212,9 +217,7 @@ class Academy: Structure {
 }
 
 class Village: Structure {
-    
-    @ObservedObject var gameLogic: GameLogic = GameLogic.shared
-    
+        
     init(x: CGFloat, y: CGFloat) {
         super.init(type: .village, x: x, y: y, rotation: 0)
     }
@@ -280,9 +283,7 @@ class Gate: Structure {
 }
 
 class Backdoor: Structure {
-    
-    @ObservedObject var gameLogic: GameLogic = GameLogic.shared
-    
+        
     var health: Int = 600
     var isOpened: Bool = false
     
@@ -303,9 +304,7 @@ class Backdoor: Structure {
 }
 
 class Trap: Structure {
-    
-    @ObservedObject var gameLogic: GameLogic = GameLogic.shared
-    
+        
     var isActive: Bool = false
     var counter: Int = 0
     let electricParticle = SKEmitterNode(fileNamed: "ElectricParticle")
