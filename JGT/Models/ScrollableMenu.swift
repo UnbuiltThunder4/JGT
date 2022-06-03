@@ -34,28 +34,29 @@ class ScrollableMenu: SKSpriteNode, ObservableObject {
     }
     
     func openMenu(structure: Structure){
-        var goblinTexture: SKTexture = SKTexture(imageNamed: "normalHead")
+//        var goblinTexture: SKTexture = SKTexture(imageNamed: "normalHead")
         self.alpha = 1.0
         self.nameLabel.text = structure.name
         self.descLabel.text = structure.name
+        
         for i in 0..<structure.goblins.count {
+//            switch structure.goblins[i].type {
+//            case .normal:
+//                goblinTexture = SKTexture(imageNamed: "normalHead")
+//                break
+//            case .fire:
+//                goblinTexture = SKTexture(imageNamed: "fireHead")
+//                break
+//            case .rock:
+//                goblinTexture = SKTexture(imageNamed: "rockHead")
+//                break
+//            case .gum:
+//                goblinTexture = SKTexture(imageNamed: "gumHead")
+//                break
+//            }
             
-            switch structure.goblins[i].type {
-            case .normal:
-                goblinTexture = SKTexture(imageNamed: "normalHead")
-                break
-            case .fire:
-                goblinTexture = SKTexture(imageNamed: "fireHead")
-                break
-            case .rock:
-                goblinTexture = SKTexture(imageNamed: "rockHead")
-                break
-            case .gum:
-                goblinTexture = SKTexture(imageNamed: "gumHead")
-                break
-            }
-            
-            goblinTable.addRow(row: GoblinRow(goblinID: structure.goblins[i].id, goblinFaceTexture: goblinTexture, goblinNameText: structure.goblins[i].fullName, goblinStatsText: String(structure.goblins[i].age)))
+//            goblinTable.addRow(row: GoblinRow(goblinID: structure.goblins[i].id, goblinFaceTexture: goblinTexture, goblinNameText: structure.goblins[i].fullName, goblinStatsText: String(structure.goblins[i].age)))
+            goblinTable.addRow(row: GoblinRow(goblin: structure.goblins[i]))
             self.rowsSize += self.goblinTable.rows[i].frame.height
         }
         self.hideRow()
@@ -165,17 +166,32 @@ class GoblinRow: SKSpriteNode, Identifiable, ObservableObject {
     var goblinName: SKLabelNode = SKLabelNode()
     var goblinStats: SKLabelNode = SKLabelNode()
     
-    init(goblinID: UUID, goblinFaceTexture: SKTexture, goblinNameText: String, goblinStatsText: String) {
+    init(goblin: Goblin) {
         self.goblinFace.name = "goblinFace"
         self.goblinName.name = "goblinName"
         self.goblinStats.name = "goblinStats"
         
         super.init(texture: SKTexture(imageNamed: "gauge"), color: .yellow, size: CGSize(width: 400, height: 40))
         
-        self.goblinID = goblinID
-        self.goblinFace.texture = goblinFaceTexture
-        self.goblinName.text = goblinNameText
-        self.goblinStats.text = goblinStatsText
+        self.goblinID = goblin.id
+//        self.goblinFace.texture = goblinFaceTexture
+        self.goblinName.text = goblin.fullName
+        self.goblinStats.text = String(goblin.currentFrenzyTurn)
+        
+        switch goblin.type {
+        case .normal:
+            self.goblinFace.texture = SKTexture(imageNamed: "normalHead")
+            break
+        case .fire:
+            self.goblinFace.texture = SKTexture(imageNamed: "fireHead")
+            break
+        case .rock:
+            self.goblinFace.texture = SKTexture(imageNamed: "rockHead")
+            break
+        case .gum:
+            self.goblinFace.texture = SKTexture(imageNamed: "gumHead")
+            break
+        }
         
         self.goblinFace.setScale(0.1)
         self.goblinFace.position.x = self.frame.minX + goblinFace.size.width
