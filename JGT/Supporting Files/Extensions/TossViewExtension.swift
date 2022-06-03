@@ -28,6 +28,7 @@ extension TossScene {
     }
     
     @objc func handlePanFrom(recognizer: UIPanGestureRecognizer) {
+        if paws == false {
         if recognizer.state == .began {
             var touchLocation = recognizer.location(in: recognizer.view)
             touchLocation = self.convertPoint(fromView: touchLocation)
@@ -58,7 +59,7 @@ extension TossScene {
             if let goblinNode = selectedNode as? Goblin {
                 goblinNode.state = .flying //this will change the update function of the goblin
             }
-            
+        }
         }
     }
     

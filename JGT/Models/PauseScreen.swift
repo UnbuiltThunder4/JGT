@@ -21,7 +21,7 @@ class PauseScreen: SKSpriteNode {
     
     init() {
         
-    super.init(texture: SKTexture(imageNamed: "gauge"), color: .clear, size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width))
+    super.init(texture: SKTexture(imageNamed: "pause-overlay"), color: .clear, size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width))
         
         self.position = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
         self.name = "pauseScreen"
