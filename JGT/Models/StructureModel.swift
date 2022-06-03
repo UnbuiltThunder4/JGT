@@ -166,7 +166,7 @@ class Tavern: Structure {
     override func addGoblin(_ goblin: Goblin) {
         self.goblins.append(goblin)
         scrollableMenu.goblinTable.addRow(row: GoblinRow(goblin: goblin))
-        scrollableMenu.rowsSize += 40.0
+        scrollableMenu.tableSize += 40.0
         scrollableMenu.hideRow()
     }
     
@@ -232,7 +232,7 @@ class Village: Structure {
     override func addGoblin(_ goblin: Goblin) {
         self.goblins.append(goblin)
         scrollableMenu.goblinTable.addRow(row: GoblinRow(goblin: goblin))
-        scrollableMenu.rowsSize += 40.0
+        scrollableMenu.tableSize += 40.0
         scrollableMenu.hideRow()
     }
     

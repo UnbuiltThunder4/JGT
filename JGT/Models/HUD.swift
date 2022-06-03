@@ -170,6 +170,7 @@ class HUD: SKNode {
         
         scrollableMenu.nameLabel.fontColor = HUDSettings.fontColor
         scrollableMenu.descLabel.fontColor = HUDSettings.fontColor
+        
     }
 
 }

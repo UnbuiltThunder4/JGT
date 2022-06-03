@@ -106,7 +106,7 @@ class GameLogic: ObservableObject {
                 tossScene.selectedNode?.physicsBody!.velocity = velocity
             }
             
-        } else if (tossScene.selectedNode?.name == "row") && tossScene.scrollableMenu.rowsSize > -tossScene.scrollableMenu.contentSection {
+        } else if (tossScene.selectedNode?.name == "row") && tossScene.scrollableMenu.tableSize > -tossScene.scrollableMenu.contentSection {
             
             tossScene.scrollableMenu.goblinTable.firstRow = tossScene.scrollableMenu.goblinTable.rows[0]
             tossScene.scrollableMenu.goblinTable.lastRow = tossScene.scrollableMenu.goblinTable.rows[tossScene.scrollableMenu.goblinTable.rows.count-1]
@@ -205,7 +205,7 @@ class GameLogic: ObservableObject {
         structure.goblins[strIndex!].alpha = 1.0
         structure.goblins.remove(at: strIndex!)
         scrollableMenu.goblinTable.deleteRow(row: goblinRow, structure: structure)
-        scrollableMenu.rowsSize -= 40.0
+        scrollableMenu.tableSize -= 40.0
         scrollableMenu.hideRow()
     }
     
