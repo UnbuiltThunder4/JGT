@@ -10,13 +10,13 @@ import SpriteKit
 
 class PauseScreen: SKSpriteNode {
     let pauseSign = SKSpriteNode(imageNamed: "structure sheet wide")
-    let continueButton = SKSpriteNode(imageNamed: "StraightArrow")
-    let quitButton = SKSpriteNode(imageNamed: "LeftArrow")
-    let restartButton = SKSpriteNode(imageNamed: "RightArrow")
+    let continueButton = SKSpriteNode(imageNamed: "continueButton")
+    let quitButton = SKSpriteNode(imageNamed: "quitButton")
+    let restartButton = SKSpriteNode(imageNamed: "restartButton")
     let pauseMessage = SKSpriteNode(imageNamed: "pauseTitle")
-    let continueMessage = SKSpriteNode(imageNamed: "continueTitle")
+    let continueMessage = SKSpriteNode(imageNamed: "continueMessage")
     let exitMessage = SKSpriteNode(imageNamed: "exitTitle")
-    let restartMessage = SKSpriteNode(imageNamed: "restartTitle")
+    let restartMessage = SKSpriteNode(imageNamed: "restartMessage")
     let littleButtonsSize = CGSize(width: UIScreen.main.bounds.width/17.0, height: UIScreen.main.bounds.width/17.0)
     
     init() {

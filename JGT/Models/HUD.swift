@@ -183,28 +183,28 @@ class HUD: SKNode {
         pauseScreen.pauseSign.zPosition = 5
         pauseScreen.pauseSign.position = CGPoint.zero
         
+        pauseScreen.pauseMessage.position = CGPoint(x: 0, y: pauseScreen.size.height/5.2)
+        pauseScreen.pauseMessage.zPosition = 5
+        
+        pauseScreen.continueMessage.position = CGPoint(x: 0, y: pauseScreen.pauseSign.size.height/10)
+        pauseScreen.continueMessage.zPosition = 5
+
+        pauseScreen.exitMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/4, y: pauseScreen.pauseSign.size.height/10)
+        pauseScreen.exitMessage.zPosition = 5
+
+        pauseScreen.restartMessage.position = CGPoint(x: -pauseScreen.pauseSign.size.width/4, y: pauseScreen.pauseSign.size.height/10)
+        pauseScreen.restartMessage.zPosition = 5
+        
         pauseScreen.continueButton.zPosition = 5
-        pauseScreen.continueButton.position = CGPoint(x: 0, y: ((-pauseScreen.size.height)/3.5)/1.7)
+        pauseScreen.continueButton.position = CGPoint(x: pauseScreen.continueMessage.position.x, y: -pauseScreen.size.height/5.2)
         
         pauseScreen.quitButton.size = pauseScreen.littleButtonsSize
-        pauseScreen.quitButton.position = CGPoint(x: pauseScreen.continueButton.position.x - 120, y: ((-pauseScreen.size.height)/3.5)/1.7)
+        pauseScreen.quitButton.position = CGPoint(x: pauseScreen.exitMessage.position.x, y: -pauseScreen.size.height/5.2)
         pauseScreen.quitButton.zPosition = 10
     
         pauseScreen.restartButton.size = pauseScreen.littleButtonsSize
-        pauseScreen.restartButton.position = CGPoint(x: pauseScreen.continueButton.position.x + 120, y: ((-pauseScreen.size.height)/3.5)/1.7)
+        pauseScreen.restartButton.position = CGPoint(x: pauseScreen.restartMessage.position.x, y: -pauseScreen.size.height/5.2)
         pauseScreen.restartButton.zPosition = 5
-        
-        pauseScreen.pauseMessage.position = CGPoint(x: 0, y: ((pauseScreen.size.height / 3.5)/1.7) - 25)
-        pauseScreen.pauseMessage.zPosition = 5
-
-        pauseScreen.continueMessage.position = CGPoint(x: 0, y: ((pauseScreen.size.height / 3.5)/1.7) - 90)
-        pauseScreen.continueMessage.zPosition = 5
-
-        pauseScreen.exitMessage.position = CGPoint(x: pauseScreen.quitButton.position.x, y: ((pauseScreen.size.height / 3.5)/1.7) - 90)
-        pauseScreen.exitMessage.zPosition = 5
-
-        pauseScreen.restartMessage.position = CGPoint(x: pauseScreen.restartButton.position.x, y: ((pauseScreen.size.height / 3.5)/1.7) - 90)
-        pauseScreen.restartMessage.zPosition = 5
     }
     
     func addPauseButton(pauseButton: PauseButton, position: CGPoint){

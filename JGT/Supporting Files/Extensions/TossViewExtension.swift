@@ -349,7 +349,7 @@ extension TossScene {
         hud.addCauldron(cauldron: cauldron, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width + UIScreen.main.bounds.height/6.6, y: cameraNode.position.y - UIScreen.main.bounds.height + UIScreen.main.bounds.height/7.5))
         hud.addScrollableMenu(scrollableMenu: scrollableMenu, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/4.5, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
         hud.addPauseScreen(pauseScreen: pauseScreen, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/2, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
-        hud.addPauseButton(pauseButton: pauseButton, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/4.5, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
+        hud.addPauseButton(pauseButton: pauseButton, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/10, y: cameraNode.position.y - pauseButton.size.height*1.1))
     }
     
     func setupCamera() {
@@ -379,11 +379,10 @@ extension TossScene {
     
     @objc func pauseGame() {
         if self.paws == true {
-        self.run(SKAction.wait(forDuration: 0.0001)){
-            self.pauseChilds(isPaused: true)
-        }
-        
-        pauseScreen.zPosition = 30
+            self.run(SKAction.wait(forDuration: 0.0001)){
+                self.pauseChilds(isPaused: true)
+            }
+            pauseScreen.zPosition = 30
         }
     }
     
