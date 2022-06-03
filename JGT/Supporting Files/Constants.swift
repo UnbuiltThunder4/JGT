@@ -135,9 +135,12 @@ public enum EnemyType: Int {
 }
 
 let gnomes: [Enemy] = [
-    Enemy(type: .small, x: 2500, y: 1110),
-    Enemy(type: .bow, x: 3000, y: 1110),
-    Enemy(type: .axe, x: 3500, y: 1110)
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .bow, x: 1400, y: 3850),
+    Enemy(type: .bow, x: 1800, y: 3850),
+    Enemy(type: .axe, x: 1800, y: 2900),
+    Enemy(type: .axe, x: 2500, y: 1450)
 ]
 
 public enum ProficencyType {
@@ -160,16 +163,16 @@ public enum StructureType: Int {
     case wall = 10
 }
 
-let tavernCoordinates = CGPoint(x: 1400, y: 300)
-let academyCoordinates = CGPoint(x: 250, y: 850)
-let villageCoordinates = CGPoint(x: 1200, y: 1800)
-let catapultCoordinates = CGPoint(x: 1500, y: 1500)
-let gateCoordinates = CGPoint(x: 3275, y: 2950)
-let backdoorCoordinates = CGPoint(x: 2700, y: 2835)
-let passageCoordinates = CGPoint(x: 2700, y: 3300)
+let tavernCoordinates = CGPoint(x: 1250, y: 1000)
+let academyCoordinates = CGPoint(x: 2650, y: 1550)
+let villageCoordinates = CGPoint(x: 1000, y: 2500)
+let catapultCoordinates = CGPoint(x: 1600, y: 3000)
+let gateCoordinates = CGPoint(x: 1600, y: 3550)
+let backdoorCoordinates = CGPoint(x: 600, y: 3435)
+let passageCoordinates = CGPoint(x: 600, y: 3900)
 
 let levelstructures: [Structure] = [
-    Structure(type: .wall, x: 2800, y: 3100, rotation: 0),
+    Structure(type: .wall, x: 1450, y: 3700, rotation: 0),
     Gate(x: gateCoordinates.x, y: gateCoordinates.y), // THIS HAS TO BE ON INDEX 1
     Backdoor(x: backdoorCoordinates.x, y: backdoorCoordinates.y),  // THIS HAS TO BE ON INDEX 2
     Catapult(x: catapultCoordinates.x, y: catapultCoordinates.y), // THIS HAS TO BE ON INDEX 3
@@ -178,23 +181,23 @@ let levelstructures: [Structure] = [
     Academy(x: academyCoordinates.x, y: academyCoordinates.y),
     Village(x: villageCoordinates.x, y: villageCoordinates.y),
     Structure(type: .passage, x: passageCoordinates.x, y: passageCoordinates.y, rotation: 0),
-    Structure(type: .tree, x: 450, y: 300, rotation: 0),
-    Structure(type: .tree, x: 850, y: 500, rotation: 0),
-    Structure(type: .tree, x: 1250, y: 1000, rotation: 0),
+    Structure(type: .tree, x: 450, y: 1300, rotation: 0),
+    Structure(type: .tree, x: 1850, y: 800, rotation: 0),
+    Structure(type: .tree, x: 1750, y: 1000, rotation: 0),
     Structure(type: .tree, x: 1750, y: 500, rotation: 0),
-    Structure(type: .tree, x: 650, y: 370, rotation: 0),
-    Structure(type: .tree, x: 1250, y: 200, rotation: 0),
-    Structure(type: .tree, x: 1250, y: 700, rotation: 0),
-    Structure(type: .tree, x: 1550, y: 580, rotation: 0),
-    Structure(type: .tree, x: 1150, y: 500, rotation: 0),
+    Structure(type: .tree, x: 2650, y: 370, rotation: 0),
+    Structure(type: .tree, x: 1250, y: 2500, rotation: 0),
+    Structure(type: .tree, x: 1250, y: 1700, rotation: 0),
+    Structure(type: .tree, x: 550, y: 1580, rotation: 0),
+    Structure(type: .tree, x: 650, y: 800, rotation: 0),
     Structure(type: .rock, x: 1600, y: 700, rotation: 0),
-    Structure(type: .rock, x: 550, y: 200, rotation: 0),
-    Structure(type: .rock, x: 650, y: 350, rotation: 0),
+    Structure(type: .rock, x: 950, y: 1200, rotation: 0),
+    Structure(type: .rock, x: 1650, y: 1350, rotation: 0),
     Structure(type: .rock, x: 1450, y: 350, rotation: 0),
-    Structure(type: .rock, x: 1400, y: 660, rotation: 0),
-    Structure(type: .rock, x: 1150, y: 80, rotation: 0),
-    Structure(type: .rock, x: 190, y: 120, rotation: 0),
-    Structure(type: .rock, x: 690, y: 620, rotation: 0)
+    Structure(type: .rock, x: 1400, y: 2660, rotation: 0),
+    Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
+    Structure(type: .rock, x: 1790, y: 1720, rotation: 0),
+    Structure(type: .rock, x: 2690, y: 2620, rotation: 0)
 ]
 
 public enum ProjectileType {

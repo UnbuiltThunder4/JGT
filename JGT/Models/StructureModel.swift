@@ -100,7 +100,7 @@ class Structure: SKSpriteNode, ObservableObject {
         case .wall:
             img = "wall"
             self.mask = .building
-            self.width = 1700
+            self.width = 3000
             self.height = 700
             self.maskmodX = 1.0
             self.maskmodY = 0.7
