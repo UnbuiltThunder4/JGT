@@ -21,7 +21,7 @@ class PauseScreen: SKSpriteNode {
     
     init() {
         
-    super.init(texture: SKTexture(imageNamed: "pause-overlay"), color: .clear, size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width))
+        super.init(texture: SKTexture(imageNamed: "pause-overlay"), color: .clear, size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width))
         
         self.position = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
         self.name = "pauseScreen"
@@ -44,7 +44,7 @@ class PauseScreen: SKSpriteNode {
         continueMessage.name = "continueMessage"
         exitMessage.name = "exitMessage"
         restartMessage.name = "restartMessage"
-    
+        
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

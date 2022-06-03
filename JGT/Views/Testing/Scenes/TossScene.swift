@@ -109,79 +109,79 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         
         playBackgroundMusic(filename: "Psycho Katana - Instrumental.wav")
         
-//        for _ in 0..<10 {
-//        structures[5].addGoblin(Goblin(health: 1, attack: 1, wit: NeuralNetwork(
-//            layers: [
-//                DenseLayer(inputSize: 2, neuronsCount: 2, functionRaw: .sigmoid), //INPUTS  1) GOBLIN TYPE          2) OBJECT
-//                DenseLayer(inputSize: 2, neuronsCount: 4, functionRaw: .sigmoid),
-//                DenseLayer(inputSize: 4, neuronsCount: 2, functionRaw: .sigmoid)  //OUTPUTS 1) 1ST INTERACTION      2) 2ND INTERACTION
-//            ]), fear: 1, frenzy: 1, randomGoblin1: "", randomGoblin2: ""))
-//        }
+        //        for _ in 0..<10 {
+        //        structures[5].addGoblin(Goblin(health: 1, attack: 1, wit: NeuralNetwork(
+        //            layers: [
+        //                DenseLayer(inputSize: 2, neuronsCount: 2, functionRaw: .sigmoid), //INPUTS  1) GOBLIN TYPE          2) OBJECT
+        //                DenseLayer(inputSize: 2, neuronsCount: 4, functionRaw: .sigmoid),
+        //                DenseLayer(inputSize: 4, neuronsCount: 2, functionRaw: .sigmoid)  //OUTPUTS 1) 1ST INTERACTION      2) 2ND INTERACTION
+        //            ]), fear: 1, frenzy: 1, randomGoblin1: "", randomGoblin2: ""))
+        //        }
     }
     
     //MARK: Update
     
     override func update(_ currentTime: TimeInterval) {
-        
-        var hasToUpdateRank = false
-        
-        self.population.goblins.forEach {
-            if ($0.update()) {
-                hasToUpdateRank = true
-            }
-            if ($0.health <= 0) {
-                self.population.kill($0)
-                if let lastSelected = lastSelectedGoblin {
-                    if $0.isEqual(to: lastSelected) {
-                        lastSelectedGoblin = nil
+        if paws == false {
+            var hasToUpdateRank = false
+            
+            self.population.goblins.forEach {
+                if ($0.update()) {
+                    hasToUpdateRank = true
+                }
+                if ($0.health <= 0) {
+                    self.population.kill($0)
+                    if let lastSelected = lastSelectedGoblin {
+                        if $0.isEqual(to: lastSelected) {
+                            lastSelectedGoblin = nil
+                        }
                     }
                 }
             }
-        }
-        if (hasToUpdateRank) {
-            self.population.rankPerFitness()
-        }
-        
-        self.enemies.forEach {
-            if ($0.update()) {
-                let index = self.enemies.firstIndex(of: $0)!
-                $0.removeFromParent()
-                self.enemies.remove(at: index)
-                evilGauge.updateGauge(goblin: nil, value: 5)
+            if (hasToUpdateRank) {
+                self.population.rankPerFitness()
+            }
+            
+            self.enemies.forEach {
+                if ($0.update()) {
+                    let index = self.enemies.firstIndex(of: $0)!
+                    $0.removeFromParent()
+                    self.enemies.remove(at: index)
+                    evilGauge.updateGauge(goblin: nil, value: 5)
+                }
+            }
+            
+            if let structure = self.structures[1] as? Gate {
+                structure.update(self)
+            }
+            
+            if let structure = self.structures[2] as? Backdoor {
+                structure.update(self)
+            }
+            
+            if let structure = self.structures[3] as? Catapult {
+                structure.update(self)
+            }
+            
+            if let structure = self.structures[4] as? Trap {
+                structure.update(self)
+            }
+            
+            
+            darkson.update()
+            
+            if channeling == true && evilGauge.currentFill > 0 {
+                evilGauge.channelingSight()
+                evilSight.evilSight(position: self.touchPoint)
+                if evilGauge.currentFill == 0 {evilSight.dispatchSight()}
+            }
+            
+            if let lastSelectedGoblin = lastSelectedGoblin as? Goblin {
+                sheet.updateSheet(goblin: lastSelectedGoblin)
+            } else {
+                sheet.alpha = 0.0
             }
         }
-        
-        if let structure = self.structures[1] as? Gate {
-            structure.update(self)
-        }
-        
-        if let structure = self.structures[2] as? Backdoor {
-            structure.update(self)
-        }
-        
-        if let structure = self.structures[3] as? Catapult {
-            structure.update(self)
-        }
-        
-        if let structure = self.structures[4] as? Trap {
-            structure.update(self)
-        }
-        
-        
-        darkson.update()
-        
-        if channeling == true && evilGauge.currentFill > 0 {
-            evilGauge.channelingSight()
-            evilSight.evilSight(position: self.touchPoint)
-            if evilGauge.currentFill == 0 {evilSight.dispatchSight()}
-        }
-        
-        if let lastSelectedGoblin = lastSelectedGoblin as? Goblin {
-            sheet.updateSheet(goblin: lastSelectedGoblin)
-        } else {
-            sheet.alpha = 0.0
-        }
-        
     }
     
 }

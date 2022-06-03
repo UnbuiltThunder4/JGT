@@ -29,37 +29,37 @@ extension TossScene {
     
     @objc func handlePanFrom(recognizer: UIPanGestureRecognizer) {
         if paws == false {
-        if recognizer.state == .began {
-            var touchLocation = recognizer.location(in: recognizer.view)
-            touchLocation = self.convertPoint(fromView: touchLocation)
-            panning = true
-            
-            gameLogic.selectNodeForTouch(self, touchLocation: touchLocation)
-            
-            if let goblinNode = selectedNode as? Goblin {
-                goblinNode.state = .inhand //this will change the update function of the goblin
+            if recognizer.state == .began {
+                var touchLocation = recognizer.location(in: recognizer.view)
+                touchLocation = self.convertPoint(fromView: touchLocation)
+                panning = true
+                
+                gameLogic.selectNodeForTouch(self, touchLocation: touchLocation)
+                
+                if let goblinNode = selectedNode as? Goblin {
+                    goblinNode.state = .inhand //this will change the update function of the goblin
+                }
+                
+            } else if recognizer.state == .changed {
+                var translation = recognizer.translation(in: recognizer.view!)
+                translation = CGPoint(x: translation.x, y: -translation.y)
+                
+                var touchLocation = recognizer.location(in: recognizer.view)
+                touchLocation = self.convertPoint(fromView: touchLocation)
+                self.touchPoint = touchLocation
+                
+                gameLogic.panForTranslation(self, translation: translation)
+                
+                recognizer.setTranslation(CGPoint.zero, in: recognizer.view)
+                
+                
+            } else if recognizer.state == .ended {
+                panning = false
+                
+                if let goblinNode = selectedNode as? Goblin {
+                    goblinNode.state = .flying //this will change the update function of the goblin
+                }
             }
-            
-        } else if recognizer.state == .changed {
-            var translation = recognizer.translation(in: recognizer.view!)
-            translation = CGPoint(x: translation.x, y: -translation.y)
-            
-            var touchLocation = recognizer.location(in: recognizer.view)
-            touchLocation = self.convertPoint(fromView: touchLocation)
-            self.touchPoint = touchLocation
-            
-            gameLogic.panForTranslation(self, translation: translation)
-            
-            recognizer.setTranslation(CGPoint.zero, in: recognizer.view)
-            
-            
-        } else if recognizer.state == .ended {
-            panning = false
-            
-            if let goblinNode = selectedNode as? Goblin {
-                goblinNode.state = .flying //this will change the update function of the goblin
-            }
-        }
         }
     }
     
