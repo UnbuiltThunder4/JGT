@@ -168,53 +168,58 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             if (self.target!.state != .invillage && self.target!.state != .inacademy && self.target!.state != .intavern) {
                 let originalPosDistance = CGVector(dx: self.initialx - self.position.x, dy: self.initialy - self.position.y)
                 let targetDistance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
-                let walkDistance = limitVector(vector: targetDistance, max: 20)
-                if (abs(originalPosDistance.dx) > 300 || abs(originalPosDistance.dy) > 300) {
-                    self.state = .idle
-                    self.target = nil
-                    removeAction(forKey: "walk")
+                if (isVectorSmallerThan(vector: targetDistance, other: 100)) {
+                    self.attackCounter += 1
+                    if (self.attackCounter % attackTime == 0) {
+                        if (self.target!.type == .rock) {
+                            self.target!.health -= self.attack / 2
+                        }
+                        else {
+                            self.target!.health -= self.attack
+                        }
+                        self.attackCounter = 0
+                        let attackParticle = SKEmitterNode(fileNamed: "AttackParticle")
+                        attackParticle!.position = CGPoint(x: 0, y: 0)
+                        attackParticle!.name = "attackParticle"
+                        let addParticle = SKAction.run({
+                            self.addChild(attackParticle!)
+                        })
+                        let removeParticle = SKAction.run({
+                            attackParticle!.removeFromParent()
+                        })
+                        
+                        let sequence = SKAction.sequence([
+                            addParticle,
+                            .wait(forDuration: 0.5),
+                            removeParticle
+                        ])
+                        
+                        self.run(sequence, withKey: "attackParticle")
+                    }
                 }
                 else {
-                    if let _ = self.action(forKey: "walk") {
-                        if (abs(targetDistance.dx) < 60 && abs(targetDistance.dy) < 60) {
-                            self.attackCounter += 1
-                            if (self.attackCounter % attackTime == 0) {
-                                if (self.target!.type == .rock) {
-                                    self.target!.health -= self.attack / 2
-                                }
-                                else {
-                                    self.target!.health -= self.attack
-                                }
-                                self.attackCounter = 0
-                                let attackParticle = SKEmitterNode(fileNamed: "AttackParticle")
-                                attackParticle!.position = CGPoint(x: 0, y: 0)
-                                attackParticle!.name = "attackParticle"
-                                let addParticle = SKAction.run({
-                                    self.addChild(attackParticle!)
-                                })
-                                let removeParticle = SKAction.run({
-                                    attackParticle!.removeFromParent()
-                                })
-                                
-                                let sequence = SKAction.sequence([
-                                    addParticle,
-                                    .wait(forDuration: 0.5),
-                                    removeParticle
-                                ])
-                                
-                                self.run(sequence, withKey: "attackParticle")
-                            }
-                            if (self.target!.health <= 0) {
-                                self.target = nil
-                                self.state = .idle
-                                removeAction(forKey: "walk")
-                            }
-                        }
+                    let walkDistance = limitVector(vector: targetDistance, max: 50)
+                    if (abs(originalPosDistance.dx) > 300 || abs(originalPosDistance.dy) > 300) {
+                        self.state = .idle
+                        self.target = nil
+                        removeAction(forKey: "walk")
                     }
                     else {
-                        let time = getDuration(distance: walkDistance, speed: self.speed)
-                        let walk = SKAction.move(by: walkDistance, duration: time)
-                        self.run(walk, withKey: "walk")
+                        if let _ = self.action(forKey: "walk") {
+                            
+                        }
+                        else {
+                            let time = getDuration(distance: walkDistance, speed: self.speed)
+                            let walk = SKAction.move(by: walkDistance, duration: time)
+                            self.run(walk, withKey: "walk")
+                        }
+                    }
+                }
+                if (self.target != nil) {
+                    if (self.target!.health <= 0) {
+                        self.target = nil
+                        self.state = .idle
+                        removeAction(forKey: "walk")
                     }
                 }
             }

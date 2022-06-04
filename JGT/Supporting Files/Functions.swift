@@ -48,6 +48,17 @@ func getParentIndex() -> [Int] {
     return ar
 }
 
+func isVectorSmallerThan(vector: CGVector, other: CGFloat) -> Bool {
+    let magnitudeSquared = (vector.dx * vector.dx) + (vector.dy * vector.dy)
+    let maxSquared = other * other
+    if (magnitudeSquared <= maxSquared) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
 func limitVector(vector: CGVector, max: CGFloat) -> CGVector {
     let magnitudeSquared = (vector.dx * vector.dx) + (vector.dy * vector.dy)
     let maxSquared = max * max

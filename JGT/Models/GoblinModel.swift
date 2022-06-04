@@ -256,7 +256,6 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             hasToUpdateRank = idleUpdate()
             break
         }
-        print(closeStructure)
         return hasToUpdateRank
     }
     
@@ -379,90 +378,95 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         if (!self.checkFear()) {
             if (self.target != nil) {
                 let targetDistance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
-                let walkDistance = limitVector(vector: targetDistance, max: 20)
-                if let _ = self.action(forKey: "walk") {
-                    if (abs(targetDistance.dx) > 300 || abs(targetDistance.dy) > 300) {
-                        self.state = .idle
-                        self.target = nil
-                        removeAction(forKey: "walk")
-                    }
-                    else if (abs(targetDistance.dx) < 60 && abs(targetDistance.dy) < 60) {
+                if (isVectorSmallerThan(vector: targetDistance, other: 100)) {
+                    removeAction(forKey: "walk")
+                    self.attackCounter += 1
+                    if (self.attackCounter % attackTime == 0) {
                         var dmg = self.attack
                         if (self.isFrenzied) {
                             dmg += self.attack
                         }
-                        self.attackCounter += 1
-                        if (self.attackCounter % attackTime == 0) {
-                            self.target!.health -= max(0, dmg - self.target!.shield)
-                            self.target!.shield = max(0, self.target!.shield - dmg)
-                            if (self.type == .fire) {
-                                self.targetQueue.forEach {
-                                    let aoeDistance = CGVector(dx: $0.position.x - self.position.x, dy: $0.position.y - self.position.y)
-                                    if (abs(aoeDistance.dx) < 60 && abs(aoeDistance.dy) < 60) {
-                                        $0.health -= max(0, dmg - self.target!.shield)
-                                        $0.shield = max(0, self.target!.shield - dmg)
-                                        if ($0.health <= 0) {
-                                            let index = self.targetQueue.firstIndex(of: $0)!
-                                            self.targetQueue.remove(at: index)
-                                        }
+                        self.target!.health -= max(0, dmg - self.target!.shield)
+                        self.target!.shield = max(0, self.target!.shield - dmg)
+                        if (self.type == .fire) {
+                            self.targetQueue.forEach {
+                                let aoeDistance = CGVector(dx: $0.position.x - self.position.x, dy: $0.position.y - self.position.y)
+                                if (isVectorSmallerThan(vector: aoeDistance, other: 100)) {
+                                    $0.health -= max(0, dmg - self.target!.shield)
+                                    $0.shield = max(0, self.target!.shield - dmg)
+                                    if ($0.health <= 0) {
+                                        let index = self.targetQueue.firstIndex(of: $0)!
+                                        self.targetQueue.remove(at: index)
                                     }
                                 }
-                                let aoeParticle = SKEmitterNode(fileNamed: "ExplosionParticle")
-                                aoeParticle!.particleScale *= 1.5
-                                aoeParticle!.position = CGPoint(x: 0, y: 0)
-                                aoeParticle!.name = "aoeParticle"
-                                let addParticle = SKAction.run({
-                                    self.addChild(aoeParticle!)
-                                })
-                                let removeParticle = SKAction.run({
-                                    aoeParticle!.removeFromParent()
-                                })
-                                
-                                let sequence = SKAction.sequence([
-                                    addParticle,
-                                    .wait(forDuration: 1.5),
-                                    removeParticle
-                                ])
-                                
-                                self.run(sequence, withKey: "aoeParticle")
                             }
-                            else {
-                                let attackParticle = SKEmitterNode(fileNamed: "AttackParticle")
-                                attackParticle!.position = CGPoint(x: 0, y: 0)
-                                attackParticle!.name = "attackParticle"
-                                let addParticle = SKAction.run({
-                                    self.addChild(attackParticle!)
-                                })
-                                let removeParticle = SKAction.run({
-                                    attackParticle!.removeFromParent()
-                                })
-                                
-                                let sequence = SKAction.sequence([
-                                    addParticle,
-                                    .wait(forDuration: 0.5),
-                                    removeParticle
-                                ])
-                                
-                                self.run(sequence, withKey: "attackParticle")
-                            }
-                            self.attackCounter = 0
-                            if (self.target!.target != self) {
-                                if (!self.target!.targetQueue.contains(self)) {
-                                    self.target!.targetQueue.append(self)
-                                }
-                            }
+                            let aoeParticle = SKEmitterNode(fileNamed: "ExplosionParticle")
+                            aoeParticle!.particleScale *= 1.5
+                            aoeParticle!.position = CGPoint(x: 0, y: 0)
+                            aoeParticle!.name = "aoeParticle"
+                            let addParticle = SKAction.run({
+                                self.addChild(aoeParticle!)
+                            })
+                            let removeParticle = SKAction.run({
+                                aoeParticle!.removeFromParent()
+                            })
+                            
+                            let sequence = SKAction.sequence([
+                                addParticle,
+                                .wait(forDuration: 1.5),
+                                removeParticle
+                            ])
+                            
+                            self.run(sequence, withKey: "aoeParticle")
                         }
-                        if (self.target!.health <= 0) {
-                            self.target = nil
-                            self.state = .idle
-                            removeAction(forKey: "walk")
+                        else {
+                            let attackParticle = SKEmitterNode(fileNamed: "AttackParticle")
+                            attackParticle!.position = CGPoint(x: 0, y: 0)
+                            attackParticle!.name = "attackParticle"
+                            let addParticle = SKAction.run({
+                                self.addChild(attackParticle!)
+                            })
+                            let removeParticle = SKAction.run({
+                                attackParticle!.removeFromParent()
+                            })
+                            
+                            let sequence = SKAction.sequence([
+                                addParticle,
+                                .wait(forDuration: 0.5),
+                                removeParticle
+                            ])
+                            
+                            self.run(sequence, withKey: "attackParticle")
+                        }
+                        self.attackCounter = 0
+                        if (self.target!.target != self) {
+                            if (!self.target!.targetQueue.contains(self)) {
+                                self.target!.targetQueue.append(self)
+                            }
                         }
                     }
                 }
                 else {
-                    let time = getDuration(distance: walkDistance, speed: self.speed)
-                    let walk = SKAction.move(by: walkDistance, duration: time)
-                    self.run(walk, withKey: "walk")
+                    let walkDistance = limitVector(vector: targetDistance, max: 50)
+                    if let _ = self.action(forKey: "walk") {
+                        if (abs(targetDistance.dx) > 300 || abs(targetDistance.dy) > 300) {
+                            self.state = .idle
+                            self.target = nil
+                            removeAction(forKey: "walk")
+                        }
+                    }
+                    else {
+                        let time = getDuration(distance: walkDistance, speed: self.speed)
+                        let walk = SKAction.move(by: walkDistance, duration: time)
+                        self.run(walk, withKey: "walk")
+                    }
+                }
+                if (self.target != nil) {
+                    if (self.target!.health <= 0) {
+                        self.target = nil
+                        self.state = .idle
+                        removeAction(forKey: "walk")
+                    }
                 }
             }
             else {
