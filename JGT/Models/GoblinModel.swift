@@ -256,6 +256,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             hasToUpdateRank = idleUpdate()
             break
         }
+        print(closeStructure)
         return hasToUpdateRank
     }
     
@@ -275,7 +276,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                     if let _ = self.action(forKey: "walk") {
                         if (self.closeStructure != nil && self.isFrenzied == false) {
                             let targetDistance = CGVector(dx: self.closeStructure!.position.x - self.position.x, dy: self.closeStructure!.position.y - self.position.y)
-                            if (abs(targetDistance.dx) < 200 && abs(targetDistance.dy) < 200) {
+                            if (abs(targetDistance.dx) < 500 && abs(targetDistance.dy) < 500) {
                                 if (self.closeStructure!.type == .trap || self.closeStructure!.type == .backdoor || self.closeStructure!.type == .passage) {
                                     hasToUpdateRank = self.checkInterations(input: 0)
                                 }

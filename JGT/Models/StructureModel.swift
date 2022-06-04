@@ -66,8 +66,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .building
             self.width = 400
             self.height = 400
-            self.maskmodX = 0.9
-            self.maskmodY = 0.9
+            self.maskmodX = 0.8
+            self.maskmodY = 0.8
             break
             
         case .tavern:
@@ -75,8 +75,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .building
             self.width = 400
             self.height = 400
-            self.maskmodX = 0.9
-            self.maskmodY = 0.9
+            self.maskmodX = 0.8
+            self.maskmodY = 0.8
             break
             
         case .village:
@@ -84,8 +84,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .building
             self.width = 400
             self.height = 400
-            self.maskmodX = 0.9
-            self.maskmodY = 0.9
+            self.maskmodX = 0.8
+            self.maskmodY = 0.8
             break
             
         case .catapult:
@@ -120,8 +120,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .enviroment
             self.width = 150
             self.height = 300
-            self.maskmodX = 1.3
-            self.maskmodY = 1.3
+            self.maskmodX = 1.1
+            self.maskmodY = 1.1
             break
             
         case .rock:
@@ -129,8 +129,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .enviroment
             self.width = 80
             self.height = 80
-            self.maskmodX = 1.5
-            self.maskmodY = 1.5
+            self.maskmodX = 1.1
+            self.maskmodY = 1.1
             break
             
         default:
