@@ -93,8 +93,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .enviroment
             self.width = 250
             self.height = 250
-            self.maskmodX = 0.9
-            self.maskmodY = 0.9
+            self.maskmodX = 1.0
+            self.maskmodY = 1.0
             break
             
         case .goblincircle:
@@ -129,8 +129,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .enviroment
             self.width = 80
             self.height = 80
-            self.maskmodX = 1.1
-            self.maskmodY = 1.1
+            self.maskmodX = 1.2
+            self.maskmodY = 1.2
             break
             
         default:

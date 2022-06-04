@@ -275,7 +275,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                     if let _ = self.action(forKey: "walk") {
                         if (self.closeStructure != nil && self.isFrenzied == false) {
                             let targetDistance = CGVector(dx: self.closeStructure!.position.x - self.position.x, dy: self.closeStructure!.position.y - self.position.y)
-                            if (abs(targetDistance.dx) < 500 && abs(targetDistance.dy) < 500) {
+                            if (isVectorSmallerThan(vector: targetDistance, other: 330)) {
                                 if (self.closeStructure!.type == .trap || self.closeStructure!.type == .backdoor || self.closeStructure!.type == .passage) {
                                     hasToUpdateRank = self.checkInterations(input: 0)
                                 }
@@ -563,7 +563,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             //GIVE EVIL POINTS
             self.inVillageCounter = 0
             let randnum = Int.random(in: 0...100)
-            if (randnum <= 20 && self.type == .normal) {
+            if (randnum <= 25 && self.type == .normal) {
                 self.state = .idle
                 self.alpha = 1.0
                 if let village = self.closeStructure as? Village {
@@ -578,6 +578,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             else {
                 self.state = .idle
                 self.alpha = 1.0
+                self.position.x += self.position.x - villageCoordinates.x
+                self.position.y += self.position.y - villageCoordinates.y
                 if let village = self.closeStructure as? Village {
                     village.removeGoblin(self)
                 }
@@ -629,8 +631,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.climbCounter += 1
                 if (self.climbCounter % taskTime == 0) {
                     self.climbCounter = 0
-                    self.position.y = passageCoordinates.y + 50
-                    self.position.x = passageCoordinates.x + 50
+                    self.position.x += self.position.x - passageCoordinates.x
+                    self.position.y += self.position.y - passageCoordinates.y
                     self.state = .idle
                     self.alpha = 1.0
                 }
