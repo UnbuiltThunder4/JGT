@@ -14,6 +14,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     public let id = UUID()
     
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
+    @ObservedObject var evilGauge: EvilGauge = EvilGauge.shared
     
     public let fullName: String
     public let backstory: String
@@ -574,6 +575,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 hasToUpdateRank = true
             }
             else {
+                self.evilGauge.updateGauge(goblin: nil, value: 1)
                 self.state = .idle
                 self.alpha = 1.0
                 self.position.x += self.position.x - villageCoordinates.x
@@ -933,6 +935,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func setFiretoTree() {
         self.closeStructure!.removeFromParent()
+        self.evilGauge.updateGauge(goblin: nil, value: 1)
         self.HWpoints += 5
         self.fitness = self.getFitness()
         self.closeStructure = nil

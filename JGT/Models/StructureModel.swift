@@ -208,6 +208,11 @@ class Academy: Structure {
     
     override func addGoblin(_ goblin: Goblin) {
         self.goblins.append(goblin)
+        if scrollableMenu.currentStructure == self.name! {
+            scrollableMenu.goblinTable.addRow(row: GoblinRow(goblin: goblin))
+            scrollableMenu.tableSize += scrollableMenu.rowsSize.height
+            scrollableMenu.hideRow()
+        }
         if (!goblin.Proficiencies.isEmpty && !self.proficencies.isEmpty) {
             for i in 0..<goblin.Proficiencies.count {
                 for j in 0..<self.proficencies.count {
