@@ -484,21 +484,19 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func fearedUpdate() {
         self.updateAge()
+        let tavernDistance = CGVector(dx: tavernCoordinates.x - self.position.x, dy: tavernCoordinates.y - self.position.y)
+        if (isVectorSmallerThan(vector: tavernDistance, other: 330)) {
+            self.enterTavern()
+        }
         if let _ = self.action(forKey: "run") {
         }
         else {
-            let tavernDistance = CGVector(dx: tavernCoordinates.x - self.position.x, dy: tavernCoordinates.y - self.position.y)
-            if (abs(tavernDistance.dx) < 250 && abs(tavernDistance.dy) < 250) {
-                self.enterTavern()
-            }
-            else {
-                var distance = limitVector(vector: tavernDistance, max: 100)
-                distance.dx = distance.dx * CGFloat.random(in: 0.2...1.8)
-                distance.dy = distance.dy * CGFloat.random(in: 0.2...1.8)
-                let time = getDuration(distance: distance, speed: self.speed * 2)
-                let run = SKAction.move(by: distance, duration: time)
-                self.run(run, withKey: "run")
-            }
+            var distance = limitVector(vector: tavernDistance, max: 50)
+            distance.dx = distance.dx * CGFloat.random(in: 0.2...1.8)
+            distance.dy = distance.dy * CGFloat.random(in: 0.2...1.8)
+            let time = getDuration(distance: distance, speed: self.speed * 2)
+            let run = SKAction.move(by: distance, duration: time)
+            self.run(run, withKey: "run")
         }
     }
     
@@ -852,6 +850,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func enterTavern() {
+        self.removeAllActions()
         self.state = .intavern
         self.alpha = 0.0
         if let tavern = self.closeStructure as? Tavern {
