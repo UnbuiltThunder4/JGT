@@ -58,13 +58,13 @@ class HUD: SKNode {
     func addSheet(sheet: Sheet, position: CGPoint) {
         switch UIDevice.current.userInterfaceIdiom {
         case .phone:
-            HUDSettings.sheetSize = CGSize(width: UIScreen.main.bounds.width/2.7, height: UIScreen.main.bounds.height/1.2)
+            HUDSettings.sheetSize = CGSize(width: UIScreen.main.bounds.width/2.9, height: UIScreen.main.bounds.height/1.1)
             HUDSettings.fontSize = 15
             HUDSettings.statsFontSize = 8
             break
         case .pad:
-            HUDSettings.sheetSize = CGSize(width: UIScreen.main.bounds.width/2.5, height: UIScreen.main.bounds.height/1.7)
-            HUDSettings.fontSize = 23
+            HUDSettings.sheetSize = CGSize(width: UIScreen.main.bounds.width/2.6, height: UIScreen.main.bounds.height/1.5)
+            HUDSettings.fontSize = 28
             HUDSettings.statsFontSize = 14
             break
         @unknown default:

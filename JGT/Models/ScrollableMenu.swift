@@ -18,8 +18,25 @@ class ScrollableMenu: SKSpriteNode, ObservableObject {
     var contentSection: CGFloat = 0.0
     var tableSize: CGFloat = 0.0
     var rowsSize: CGSize = CGSize()
+    var sheetWidth: CGFloat = CGFloat()
+    var sheetHeight: CGFloat = CGFloat()
+    
     init() {
-        super.init(texture: SKTexture(imageNamed: "structure sheet wide"), color: .yellow, size: CGSize(width: UIScreen.main.bounds.width/2.5, height: UIScreen.main.bounds.height/1.8))
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
+            sheetWidth = UIScreen.main.bounds.width/3
+            sheetHeight = UIScreen.main.bounds.height/1.5
+            break
+        case .pad:
+            sheetWidth = UIScreen.main.bounds.width/2.5
+            sheetHeight = UIScreen.main.bounds.height/1.8
+            break
+        @unknown default:
+            break
+        }
+        
+        super.init(texture: SKTexture(imageNamed: "structure sheet wide"), color: .yellow, size: CGSize(width: sheetWidth, height: sheetHeight))
+        
         self.name = "scrollableMenu"
         
         self.contentSection = self.frame.minY/2
