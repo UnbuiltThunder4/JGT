@@ -130,6 +130,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
                     hasToUpdateRank = true
                 }
                 if ($0.health <= 0) {
+                    self.cauldron.updateCauldron(amount: -1)
                     self.population.kill($0)
                     if let lastSelected = lastSelectedGoblin {
                         if $0.isEqual(to: lastSelected) {

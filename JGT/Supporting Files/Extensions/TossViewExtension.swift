@@ -140,6 +140,10 @@ extension TossScene {
                 pauseChilds(isPaused: false)
             }
             
+            if selectedNode?.name! == "RestartBtn" {
+                
+            }
+            
         }
     }
     

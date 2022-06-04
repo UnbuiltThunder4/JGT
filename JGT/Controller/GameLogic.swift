@@ -157,7 +157,7 @@ class GameLogic: ObservableObject {
     public func shootGoblin(_ tossScene: TossScene, node: SKNode, type: GoblinType, population: Population, destination: CGPoint) {
        
         let spawnable = tossScene.evilGauge.checkSpawn(type: type)
-        if spawnable && population.goblins.count != MainScreenProperties.maxGoblinsNumber {
+        if spawnable && population.goblins.count < MainScreenProperties.maxGoblinsNumber {
             let spawnPoint = CGPoint(x: node.position.x - (tossScene.size.width/2)*tossScene.currentScale + 50, y: node.position.y - (tossScene.size.height/2)*tossScene.currentScale + 50)
             let newGoblin = spawnGoblin(tossScene, population: population, spawnPoint: spawnPoint)
             let distance = CGVector(dx: destination.x - spawnPoint.x, dy: destination.y - spawnPoint.y)
@@ -194,6 +194,7 @@ class GameLogic: ObservableObject {
             
             tossScene.evilGauge.shootGauge(goblin: newGoblin)
             tossScene.cauldron.updateCauldron(amount: 1)
+            print(tossScene.population.goblins.count)
                         
         }
     }
