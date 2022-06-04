@@ -120,7 +120,7 @@ extension TossScene {
                 self.cauldron.closeSpawn()
             }
             
-            if selectedNode?.name! == "background" || selectedNode?.name! == "tree" || selectedNode?.name! == "rock" || selectedNode?.name! == "goblinmancy-circle" || selectedNode?.name! == "wall" || selectedNode?.name! == "backdoor" || selectedNode?.name! == "backdoor-up" {
+            if selectedNode?.name! == "background" || selectedNode?.name! == "tree" || selectedNode?.name! == "rock" || selectedNode?.name! == "goblinmancy-circle" || selectedNode?.name! == "wall" || selectedNode?.name! == "backdoor" || selectedNode?.name! == "backdoor-up" || selectedNode?.name! == "closed-trap" || selectedNode?.name! == "open-trap" {
                 self.sheet.alpha = 0.0
                 self.scrollableMenu.closeMenu()
                 self.scrollableMenu.alpha = 0.0
