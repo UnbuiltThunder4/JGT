@@ -15,6 +15,7 @@ class ScrollableMenu: SKSpriteNode, ObservableObject {
     var nameLabel: SKLabelNode = SKLabelNode()
     var descLabel: SKLabelNode = SKLabelNode()
     var goblinTable: GoblinTable = GoblinTable()
+    var currentStructure: String = ""
     var contentSection: CGFloat = 0.0
     var tableSize: CGFloat = 0.0
     var rowsSize: CGSize = CGSize()

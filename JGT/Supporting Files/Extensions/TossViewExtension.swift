@@ -73,9 +73,10 @@ extension TossScene {
             
             if let structure = selectedNode as? Structure {
                 self.lastSelectedStructure = structure
+                self.scrollableMenu.currentStructure = structure.name!
                 self.sheet.alpha = 0.0
                 self.scrollableMenu.closeMenu()
-                self.scrollableMenu.openMenu(structure: lastSelectedStructure as! Structure)
+                self.scrollableMenu.openMenu(structure: structure)
             }
             
             if let goblinRow = selectedNode as? GoblinRow {
