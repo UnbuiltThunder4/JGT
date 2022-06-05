@@ -168,6 +168,23 @@ extension TossScene {
                         lastSelectedGoblin = nil
                     }
                 }
+                
+                let dyingGoblin = selectedNode as! Goblin
+                switch dyingGoblin.type {
+                case .rock:
+                    let random = Int.random(in: 0...1)
+                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.stoneblinDeath1 : Audio.EffectFiles.stoneblinDeath3, wait: true)
+                case .fire:
+                    let random = Int.random(in: 0...1)
+                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.flameblinDeath1 : Audio.EffectFiles.flameblinDeath2, wait: true)
+                case .gum:
+                    let random = Int.random(in: 0...1)
+                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.gumblinDeath1 : Audio.EffectFiles.gumblinDeath2, wait: true)
+                case .normal:
+                    let random = Int.random(in: 0...1)
+                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.goblinDeath1 : Audio.EffectFiles.goblinDeath2, wait: true)
+                }
+                
                 selectedNode!.removeFromParent()
             }
             if selectedNode?.name! == "background" {

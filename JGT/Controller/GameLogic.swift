@@ -169,7 +169,7 @@ class GameLogic: ObservableObject {
             tossScene.cauldron.run(rotateAnimation)
             
 //            player.play(effect: Audio.EffectFiles.cauldronn, node: nil)
-            playSound(node: tossScene.cauldron, audio: Audio.EffectFiles.cauldronn, wait: false)
+            playSound(node: nil, audio: Audio.EffectFiles.cauldronn, wait: false)
             
             newGoblin.type = type
             newGoblin.state = .launched
@@ -224,7 +224,7 @@ class GameLogic: ObservableObject {
         node.run(SKAction.playSoundFileNamed(audio.filename, waitForCompletion: wait))
             }
         } else {
-            player.play(effect: audio, node: nil)
+            player.play(effect: audio)
         }
     }
 }

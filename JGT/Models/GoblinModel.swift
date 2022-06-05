@@ -383,6 +383,26 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                     removeAction(forKey: "walk")
                     self.attackCounter += 1
                     if (self.attackCounter % attackTime == 0) {
+                        
+                        switch self.type {
+                        case .rock:
+                            let random = Int.random(in: 0...1)
+                            gameLogic.playSound(node: self, audio:
+                                                    random == 0 ? Audio.EffectFiles.stoneblinHit1 : Audio.EffectFiles.stoneblinHit3, wait: false)
+                        case .fire:
+                            let random = Int.random(in: 0...1)
+                            gameLogic.playSound(node: self, audio:
+                                                    random == 0 ? Audio.EffectFiles.flameblinHit2 : Audio.EffectFiles.flameblinHit3, wait: false)
+                        case .gum:
+                            let random = Int.random(in: 0...1)
+                            gameLogic.playSound(node: self, audio:
+                                                    random == 0 ? Audio.EffectFiles.gumblinHit2 : Audio.EffectFiles.gumblinHit4, wait: false)
+                        case .normal:
+                            let random = Int.random(in: 0...1)
+                            gameLogic.playSound(node: self,
+                                                audio: random == 0 ? Audio.EffectFiles.goblinHit1 : Audio.EffectFiles.goblinHit3, wait: false)
+                        }
+                        
                         var dmg = self.attack
                         if (self.isFrenzied) {
                             dmg += self.attack
@@ -522,6 +542,20 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.health = self.maxHealth
             }
             if (self.currentFrenzyTurn >= self.frenzy && self.health == self.maxHealth) {
+                
+                switch self.type {
+                case .rock:
+                    let random = Int.random(in: 0...1)
+                    gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.stoneblinFrenzy1 : Audio.EffectFiles.stoneblinFrenzy2, wait: false)
+                case .fire:
+                    let random = Int.random(in: 0...1)
+                    gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.flameblinFrenzy1 : Audio.EffectFiles.flameblinFrenzy2, wait: false)
+                case .gum:
+                    gameLogic.playSound(node: self, audio: Audio.EffectFiles.gumblinFrenzy1, wait: false)
+                case .normal:
+                    gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinFrenzy1, wait: false)
+                }
+                
                 self.isFrenzied = true
                 self.fear = 0
                 self.state = .idle
@@ -579,6 +613,21 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                                     audio: random == 0 ? Audio.EffectFiles.gumblinTransform1 : Audio.EffectFiles.gumblinTransform2, wait: false)
             }
             else {
+                
+                switch self.type {
+                case .normal:
+                gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinCandy1, wait: false)
+                case .fire:
+                    let random = Int.random(in: 0...1)
+                    gameLogic.playSound(node: self,
+                                        audio: random == 0 ? Audio.EffectFiles.flameblinCandy1 : Audio.EffectFiles.flameblinCandy2, wait: false)
+                case .rock:
+                    let random = Int.random(in: 0...1)
+                    gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.stoneblinCandy1 : Audio.EffectFiles.stoneblinCandy2, wait: false)
+                case .gum:
+                    break
+                }
+                
                 self.evilGauge.updateGauge(goblin: nil, value: 1)
                 self.state = .idle
                 self.alpha = 1.0
@@ -707,6 +756,18 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func checkFear() -> Bool {
         let percentage = (Double(self.health) / Double(self.maxHealth)) * 100.0
         if (percentage <= Double(self.fear)) {
+            switch self.type {
+            case .rock:
+                gameLogic.playSound(node: self, audio: Audio.EffectFiles.stoneblinFear1, wait: false)
+            case .fire:
+                break
+            case .gum:
+                let random = Int.random(in: 0...1)
+                gameLogic.playSound(node: self,
+                                    audio: random == 0 ? Audio.EffectFiles.gumblinFear2 : Audio.EffectFiles.gumblinFear3, wait: false)
+            case .normal:
+                gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinFear1, wait: false)
+            }
             return true
         }
         else {
@@ -873,6 +934,22 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func throwRock() {
+        
+        switch self.type {
+        case .rock:
+            break
+        case .fire:
+            let random = Int.random(in: 0...1)
+            gameLogic.playSound(node: self,
+                                audio: random == 0 ? Audio.EffectFiles.flameblinCatapult1 : Audio.EffectFiles.flameblinCatapult2, wait: false)
+        case .gum:
+            gameLogic.playSound(node: self,
+                                audio: Audio.EffectFiles.gumblinCatapult1, wait: false)
+        case .normal:
+            gameLogic.playSound(node: self,
+                                audio: Audio.EffectFiles.goblinCatapult1, wait: false)
+        }
+        
         self.removeAllActions()
         self.hasRock = false
         let prof1 = Proficency(type: .catapult, level: 1)
@@ -901,9 +978,29 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.run(SKAction.move(to: CGPoint(x: 2000, y: 2000), duration: 1.5), withKey: "thrown")
         if (self.type != .rock) {
             self.HWpoints += 5
+            
+            let random = Int.random(in: 0...1)
+            gameLogic.playSound(node: self,
+                                audio: random == 0 ? Audio.EffectFiles.stoneblinFly1 : Audio.EffectFiles.stoneblinFly1, wait: false)
         }
         else {
             self.HWpoints += 10
+            switch self.type {
+            case .normal:
+                let random = Int.random(in: 0...1)
+                gameLogic.playSound(node: self,
+                                    audio: random == 0 ? Audio.EffectFiles.goblinFly1 : Audio.EffectFiles.goblinFly2, wait: false)
+            case .fire:
+                let random = Int.random(in: 0...1)
+                gameLogic.playSound(node: self,
+                                    audio: random == 0 ? Audio.EffectFiles.flameblinFly1 : Audio.EffectFiles.flameblinFly2, wait: false)
+            case .gum:
+                gameLogic.playSound(node: self,
+                                    audio: Audio.EffectFiles.gumblinFly1, wait: false)
+            case .rock:
+                break
+            }
+
         }
         let prof2 = Proficency(type: .catapult, level: 2)
         if let _ = self.Proficiencies.firstIndex(where: { $0.id == prof2.id }) {
@@ -944,6 +1041,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         let random = Int.random(in: 0...1)
         gameLogic.playSound(node: self,
                             audio: random == 0 ? Audio.EffectFiles.stoneblinTransform1 : Audio.EffectFiles.stoneblinTransform2, wait: false)
+        gameLogic.playSound(node: self, audio: Audio.EffectFiles.rockEating, wait: false)
         
         self.closeStructure!.removeFromParent()
         self.type = .rock
@@ -966,6 +1064,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         case .gum:
             gameLogic.playSound(node: self, audio: Audio.EffectFiles.gumblinBurn1, wait: false)
         }
+        gameLogic.playSound(node: self, audio: Audio.EffectFiles.treeOnFire, wait: false)
     
         self.closeStructure!.removeFromParent()
         self.evilGauge.updateGauge(goblin: nil, value: 1)
@@ -976,6 +1075,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func setFiretoSelf() {
         gameLogic.playSound(node: self, audio: Audio.EffectFiles.flameblinTransform1, wait: false)
+        gameLogic.playSound(node: self, audio: Audio.EffectFiles.treeOnFire, wait: false)
             
         self.closeStructure!.removeFromParent()
         self.type = .fire

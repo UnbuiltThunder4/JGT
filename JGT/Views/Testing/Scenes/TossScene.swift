@@ -139,6 +139,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
                     hasToUpdateRank = true
                 }
                 if ($0.health <= 0) {
+                    gameLogic.playSound(node: $0, audio: Audio.EffectFiles.goblinDeath1, wait: false)
                     self.cauldron.updateCauldron(amount: -1)
                     self.population.kill($0)
                     if let lastSelected = lastSelectedGoblin {

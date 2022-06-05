@@ -14,9 +14,8 @@ protocol AudioPlayer {
     func play(music: Music)
     func pause(music: Music)
     
-    var node: SKNode? { get set }
     var effectsVolume: Float { get set }
-    func play(effect: Effect, node: SKNode?)
+    func play(effect: Effect)
 }
 
 public protocol SoundFile {
