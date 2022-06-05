@@ -229,7 +229,7 @@
 		76B5F306284A5ADF00E7C071 /* PauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseButton.swift; sourceTree = "<group>"; };
 		76B5F308284CC58700E7C071 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		76B5F30A284CC5D900E7C071 /* AVAudioPlayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAudioPlayerExtension.swift; sourceTree = "<group>"; };
-		76B5F30C284CC65F00E7C071 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		76B5F30C284CC65F00E7C071 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		76B5F30E284CD0A900E7C071 /* gumblin-self-catapult-1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "gumblin-self-catapult-1.wav"; sourceTree = "<group>"; };
 		76B5F30F284CD0A900E7C071 /* goblin-frenzy-1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "goblin-frenzy-1.wav"; sourceTree = "<group>"; };
 		76B5F310284CD0A900E7C071 /* gumblin-hit-4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "gumblin-hit-4.wav"; sourceTree = "<group>"; };

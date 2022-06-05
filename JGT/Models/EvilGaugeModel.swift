@@ -9,7 +9,8 @@ import Foundation
 import SpriteKit
 
 class EvilGauge: SKSpriteNode, ObservableObject {
-    static let shared: EvilGauge = EvilGauge(maxFill: MainScreenProperties.maxFill, currentFill: 20, size: (UIDevice.current.userInterfaceIdiom == .pad ? GaugeHUDSetting.ipadSize : GaugeHUDSetting.iphoneSize ))
+    static let shared: EvilGauge = EvilGauge(maxFill: MainScreenProperties.maxFill, currentFill: 20,
+                                             size: (UIDevice.current.userInterfaceIdiom == .pad ? GaugeHUDSetting.ipadSize : GaugeHUDSetting.iphoneSize ))
 
     let maxFill: Int
     public var currentFill: Int

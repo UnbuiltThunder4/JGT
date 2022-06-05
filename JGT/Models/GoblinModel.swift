@@ -573,6 +573,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.HWpoints += 15
                 self.fitness = self.getFitness()
                 hasToUpdateRank = true
+                
+                let random = Int.random(in: 0...1)
+                gameLogic.playSound(node: self,
+                                    audio: random == 0 ? Audio.EffectFiles.gumblinTransform1 : Audio.EffectFiles.gumblinTransform2, wait: false)
             }
             else {
                 self.evilGauge.updateGauge(goblin: nil, value: 1)
@@ -917,6 +921,18 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func pickUpRock() {
+        
+        switch self.type {
+        case .normal:
+            gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinStone1, wait: false)
+        case .fire:
+            gameLogic.playSound(node: self, audio: Audio.EffectFiles.flameblinStone1, wait: false)
+        case .rock:
+            break
+        case .gum:
+            gameLogic.playSound(node: self, audio: Audio.EffectFiles.gumblinStone1, wait: false)
+        }
+        
         self.closeStructure!.removeFromParent()
         self.HWpoints += 5
         self.hasRock = true
@@ -925,6 +941,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func eatRock() {
+        let random = Int.random(in: 0...1)
+        gameLogic.playSound(node: self,
+                            audio: random == 0 ? Audio.EffectFiles.stoneblinTransform1 : Audio.EffectFiles.stoneblinTransform2, wait: false)
+        
         self.closeStructure!.removeFromParent()
         self.type = .rock
         self.texture = SKTexture(imageNamed: "rock_goblin")
@@ -934,7 +954,18 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func setFiretoTree() {
-        player.play(effect: Audio.EffectFiles.treeOnFire, node: self)
+        switch self.type {
+        case .normal:
+            gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinBurn1, wait: false)
+        case .fire:
+            let random = Int.random(in: 0...1)
+            gameLogic.playSound(node: self,
+                                audio: random == 0 ? Audio.EffectFiles.flameblinBurn1 : Audio.EffectFiles.flameblinBurn2, wait: false)
+        case .rock:
+            break
+        case .gum:
+            gameLogic.playSound(node: self, audio: Audio.EffectFiles.gumblinBurn1, wait: false)
+        }
     
         self.closeStructure!.removeFromParent()
         self.evilGauge.updateGauge(goblin: nil, value: 1)
@@ -944,9 +975,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func setFiretoSelf() {
-        
-        print("a")
-        player.play(effect: Audio.EffectFiles.treeOnFire, node: self)
+        gameLogic.playSound(node: self, audio: Audio.EffectFiles.flameblinTransform1, wait: false)
             
         self.closeStructure!.removeFromParent()
         self.type = .fire

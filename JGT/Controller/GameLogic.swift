@@ -168,7 +168,8 @@ class GameLogic: ObservableObject {
             let rotateAnimation = SKAction.sequence([rotateRight, rotateLeft])
             tossScene.cauldron.run(rotateAnimation)
             
-            player.play(effect: Audio.EffectFiles.cauldronn, node: nil)
+//            player.play(effect: Audio.EffectFiles.cauldronn, node: nil)
+            playSound(node: tossScene.cauldron, audio: Audio.EffectFiles.cauldronn, wait: false)
             
             newGoblin.type = type
             newGoblin.state = .launched
@@ -211,8 +212,20 @@ class GameLogic: ObservableObject {
         scrollableMenu.hideRow()
     }
     
-    public func playSound(node: SKNode, fileName: String, wait: Bool) {
-        node.run(SKAction.playSoundFileNamed(fileName, waitForCompletion: wait))
+    public func playSound(node: SKNode?, audio: Effect, wait: Bool) {
+        if let node = node {
+            if (node.position.x > (node.parent?.scene?.camera?.position.x)! + UIScreen.main.bounds.width/2 ||
+                node.position.y > (node.parent?.scene?.camera?.position.y)! + UIScreen.main.bounds.height/2) ||
+                (node.position.x < (node.parent?.scene?.camera?.position.x)! - UIScreen.main.bounds.width/2 ||
+                    node.position.y < (node.parent?.scene?.camera?.position.y)! - UIScreen.main.bounds.height/2)
+            {
+                print("mute")
+            } else {
+        node.run(SKAction.playSoundFileNamed(audio.filename, waitForCompletion: wait))
+            }
+        } else {
+            player.play(effect: audio, node: nil)
+        }
     }
 }
 
