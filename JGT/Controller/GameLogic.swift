@@ -168,7 +168,7 @@ class GameLogic: ObservableObject {
             let rotateAnimation = SKAction.sequence([rotateRight, rotateLeft])
             tossScene.cauldron.run(rotateAnimation)
             
-            playSound(node: tossScene.cauldron, fileName: "cauldronn", wait: false)
+            player.play(effect: Audio.EffectFiles.cauldronn)
             
             newGoblin.type = type
             newGoblin.state = .launched
@@ -196,7 +196,6 @@ class GameLogic: ObservableObject {
             
             tossScene.evilGauge.shootGauge(goblin: newGoblin)
             tossScene.cauldron.updateCauldron(amount: 1)
-            print(tossScene.population.goblins.count)
                         
         }
     }
