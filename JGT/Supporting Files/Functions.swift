@@ -80,46 +80,25 @@ func getDuration(distance: CGVector, speed: CGFloat) -> TimeInterval {
     return TimeInterval(dist/speed)
 }
 
-var backgroundMusicPlayer: AVAudioPlayer!
-var effectsMusicPlayer: AVAudioPlayer!
+//var backgroundMusicPlayer: AVAudioPlayer!
+//var effectsMusicPlayer: AVAudioPlayer!
+//
+//func playBackgroundMusic(filename: String) {
+//  let resourceUrl = Bundle.main.url(forResource:
+//    filename, withExtension: nil)
+//  guard let url = resourceUrl else {
+//    print("Could not find file: \(filename)")
+//return
+//}
+//  do {
+//    try backgroundMusicPlayer =
+//      AVAudioPlayer(contentsOf: url)
+//          backgroundMusicPlayer.numberOfLoops = -1
+//          backgroundMusicPlayer.prepareToPlay()
+//          backgroundMusicPlayer.play()
+//        } catch {
+//          print("Could not create audio player!")
+//      return
+//        }
+//}
 
-func playBackgroundMusic(filename: String) {
-  let resourceUrl = Bundle.main.url(forResource:
-    filename, withExtension: nil)
-  guard let url = resourceUrl else {
-    print("Could not find file: \(filename)")
-return
-}
-  do {
-    try backgroundMusicPlayer =
-      AVAudioPlayer(contentsOf: url)
-          backgroundMusicPlayer.numberOfLoops = -1
-          backgroundMusicPlayer.prepareToPlay()
-          backgroundMusicPlayer.play()
-        } catch {
-          print("Could not create audio player!")
-      return
-      } }
-
-func playEffectSound(filename: String, listener: CGPoint, position: CGPoint) {
-    let resourceUrl = Bundle.main.url(forResource: filename, withExtension: nil)
-    guard let url = resourceUrl else {
-        print("Could not find file: \(filename)")
-    return
-    }
-    do {
-        try effectsMusicPlayer = AVAudioPlayer(contentsOf: url)
-        if listener.x - position.x > UIScreen.main.bounds.width/2 &&
-            listener.y - position.y > UIScreen.main.bounds.height/2 {
-            effectsMusicPlayer.volume = 0.0
-        }
-        else {
-            effectsMusicPlayer.volume = 1.0
-        }
-        effectsMusicPlayer.prepareToPlay()
-        effectsMusicPlayer.play()
-    } catch {
-        print("Could not create audio player!")
-        return
-    }
-}

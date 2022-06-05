@@ -154,6 +154,7 @@ extension TossScene {
                 pauseButton.alpha = 0.0
                 self.pauseChilds(isPaused: true)
                 pauseScreen.alpha = 1.0
+                player.pause(music: Audio.MusicFiles.background)
             }
             
             if selectedNode?.name! == "ContinueBtn" {
@@ -161,6 +162,7 @@ extension TossScene {
                 pauseScreen.alpha = 0.0
                 pauseButton.alpha = 1.0
                 pauseChilds(isPaused: false)
+                player.resume()
             }
             
             if selectedNode?.name! == "RestartBtn" {

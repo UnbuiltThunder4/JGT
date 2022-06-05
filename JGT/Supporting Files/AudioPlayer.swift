@@ -24,12 +24,18 @@ extension AudioPlayerImpl: AudioPlayer {
         currentMusicPlayer?.stop()
         guard let newPlayer = try? AVAudioPlayer(soundFile: music) else { return }
         newPlayer.volume = musicVolume
+        newPlayer.prepareToPlay()
         newPlayer.play()
+        newPlayer.numberOfLoops = -1
         currentMusicPlayer = newPlayer
     }
     
     func pause(music: Music) {
         currentMusicPlayer?.pause()
+    }
+    
+    func resume() {
+        currentMusicPlayer?.play()
     }
     
     func play(effect: Effect) {
