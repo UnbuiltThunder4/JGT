@@ -313,7 +313,7 @@ class Gate: Structure {
         if (self.health <= 0) {
             self.removeFromParent()
             tossScene.darkson.target = nil
-            gameLogic.playSound(node: nil, audio: Audio.EffectFiles.darkSonGateDestroyed, wait: false)
+//            gameLogic.playSound(node: nil, audio: Audio.EffectFiles.darkSonGateDestroyed, wait: false)
             //HERE YOU WIN
         }
     }
