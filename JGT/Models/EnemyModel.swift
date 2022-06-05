@@ -165,6 +165,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
         self.shieldCounter = 0
         self.idleCounter = 0
         if (self.target != nil) {
+            let targetType = self.target?.type
             if (self.target!.state != .invillage && self.target!.state != .inacademy && self.target!.state != .intavern) {
                 if (self.type != .bow) {
                     let originalPosDistance = CGVector(dx: self.initialx - self.position.x, dy: self.initialy - self.position.y)
@@ -172,6 +173,13 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                     if (isVectorSmallerThan(vector: targetDistance, other: 100)) {
                         self.attackCounter += 1
                         if (self.attackCounter % attackTime == 0) {
+                            
+                            if self.type == .axe {
+                                gameLogic.playSound(node: self, audio: Audio.EffectFiles.axeGnomeAttack, wait: false)
+                            } else {
+                                gameLogic.playSound(node: self, audio: Audio.EffectFiles.smallGnomeAttack, wait: false)
+                            }
+                            
                             if (self.target!.type == .rock) {
                                 self.target!.health -= self.attack / 2
                             }
@@ -221,6 +229,24 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                             self.target = nil
                             self.state = .idle
                             removeAction(forKey: "walk")
+                            
+                            switch targetType {
+                            case .rock:
+                                let random = Int.random(in: 0...1)
+                                gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.stoneblinDeath1 : Audio.EffectFiles.stoneblinDeath3, wait: true)
+                            case .fire:
+                                let random = Int.random(in: 0...1)
+                                gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.flameblinDeath1 : Audio.EffectFiles.flameblinDeath2, wait: true)
+                            case .gum:
+                                let random = Int.random(in: 0...1)
+                                gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.gumblinDeath1 : Audio.EffectFiles.gumblinDeath2, wait: true)
+                            case .normal:
+                                let random = Int.random(in: 0...1)
+                                gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.goblinDeath1 : Audio.EffectFiles.goblinDeath2, wait: true)
+                            case .none:
+                                break
+                            }
+                            
                         }
                     }
                 }

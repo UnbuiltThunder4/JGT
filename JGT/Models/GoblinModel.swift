@@ -653,6 +653,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                     self.health -= 80
                     self.HWpoints -= 5
                     self.state = .stunned
+                    gameLogic.playSound(node: trap, audio: Audio.EffectFiles.trap, wait: false)
                 }
                 else {
                     self.HWpoints += 5
@@ -979,28 +980,27 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         if (self.type != .rock) {
             self.HWpoints += 5
             
-            let random = Int.random(in: 0...1)
-            gameLogic.playSound(node: self,
-                                audio: random == 0 ? Audio.EffectFiles.stoneblinFly1 : Audio.EffectFiles.stoneblinFly1, wait: false)
-        }
-        else {
-            self.HWpoints += 10
             switch self.type {
             case .normal:
-                let random = Int.random(in: 0...1)
                 gameLogic.playSound(node: self,
-                                    audio: random == 0 ? Audio.EffectFiles.goblinFly1 : Audio.EffectFiles.goblinFly2, wait: false)
+                                    audio: Audio.EffectFiles.goblinSelfCatapult1, wait: false)
             case .fire:
                 let random = Int.random(in: 0...1)
                 gameLogic.playSound(node: self,
-                                    audio: random == 0 ? Audio.EffectFiles.flameblinFly1 : Audio.EffectFiles.flameblinFly2, wait: false)
+                                    audio: random == 0 ? Audio.EffectFiles.flameblinSelfCatapult1 : Audio.EffectFiles.flameblinSelfCatapult2, wait: false)
             case .gum:
+                let random = Int.random(in: 0...1)
                 gameLogic.playSound(node: self,
-                                    audio: Audio.EffectFiles.gumblinFly1, wait: false)
+                                    audio: random == 0 ? Audio.EffectFiles.gumblinSelfCatapult1 : Audio.EffectFiles.gumblinSelfCatapult2, wait: false)
             case .rock:
                 break
             }
-
+        }
+        else {
+            self.HWpoints += 10
+            let random = Int.random(in: 0...1)
+            gameLogic.playSound(node: self,
+                                audio: random == 0 ? Audio.EffectFiles.stoneblinFly1 : Audio.EffectFiles.stoneblinFly1, wait: false)
         }
         let prof2 = Proficency(type: .catapult, level: 2)
         if let _ = self.Proficiencies.firstIndex(where: { $0.id == prof2.id }) {

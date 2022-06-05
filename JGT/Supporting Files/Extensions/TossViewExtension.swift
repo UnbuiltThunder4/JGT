@@ -58,6 +58,28 @@ extension TossScene {
                 
                 if let goblinNode = selectedNode as? Goblin {
                     goblinNode.state = .flying //this will change the update function of the goblin
+                    switch goblinNode.type {
+                    case .normal:
+                        let random = Int.random(in: 0...1)
+                        gameLogic.playSound(node: goblinNode,
+                                  audio: random == 0 ? Audio.EffectFiles.goblinFly1 : Audio.EffectFiles.goblinFly2, wait: false)
+                        break
+                    case .fire:
+                        let random = Int.random(in: 0...1)
+                        gameLogic.playSound(node: goblinNode,
+                                  audio: random == 0 ? Audio.EffectFiles.flameblinFly1 : Audio.EffectFiles.flameblinFly2, wait: false)
+
+                        break
+                    case .rock:
+                        let random = Int.random(in: 0...1)
+                        gameLogic.playSound(node: goblinNode,
+                                  audio: random == 0 ? Audio.EffectFiles.stoneblinFly1 : Audio.EffectFiles.stoneblinFly2, wait: false)
+                        break
+                    case .gum:
+                        gameLogic.playSound(node: goblinNode,
+                                  audio: Audio.EffectFiles.gumblinFly1, wait: false)
+                        break
+                    }
                 }
             }
         }

@@ -176,8 +176,14 @@ class GameLogic: ObservableObject {
             
             switch type {
             case .normal:
+                let random = Int.random(in: 0...1)
+                playSound(node: newGoblin,
+                          audio: random == 0 ? Audio.EffectFiles.goblinFly1 : Audio.EffectFiles.goblinFly2, wait: false)
                 break
             case .fire:
+                let random = Int.random(in: 0...1)
+                playSound(node: newGoblin,
+                          audio: random == 0 ? Audio.EffectFiles.flameblinFly1 : Audio.EffectFiles.flameblinFly2, wait: false)
                 newGoblin.fear = 0
                 newGoblin.maxFear = 0
                 newGoblin.texture = SKTexture(imageNamed: "fire_goblin")
@@ -187,9 +193,14 @@ class GameLogic: ObservableObject {
                 flameblinParticle?.zPosition = -1
                 break
             case .rock:
+                let random = Int.random(in: 0...1)
+                playSound(node: newGoblin,
+                          audio: random == 0 ? Audio.EffectFiles.stoneblinFly1 : Audio.EffectFiles.stoneblinFly2, wait: false)
                 newGoblin.texture = SKTexture(imageNamed: "rock_goblin")
                 break
             case .gum:
+                playSound(node: newGoblin,
+                          audio: Audio.EffectFiles.gumblinFly1, wait: false)
                 newGoblin.texture = SKTexture(imageNamed: "gum_goblin")
                 break
             }
