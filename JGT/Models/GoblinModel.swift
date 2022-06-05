@@ -1060,7 +1060,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             gameLogic.playSound(node: self,
                                 audio: random == 0 ? Audio.EffectFiles.flameblinBurn1 : Audio.EffectFiles.flameblinBurn2, wait: false)
         case .rock:
-            break
+            gameLogic.playSound(node: self,
+                                audio: Audio.EffectFiles.stoneblinBurn1, wait: false)
         case .gum:
             gameLogic.playSound(node: self, audio: Audio.EffectFiles.gumblinBurn1, wait: false)
         }
