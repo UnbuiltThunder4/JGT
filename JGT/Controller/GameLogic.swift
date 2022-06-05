@@ -7,6 +7,7 @@
 
 import Foundation
 import SpriteKit
+import AVFoundation
 
 class GameLogic: ObservableObject {
     
@@ -166,7 +167,8 @@ class GameLogic: ObservableObject {
             let rotateLeft = SKAction.rotate(byAngle: .pi/4, duration: 0.2)
             let rotateAnimation = SKAction.sequence([rotateRight, rotateLeft])
             tossScene.cauldron.run(rotateAnimation)
-
+            
+            playSound(node: tossScene.cauldron, fileName: "cauldronn", wait: false)
             
             newGoblin.type = type
             newGoblin.state = .launched
@@ -210,5 +212,8 @@ class GameLogic: ObservableObject {
         scrollableMenu.hideRow()
     }
     
+    public func playSound(node: SKNode, fileName: String, wait: Bool) {
+        node.run(SKAction.playSoundFileNamed(fileName, waitForCompletion: wait))
+    }
 }
 

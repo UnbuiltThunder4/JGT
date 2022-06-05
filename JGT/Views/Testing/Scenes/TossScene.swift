@@ -9,7 +9,7 @@ import Foundation
 import SpriteKit
 import GameplayKit
 import SwiftUI
-import NotificationCenter
+import AVFoundation
 
 class TossScene: SKScene, UIGestureRecognizerDelegate {
     
@@ -23,6 +23,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     var structures: [Structure] = []
     
     let background = SKSpriteNode(imageNamed: "forest")
+    var effectsMusicPlayer: AVAudioPlayer!
     
     var selectedNode: SKNode?
     var lastSelectedGoblin: SKNode?
@@ -109,7 +110,9 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         setupHUD()
         setupCamera()
         
-        playBackgroundMusic(filename: "Psycho Katana - Instrumental.wav")
+        player.musicVolume = 0.5
+//        playBackgroundMusic(filename: "Psycho Katana - Instrumental.wav")
+        player.play(music: Audio.MusicFiles.background)
         
         //        for _ in 0..<10 {
         //        structures[5].addGoblin(Goblin(health: 1, attack: 1, wit: NeuralNetwork(
@@ -125,6 +128,9 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         if paws == false {
+           
+            self.listener?.position = cameraNode.position
+            
             var hasToUpdateRank = false
             
             self.population.goblins.forEach {
