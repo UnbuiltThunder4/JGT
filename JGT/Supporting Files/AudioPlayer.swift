@@ -36,8 +36,17 @@ extension AudioPlayerImpl: AudioPlayer {
     
     func play(effect: Effect, node: SKNode?) {
         guard let effectPlayer = try? AVAudioPlayer(soundFile: effect) else { return }
-        if node != nil {
-        effectPlayer.volume = effectsVolume
+        if let node = node {
+            if (node.position.x > (node.parent?.scene?.camera?.position.x)! + UIScreen.main.bounds.width/2 &&
+                node.position.y > (node.parent?.scene?.camera?.position.y)! + UIScreen.main.bounds.height/2) ||
+                (node.position.x < (node.parent?.scene?.camera?.position.x)! - UIScreen.main.bounds.width/2 &&
+                    node.position.y < (node.parent?.scene?.camera?.position.y)! - UIScreen.main.bounds.height/2)
+            {
+                effectPlayer.volume = 0.0
+            }
+            else {
+                effectPlayer.volume = effectsVolume
+            }
         }
         else {
             effectPlayer.volume = effectsVolume

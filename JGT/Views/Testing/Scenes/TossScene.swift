@@ -106,6 +106,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         background.addChild(cameraNode)
         camera = cameraNode
         cameraNode.position = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
+        camera?.addChild(SKShapeNode(circleOfRadius: 10.0))
         
         setupHUD()
         setupCamera()

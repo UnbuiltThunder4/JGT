@@ -945,6 +945,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func setFiretoSelf() {
         
+        print("a")
         player.play(effect: Audio.EffectFiles.treeOnFire, node: self)
             
         self.closeStructure!.removeFromParent()
