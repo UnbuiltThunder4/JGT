@@ -934,7 +934,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func setFiretoTree() {
-        player.play(effect: Audio.EffectFiles.treeOnFire)
+        player.play(effect: Audio.EffectFiles.treeOnFire, node: self)
+    
         self.closeStructure!.removeFromParent()
         self.evilGauge.updateGauge(goblin: nil, value: 1)
         self.HWpoints += 5
@@ -943,6 +944,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func setFiretoSelf() {
+        
+        player.play(effect: Audio.EffectFiles.treeOnFire, node: self)
+            
         self.closeStructure!.removeFromParent()
         self.type = .fire
         self.fear = 0

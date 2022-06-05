@@ -103,7 +103,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         tapGestureRecognizer.require(toFail: longPressGestureRecognizer)
         tapGestureRecognizer.require(toFail: pinchGestureRecognizer)
         
-        addChild(cameraNode)
+        background.addChild(cameraNode)
         camera = cameraNode
         cameraNode.position = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
         

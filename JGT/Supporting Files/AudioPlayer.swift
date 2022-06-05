@@ -6,6 +6,7 @@
 //
 
 import AVKit
+import SpriteKit
 
 class AudioPlayerImpl {
     
@@ -15,9 +16,11 @@ class AudioPlayerImpl {
         didSet { currentMusicPlayer?.volume = musicVolume }
     }
     var effectsVolume: Float = 1.0
+    var node: SKNode?
 }
 
 extension AudioPlayerImpl: AudioPlayer {
+    
     
     func play(music: Music) {
         currentMusicPlayer?.stop()
@@ -31,9 +34,14 @@ extension AudioPlayerImpl: AudioPlayer {
         currentMusicPlayer?.pause()
     }
     
-    func play(effect: Effect) {
+    func play(effect: Effect, node: SKNode?) {
         guard let effectPlayer = try? AVAudioPlayer(soundFile: effect) else { return }
+        if node != nil {
         effectPlayer.volume = effectsVolume
+        }
+        else {
+            effectPlayer.volume = effectsVolume
+        }
         effectPlayer.play()
         currentEffectPlayer = effectPlayer
     }
