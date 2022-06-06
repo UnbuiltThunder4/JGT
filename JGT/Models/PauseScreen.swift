@@ -31,7 +31,8 @@ class PauseScreen: SKSpriteNode {
             sheetHeight = UIScreen.main.bounds.height/1.2
             break
         case .pad:
-
+            sheetWidth = UIScreen.main.bounds.width
+            sheetHeight = UIScreen.main.bounds.height
             break
         @unknown default:
             break

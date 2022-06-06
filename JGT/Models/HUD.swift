@@ -51,6 +51,19 @@ class HUD: SKNode {
         cauldron.currentGoblinsNumberLabel.fontSize = HUDSettings.fontSize
         cauldron.currentGoblinsNumberLabel.fontColor = HUDSettings.fontColor
         
+        cauldron.goblinCount.fontName = HUDSettings.font
+        cauldron.goblinCount.fontSize = HUDSettings.fontSize
+        cauldron.goblinCount.fontColor = HUDSettings.fontColor
+        cauldron.flameblinCount.fontName = HUDSettings.font
+        cauldron.flameblinCount.fontSize = HUDSettings.fontSize
+        cauldron.flameblinCount.fontColor = HUDSettings.fontColor
+        cauldron.rockCount.fontName = HUDSettings.font
+        cauldron.rockCount.fontSize = HUDSettings.fontSize
+        cauldron.rockCount.fontColor = HUDSettings.fontColor
+        cauldron.gumblingCount.fontName = HUDSettings.font
+        cauldron.gumblingCount.fontSize = HUDSettings.fontSize
+        cauldron.gumblingCount.fontColor = HUDSettings.fontColor
+        
         cauldron.currentGoblinsNumberLabel.text = String(cauldron.currentGoblinsNumber) + "/" + String(cauldron.maxGoblinNumber)
         
     }
@@ -188,27 +201,32 @@ class HUD: SKNode {
         pauseScreen.pauseSign.zPosition = 5
         pauseScreen.pauseSign.position = CGPoint.zero
         
-        pauseScreen.pauseMessage.position = CGPoint(x: 0, y: pauseScreen.size.height/5.2)
+        pauseScreen.pauseMessage.size = CGSize(width: pauseScreen.pauseSign.size.width/2, height: pauseScreen.pauseSign.size.width/10)
+        pauseScreen.pauseMessage.position = CGPoint(x: 0, y: pauseScreen.pauseSign.size.height/5.2)
         pauseScreen.pauseMessage.zPosition = 5
         
+        pauseScreen.continueMessage.size = CGSize(width: pauseScreen.pauseSign.size.width/5, height: pauseScreen.pauseSign.size.width/10)
         pauseScreen.continueMessage.position = CGPoint(x: 0, y: pauseScreen.pauseSign.size.height/10)
         pauseScreen.continueMessage.zPosition = 5
 
+        pauseScreen.exitMessage.size = CGSize(width: pauseScreen.pauseSign.size.width/5, height: pauseScreen.pauseSign.size.width/10)
         pauseScreen.exitMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/4, y: pauseScreen.pauseSign.size.height/10)
         pauseScreen.exitMessage.zPosition = 5
 
+        pauseScreen.restartMessage.size = CGSize(width: pauseScreen.pauseSign.size.width/5, height: pauseScreen.pauseSign.size.width/10)
         pauseScreen.restartMessage.position = CGPoint(x: -pauseScreen.pauseSign.size.width/4, y: pauseScreen.pauseSign.size.height/10)
         pauseScreen.restartMessage.zPosition = 5
         
+        pauseScreen.continueButton.size = CGSize(width: pauseScreen.pauseSign.size.width/10, height: pauseScreen.pauseSign.size.width/10)
         pauseScreen.continueButton.zPosition = 5
-        pauseScreen.continueButton.position = CGPoint(x: pauseScreen.continueMessage.position.x, y: -pauseScreen.size.height/5.2)
+        pauseScreen.continueButton.position = CGPoint(x: pauseScreen.continueMessage.position.x, y: -pauseScreen.pauseSign.size.height/5.2)
         
-        pauseScreen.quitButton.size = pauseScreen.littleButtonsSize
-        pauseScreen.quitButton.position = CGPoint(x: pauseScreen.exitMessage.position.x, y: -pauseScreen.size.height/5.2)
+        pauseScreen.quitButton.size = CGSize(width: pauseScreen.pauseSign.size.width/10, height: pauseScreen.pauseSign.size.width/10)
+        pauseScreen.quitButton.position = CGPoint(x: pauseScreen.exitMessage.position.x, y: -pauseScreen.pauseSign.size.height/5.2)
         pauseScreen.quitButton.zPosition = 10
     
-        pauseScreen.restartButton.size = pauseScreen.littleButtonsSize
-        pauseScreen.restartButton.position = CGPoint(x: pauseScreen.restartMessage.position.x, y: -pauseScreen.size.height/5.2)
+        pauseScreen.restartButton.size = CGSize(width: pauseScreen.pauseSign.size.width/10, height: pauseScreen.pauseSign.size.width/10)
+        pauseScreen.restartButton.position = CGPoint(x: pauseScreen.restartMessage.position.x, y: -pauseScreen.pauseSign.size.height/5.2)
         pauseScreen.restartButton.zPosition = 5
     }
     

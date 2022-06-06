@@ -67,6 +67,9 @@ class ScrollableMenu: SKSpriteNode, ObservableObject {
         }
         self.hideRow()
         }
+        else {
+            self.nameLabel.fontColor = .white
+        }
     }
     
     func closeMenu() {

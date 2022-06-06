@@ -38,57 +38,65 @@ class Cauldron: SKSpriteNode {
         
         self.addChild(currentGoblinsNumberLabel)
         
-        self.goblinHead.position = CGPoint(x: self.position.x + self.goblinHead.size.width/2, y: self.position.y)
-        self.goblinHead.setScale(0.2)
+        self.goblinHead.size = CGSize(width: self.size.width/2, height: self.size.width/4)
+        self.goblinHead.position = CGPoint(x: self.position.x + self.size.width + self.goblinHead.size.width/4,
+                                           y: self.position.y)
         self.goblinHead.color = .green
         self.goblinHead.zPosition = 100
         self.goblinHead.alpha = 0
         self.goblinHead.name = "normalHead"
         self.addChild(goblinHead)
         
-        self.goblinCount.position = CGPoint(x: self.goblinHead.position.x + self.size.width/2, y: self.goblinHead.position.y)
+        self.goblinCount.position = CGPoint(x: self.goblinHead.position.x + self.goblinHead.size.width/1.5,
+                                            y: self.goblinHead.position.y - self.goblinHead.frame.maxY * 0.30)
         self.goblinCount.zPosition = 100
         self.goblinCount.alpha = 0
         self.goblinCount.name = "goblinCount"
         self.addChild(goblinCount)
         
-        self.flameblinHead.position = CGPoint(x: self.position.x + self.flameblinHead.size.width/2, y: self.position.y + 50)
-        self.flameblinHead.setScale(0.2)
+        self.flameblinHead.size = CGSize(width: self.size.width/2, height: self.size.width/4)
+        self.flameblinHead.position = CGPoint(x: self.position.x + self.size.width + self.flameblinHead.size.width/4,
+                                              y: self.position.y + self.size.height/2)
         self.flameblinHead.color = .red
         self.flameblinHead.zPosition = 100
         self.flameblinHead.alpha = 0
         self.flameblinHead.name = "flameblinHead"
         self.addChild(flameblinHead)
         
-        self.flameblinCount.position = CGPoint(x: self.flameblinHead.position.x + self.size.width/2, y: self.flameblinHead.position.y)
+        self.flameblinCount.position = CGPoint(x: self.flameblinHead.position.x + self.flameblinHead.size.width/1.5,
+                                               y: self.flameblinHead.position.y - self.flameblinHead.frame.maxY * 0.10)
         self.flameblinCount.zPosition = 100
         self.flameblinCount.alpha = 0
         self.flameblinCount.name = "flameblinCount"
         self.addChild(flameblinCount)
         
-        self.rockHead.position = CGPoint(x: self.position.x + self.rockHead.size.width/2, y: self.position.y + 100)
-        self.rockHead.setScale(0.2)
+        self.rockHead.size = CGSize(width: self.size.width/2, height: self.size.width/4)
+        self.rockHead.position = CGPoint(x: self.position.x + self.size.width + self.goblinHead.size.width/4,
+                                         y: self.position.y + self.size.height/4)
         self.rockHead.color = .yellow
         self.rockHead.zPosition = 100
         self.rockHead.alpha = 0
         self.rockHead.name = "rockHead"
         self.addChild(rockHead)
         
-        self.rockCount.position = CGPoint(x: self.rockHead.position.x + self.size.width/2, y: self.rockHead.position.y)
+        self.rockCount.position = CGPoint(x: self.rockHead.position.x + self.rockHead.size.width/1.5,
+                                            y: self.rockHead.position.y - self.rockHead.frame.maxY * 0.10)
         self.rockCount.zPosition = 100
         self.rockCount.alpha = 0
         self.rockCount.name = "rockCount"
         self.addChild(rockCount)
         
-        self.gumblingHead.position = CGPoint(x: self.position.x + self.gumblingHead.size.width/2, y: self.position.y + 160)
-        self.gumblingHead.setScale(0.2)
+        self.gumblingHead.size = CGSize(width: self.size.width/2, height: self.size.width/4)
+        self.gumblingHead.position = CGPoint(x: self.position.x + self.size.width + self.gumblingHead.size.width/4,
+                                             y: self.position.y - self.size.height/4)
         self.gumblingHead.color = .yellow
         self.gumblingHead.zPosition = 100
         self.gumblingHead.alpha = 0
         self.gumblingHead.name = "gumblingHead"
         self.addChild(gumblingHead)
         
-        self.gumblingCount.position = CGPoint(x: self.gumblingHead.position.x + self.size.width/2, y: self.gumblingHead.position.y)
+        self.gumblingCount.position = CGPoint(x: self.gumblingHead.position.x + self.gumblingHead.size.width/1.5,
+                                            y: self.gumblingHead.position.y + self.gumblingHead.frame.maxY * 0.30)
         self.gumblingCount.zPosition = 100
         self.gumblingCount.alpha = 0
         self.gumblingCount.name = "gumblingCount"

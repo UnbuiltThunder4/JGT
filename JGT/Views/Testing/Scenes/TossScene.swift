@@ -130,8 +130,6 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         if paws == false {
-           
-            self.listener?.position = cameraNode.position
             
             var hasToUpdateRank = false
             
