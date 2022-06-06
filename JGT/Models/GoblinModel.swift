@@ -21,6 +21,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     public var type: GoblinType
     public var age: Int = 0
     private var agecounter: Int = 0
+    public var pressCounter: Int = 0
     
     public var isSelected: Bool = false
     public var isGraduated: Bool = false
@@ -1191,5 +1192,39 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         
         self.parent!.run(removeSequence, withKey: "removeParticle")
     }
+    
+    public func pressAnimation() -> Bool {
+        var isDead = false
+        let twoSecond = 120
+        self.pressCounter += 1
+        self.state = .inhand
+        self.removeAllActions()
+        print("\(twoSecond - self.pressCounter)")
+        if (twoSecond - self.pressCounter == 0 && isDead == false) {
+            self.pressCounter = 0
+            isDead = true
+            switch self.type {
+            case .rock:
+                let random = Int.random(in: 0...1)
+                gameLogic.playSound(node: self.parent?.scene?.camera, audio: random == 0 ? Audio.EffectFiles.stoneblinDeath2 : Audio.EffectFiles.stoneblinDeath3, wait: true)
+            case .fire:
+                let random = Int.random(in: 0...1)
+                gameLogic.playSound(node: self.parent?.scene?.camera, audio: random == 0 ? Audio.EffectFiles.flameblinDeath2 : Audio.EffectFiles.flameblinDeath1, wait: true)
+            case .gum:
+                let random = Int.random(in: 0...1)
+                gameLogic.playSound(node: self.parent?.scene?.camera, audio: random == 0 ? Audio.EffectFiles.gumblinDeath1 : Audio.EffectFiles.gumblinDeath2, wait: true)
+            case .normal:
+                let random = Int.random(in: 0...1)
+                gameLogic.playSound(node: self.parent?.scene?.camera, audio: random == 0 ? Audio.EffectFiles.goblinDeath1 : Audio.EffectFiles.goblinDeath2, wait: true)
+            }
+            self.removeFromParent()
+            return isDead
+        } else {
+//            self.pressCounter = 0
+            return false
+        }
+    }
+ 
+
     
 }

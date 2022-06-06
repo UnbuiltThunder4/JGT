@@ -185,7 +185,7 @@ extension TossScene {
                     self.evilGauge.updateGauge(goblin: selectedNode as? Goblin, value: nil)
                     self.cauldron.updateCauldron(amount: -1)
                 }
-                population.goblins.remove(at: population.getIndex(of: selectedNode as! Goblin)!)
+//                population.goblins.remove(at: population.getIndex(of: selectedNode as! Goblin)!)
                 
                 if let lastSelected = lastSelectedGoblin {
                     if selectedNode!.isEqual(to: lastSelected) {
@@ -193,23 +193,42 @@ extension TossScene {
                     }
                 }
                 
+                self.pressed = true
+                
                 let dyingGoblin = selectedNode as! Goblin
                 switch dyingGoblin.type {
                 case .rock:
                     let random = Int.random(in: 0...1)
-                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.stoneblinDeath1 : Audio.EffectFiles.stoneblinDeath3, wait: true)
+                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.stoneblinPress1 : Audio.EffectFiles.stoneblinPress2, wait: true)
                 case .fire:
                     let random = Int.random(in: 0...1)
-                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.flameblinDeath1 : Audio.EffectFiles.flameblinDeath2, wait: true)
+                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.flameblinPress2 : Audio.EffectFiles.flameblinPress3, wait: true)
                 case .gum:
-                    let random = Int.random(in: 0...1)
-                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.gumblinDeath1 : Audio.EffectFiles.gumblinDeath2, wait: true)
+                    gameLogic.playSound(node: cameraNode, audio: Audio.EffectFiles.gumblinPress1, wait: true)
                 case .normal:
-                    let random = Int.random(in: 0...1)
-                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.goblinDeath1 : Audio.EffectFiles.goblinDeath2, wait: true)
+                    gameLogic.playSound(node: cameraNode, audio: Audio.EffectFiles.goblinPress1, wait: true)
                 }
                 
-                selectedNode!.removeFromParent()
+
+//                dyingGoblin.removeAllActions()
+//                dyingGoblin.state = .inhand
+//                dyingGoblin.pressAnimation()
+//                switch dyingGoblin.type {
+//                case .rock:
+//                    let random = Int.random(in: 0...1)
+//                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.stoneblinDeath1 : Audio.EffectFiles.stoneblinDeath3, wait: true)
+//                case .fire:
+//                    let random = Int.random(in: 0...1)
+//                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.flameblinDeath1 : Audio.EffectFiles.flameblinDeath2, wait: true)
+//                case .gum:
+//                    let random = Int.random(in: 0...1)
+//                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.gumblinDeath1 : Audio.EffectFiles.gumblinDeath2, wait: true)
+//                case .normal:
+//                    let random = Int.random(in: 0...1)
+//                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.goblinDeath1 : Audio.EffectFiles.goblinDeath2, wait: true)
+//                }
+                
+//                selectedNode!.removeFromParent()
             }
             if selectedNode?.name! == "background" {
                 channeling = true
@@ -221,6 +240,21 @@ extension TossScene {
             }
         }
         if recognizer.state == .ended {
+            
+            if selectedNode?.name == "goblin" {
+                self.pressed = false
+                if self.isDead == false {
+                    let goblin = selectedNode as! Goblin
+                    goblin.pressCounter = 0
+                    goblin.state = .idle
+                } else {
+                    self.isDead = false
+                    let goblin = selectedNode as! Goblin
+                    population.goblins.remove(at: population.getIndex(of: goblin)!)
+//                    goblin.removeFromParent()
+                }
+            }
+            
             if selectedNode?.name! == "background" {
                 channeling = false
                 evilSight.dispatchSight()
