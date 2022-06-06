@@ -245,8 +245,8 @@ extension TossScene {
                 } else {
                     self.isDead = false
                     let goblin = selectedNode as! Goblin
-                    population.kill(goblin)
-//                    population.goblins.remove(at: population.getIndex(of: goblin)!)
+//                    population.kill(goblin)
+                    population.goblins.remove(at: population.getIndex(of: goblin)!)
                     
                     if self.evilGauge.currentFill <= 20 {
                         self.evilGauge.updateGauge(goblin: goblin, value: nil)
