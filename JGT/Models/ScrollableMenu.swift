@@ -57,7 +57,7 @@ class ScrollableMenu: SKSpriteNode, ObservableObject {
     
     func openMenu(structure: Structure){
         self.alpha = 1.0
-        self.nameLabel.text = structure.name
+        self.nameLabel.text = structure.fullName
         self.descLabel.text = structure.desc
         
         if structure.type == .tavern || structure.type == .academy || structure.type == .village {

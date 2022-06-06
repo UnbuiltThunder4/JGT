@@ -33,7 +33,7 @@ class Cauldron: SKSpriteNode {
         self.zPosition = 100
         
         currentGoblinsNumberLabel.name = "goblinsNumber"
-        currentGoblinsNumberLabel.position = CGPoint(x: 0, y: -self.size.height/4)
+        currentGoblinsNumberLabel.position = CGPoint(x: 0.0, y: self.frame.midY - self.frame.maxY/4)
         currentGoblinsNumberLabel.isUserInteractionEnabled = false
         
         self.addChild(currentGoblinsNumberLabel)

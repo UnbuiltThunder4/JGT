@@ -136,7 +136,7 @@ class Structure: SKSpriteNode, ObservableObject {
             
         case .tree:
             img = "tree"
-            self.desc = "Pine Tree"
+            self.fullName = "Pine Tree"
             self.desc = "“A conifer tree full of life and uses, goblin can set them on fire just for fun”"
             self.mask = .enviroment
             self.width = 150

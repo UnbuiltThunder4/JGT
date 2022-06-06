@@ -157,10 +157,10 @@ class HUD: SKNode {
         addChild(scrollableMenu)
         scrollableMenu.position = position
         
-        scrollableMenu.nameLabel.position = CGPoint(x: scrollableMenu.frame.maxX * -0.08,
-                                           y: scrollableMenu.frame.maxY * 0.55)
+        scrollableMenu.nameLabel.position = CGPoint(x: 0,
+                                           y: scrollableMenu.frame.maxY * 0.75)
         scrollableMenu.descLabel.position = CGPoint(x: 0,
-                                                    y: scrollableMenu.frame.minY * 0.08)
+                                                    y: scrollableMenu.frame.maxY * 0.55)
         
         scrollableMenu.nameLabel.fontName = HUDSettings.font
         scrollableMenu.descLabel.fontName = HUDSettings.font
