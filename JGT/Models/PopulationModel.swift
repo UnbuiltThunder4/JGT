@@ -76,17 +76,8 @@ class Population: ObservableObject {
     public func kill(_ goblin: Goblin) {
         let index = self.goblins.firstIndex(of: goblin)!
         
-        let killGoblin = SKAction.run({
-            self.goblins[index].removeFromParent()
-            self.goblins.remove(at: index)
-        })
-        
-        let killSequence = SKAction.sequence([
-            .wait(forDuration: 1),
-            killGoblin
-        ])
-        
-        goblin.run(killSequence)
+        self.goblins[index].removeFromParent()
+        self.goblins.remove(at: index)
         
     }
     

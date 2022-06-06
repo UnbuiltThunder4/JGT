@@ -62,22 +62,22 @@ extension TossScene {
                     case .normal:
                         let random = Int.random(in: 0...1)
                         gameLogic.playSound(node: goblinNode,
-                                  audio: random == 0 ? Audio.EffectFiles.goblinFly1 : Audio.EffectFiles.goblinFly2, wait: false)
+                                            audio: random == 0 ? Audio.EffectFiles.goblinFly1 : Audio.EffectFiles.goblinFly2, wait: false)
                         break
                     case .fire:
                         let random = Int.random(in: 0...1)
                         gameLogic.playSound(node: goblinNode,
-                                  audio: random == 0 ? Audio.EffectFiles.flameblinFly1 : Audio.EffectFiles.flameblinFly2, wait: false)
-
+                                            audio: random == 0 ? Audio.EffectFiles.flameblinFly1 : Audio.EffectFiles.flameblinFly2, wait: false)
+                        
                         break
                     case .rock:
                         let random = Int.random(in: 0...1)
                         gameLogic.playSound(node: goblinNode,
-                                  audio: random == 0 ? Audio.EffectFiles.stoneblinFly1 : Audio.EffectFiles.stoneblinFly2, wait: false)
+                                            audio: random == 0 ? Audio.EffectFiles.stoneblinFly1 : Audio.EffectFiles.stoneblinFly2, wait: false)
                         break
                     case .gum:
                         gameLogic.playSound(node: goblinNode,
-                                  audio: Audio.EffectFiles.gumblinFly1, wait: false)
+                                            audio: Audio.EffectFiles.gumblinFly1, wait: false)
                         break
                     }
                 }
@@ -180,7 +180,7 @@ extension TossScene {
             gameLogic.selectNodeForTouch(self, touchLocation: touchLocation)
             
             if selectedNode?.name! == "goblin" {
-//                population.goblins.remove(at: population.getIndex(of: selectedNode as! Goblin)!)
+                //                population.goblins.remove(at: population.getIndex(of: selectedNode as! Goblin)!)
                 
                 if let lastSelected = lastSelectedGoblin {
                     if selectedNode!.isEqual(to: lastSelected) {
@@ -204,26 +204,26 @@ extension TossScene {
                     gameLogic.playSound(node: cameraNode, audio: Audio.EffectFiles.goblinPress1, wait: true)
                 }
                 
-
-//                dyingGoblin.removeAllActions()
-//                dyingGoblin.state = .inhand
-//                dyingGoblin.pressAnimation()
-//                switch dyingGoblin.type {
-//                case .rock:
-//                    let random = Int.random(in: 0...1)
-//                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.stoneblinDeath1 : Audio.EffectFiles.stoneblinDeath3, wait: true)
-//                case .fire:
-//                    let random = Int.random(in: 0...1)
-//                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.flameblinDeath1 : Audio.EffectFiles.flameblinDeath2, wait: true)
-//                case .gum:
-//                    let random = Int.random(in: 0...1)
-//                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.gumblinDeath1 : Audio.EffectFiles.gumblinDeath2, wait: true)
-//                case .normal:
-//                    let random = Int.random(in: 0...1)
-//                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.goblinDeath1 : Audio.EffectFiles.goblinDeath2, wait: true)
-//                }
                 
-//                selectedNode!.removeFromParent()
+                //                dyingGoblin.removeAllActions()
+                //                dyingGoblin.state = .inhand
+                //                dyingGoblin.pressAnimation()
+                //                switch dyingGoblin.type {
+                //                case .rock:
+                //                    let random = Int.random(in: 0...1)
+                //                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.stoneblinDeath1 : Audio.EffectFiles.stoneblinDeath3, wait: true)
+                //                case .fire:
+                //                    let random = Int.random(in: 0...1)
+                //                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.flameblinDeath1 : Audio.EffectFiles.flameblinDeath2, wait: true)
+                //                case .gum:
+                //                    let random = Int.random(in: 0...1)
+                //                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.gumblinDeath1 : Audio.EffectFiles.gumblinDeath2, wait: true)
+                //                case .normal:
+                //                    let random = Int.random(in: 0...1)
+                //                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.goblinDeath1 : Audio.EffectFiles.goblinDeath2, wait: true)
+                //                }
+                
+                //                selectedNode!.removeFromParent()
             }
             if selectedNode?.name! == "background" {
                 channeling = true
@@ -244,15 +244,15 @@ extension TossScene {
                     goblin.state = .idle
                 } else {
                     self.isDead = false
-                    let goblin = selectedNode as! Goblin
-//                    population.kill(goblin)
-                    population.goblins.remove(at: population.getIndex(of: goblin)!)
-                    
-                    if self.evilGauge.currentFill <= 20 {
-                        self.evilGauge.updateGauge(goblin: goblin, value: nil)
-                        self.cauldron.updateCauldron(amount: -1)
+                    if let goblin = selectedNode as? Goblin {
+                        //                    population.kill(goblin)
+                        population.goblins.remove(at: population.getIndex(of: goblin)!)
+                        
+                        if self.evilGauge.currentFill <= 20 {
+                            self.evilGauge.updateGauge(goblin: goblin, value: nil)
+                            self.cauldron.updateCauldron(amount: -1)
+                        }
                     }
-//                    goblin.removeFromParent()
                 }
             }
             
@@ -271,7 +271,7 @@ extension TossScene {
             let maximumZoom = ZoomProperties.maximumZoom
             
             if recognizer.state == .began {
-                self.lastScale = cameraNode.xScale
+                gameLogic.lastScale = cameraNode.xScale
             }
             
             if recognizer.state == .changed {
@@ -280,11 +280,11 @@ extension TossScene {
                                     abs(cameraNode.position.x - self.background.frame.maxX))
                 let distanceY = min(abs(cameraNode.position.y - self.background.frame.minY),
                                     abs(cameraNode.position.y - self.background.frame.maxY))
-                let minDistanceX = (self.size.width/2 * self.currentScale) - self.background.frame.minX
-                let minDistanceY = (self.size.height/2 * self.currentScale) - self.background.frame.minY
+                let minDistanceX = (self.size.width/2 * gameLogic.currentScale) - self.background.frame.minX
+                let minDistanceY = (self.size.height/2 * gameLogic.currentScale) - self.background.frame.minY
                 
-                cameraNode.xScale = (1.0 / scale) * self.lastScale
-                cameraNode.yScale = (1.0 / scale) * self.lastScale
+                cameraNode.xScale = (1.0 / scale) * gameLogic.lastScale
+                cameraNode.yScale = (1.0 / scale) * gameLogic.lastScale
                 
                 var moveX: CGFloat = 0.0
                 var moveY: CGFloat = 0.0
@@ -314,7 +314,7 @@ extension TossScene {
                     cameraNode.xScale = minimumZoom
                     cameraNode.yScale = minimumZoom
                 }
-                self.currentScale = cameraNode.xScale
+                gameLogic.currentScale = cameraNode.xScale
             }
             
         }

@@ -13,6 +13,8 @@ class GameLogic: ObservableObject {
     
     // Single instance of the class
     static let shared: GameLogic = GameLogic()
+    var lastScale = 1.0
+    var currentScale = 1.0
     
     
     // Function responsible to set up the game before it starts.
@@ -64,10 +66,10 @@ class GameLogic: ObservableObject {
         let winSize = tossScene.size
         var retval = aNewPosition
         
-        retval.x = CGFloat(max(retval.x, (tossScene.background.frame.minX + winSize.width/2*tossScene.currentScale)))
-        retval.x = CGFloat(min(retval.x, (tossScene.background.frame.maxX - winSize.width/2*tossScene.currentScale)))
-        retval.y = CGFloat(max(retval.y, (tossScene.background.frame.minY + winSize.height/2*tossScene.currentScale)))
-        retval.y = CGFloat(min(retval.y, (tossScene.background.frame.maxY - winSize.height/2*tossScene.currentScale)))
+        retval.x = CGFloat(max(retval.x, (tossScene.background.frame.minX + winSize.width/2*currentScale)))
+        retval.x = CGFloat(min(retval.x, (tossScene.background.frame.maxX - winSize.width/2*currentScale)))
+        retval.y = CGFloat(max(retval.y, (tossScene.background.frame.minY + winSize.height/2*currentScale)))
+        retval.y = CGFloat(min(retval.y, (tossScene.background.frame.maxY - winSize.height/2*currentScale)))
         
         return retval
     }
@@ -130,7 +132,7 @@ class GameLogic: ObservableObject {
             
         } else {
             
-            let aNewPosition = CGPoint(x: tossScene.cameraNode.position.x + (translation.x * -tossScene.currentScale), y: tossScene.cameraNode.position.y - (translation.y * tossScene.currentScale))
+            let aNewPosition = CGPoint(x: tossScene.cameraNode.position.x + (translation.x * -currentScale), y: tossScene.cameraNode.position.y - (translation.y * currentScale))
             tossScene.cameraNode.position = self.boundLayerPos(tossScene, aNewPosition: aNewPosition)
             tossScene.panning = false
         }
@@ -159,7 +161,7 @@ class GameLogic: ObservableObject {
        
         let spawnable = tossScene.evilGauge.checkSpawn(type: type)
         if spawnable && population.goblins.count < MainScreenProperties.maxGoblinsNumber {
-            let spawnPoint = CGPoint(x: node.position.x - (tossScene.size.width/2)*tossScene.currentScale + 50, y: node.position.y - (tossScene.size.height/2)*tossScene.currentScale + 50)
+            let spawnPoint = CGPoint(x: node.position.x - (tossScene.size.width/2)*currentScale + 50, y: node.position.y - (tossScene.size.height/2)*currentScale + 50)
             let newGoblin = spawnGoblin(tossScene, population: population, spawnPoint: spawnPoint)
             let distance = CGVector(dx: destination.x - spawnPoint.x, dy: destination.y - spawnPoint.y)
             
@@ -225,10 +227,10 @@ class GameLogic: ObservableObject {
     
     public func playSound(node: SKNode?, audio: Effect, wait: Bool) {
         if let node = node {
-            if (node.position.x > (node.parent?.scene?.camera?.position.x)! + UIScreen.main.bounds.width/2 ||
-                node.position.y > (node.parent?.scene?.camera?.position.y)! + UIScreen.main.bounds.height/2) ||
-                (node.position.x < (node.parent?.scene?.camera?.position.x)! - UIScreen.main.bounds.width/2 ||
-                    node.position.y < (node.parent?.scene?.camera?.position.y)! - UIScreen.main.bounds.height/2)
+            if (node.position.x > (node.parent?.scene?.camera?.position.x)! + UIScreen.main.bounds.width/2 * currentScale ||
+                node.position.y > (node.parent?.scene?.camera?.position.y)! + UIScreen.main.bounds.height/2 * currentScale) ||
+                (node.position.x < (node.parent?.scene?.camera?.position.x)! - UIScreen.main.bounds.width/2 * currentScale ||
+                    node.position.y < (node.parent?.scene?.camera?.position.y)! - UIScreen.main.bounds.height/2 * currentScale) 
             {
                 print("mute")
             } else {
