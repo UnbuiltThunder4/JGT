@@ -926,7 +926,42 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func setFiretoTree() {
+        let fireParticle = SKEmitterNode(fileNamed: "FireParticle")
+        fireParticle!.name = "fireParticle"
+        fireParticle!.position = closeStructure!.position
+        fireParticle!.zPosition = -1
+        
+        let smokeParticle = SKEmitterNode(fileNamed: "SmokeParticle")
+        smokeParticle!.name = "smokeParticle"
+        smokeParticle!.position = CGPoint(x: 0, y: 0)
+        smokeParticle!.zPosition = -1
+        
+        let addFireParticle = SKAction.run({
+            self.addChild(fireParticle!)
+        })
+        let removeFireParticle = SKAction.run({
+            fireParticle!.removeFromParent()
+        })
+        let addSmokeParticle = SKAction.run({
+            self.addChild(smokeParticle!)
+        })
+        let removeSmokeParticle = SKAction.run({
+            smokeParticle!.removeFromParent()
+        })
+        
+        let burnSequence = SKAction.sequence([
+            addFireParticle,
+            .wait(forDuration: 1.5),
+            removeFireParticle,
+            .wait(forDuration: 0.5),
+            addSmokeParticle,
+            .wait(forDuration: 1.0),
+            removeSmokeParticle
+        ])
+        
+        self.run(burnSequence, withKey: "burnTreeParticle")
         self.closeStructure!.removeFromParent()
+        
         self.HWpoints += 5
         self.fitness = self.getFitness()
         self.closeStructure = nil
