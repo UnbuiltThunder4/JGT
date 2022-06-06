@@ -1222,7 +1222,20 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             goblinDeathParticle!.position = self.position
             goblinDeathParticle!.name = "goblinDeathParticle"
             goblinDeathParticle!.zPosition = 1
+            goblinDeathParticle!.particleColorSequence = nil
+            goblinDeathParticle!.particleColorBlendFactor = 1.0
             
+            switch self.type {
+            case .rock:
+                goblinDeathParticle!.particleColor = UIColor(red: 110/255, green: 110/255, blue: 110/255, alpha: 1.0)
+            case .fire:
+                goblinDeathParticle!.particleColor = UIColor(red: 224/255, green: 53/255, blue: 50/255, alpha: 1.0)
+            case .gum:
+                goblinDeathParticle!.particleColor = UIColor(red: 255/255, green: 141/255, blue: 157/255, alpha: 1.0)
+            case .normal:
+                goblinDeathParticle!.particleColor = UIColor(red: 11/255, green: 129/255, blue: 80/255, alpha: 1.0)
+            }
+                                    
             let parent = self.parent!.scene!
 
             let addParticle = SKAction.run({
