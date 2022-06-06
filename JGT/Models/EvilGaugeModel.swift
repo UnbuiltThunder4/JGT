@@ -151,7 +151,7 @@ class EvilGauge: SKSpriteNode, ObservableObject {
             case .gum:
                 self.texture = SKTexture(imageNamed: "pink-gauge")
                 gaugeBezel.texture = SKTexture(imageNamed: "pink-gauge-bezel")
-                gaugeFill.color = UIColor(red: 255/255, green: 53/255, blue: 50/255, alpha: 1.0)
+                gaugeFill.color = UIColor(red: 255/255, green: 141/255, blue: 157/255, alpha: 1.0)
                 break
             }
             
