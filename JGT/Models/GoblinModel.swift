@@ -563,6 +563,13 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 if let tavern = self.closeStructure as? Tavern {
                     tavern.removeGoblin(self)
                 }
+                
+                let frenzyParticle = SKEmitterNode(fileNamed: "FrenzyParticle")
+                frenzyParticle!.name = "frenzyParticle"
+                frenzyParticle!.position = CGPoint(x: 0.0, y: 0.0)
+                frenzyParticle!.setScale(1.5)
+                
+                self.addChild(frenzyParticle!)
             }
         }
     }
@@ -809,6 +816,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         if (self.currentFrenzyTurn == 0) {
             self.isFrenzied = false
             self.fear = self.maxFear
+            self.removeAllChildren()
         }
         else {
             self.frenzyCounter += 1
