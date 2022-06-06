@@ -33,6 +33,8 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     var panning = false
     var channeling = false
     var paws = false
+    var pressed = false
+    var isDead = false
     
     let playableRect: CGRect
     let cameraNode = SKCameraNode()
@@ -189,6 +191,15 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
                 sheet.updateSheet(goblin: lastSelectedGoblin)
             } else {
                 sheet.alpha = 0.0
+            }
+            
+            if self.pressed == true && self.isDead == false {
+                print(self.pressed)
+                if let dyingGoblin = selectedNode as? Goblin {
+                    self.isDead = dyingGoblin.pressAnimation()
+                } else {
+//                    selectedNode = nil
+                }
             }
         }
     }
