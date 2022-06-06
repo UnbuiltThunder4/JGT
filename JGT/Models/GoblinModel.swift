@@ -650,10 +650,31 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 let closeTrap = SKAction.setTexture(SKTexture(imageNamed: "closed-trap"))
                 trap.run(closeTrap)
                 if (self.type != .gum) {
-                    self.health -= 80
+                    self.health -= 10
                     self.HWpoints -= 5
                     self.state = .stunned
                     gameLogic.playSound(node: trap, audio: Audio.EffectFiles.trap, wait: false)
+                    
+                    let stunParticle = SKEmitterNode(fileNamed: "StunParticle")
+                    stunParticle!.name = "stunParticle"
+                    stunParticle!.position = CGPoint(x: 0.0, y: 0.0)
+                    stunParticle!.zPosition = -1
+                    
+                    let addStunParticle = SKAction.run {
+                        self.addChild(stunParticle!)
+                    }
+                    let fadeOutStun = SKAction.run {
+                        stunParticle!.run(SKAction.fadeOut(withDuration: 2.0))
+                    }
+                    
+                    let stunSequence = SKAction.sequence([
+                        addStunParticle,
+                        fadeOutStun,
+                    ])
+                    
+                    self.run(stunSequence, withKey: "StunSequence")
+                    
+                    stunParticle!.removeFromParent()
                 }
                 else {
                     self.HWpoints += 5
@@ -1107,14 +1128,14 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         fireParticle!.position = closeStructure!.position
         fireParticle!.position.y -= 100
         fireParticle!.zPosition = -1
-        fireParticle!.setScale(1.5)
+        fireParticle!.setScale(3)
         
         let smokeParticle = SKEmitterNode(fileNamed: "SmokeParticle")
         smokeParticle!.name = "smokeParticle"
         smokeParticle!.position = closeStructure!.position
         smokeParticle!.position.y -= 100
         smokeParticle!.zPosition = -1
-        smokeParticle!.setScale(1.5)
+        smokeParticle!.setScale(3)
         
         let addFireParticle = SKAction.run({
             self.parent!.scene!.addChild(fireParticle!)
@@ -1122,24 +1143,37 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         let removeFireParticle = SKAction.run({
             fireParticle!.removeFromParent()
         })
+        
         let addSmokeParticle = SKAction.run({
             self.parent!.scene!.addChild(smokeParticle!)
         })
         let removeSmokeParticle = SKAction.run({
             smokeParticle!.removeFromParent()
         })
+
+        let fireFade = SKAction.run({
+            fireParticle!.run(SKAction.fadeOut(withDuration: 0.7))
+        })
+        let smokeFade = SKAction.run({
+            smokeParticle!.run(SKAction.fadeOut(withDuration: 2))
+        })
         
         let burnSequence = SKAction.sequence([
-            addFireParticle,
-            .wait(forDuration: 1.0),
-            removeFireParticle,
-            .wait(forDuration: 0.5),
             addSmokeParticle,
-            .wait(forDuration: 1.0),
-            removeSmokeParticle
+            addFireParticle,
+            fireFade,
+            smokeFade,
         ])
         
         self.parent!.run(burnSequence, withKey: "burnTreeParticle")
+        
+        let removeSequence = SKAction.sequence([
+            .wait(forDuration: 3),
+            removeFireParticle,
+            removeSmokeParticle
+        ])
+        
+        self.parent!.run(removeSequence, withKey: "removeParticle")
     }
     
 }
