@@ -9,19 +9,21 @@ import Foundation
 import SpriteKit
 import GameplayKit
 import SwiftUI
-import NotificationCenter
+import AVFoundation
 
 class TossScene: SKScene, UIGestureRecognizerDelegate {
     
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     @ObservedObject var population = Population(size: 3, mutationRate: 10)
     @ObservedObject var scrollableMenu: ScrollableMenu = ScrollableMenu.shared
+    @ObservedObject var evilGauge: EvilGauge = EvilGauge.shared
     
     var darkson = DarkSon()
     var enemies: [Enemy] = []
     var structures: [Structure] = []
     
     let background = SKSpriteNode(imageNamed: "forest")
+    var effectsMusicPlayer: AVAudioPlayer!
     
     var selectedNode: SKNode?
     var lastSelectedGoblin: SKNode?
@@ -40,7 +42,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     var hud = HUD()
     var sheet = Sheet()
     var cauldron = Cauldron(currentGoblinsNumber: 3, maxGoblinNumber: MainScreenProperties.maxGoblinsNumber)
-    var evilGauge = EvilGauge(maxFill: MainScreenProperties.maxFill, currentFill: 20, size: (UIDevice.current.userInterfaceIdiom == .pad ? GaugeHUDSetting.ipadSize : GaugeHUDSetting.iphoneSize ))
+//    var evilGauge = EvilGauge(maxFill: MainScreenProperties.maxFill, currentFill: 20, size: (UIDevice.current.userInterfaceIdiom == .pad ? GaugeHUDSetting.ipadSize : GaugeHUDSetting.iphoneSize ))
     var evilSight = EvilSight(currentRadius: 1.0, maxRadius: 26.0)
     var pauseScreen = PauseScreen()
     var pauseButton = PauseButton()
@@ -82,6 +84,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         setStructures(self.structures)
         background.addChild(darkson)
         
+        evilSight.position.x = UIScreen.main.bounds.width
         background.addChild(evilSight)
     }
     
@@ -100,14 +103,16 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         tapGestureRecognizer.require(toFail: longPressGestureRecognizer)
         tapGestureRecognizer.require(toFail: pinchGestureRecognizer)
         
-        addChild(cameraNode)
+        background.addChild(cameraNode)
         camera = cameraNode
         cameraNode.position = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
         
         setupHUD()
         setupCamera()
         
-        playBackgroundMusic(filename: "Psycho Katana - Instrumental.wav")
+        player.musicVolume = 0.7
+//        playBackgroundMusic(filename: "Psycho Katana - Instrumental.wav")
+        player.play(music: Audio.MusicFiles.background)
         
         //        for _ in 0..<10 {
         //        structures[5].addGoblin(Goblin(health: 1, attack: 1, wit: NeuralNetwork(
@@ -123,6 +128,9 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         if paws == false {
+           
+            self.listener?.position = cameraNode.position
+            
             var hasToUpdateRank = false
             
             self.population.goblins.forEach {
@@ -130,6 +138,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
                     hasToUpdateRank = true
                 }
                 if ($0.health <= 0) {
+                    self.cauldron.updateCauldron(amount: -1)
                     self.population.kill($0)
                     if let lastSelected = lastSelectedGoblin {
                         if $0.isEqual(to: lastSelected) {

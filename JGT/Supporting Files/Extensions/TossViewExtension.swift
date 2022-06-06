@@ -58,6 +58,28 @@ extension TossScene {
                 
                 if let goblinNode = selectedNode as? Goblin {
                     goblinNode.state = .flying //this will change the update function of the goblin
+                    switch goblinNode.type {
+                    case .normal:
+                        let random = Int.random(in: 0...1)
+                        gameLogic.playSound(node: goblinNode,
+                                  audio: random == 0 ? Audio.EffectFiles.goblinFly1 : Audio.EffectFiles.goblinFly2, wait: false)
+                        break
+                    case .fire:
+                        let random = Int.random(in: 0...1)
+                        gameLogic.playSound(node: goblinNode,
+                                  audio: random == 0 ? Audio.EffectFiles.flameblinFly1 : Audio.EffectFiles.flameblinFly2, wait: false)
+
+                        break
+                    case .rock:
+                        let random = Int.random(in: 0...1)
+                        gameLogic.playSound(node: goblinNode,
+                                  audio: random == 0 ? Audio.EffectFiles.stoneblinFly1 : Audio.EffectFiles.stoneblinFly2, wait: false)
+                        break
+                    case .gum:
+                        gameLogic.playSound(node: goblinNode,
+                                  audio: Audio.EffectFiles.gumblinFly1, wait: false)
+                        break
+                    }
                 }
             }
         }
@@ -73,9 +95,10 @@ extension TossScene {
             
             if let structure = selectedNode as? Structure {
                 self.lastSelectedStructure = structure
+                self.scrollableMenu.currentStructure = structure.name!
                 self.sheet.alpha = 0.0
                 self.scrollableMenu.closeMenu()
-                self.scrollableMenu.openMenu(structure: lastSelectedStructure as! Structure)
+                self.scrollableMenu.openMenu(structure: structure)
             }
             
             if let goblinRow = selectedNode as? GoblinRow {
@@ -119,7 +142,7 @@ extension TossScene {
                 self.cauldron.closeSpawn()
             }
             
-            if selectedNode?.name! == "background" || selectedNode?.name! == "tree" || selectedNode?.name! == "rock" || selectedNode?.name! == "goblinmancy-circle" || selectedNode?.name! == "wall" || selectedNode?.name! == "backdoor" || selectedNode?.name! == "backdoor-up" {
+            if selectedNode?.name! == "background" || selectedNode?.name! == "tree" || selectedNode?.name! == "rock" || selectedNode?.name! == "goblinmancy-circle" || selectedNode?.name! == "wall" || selectedNode?.name! == "backdoor" || selectedNode?.name! == "backdoor-up" || selectedNode?.name! == "closed-trap" || selectedNode?.name! == "open-trap" {
                 self.sheet.alpha = 0.0
                 self.scrollableMenu.closeMenu()
                 self.scrollableMenu.alpha = 0.0
@@ -131,6 +154,7 @@ extension TossScene {
                 pauseButton.alpha = 0.0
                 self.pauseChilds(isPaused: true)
                 pauseScreen.alpha = 1.0
+                player.pause(music: Audio.MusicFiles.background)
             }
             
             if selectedNode?.name! == "ContinueBtn" {
@@ -138,6 +162,11 @@ extension TossScene {
                 pauseScreen.alpha = 0.0
                 pauseButton.alpha = 1.0
                 pauseChilds(isPaused: false)
+                player.resume()
+            }
+            
+            if selectedNode?.name! == "RestartBtn" {
+                
             }
             
         }
@@ -163,6 +192,23 @@ extension TossScene {
                         lastSelectedGoblin = nil
                     }
                 }
+                
+                let dyingGoblin = selectedNode as! Goblin
+                switch dyingGoblin.type {
+                case .rock:
+                    let random = Int.random(in: 0...1)
+                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.stoneblinDeath1 : Audio.EffectFiles.stoneblinDeath3, wait: true)
+                case .fire:
+                    let random = Int.random(in: 0...1)
+                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.flameblinDeath1 : Audio.EffectFiles.flameblinDeath2, wait: true)
+                case .gum:
+                    let random = Int.random(in: 0...1)
+                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.gumblinDeath1 : Audio.EffectFiles.gumblinDeath2, wait: true)
+                case .normal:
+                    let random = Int.random(in: 0...1)
+                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.goblinDeath1 : Audio.EffectFiles.goblinDeath2, wait: true)
+                }
+                
                 selectedNode!.removeFromParent()
             }
             if selectedNode?.name! == "background" {

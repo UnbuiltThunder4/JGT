@@ -97,6 +97,7 @@ let attackTime = 120
 let ageTime = 300
 let structureTime = 360
 
+let player = AudioPlayerImpl()
 
 public enum GoblinState {
     case working

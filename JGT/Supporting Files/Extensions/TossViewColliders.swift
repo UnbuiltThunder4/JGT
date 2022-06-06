@@ -65,6 +65,21 @@ extension TossScene: SKPhysicsContactDelegate {
         if (collision.matches(.goblin, .evilSight)) {
             if let node = firstBody.node as? Goblin {
                 if let _ = secondBody.node as? EvilSight {
+                    
+                    if !node.isFrenzied {
+                    switch node.type {
+                    case .rock:
+                        let random = Int.random(in: 0...1)
+                        gameLogic.playSound(node: node, audio: random == 0 ? Audio.EffectFiles.stoneblinFrenzy1 : Audio.EffectFiles.stoneblinFrenzy2, wait: false)
+                    case .fire:
+                        let random = Int.random(in: 0...1)
+                        gameLogic.playSound(node: node, audio: random == 0 ? Audio.EffectFiles.flameblinFrenzy1 : Audio.EffectFiles.flameblinFrenzy2, wait: false)
+                    case .gum:
+                        gameLogic.playSound(node: node, audio: Audio.EffectFiles.gumblinFrenzy1, wait: false)
+                    case .normal:
+                        gameLogic.playSound(node: node, audio: Audio.EffectFiles.goblinFrenzy1, wait: false)
+                    }
+                    }
                     node.isFrenzied = true
                     node.fear = 0
                     node.currentFrenzyTurn = node.frenzy
@@ -74,9 +89,26 @@ extension TossScene: SKPhysicsContactDelegate {
             }
             if let node = secondBody.node as? Goblin {
                 if let _ = firstBody.node as? EvilSight {
+                    
+                    if !node.isFrenzied {
+                    switch node.type {
+                    case .rock:
+                        let random = Int.random(in: 0...1)
+                        gameLogic.playSound(node: node, audio: random == 0 ? Audio.EffectFiles.stoneblinFrenzy1 : Audio.EffectFiles.stoneblinFrenzy2, wait: false)
+                    case .fire:
+                        let random = Int.random(in: 0...1)
+                        gameLogic.playSound(node: node, audio: random == 0 ? Audio.EffectFiles.flameblinFrenzy1 : Audio.EffectFiles.flameblinFrenzy2, wait: false)
+                    case .gum:
+                        gameLogic.playSound(node: node, audio: Audio.EffectFiles.gumblinFrenzy1, wait: false)
+                    case .normal:
+                        gameLogic.playSound(node: node, audio: Audio.EffectFiles.goblinFrenzy1, wait: false)
+                    }
+                    }
+                    
                     node.isFrenzied = true
                     node.fear = 0
                     node.currentFrenzyTurn = node.frenzy
+                    
                     print(node.fullName)
                     print(node.isFrenzied)
                 }

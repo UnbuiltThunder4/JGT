@@ -48,6 +48,17 @@ func getParentIndex() -> [Int] {
     return ar
 }
 
+func isVectorSmallerThan(vector: CGVector, other: CGFloat) -> Bool {
+    let magnitudeSquared = (vector.dx * vector.dx) + (vector.dy * vector.dy)
+    let maxSquared = other * other
+    if (magnitudeSquared <= maxSquared) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
 func limitVector(vector: CGVector, max: CGFloat) -> CGVector {
     let magnitudeSquared = (vector.dx * vector.dx) + (vector.dy * vector.dy)
     let maxSquared = max * max
@@ -69,22 +80,25 @@ func getDuration(distance: CGVector, speed: CGFloat) -> TimeInterval {
     return TimeInterval(dist/speed)
 }
 
-var backgroundMusicPlayer: AVAudioPlayer!
+//var backgroundMusicPlayer: AVAudioPlayer!
+//var effectsMusicPlayer: AVAudioPlayer!
+//
+//func playBackgroundMusic(filename: String) {
+//  let resourceUrl = Bundle.main.url(forResource:
+//    filename, withExtension: nil)
+//  guard let url = resourceUrl else {
+//    print("Could not find file: \(filename)")
+//return
+//}
+//  do {
+//    try backgroundMusicPlayer =
+//      AVAudioPlayer(contentsOf: url)
+//          backgroundMusicPlayer.numberOfLoops = -1
+//          backgroundMusicPlayer.prepareToPlay()
+//          backgroundMusicPlayer.play()
+//        } catch {
+//          print("Could not create audio player!")
+//      return
+//        }
+//}
 
-func playBackgroundMusic(filename: String) {
-  let resourceUrl = Bundle.main.url(forResource:
-    filename, withExtension: nil)
-  guard let url = resourceUrl else {
-    print("Could not find file: \(filename)")
-return
-}
-  do {
-    try backgroundMusicPlayer =
-      AVAudioPlayer(contentsOf: url)
-          backgroundMusicPlayer.numberOfLoops = -1
-          backgroundMusicPlayer.prepareToPlay()
-          backgroundMusicPlayer.play()
-        } catch {
-          print("Could not create audio player!")
-      return
-      } }

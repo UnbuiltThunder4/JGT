@@ -14,6 +14,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     public let id = UUID()
     
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
+    @ObservedObject var evilGauge: EvilGauge = EvilGauge.shared
     
     public let fullName: String
     public let backstory: String
@@ -275,7 +276,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                     if let _ = self.action(forKey: "walk") {
                         if (self.closeStructure != nil && self.isFrenzied == false) {
                             let targetDistance = CGVector(dx: self.closeStructure!.position.x - self.position.x, dy: self.closeStructure!.position.y - self.position.y)
-                            if (abs(targetDistance.dx) < 200 && abs(targetDistance.dy) < 200) {
+                            if (isVectorSmallerThan(vector: targetDistance, other: 330)) {
                                 if (self.closeStructure!.type == .trap || self.closeStructure!.type == .backdoor || self.closeStructure!.type == .passage) {
                                     hasToUpdateRank = self.checkInterations(input: 0)
                                 }
@@ -378,90 +379,115 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         if (!self.checkFear()) {
             if (self.target != nil) {
                 let targetDistance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
-                let walkDistance = limitVector(vector: targetDistance, max: 20)
-                if let _ = self.action(forKey: "walk") {
-                    if (abs(targetDistance.dx) > 300 || abs(targetDistance.dy) > 300) {
-                        self.state = .idle
-                        self.target = nil
-                        removeAction(forKey: "walk")
-                    }
-                    else if (abs(targetDistance.dx) < 60 && abs(targetDistance.dy) < 60) {
+                if (isVectorSmallerThan(vector: targetDistance, other: 100)) {
+                    removeAction(forKey: "walk")
+                    self.attackCounter += 1
+                    if (self.attackCounter % attackTime == 0) {
+                        
+                        switch self.type {
+                        case .rock:
+                            let random = Int.random(in: 0...1)
+                            gameLogic.playSound(node: self, audio:
+                                                    random == 0 ? Audio.EffectFiles.stoneblinHit1 : Audio.EffectFiles.stoneblinHit3, wait: false)
+                        case .fire:
+                            let random = Int.random(in: 0...1)
+                            gameLogic.playSound(node: self, audio:
+                                                    random == 0 ? Audio.EffectFiles.flameblinHit2 : Audio.EffectFiles.flameblinHit3, wait: false)
+                        case .gum:
+                            let random = Int.random(in: 0...1)
+                            gameLogic.playSound(node: self, audio:
+                                                    random == 0 ? Audio.EffectFiles.gumblinHit2 : Audio.EffectFiles.gumblinHit4, wait: false)
+                        case .normal:
+                            let random = Int.random(in: 0...1)
+                            gameLogic.playSound(node: self,
+                                                audio: random == 0 ? Audio.EffectFiles.goblinHit1 : Audio.EffectFiles.goblinHit3, wait: false)
+                        }
+                        
                         var dmg = self.attack
                         if (self.isFrenzied) {
                             dmg += self.attack
                         }
-                        self.attackCounter += 1
-                        if (self.attackCounter % attackTime == 0) {
-                            self.target!.health -= max(0, dmg - self.target!.shield)
-                            self.target!.shield = max(0, self.target!.shield - dmg)
-                            if (self.type == .fire) {
-                                self.targetQueue.forEach {
-                                    let aoeDistance = CGVector(dx: $0.position.x - self.position.x, dy: $0.position.y - self.position.y)
-                                    if (abs(aoeDistance.dx) < 60 && abs(aoeDistance.dy) < 60) {
-                                        $0.health -= max(0, dmg - self.target!.shield)
-                                        $0.shield = max(0, self.target!.shield - dmg)
-                                        if ($0.health <= 0) {
-                                            let index = self.targetQueue.firstIndex(of: $0)!
-                                            self.targetQueue.remove(at: index)
-                                        }
+                        self.target!.health -= max(0, dmg - self.target!.shield)
+                        self.target!.shield = max(0, self.target!.shield - dmg)
+                        if (self.type == .fire) {
+                            self.targetQueue.forEach {
+                                let aoeDistance = CGVector(dx: $0.position.x - self.position.x, dy: $0.position.y - self.position.y)
+                                if (isVectorSmallerThan(vector: aoeDistance, other: 100)) {
+                                    $0.health -= max(0, dmg - self.target!.shield)
+                                    $0.shield = max(0, self.target!.shield - dmg)
+                                    if ($0.health <= 0) {
+                                        let index = self.targetQueue.firstIndex(of: $0)!
+                                        self.targetQueue.remove(at: index)
                                     }
                                 }
-                                let aoeParticle = SKEmitterNode(fileNamed: "ExplosionParticle")
-                                aoeParticle!.particleScale *= 1.5
-                                aoeParticle!.position = CGPoint(x: 0, y: 0)
-                                aoeParticle!.name = "aoeParticle"
-                                let addParticle = SKAction.run({
-                                    self.addChild(aoeParticle!)
-                                })
-                                let removeParticle = SKAction.run({
-                                    aoeParticle!.removeFromParent()
-                                })
-                                
-                                let sequence = SKAction.sequence([
-                                    addParticle,
-                                    .wait(forDuration: 1.5),
-                                    removeParticle
-                                ])
-                                
-                                self.run(sequence, withKey: "aoeParticle")
                             }
-                            else {
-                                let attackParticle = SKEmitterNode(fileNamed: "AttackParticle")
-                                attackParticle!.position = CGPoint(x: 0, y: 0)
-                                attackParticle!.name = "attackParticle"
-                                let addParticle = SKAction.run({
-                                    self.addChild(attackParticle!)
-                                })
-                                let removeParticle = SKAction.run({
-                                    attackParticle!.removeFromParent()
-                                })
-                                
-                                let sequence = SKAction.sequence([
-                                    addParticle,
-                                    .wait(forDuration: 0.5),
-                                    removeParticle
-                                ])
-                                
-                                self.run(sequence, withKey: "attackParticle")
-                            }
-                            self.attackCounter = 0
-                            if (self.target!.target != self) {
-                                if (!self.target!.targetQueue.contains(self)) {
-                                    self.target!.targetQueue.append(self)
-                                }
-                            }
+                            let aoeParticle = SKEmitterNode(fileNamed: "ExplosionParticle")
+                            aoeParticle!.particleScale *= 1.5
+                            aoeParticle!.position = CGPoint(x: 0, y: 0)
+                            aoeParticle!.name = "aoeParticle"
+                            let addParticle = SKAction.run({
+                                self.addChild(aoeParticle!)
+                            })
+                            let removeParticle = SKAction.run({
+                                aoeParticle!.removeFromParent()
+                            })
+                            
+                            let sequence = SKAction.sequence([
+                                addParticle,
+                                .wait(forDuration: 1.5),
+                                removeParticle
+                            ])
+                            
+                            self.run(sequence, withKey: "aoeParticle")
                         }
-                        if (self.target!.health <= 0) {
-                            self.target = nil
-                            self.state = .idle
-                            removeAction(forKey: "walk")
+                        else {
+                            let attackParticle = SKEmitterNode(fileNamed: "AttackParticle")
+                            attackParticle!.position = CGPoint(x: 0, y: 0)
+                            attackParticle!.name = "attackParticle"
+                            let addParticle = SKAction.run({
+                                self.addChild(attackParticle!)
+                            })
+                            let removeParticle = SKAction.run({
+                                attackParticle!.removeFromParent()
+                            })
+                            
+                            let sequence = SKAction.sequence([
+                                addParticle,
+                                .wait(forDuration: 0.5),
+                                removeParticle
+                            ])
+                            
+                            self.run(sequence, withKey: "attackParticle")
+                        }
+                        self.attackCounter = 0
+                        if (self.target!.target != self) {
+                            if (!self.target!.targetQueue.contains(self)) {
+                                self.target!.targetQueue.append(self)
+                            }
                         }
                     }
                 }
                 else {
-                    let time = getDuration(distance: walkDistance, speed: self.speed)
-                    let walk = SKAction.move(by: walkDistance, duration: time)
-                    self.run(walk, withKey: "walk")
+                    let walkDistance = limitVector(vector: targetDistance, max: 50)
+                    if let _ = self.action(forKey: "walk") {
+                        if (abs(targetDistance.dx) > 300 || abs(targetDistance.dy) > 300) {
+                            self.state = .idle
+                            self.target = nil
+                            removeAction(forKey: "walk")
+                        }
+                    }
+                    else {
+                        let time = getDuration(distance: walkDistance, speed: self.speed)
+                        let walk = SKAction.move(by: walkDistance, duration: time)
+                        self.run(walk, withKey: "walk")
+                    }
+                }
+                if (self.target != nil) {
+                    if (self.target!.health <= 0) {
+                        self.target = nil
+                        self.state = .idle
+                        removeAction(forKey: "walk")
+                    }
                 }
             }
             else {
@@ -479,21 +505,19 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func fearedUpdate() {
         self.updateAge()
+        let tavernDistance = CGVector(dx: tavernCoordinates.x - self.position.x, dy: tavernCoordinates.y - self.position.y)
+        if (isVectorSmallerThan(vector: tavernDistance, other: 330)) {
+            self.enterTavern()
+        }
         if let _ = self.action(forKey: "run") {
         }
         else {
-            let tavernDistance = CGVector(dx: tavernCoordinates.x - self.position.x, dy: tavernCoordinates.y - self.position.y)
-            if (abs(tavernDistance.dx) < 250 && abs(tavernDistance.dy) < 250) {
-                self.enterTavern()
-            }
-            else {
-                var distance = limitVector(vector: tavernDistance, max: 100)
-                distance.dx = distance.dx * CGFloat.random(in: 0.2...1.8)
-                distance.dy = distance.dy * CGFloat.random(in: 0.2...1.8)
-                let time = getDuration(distance: distance, speed: self.speed * 2)
-                let run = SKAction.move(by: distance, duration: time)
-                self.run(run, withKey: "run")
-            }
+            var distance = limitVector(vector: tavernDistance, max: 50)
+            distance.dx = distance.dx * CGFloat.random(in: 0.2...1.8)
+            distance.dy = distance.dy * CGFloat.random(in: 0.2...1.8)
+            let time = getDuration(distance: distance, speed: self.speed * 2)
+            let run = SKAction.move(by: distance, duration: time)
+            self.run(run, withKey: "run")
         }
     }
     
@@ -518,6 +542,20 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.health = self.maxHealth
             }
             if (self.currentFrenzyTurn >= self.frenzy && self.health == self.maxHealth) {
+                
+                switch self.type {
+                case .rock:
+                    let random = Int.random(in: 0...1)
+                    gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.stoneblinFrenzy1 : Audio.EffectFiles.stoneblinFrenzy2, wait: false)
+                case .fire:
+                    let random = Int.random(in: 0...1)
+                    gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.flameblinFrenzy1 : Audio.EffectFiles.flameblinFrenzy2, wait: false)
+                case .gum:
+                    gameLogic.playSound(node: self, audio: Audio.EffectFiles.gumblinFrenzy1, wait: false)
+                case .normal:
+                    gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinFrenzy1, wait: false)
+                }
+                
                 self.isFrenzied = true
                 self.fear = 0
                 self.state = .idle
@@ -558,7 +596,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             //GIVE EVIL POINTS
             self.inVillageCounter = 0
             let randnum = Int.random(in: 0...100)
-            if (randnum <= 20 && self.type == .normal) {
+            if (randnum <= 25 && self.type == .normal) {
                 self.state = .idle
                 self.alpha = 1.0
                 if let village = self.closeStructure as? Village {
@@ -569,10 +607,32 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.HWpoints += 15
                 self.fitness = self.getFitness()
                 hasToUpdateRank = true
+                
+                let random = Int.random(in: 0...1)
+                gameLogic.playSound(node: self,
+                                    audio: random == 0 ? Audio.EffectFiles.gumblinTransform1 : Audio.EffectFiles.gumblinTransform2, wait: false)
             }
             else {
+                
+                switch self.type {
+                case .normal:
+                gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinCandy1, wait: false)
+                case .fire:
+                    let random = Int.random(in: 0...1)
+                    gameLogic.playSound(node: self,
+                                        audio: random == 0 ? Audio.EffectFiles.flameblinCandy1 : Audio.EffectFiles.flameblinCandy2, wait: false)
+                case .rock:
+                    let random = Int.random(in: 0...1)
+                    gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.stoneblinCandy1 : Audio.EffectFiles.stoneblinCandy2, wait: false)
+                case .gum:
+                    break
+                }
+                
+                self.evilGauge.updateGauge(goblin: nil, value: 1)
                 self.state = .idle
                 self.alpha = 1.0
+                self.position.x += self.position.x - villageCoordinates.x
+                self.position.y += self.position.y - villageCoordinates.y
                 if let village = self.closeStructure as? Village {
                     village.removeGoblin(self)
                 }
@@ -593,6 +653,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                     self.health -= 80
                     self.HWpoints -= 5
                     self.state = .stunned
+                    gameLogic.playSound(node: trap, audio: Audio.EffectFiles.trap, wait: false)
                 }
                 else {
                     self.HWpoints += 5
@@ -624,8 +685,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.climbCounter += 1
                 if (self.climbCounter % taskTime == 0) {
                     self.climbCounter = 0
-                    self.position.y = passageCoordinates.y + 50
-                    self.position.x = passageCoordinates.x + 50
+                    self.position.x += self.position.x - passageCoordinates.x
+                    self.position.y += self.position.y - passageCoordinates.y
                     self.state = .idle
                     self.alpha = 1.0
                 }
@@ -696,6 +757,18 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func checkFear() -> Bool {
         let percentage = (Double(self.health) / Double(self.maxHealth)) * 100.0
         if (percentage <= Double(self.fear)) {
+            switch self.type {
+            case .rock:
+                gameLogic.playSound(node: self, audio: Audio.EffectFiles.stoneblinFear1, wait: false)
+            case .fire:
+                break
+            case .gum:
+                let random = Int.random(in: 0...1)
+                gameLogic.playSound(node: self,
+                                    audio: random == 0 ? Audio.EffectFiles.gumblinFear2 : Audio.EffectFiles.gumblinFear3, wait: false)
+            case .normal:
+                gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinFear1, wait: false)
+            }
             return true
         }
         else {
@@ -845,6 +918,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func enterTavern() {
+        self.removeAllActions()
         self.state = .intavern
         self.alpha = 0.0
         if let tavern = self.closeStructure as? Tavern {
@@ -861,6 +935,22 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func throwRock() {
+        
+        switch self.type {
+        case .rock:
+            break
+        case .fire:
+            let random = Int.random(in: 0...1)
+            gameLogic.playSound(node: self,
+                                audio: random == 0 ? Audio.EffectFiles.flameblinCatapult1 : Audio.EffectFiles.flameblinCatapult2, wait: false)
+        case .gum:
+            gameLogic.playSound(node: self,
+                                audio: Audio.EffectFiles.gumblinCatapult1, wait: false)
+        case .normal:
+            gameLogic.playSound(node: self,
+                                audio: Audio.EffectFiles.goblinCatapult1, wait: false)
+        }
+        
         self.removeAllActions()
         self.hasRock = false
         let prof1 = Proficency(type: .catapult, level: 1)
@@ -889,9 +979,28 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.run(SKAction.move(to: CGPoint(x: 2000, y: 2000), duration: 1.5), withKey: "thrown")
         if (self.type != .rock) {
             self.HWpoints += 5
+            
+            switch self.type {
+            case .normal:
+                gameLogic.playSound(node: self,
+                                    audio: Audio.EffectFiles.goblinSelfCatapult1, wait: false)
+            case .fire:
+                let random = Int.random(in: 0...1)
+                gameLogic.playSound(node: self,
+                                    audio: random == 0 ? Audio.EffectFiles.flameblinSelfCatapult1 : Audio.EffectFiles.flameblinSelfCatapult2, wait: false)
+            case .gum:
+                let random = Int.random(in: 0...1)
+                gameLogic.playSound(node: self,
+                                    audio: random == 0 ? Audio.EffectFiles.gumblinSelfCatapult1 : Audio.EffectFiles.gumblinSelfCatapult2, wait: false)
+            case .rock:
+                break
+            }
         }
         else {
             self.HWpoints += 10
+            let random = Int.random(in: 0...1)
+            gameLogic.playSound(node: self,
+                                audio: random == 0 ? Audio.EffectFiles.stoneblinFly1 : Audio.EffectFiles.stoneblinFly1, wait: false)
         }
         let prof2 = Proficency(type: .catapult, level: 2)
         if let _ = self.Proficiencies.firstIndex(where: { $0.id == prof2.id }) {
@@ -909,6 +1018,18 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func pickUpRock() {
+        
+        switch self.type {
+        case .normal:
+            gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinStone1, wait: false)
+        case .fire:
+            gameLogic.playSound(node: self, audio: Audio.EffectFiles.flameblinStone1, wait: false)
+        case .rock:
+            break
+        case .gum:
+            gameLogic.playSound(node: self, audio: Audio.EffectFiles.gumblinStone1, wait: false)
+        }
+        
         self.closeStructure!.removeFromParent()
         self.HWpoints += 5
         self.hasRock = true
@@ -917,6 +1038,11 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func eatRock() {
+        let random = Int.random(in: 0...1)
+        gameLogic.playSound(node: self,
+                            audio: random == 0 ? Audio.EffectFiles.stoneblinTransform1 : Audio.EffectFiles.stoneblinTransform2, wait: false)
+        gameLogic.playSound(node: self, audio: Audio.EffectFiles.rockEating, wait: false)
+        
         self.closeStructure!.removeFromParent()
         self.type = .rock
         self.texture = SKTexture(imageNamed: "rock_goblin")
@@ -926,48 +1052,32 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func setFiretoTree() {
-        let fireParticle = SKEmitterNode(fileNamed: "FireParticle")
-        fireParticle!.name = "fireParticle"
-        fireParticle!.position = closeStructure!.position
-        fireParticle!.zPosition = -1
-        
-        let smokeParticle = SKEmitterNode(fileNamed: "SmokeParticle")
-        smokeParticle!.name = "smokeParticle"
-        smokeParticle!.position = CGPoint(x: 0, y: 0)
-        smokeParticle!.zPosition = -1
-        
-        let addFireParticle = SKAction.run({
-            self.addChild(fireParticle!)
-        })
-        let removeFireParticle = SKAction.run({
-            fireParticle!.removeFromParent()
-        })
-        let addSmokeParticle = SKAction.run({
-            self.addChild(smokeParticle!)
-        })
-        let removeSmokeParticle = SKAction.run({
-            smokeParticle!.removeFromParent()
-        })
-        
-        let burnSequence = SKAction.sequence([
-            addFireParticle,
-            .wait(forDuration: 1.5),
-            removeFireParticle,
-            .wait(forDuration: 0.5),
-            addSmokeParticle,
-            .wait(forDuration: 1.0),
-            removeSmokeParticle
-        ])
-        
-        self.run(burnSequence, withKey: "burnTreeParticle")
+        switch self.type {
+        case .normal:
+            gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinBurn1, wait: false)
+        case .fire:
+            let random = Int.random(in: 0...1)
+            gameLogic.playSound(node: self,
+                                audio: random == 0 ? Audio.EffectFiles.flameblinBurn1 : Audio.EffectFiles.flameblinBurn2, wait: false)
+        case .rock:
+            gameLogic.playSound(node: self,
+                                audio: Audio.EffectFiles.stoneblinBurn1, wait: false)
+        case .gum:
+            gameLogic.playSound(node: self, audio: Audio.EffectFiles.gumblinBurn1, wait: false)
+        }
+        gameLogic.playSound(node: self, audio: Audio.EffectFiles.treeOnFire, wait: false)
+    
         self.closeStructure!.removeFromParent()
-        
+        self.evilGauge.updateGauge(goblin: nil, value: 1)
         self.HWpoints += 5
         self.fitness = self.getFitness()
         self.closeStructure = nil
     }
     
     private func setFiretoSelf() {
+        gameLogic.playSound(node: self, audio: Audio.EffectFiles.flameblinTransform1, wait: false)
+        gameLogic.playSound(node: self, audio: Audio.EffectFiles.treeOnFire, wait: false)
+            
         self.closeStructure!.removeFromParent()
         self.type = .fire
         self.fear = 0

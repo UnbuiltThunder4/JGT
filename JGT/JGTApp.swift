@@ -11,10 +11,7 @@ import SwiftUI
 struct JGTApp: App {
     var body: some Scene {
         WindowGroup {
-            
-            //TestView() //FOR TESTING GOBLINS
-            
-            TossView() //FOR TESTING TOSSING GOBLINS
+            TossView()
         }
     }
 }
