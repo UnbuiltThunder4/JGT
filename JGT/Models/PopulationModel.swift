@@ -14,7 +14,6 @@ class Population: ObservableObject {
     public var size: Int
     public var mutationRate: Int
     
-    private var firstEvocation: Bool = true
     private let reproductionTable = [
         (0, 20.0), (1, 15.0), (2, 10.0), (3, 8.0), (4, 7.0),
         (5, 6.0), (6, 5.0), (7, 4.0), (8, 3.0), (9, 2.0),
@@ -52,7 +51,7 @@ class Population: ObservableObject {
         if (number > 0) {
             var newGoblins: [Goblin] = []
             for _ in 0..<number {
-                if (self.firstEvocation) {
+                if (self.goblins.count <= 10) {
                     let goblin = Goblin()
                     newGoblins.append(goblin)
                     goblin.fitness = goblin.getFitness()
@@ -63,7 +62,6 @@ class Population: ObservableObject {
                     goblin.fitness = goblin.getFitness()
                 }
             }
-            self.firstEvocation = false
             self.goblins.append(contentsOf: newGoblins)
             self.rankPerFitness()
             return newGoblins

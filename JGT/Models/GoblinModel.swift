@@ -303,7 +303,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                                     }
                                     else {
                                         print("ignored")
-                                        self.ignoreThreshold += 0.01
+                                        self.ignoreThreshold += 0.1
                                         self.closeStructure = nil
                                     }
                                 }

@@ -169,7 +169,7 @@ public enum StructureType: Int {
 }
 
 let goblinmancyCircleCoordinates = CGPoint(x: 1600, y: 550)
-let tavernCoordinates = CGPoint(x: 1100, y: 1000)
+let tavernCoordinates = CGPoint(x: 1100, y: 950)
 let academyCoordinates = CGPoint(x: 2650, y: 1550)
 let villageCoordinates = CGPoint(x: 1000, y: 2500)
 let catapultCoordinates = CGPoint(x: 1350, y: 3000)
@@ -198,7 +198,7 @@ let levelstructures: [Structure] = [
     Structure(type: .tree, x: 550, y: 1580, rotation: 0),
     Structure(type: .tree, x: 650, y: 800, rotation: 0),
     Structure(type: .rock, x: 2100, y: 700, rotation: 0),
-    Structure(type: .rock, x: 950, y: 1200, rotation: 0),
+    Structure(type: .rock, x: 650, y: 1450, rotation: 0),
     Structure(type: .rock, x: 1950, y: 1350, rotation: 0),
     Structure(type: .rock, x: 1400, y: 350, rotation: 0),
     Structure(type: .rock, x: 1300, y: 2660, rotation: 0),
