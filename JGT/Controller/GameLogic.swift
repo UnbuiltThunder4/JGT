@@ -13,8 +13,8 @@ class GameLogic: ObservableObject {
     
     // Single instance of the class
     static let shared: GameLogic = GameLogic()
-    var lastScale = 1.0
-    var currentScale = 1.0
+    var lastScale = ZoomProperties.initialScale
+    var currentScale = ZoomProperties.initialScale
     
     
     // Function responsible to set up the game before it starts.

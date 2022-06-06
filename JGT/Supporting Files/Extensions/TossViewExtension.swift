@@ -289,14 +289,14 @@ extension TossScene {
                 var moveX: CGFloat = 0.0
                 var moveY: CGFloat = 0.0
                 
-                if distanceX <= minDistanceX && cameraNode.xScale != maximumZoom && cameraNode.xScale != minimumZoom {
+                if distanceX <= minDistanceX && cameraNode.xScale != maximumZoom && cameraNode.xScale != ZoomProperties.minimumZoom {
                     if cameraNode.position.x < self.background.frame.midX {
                         moveX += ZoomProperties.cameraOffsetx
                     } else {
                         moveX -= ZoomProperties.cameraOffsetx
                     }
                 }
-                if distanceY <= minDistanceY && cameraNode.xScale != maximumZoom && cameraNode.xScale != minimumZoom {
+                if distanceY <= minDistanceY && cameraNode.xScale != maximumZoom && cameraNode.xScale != ZoomProperties.minimumZoom {
                     if cameraNode.position.y < self.background.frame.midY {
                         moveY += ZoomProperties.cameraOffsety
                     } else {
@@ -310,9 +310,9 @@ extension TossScene {
                     cameraNode.xScale = maximumZoom
                     cameraNode.yScale = maximumZoom
                 }
-                if (cameraNode.xScale < minimumZoom) && (cameraNode.yScale < minimumZoom) {
-                    cameraNode.xScale = minimumZoom
-                    cameraNode.yScale = minimumZoom
+                if (cameraNode.xScale < ZoomProperties.minimumZoom) && (cameraNode.yScale < ZoomProperties.minimumZoom) {
+                    cameraNode.xScale = ZoomProperties.minimumZoom
+                    cameraNode.yScale = ZoomProperties.minimumZoom
                 }
                 gameLogic.currentScale = cameraNode.xScale
             }
@@ -436,12 +436,15 @@ extension TossScene {
     
     func setupCamera() {
         switch UIDevice.current.userInterfaceIdiom {
+            
         case .phone:
-            ZoomProperties.initialScale = 2.0
+            ZoomProperties.initialScale = 3.0
             ZoomProperties.maximumZoom = 4.0
             ZoomProperties.minimumZoom = 1.5
-            ZoomProperties.cameraOffsetx = 40.0
+            ZoomProperties.cameraOffsetx = 90.0
             ZoomProperties.cameraOffsety = 40.0
+            ZoomProperties.initialOffsetx = 230.0
+            ZoomProperties.initialOffsety = 120.0
             cameraNode.xScale = ZoomProperties.initialScale
             cameraNode.yScale = ZoomProperties.initialScale
             break
@@ -451,12 +454,55 @@ extension TossScene {
             ZoomProperties.minimumZoom = 0.8
             ZoomProperties.cameraOffsetx = 30.0
             ZoomProperties.cameraOffsety = 30.0
+            ZoomProperties.initialOffsetx = 30.0
+            ZoomProperties.initialOffsety = 30.0
             cameraNode.xScale = ZoomProperties.initialScale
             cameraNode.yScale = ZoomProperties.initialScale
             break
         @unknown default:
             break
         }
+        
+        let distanceX = min(abs(cameraNode.position.x - self.background.frame.minX),
+                            abs(cameraNode.position.x - self.background.frame.maxX))
+        let distanceY = min(abs(cameraNode.position.y - self.background.frame.minY),
+                            abs(cameraNode.position.y - self.background.frame.maxY))
+        let minDistanceX = (UIScreen.main.bounds.width/2 * gameLogic.currentScale) - self.background.frame.minX
+        let minDistanceY = (UIScreen.main.bounds.height/2 * gameLogic.currentScale) - self.background.frame.minY
+        
+        cameraNode.xScale = gameLogic.lastScale
+        cameraNode.yScale = gameLogic.lastScale
+        
+        var moveX: CGFloat = 0.0
+        var moveY: CGFloat = 0.0
+        
+        if distanceX <= minDistanceX && cameraNode.xScale != ZoomProperties.maximumZoom && cameraNode.xScale != ZoomProperties.minimumZoom {
+            if cameraNode.position.x < self.background.frame.midX {
+                moveX += ZoomProperties.initialOffsetx
+            } else {
+                moveX -= ZoomProperties.initialOffsetx
+            }
+        }
+        if distanceY <= minDistanceY && cameraNode.xScale != ZoomProperties.maximumZoom && cameraNode.xScale != ZoomProperties.minimumZoom {
+            if cameraNode.position.y < self.background.frame.midY {
+                moveY += ZoomProperties.initialOffsety
+            } else {
+                moveY -= ZoomProperties.initialOffsety
+            }
+        }
+        
+        cameraNode.position.x += moveX
+        cameraNode.position.y += moveY
+        
+        if (cameraNode.xScale > ZoomProperties.maximumZoom) && (cameraNode.yScale > ZoomProperties.maximumZoom) {
+            cameraNode.xScale = ZoomProperties.maximumZoom
+            cameraNode.yScale = ZoomProperties.maximumZoom
+        }
+        if (cameraNode.xScale < ZoomProperties.minimumZoom) && (cameraNode.yScale < ZoomProperties.minimumZoom) {
+            cameraNode.xScale = ZoomProperties.minimumZoom
+            cameraNode.yScale = ZoomProperties.minimumZoom
+        }
+        gameLogic.currentScale = cameraNode.xScale
     }
     
     @objc func pauseGame() {
