@@ -658,7 +658,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 let closeTrap = SKAction.setTexture(SKTexture(imageNamed: "closed-trap"))
                 trap.run(closeTrap)
                 if (self.type != .gum) {
-                    self.health -= 10
+                    self.health -= 80
                     self.HWpoints -= 5
                     self.state = .stunned
                     gameLogic.playSound(node: trap, audio: Audio.EffectFiles.trap, wait: false)

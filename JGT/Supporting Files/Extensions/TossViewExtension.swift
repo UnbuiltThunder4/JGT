@@ -142,7 +142,7 @@ extension TossScene {
                 self.cauldron.closeSpawn()
             }
             
-            if selectedNode?.name! == "background" || selectedNode?.name! == "tree" || selectedNode?.name! == "rock" || selectedNode?.name! == "goblinmancy-circle" || selectedNode?.name! == "wall" || selectedNode?.name! == "backdoor" || selectedNode?.name! == "backdoor-up" || selectedNode?.name! == "closed-trap" || selectedNode?.name! == "open-trap" {
+            if selectedNode?.name! == "background" || selectedNode?.name! == "rock" || selectedNode?.name! == "wall" || selectedNode?.name! == "backdoor-up" {
                 self.sheet.alpha = 0.0
                 self.scrollableMenu.closeMenu()
                 self.scrollableMenu.alpha = 0.0
@@ -440,7 +440,7 @@ extension TossScene {
             ZoomProperties.initialScale = 2.0
             ZoomProperties.maximumZoom = 4.0
             ZoomProperties.minimumZoom = 1.5
-            ZoomProperties.cameraOffsetx = 70.0
+            ZoomProperties.cameraOffsetx = 40.0
             ZoomProperties.cameraOffsety = 40.0
             cameraNode.xScale = ZoomProperties.initialScale
             cameraNode.yScale = ZoomProperties.initialScale

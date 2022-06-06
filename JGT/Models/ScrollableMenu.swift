@@ -58,13 +58,15 @@ class ScrollableMenu: SKSpriteNode, ObservableObject {
     func openMenu(structure: Structure){
         self.alpha = 1.0
         self.nameLabel.text = structure.name
-        self.descLabel.text = structure.name
+        self.descLabel.text = structure.desc
         
+        if structure.type == .tavern || structure.type == .academy || structure.type == .village {
         for i in 0..<structure.goblins.count {
             goblinTable.addRow(row: GoblinRow(goblin: structure.goblins[i]))
             self.tableSize += self.goblinTable.rows[i].frame.height
         }
         self.hideRow()
+        }
     }
     
     func closeMenu() {
@@ -73,15 +75,6 @@ class ScrollableMenu: SKSpriteNode, ObservableObject {
         self.goblinTable.position = CGPoint.zero
         self.goblinTable.contentOffset = 0.0
         self.tableSize = 0.0
-    }
-    
-    func updateMenu(table: GoblinTable) {
-        if table.rows.count > 0 {
-            table.rows[0].position.y = 0
-            for i in 1..<table.rows.count {
-                table.rows[i].position.y = table.rows[i-1].position.y - table.rows[i].frame.height
-            }
-        }
     }
     
     func hideRow() {

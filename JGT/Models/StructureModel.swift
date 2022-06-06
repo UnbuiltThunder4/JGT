@@ -13,6 +13,8 @@ class Structure: SKSpriteNode, ObservableObject {
     @ObservedObject var scrollableMenu: ScrollableMenu = ScrollableMenu.shared
     
     var goblins: [Goblin] = []
+    var fullName: String?
+    var desc: String?
     let type: StructureType
     let mask: Collision.Masks
     let maskmodX: CGFloat
@@ -22,11 +24,14 @@ class Structure: SKSpriteNode, ObservableObject {
     
     init(type: StructureType, x: CGFloat, y: CGFloat, rotation: Double) {
         var img = ""
+        self.desc = nil
         self.type = type
         switch type {
             
         case .gate:
             img = "gate"
+            self.fullName = "Gate"
+            self.desc = "“Once this will be gone, our enemies will have no defenses left!”"
             self.mask = .gate
             self.width = 380
             self.height = 380
@@ -36,6 +41,8 @@ class Structure: SKSpriteNode, ObservableObject {
             
         case .backdoor:
             img = "backdoor"
+            self.fullName = "Backdoor"
+            self.desc = "“Gnomes really left a backdoor? Goblins can destroy this little gate to gain access.”"
             self.mask = .enviroment
             self.width = 125
             self.height = 150
@@ -54,6 +61,8 @@ class Structure: SKSpriteNode, ObservableObject {
             
         case .trap:
             img = "open-trap"
+            self.fullName = "Electric Trap"
+            self.desc = "“This place is shocking! Goblins will take damage if they step on it, except if they’re Insulated of course”"
             self.mask = .enviroment
             self.width = 80
             self.height = 80
@@ -63,6 +72,8 @@ class Structure: SKSpriteNode, ObservableObject {
             
         case .academy:
             img = "academy"
+            self.fullName = "GDA - Goblin Developer Academy"
+            self.desc = "“Here the goblins can learn how to work better and learn new skills, the important thing is to never let them learn too much.”"
             self.mask = .building
             self.width = 400
             self.height = 400
@@ -72,6 +83,8 @@ class Structure: SKSpriteNode, ObservableObject {
             
         case .tavern:
             img = "tavern"
+            self.fullName = "The Sleeping Drake"
+            self.desc = "“An inn full of healing potions and beds for my goblins to rest… I'm such a magnanimous Dark Lord…”"
             self.mask = .building
             self.width = 400
             self.height = 400
@@ -81,6 +94,8 @@ class Structure: SKSpriteNode, ObservableObject {
             
         case .village:
             img = "village"
+            self.fullName = "Candyland"
+            self.desc = "“Goblins love candies, we’re lucky that gnomes have entire villages made of sweets.”"
             self.mask = .building
             self.width = 400
             self.height = 400
@@ -90,6 +105,8 @@ class Structure: SKSpriteNode, ObservableObject {
             
         case .catapult:
             img = "catapult"
+            self.fullName = "Catapult"
+            self.desc = "“A powerful assault weapon, once repaired it can be used to deal a lot of damages to enemies and gates”"
             self.mask = .enviroment
             self.width = 250
             self.height = 250
@@ -99,6 +116,8 @@ class Structure: SKSpriteNode, ObservableObject {
             
         case .goblincircle:
             img = "goblinmancy-circle"
+            self.fullName = "Goblinmancy Circle"
+            self.desc = "“The power of these circles is absurd, with this, death will just be an inconvenience for my Dark Son, as long as the circle doesn’t  run out of power…”"
             self.mask = .enviroment
             self.width = 350
             self.height = 350
@@ -117,6 +136,8 @@ class Structure: SKSpriteNode, ObservableObject {
             
         case .tree:
             img = "tree"
+            self.desc = "Pine Tree"
+            self.desc = "“A conifer tree full of life and uses, goblin can set them on fire just for fun”"
             self.mask = .enviroment
             self.width = 150
             self.height = 300
