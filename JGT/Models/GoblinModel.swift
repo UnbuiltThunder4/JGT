@@ -422,7 +422,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                                 }
                             }
                             let aoeParticle = SKEmitterNode(fileNamed: "ExplosionParticle")
-                            aoeParticle!.particleScale *= 1.5
+                            aoeParticle!.particleScale *= 2.5
                             aoeParticle!.position = CGPoint(x: 0, y: 0)
                             aoeParticle!.name = "aoeParticle"
                             let addParticle = SKAction.run({
