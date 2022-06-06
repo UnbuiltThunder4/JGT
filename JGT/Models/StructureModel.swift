@@ -83,7 +83,7 @@ class Structure: SKSpriteNode, ObservableObject {
             
         case .tavern:
             img = "tavern"
-            self.fullName = "The Sleeping Drake"
+            self.fullName = "The Sleeping Quokka"
             self.desc = "“An inn full of healing potions and beds for my goblins to rest… I'm such a magnanimous Dark Lord…”"
             self.mask = .building
             self.width = 400
