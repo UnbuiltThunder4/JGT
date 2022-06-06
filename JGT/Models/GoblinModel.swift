@@ -1052,6 +1052,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func setFiretoTree() {
+        setFireParticles()
+        
         switch self.type {
         case .normal:
             gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinBurn1, wait: false)
@@ -1075,6 +1077,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func setFiretoSelf() {
+        setFireParticles()
+        
         gameLogic.playSound(node: self, audio: Audio.EffectFiles.flameblinTransform1, wait: false)
         gameLogic.playSound(node: self, audio: Audio.EffectFiles.treeOnFire, wait: false)
             
@@ -1095,6 +1099,47 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func addProficency(type: ProficencyType, level: Int) {
         let prof = Proficency(type: type, level: level)
         self.Proficiencies.append(prof)
+    }
+    
+    private func setFireParticles() {
+        let fireParticle = SKEmitterNode(fileNamed: "FireParticle")
+        fireParticle!.name = "fireParticle"
+        fireParticle!.position = closeStructure!.position
+        fireParticle!.position.y -= 100
+        fireParticle!.zPosition = -1
+        fireParticle!.setScale(1.5)
+        
+        let smokeParticle = SKEmitterNode(fileNamed: "SmokeParticle")
+        smokeParticle!.name = "smokeParticle"
+        smokeParticle!.position = closeStructure!.position
+        smokeParticle!.position.y -= 100
+        smokeParticle!.zPosition = -1
+        smokeParticle!.setScale(1.5)
+        
+        let addFireParticle = SKAction.run({
+            self.parent!.scene!.addChild(fireParticle!)
+        })
+        let removeFireParticle = SKAction.run({
+            fireParticle!.removeFromParent()
+        })
+        let addSmokeParticle = SKAction.run({
+            self.parent!.scene!.addChild(smokeParticle!)
+        })
+        let removeSmokeParticle = SKAction.run({
+            smokeParticle!.removeFromParent()
+        })
+        
+        let burnSequence = SKAction.sequence([
+            addFireParticle,
+            .wait(forDuration: 1.0),
+            removeFireParticle,
+            .wait(forDuration: 0.5),
+            addSmokeParticle,
+            .wait(forDuration: 1.0),
+            removeSmokeParticle
+        ])
+        
+        self.parent!.run(burnSequence, withKey: "burnTreeParticle")
     }
     
 }
