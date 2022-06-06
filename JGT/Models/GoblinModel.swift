@@ -1128,7 +1128,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         let flameblinParticle = SKEmitterNode(fileNamed: "FlameblinParticle")
         flameblinParticle!.position = CGPoint(x: 0, y: 0)
         self.addChild(flameblinParticle!)
-        flameblinParticle?.zPosition = -1
+        flameblinParticle!.zPosition = -1
         self.HWpoints += 15
         self.fitness = self.getFitness()
         self.closeStructure = nil
@@ -1217,7 +1217,40 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 let random = Int.random(in: 0...1)
                 gameLogic.playSound(node: self.parent?.scene?.camera, audio: random == 0 ? Audio.EffectFiles.goblinDeath1 : Audio.EffectFiles.goblinDeath2, wait: true)
             }
+            
+            let goblinDeathParticle = SKEmitterNode(fileNamed: "GoblinDeathParticle")
+            goblinDeathParticle!.position = self.position
+            goblinDeathParticle!.name = "goblinDeathParticle"
+            goblinDeathParticle!.zPosition = 1
+            
+            let parent = self.parent!.scene!
+
+            let addParticle = SKAction.run({
+                parent.addChild(goblinDeathParticle!)
+            })
+            let goblinDeathFade = SKAction.run {
+                goblinDeathParticle!.run(SKAction.fadeOut(withDuration: 0.4))
+            }
+            
+            let particleSequence = SKAction.sequence([
+                addParticle,
+                goblinDeathFade
+            ])
+
+            let removeParticle = SKAction.run({
+                goblinDeathParticle!.removeFromParent()
+            })
+
+            let removeSequence = SKAction.sequence([
+                .wait(forDuration: 0.5),
+                removeParticle
+            ])
+
+            parent.run(particleSequence)
+            parent.run(removeSequence)
+            
             self.removeFromParent()
+            
             return isDead
         } else {
 //            self.pressCounter = 0

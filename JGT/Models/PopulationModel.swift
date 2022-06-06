@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SpriteKit
 
 class Population: ObservableObject {
     @Published public var goblins: [Goblin] = []
@@ -74,8 +75,19 @@ class Population: ObservableObject {
     
     public func kill(_ goblin: Goblin) {
         let index = self.goblins.firstIndex(of: goblin)!
-        self.goblins[index].removeFromParent()
-        self.goblins.remove(at: index)
+        
+        let killGoblin = SKAction.run({
+            self.goblins[index].removeFromParent()
+            self.goblins.remove(at: index)
+        })
+        
+        let killSequence = SKAction.sequence([
+            .wait(forDuration: 1),
+            killGoblin
+        ])
+        
+        goblin.run(killSequence)
+        
     }
     
     public func rankPerFitness() {

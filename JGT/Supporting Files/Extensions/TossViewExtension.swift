@@ -180,11 +180,6 @@ extension TossScene {
             gameLogic.selectNodeForTouch(self, touchLocation: touchLocation)
             
             if selectedNode?.name! == "goblin" {
-                
-                if self.evilGauge.currentFill <= 20 {
-                    self.evilGauge.updateGauge(goblin: selectedNode as? Goblin, value: nil)
-                    self.cauldron.updateCauldron(amount: -1)
-                }
 //                population.goblins.remove(at: population.getIndex(of: selectedNode as! Goblin)!)
                 
                 if let lastSelected = lastSelectedGoblin {
@@ -250,7 +245,13 @@ extension TossScene {
                 } else {
                     self.isDead = false
                     let goblin = selectedNode as! Goblin
-                    population.goblins.remove(at: population.getIndex(of: goblin)!)
+                    population.kill(goblin)
+//                    population.goblins.remove(at: population.getIndex(of: goblin)!)
+                    
+                    if self.evilGauge.currentFill <= 20 {
+                        self.evilGauge.updateGauge(goblin: goblin, value: nil)
+                        self.cauldron.updateCauldron(amount: -1)
+                    }
 //                    goblin.removeFromParent()
                 }
             }
