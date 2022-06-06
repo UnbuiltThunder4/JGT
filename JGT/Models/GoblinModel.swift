@@ -666,6 +666,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                     let fadeOutStun = SKAction.run {
                         stunParticle!.run(SKAction.fadeOut(withDuration: 2.0))
                     }
+                    let removeStun = SKAction.run {
+                        stunParticle!.removeFromParent()
+                    }
                     
                     let stunSequence = SKAction.sequence([
                         addStunParticle,
@@ -674,7 +677,12 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                     
                     self.run(stunSequence, withKey: "StunSequence")
                     
-                    stunParticle!.removeFromParent()
+                    let removeSequence = SKAction.sequence([
+                        .wait(forDuration: 3),
+                        removeStun,
+                    ])
+                    
+                    self.run(removeSequence)
                 }
                 else {
                     self.HWpoints += 5
