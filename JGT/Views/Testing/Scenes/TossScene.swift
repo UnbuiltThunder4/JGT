@@ -17,8 +17,10 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     @ObservedObject var population = Population(size: 3, mutationRate: 10)
     @ObservedObject var scrollableMenu: ScrollableMenu = ScrollableMenu.shared
     @ObservedObject var evilGauge: EvilGauge = EvilGauge.shared
-    
-    var level = 0
+    @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet.shared
+    @ObservedObject var hud: HUD = HUD.shared
+
+    var level = 1
     
     var darkson = DarkSon()
     var enemies: [Enemy] = []
@@ -44,7 +46,6 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     var lastScale = 1.0
     var currentScale = 1.0
     
-    var hud = HUD()
     var sheet = Sheet()
     var cauldron = Cauldron(currentGoblinsNumber: 3, maxGoblinNumber: MainScreenProperties.maxGoblinsNumber)
     var evilSight = EvilSight(currentRadius: 1.0, maxRadius: 26.0)

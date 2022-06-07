@@ -8,8 +8,12 @@
 import Foundation
 import SpriteKit
 import AVFoundation
+import SwiftUI
 
 class GameLogic: ObservableObject {
+    
+    @State var fireTutorial = UserDefaults.standard.bool(forKey: "fireTutorial")
+    @State var rockTutorial = UserDefaults.standard.bool(forKey: "rockTutorial")
     
     // Single instance of the class
     static let shared: GameLogic = GameLogic()
@@ -17,6 +21,8 @@ class GameLogic: ObservableObject {
     var lastScale = ZoomProperties.initialScale
     var currentScale = ZoomProperties.initialScale
     
+    var tutorials: [TutorialButton] = [TutorialButton(tutorialName: "Fire", tutorialDesc: "Fire", screen: SKTexture(imageNamed: "goblinHead")),
+                                       TutorialButton(tutorialName: "Rock", tutorialDesc: "Rock", screen: SKTexture(imageNamed: "rockHead"))]
     
     // Function responsible to set up the game before it starts.
     func setUpGame() {
@@ -243,5 +249,13 @@ class GameLogic: ObservableObject {
         }
        }
     }
+    
+    public func tutorialEvent(index: Int, hud: HUD, tutorialSheet: TutorialSheet) {
+        hud.addTutorialButton(tutorialButton: tutorials[index], position: CGPoint.zero)
+        tutorialSheet.tutorialName.text = tutorials[index].tutorialName
+        tutorialSheet.tutorialDesc.text = tutorials[index].tutorialDesc
+        tutorialSheet.screen.texture = tutorials[index].screen
+    }
+    
 }
 

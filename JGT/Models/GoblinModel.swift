@@ -15,6 +15,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     @ObservedObject var evilGauge: EvilGauge = EvilGauge.shared
+    @ObservedObject var hud: HUD = HUD.shared
+    @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet.shared
     
     public var fullName: String
     public let backstory: String
@@ -66,6 +68,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private var ignoreThreshold: Float = 0.0
     
     private var goblinTaskTime: Int = taskTime
+    
+    var fireTutorial = false
+    var rockTutorial = false
     
     init() {
         let goblinname = GoblinConstants.names.randomElement()! + " " + GoblinConstants.surnames.randomElement()!
@@ -1086,6 +1091,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                             audio: random == 0 ? Audio.EffectFiles.stoneblinTransform1 : Audio.EffectFiles.stoneblinTransform2, wait: false, muted: gameLogic.muted)
         gameLogic.playSound(node: self, audio: Audio.EffectFiles.rockEating, wait: false, muted: gameLogic.muted)
         
+        gameLogic.tutorialEvent(index: 1, hud: hud, tutorialSheet: tutorialSheet)
+        
         self.closeStructure!.removeFromParent()
         self.type = .rock
         self.texture = SKTexture(imageNamed: "rock_goblin")
@@ -1095,7 +1102,12 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func setFiretoTree() {
+        print(gameLogic.fireTutorial)
         setFireParticles()
+        if UserDefaults.standard.bool(forKey: "fireTutorial") == false {
+        gameLogic.tutorialEvent(index: 0, hud: hud, tutorialSheet: tutorialSheet)
+            UserDefaults.standard.set(true, forKey: "fireTutorial")
+        }
         
         switch self.type {
         case .normal:
@@ -1121,6 +1133,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func setFiretoSelf() {
         setFireParticles()
+        if UserDefaults.standard.bool(forKey: "fireTutorial") == false {
+        gameLogic.tutorialEvent(index: 0, hud: hud, tutorialSheet: tutorialSheet)
+            UserDefaults.standard.set(true, forKey: "fireTutorial")
+        }
         
         gameLogic.playSound(node: self, audio: Audio.EffectFiles.flameblinTransform1, wait: false, muted: gameLogic.muted)
         gameLogic.playSound(node: self, audio: Audio.EffectFiles.treeOnFire, wait: false, muted: gameLogic.muted)

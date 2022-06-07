@@ -189,6 +189,10 @@ extension TossScene {
                 }
             }
             
+            if selectedNode?.name! == "tutorialButton" {
+                self.tutorialSheet.alpha = 1.0
+            }
+            
         }
     }
     
@@ -452,6 +456,7 @@ extension TossScene {
         hud.addScrollableMenu(scrollableMenu: scrollableMenu, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/4.5, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
         hud.addPauseScreen(pauseScreen: pauseScreen, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/2, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
         hud.addPauseButton(pauseButton: pauseButton, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/10, y: cameraNode.position.y - pauseButton.size.height*1.1))
+        hud.addTutorialSheet(tutorialSheet: tutorialSheet, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/2, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
     }
     
     func setupCamera() {

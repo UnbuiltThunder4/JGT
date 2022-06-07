@@ -20,7 +20,9 @@ enum HUDSettings {
     static var descFontColor: UIColor = .brown
 }
 
-class HUD: SKNode {
+class HUD: SKNode, ObservableObject {
+    
+    static let shared: HUD = HUD()
     
     override init() {
         super.init()
@@ -255,6 +257,22 @@ class HUD: SKNode {
         pauseButton.position = position
         
         addChild(pauseButton)
+    }
+    
+    func addTutorialButton(tutorialButton: TutorialButton, position: CGPoint) {
+        tutorialButton.alpha = 1.0
+        tutorialButton.zPosition = 20
+        tutorialButton.position = position
+        
+        addChild(tutorialButton)
+    }
+    
+    func addTutorialSheet(tutorialSheet: TutorialSheet, position: CGPoint) {
+    
+        tutorialSheet.zPosition = 20
+        tutorialSheet.position = position
+        
+        addChild(tutorialSheet)
     }
 
 }
