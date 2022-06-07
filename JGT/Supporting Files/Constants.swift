@@ -141,9 +141,9 @@ public enum EnemyType: Int {
 let gnomes: [Enemy] = [
     Enemy(type: .small, x: 800, y: 2300),
     Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .bow, x: 1400, y: 3850),
-    Enemy(type: .bow, x: 1800, y: 3850),
-    Enemy(type: .axe, x: 1350, y: 2800),
+    Enemy(type: .bow, x: 1400, y: 4050),
+    Enemy(type: .bow, x: 1800, y: 4050),
+    Enemy(type: .axe, x: 1350, y: 3000),
     Enemy(type: .axe, x: 2500, y: 1450)
 ]
 
@@ -172,13 +172,13 @@ let goblinmancyCircleCoordinates = CGPoint(x: 1600, y: 550)
 let tavernCoordinates = CGPoint(x: 1100, y: 950)
 let academyCoordinates = CGPoint(x: 2650, y: 1550)
 let villageCoordinates = CGPoint(x: 1000, y: 2500)
-let catapultCoordinates = CGPoint(x: 1350, y: 3000)
-let gateCoordinates = CGPoint(x: 1600, y: 3550)
-let backdoorCoordinates = CGPoint(x: 600, y: 3435)
-let passageCoordinates = CGPoint(x: 600, y: 3900)
+let catapultCoordinates = CGPoint(x: 1350, y: 3200)
+let gateCoordinates = CGPoint(x: 1600, y: 3750)
+let backdoorCoordinates = CGPoint(x: 600, y: 3635)
+let passageCoordinates = CGPoint(x: 600, y: 4100)
 
 let levelstructures: [Structure] = [
-    Structure(type: .wall, x: 1600, y: 3700, rotation: 0),
+    Structure(type: .wall, x: 1680, y: 3900, rotation: 0),
     Gate(x: gateCoordinates.x, y: gateCoordinates.y), // THIS HAS TO BE ON INDEX 1
     Backdoor(x: backdoorCoordinates.x, y: backdoorCoordinates.y),  // THIS HAS TO BE ON INDEX 2
     Catapult(x: catapultCoordinates.x, y: catapultCoordinates.y), // THIS HAS TO BE ON INDEX 3
@@ -188,12 +188,12 @@ let levelstructures: [Structure] = [
     Village(x: villageCoordinates.x, y: villageCoordinates.y),
     Structure(type: .passage, x: passageCoordinates.x, y: passageCoordinates.y, rotation: 0),
     Structure(type: .goblincircle, x: goblinmancyCircleCoordinates.x, y: goblinmancyCircleCoordinates.y, rotation: 0),
-    Structure(type: .tree, x: 450, y: 1300, rotation: 0),
+    Structure(type: .tree, x: 350, y: 1350, rotation: 0),
     Structure(type: .tree, x: 1950, y: 800, rotation: 0),
-    Structure(type: .tree, x: 550, y: 1150, rotation: 0),
+    Structure(type: .tree, x: 600, y: 750, rotation: 0),
     Structure(type: .tree, x: 1850, y: 500, rotation: 0),
     Structure(type: .tree, x: 2650, y: 370, rotation: 0),
-    Structure(type: .tree, x: 1250, y: 2500, rotation: 0),
+    Structure(type: .tree, x: 650, y: 3000, rotation: 0),
     Structure(type: .tree, x: 1250, y: 1700, rotation: 0),
     Structure(type: .tree, x: 550, y: 1580, rotation: 0),
     Structure(type: .tree, x: 750, y: 400, rotation: 0),
