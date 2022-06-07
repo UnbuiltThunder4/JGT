@@ -178,7 +178,7 @@ let backdoorCoordinates = CGPoint(x: 600, y: 3435)
 let passageCoordinates = CGPoint(x: 600, y: 3900)
 
 let levelstructures: [Structure] = [
-    Structure(type: .wall, x: 1750, y: 3700, rotation: 0),
+    Structure(type: .wall, x: 1600, y: 3700, rotation: 0),
     Gate(x: gateCoordinates.x, y: gateCoordinates.y), // THIS HAS TO BE ON INDEX 1
     Backdoor(x: backdoorCoordinates.x, y: backdoorCoordinates.y),  // THIS HAS TO BE ON INDEX 2
     Catapult(x: catapultCoordinates.x, y: catapultCoordinates.y), // THIS HAS TO BE ON INDEX 3

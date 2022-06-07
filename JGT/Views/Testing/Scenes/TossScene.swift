@@ -23,6 +23,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     var structures: [Structure] = []
     
     let background = SKSpriteNode(imageNamed: "forest")
+    let trueBackground = SKSpriteNode(imageNamed: "background")
     var effectsMusicPlayer: AVAudioPlayer!
     
     var selectedNode: SKNode?
@@ -74,6 +75,12 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         self.background.anchorPoint = CGPoint(x: 0, y: 0)
         background.zPosition = -1
         self.addChild(background)
+        
+        self.trueBackground.name = "trueBackground"
+        self.trueBackground.anchorPoint = CGPoint(x: 0, y: 0)
+        self.trueBackground.position = self.background.position
+        trueBackground.zPosition = -2
+        self.addChild(trueBackground)
         
         background.physicsBody = SKPhysicsBody(edgeLoopFrom: background.frame)
         
