@@ -39,14 +39,14 @@ they can help you in many ways, I can throw them by dragging them wherever I wan
 Once I tap on a Goblin I can see all of their stats, in order, I can see their Health, their Attack Power, how much they Fear death, their age, their wit and how long is their frenzy.
 If i think some of them are unworthy i can even long press on them to make them explode and get some of my power back.
 Remember, the older a goblin I sacrifice, the more evilness I will get back.”
-""", screen: SKTexture(imageNamed: "goblinHead")),
+""", screen: SKTexture(imageNamed: "rockHead")),
                                        TutorialButton(tutorialName: "Lighting Up The Tree", tutorialDesc: """
 “Looks like one of our goblins decided to put a tree on fire for no actual reason, this is wonderful!
 This act of senseless violence is what we need to gain more power!
 I can use the evilness obtained to summon more goblins with the cauldronn.”
 """, screen: SKTexture(imageNamed: "rockHead")),
                                        TutorialButton(tutorialName: "Flameblins", tutorialDesc: """
-Rock“Seems like one of our goblins accidentally put himself on flames, since this goblins are made of pure evilness the flames don't burn them but they evolved in a new kind of goblin, the flameblin,
+“Seems like one of our goblins accidentally put himself on flames, since this goblins are made of pure evilness the flames don't burn them but they evolved in a new kind of goblin, the flameblin,
 a powerful and reckless fighter, now that i have this new kind of creature i can long press the cauldronn and select it to change the evilness color and summon new flameblin.”
 """, screen: SKTexture(imageNamed: "rockHead")),
                                        TutorialButton(tutorialName: "Fighting", tutorialDesc: """

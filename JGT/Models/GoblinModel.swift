@@ -218,10 +218,18 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         case .feared:
+            if UserDefaults.standard.bool(forKey: "fearTutorial") == false {
+            gameLogic.tutorialEvent(index: 4, hud: hud, tutorialSheet: tutorialSheet)
+                UserDefaults.standard.set(true, forKey: "fearTutorial")
+            }
             fearedUpdate()
             break
             
         case .intavern:
+            if UserDefaults.standard.bool(forKey: "frenzyTutorial") == false {
+            gameLogic.tutorialEvent(index: 5, hud: hud, tutorialSheet: tutorialSheet)
+                UserDefaults.standard.set(true, forKey: "frenzyTutorial")
+            }
             inTavernUpdate()
             break
             
@@ -386,6 +394,12 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
         if (!self.checkFear()) {
             if (self.target != nil) {
+                
+                if UserDefaults.standard.bool(forKey: "fightTutorial") == false {
+                gameLogic.tutorialEvent(index: 3, hud: hud, tutorialSheet: tutorialSheet)
+                    UserDefaults.standard.set(true, forKey: "fightTutorial")
+                }
+                
                 let targetDistance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
                 if (isVectorSmallerThan(vector: targetDistance, other: 100)) {
                     removeAction(forKey: "walk")
@@ -1079,7 +1093,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
         
         if UserDefaults.standard.bool(forKey: "rockTutorial") == false {
-        gameLogic.tutorialEvent(index: 1, hud: hud, tutorialSheet: tutorialSheet)
+        gameLogic.tutorialEvent(index: 9, hud: hud, tutorialSheet: tutorialSheet)
             UserDefaults.standard.set(true, forKey: "rockTutorial")
         }
         
@@ -1097,7 +1111,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         gameLogic.playSound(node: self, audio: Audio.EffectFiles.rockEating, wait: false, muted: gameLogic.muted)
         
         if UserDefaults.standard.bool(forKey: "stoneblinTutorial") == false {
-        gameLogic.tutorialEvent(index: 1, hud: hud, tutorialSheet: tutorialSheet)
+        gameLogic.tutorialEvent(index: 10, hud: hud, tutorialSheet: tutorialSheet)
             UserDefaults.standard.set(true, forKey: "stoneblinTutorial")
         }
         
@@ -1112,7 +1126,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func setFiretoTree() {
         setFireParticles()
         if UserDefaults.standard.bool(forKey: "treeTutorial") == false {
-        gameLogic.tutorialEvent(index: 0, hud: hud, tutorialSheet: tutorialSheet)
+        gameLogic.tutorialEvent(index: 1, hud: hud, tutorialSheet: tutorialSheet)
             UserDefaults.standard.set(true, forKey: "treeTutorial")
         }
         
@@ -1141,7 +1155,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func setFiretoSelf() {
         setFireParticles()
         if UserDefaults.standard.bool(forKey: "fireTutorial") == false {
-        gameLogic.tutorialEvent(index: 0, hud: hud, tutorialSheet: tutorialSheet)
+        gameLogic.tutorialEvent(index: 2, hud: hud, tutorialSheet: tutorialSheet)
             UserDefaults.standard.set(true, forKey: "fireTutorial")
         }
         

@@ -67,6 +67,11 @@ extension TossScene: SKPhysicsContactDelegate {
                 if let _ = secondBody.node as? EvilSight {
                     
                     if !node.isFrenzied {
+                        if UserDefaults.standard.bool(forKey: "frenzyTutorial") == false {
+                        gameLogic.tutorialEvent(index: 5, hud: hud, tutorialSheet: tutorialSheet)
+                            UserDefaults.standard.set(true, forKey: "frenzyTutorial")
+                        }
+                        
                     switch node.type {
                     case .rock:
                         let random = Int.random(in: 0...1)
@@ -98,6 +103,11 @@ extension TossScene: SKPhysicsContactDelegate {
                 if let _ = firstBody.node as? EvilSight {
                     
                     if !node.isFrenzied {
+                        if UserDefaults.standard.bool(forKey: "frenzyTutorial") == false {
+                        gameLogic.tutorialEvent(index: 5, hud: hud, tutorialSheet: tutorialSheet)
+                            UserDefaults.standard.set(true, forKey: "frenzyTutorial")
+                        }
+                        
                     switch node.type {
                     case .rock:
                         let random = Int.random(in: 0...1)

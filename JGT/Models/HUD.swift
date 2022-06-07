@@ -272,6 +272,19 @@ class HUD: SKNode, ObservableObject {
         tutorialSheet.zPosition = 50
         tutorialSheet.position = position
         
+        tutorialSheet.tutorialName.position = CGPoint(x: 0,
+                                                      y: tutorialSheet.tutorialSign.frame.maxY * 0.75)
+        
+        tutorialSheet.tutorialName.fontColor = HUDSettings.nameFontColor
+        tutorialSheet.tutorialName.fontSize = HUDSettings.nameFontSize
+        tutorialSheet.tutorialName.fontName = HUDSettings.nameFont
+        tutorialSheet.tutorialDesc.fontColor = HUDSettings.descFontColor
+        tutorialSheet.tutorialDesc.fontSize = HUDSettings.descFontSize
+        tutorialSheet.tutorialDesc.fontName = HUDSettings.descFont
+        tutorialSheet.tutorialDesc.verticalAlignmentMode = .top
+        tutorialSheet.tutorialDesc.preferredMaxLayoutWidth = tutorialSheet.tutorialSign.frame.width - tutorialSheet.tutorialSign.frame.width/6
+        tutorialSheet.tutorialDesc.numberOfLines = Int(tutorialSheet.tutorialDesc.frame.width / tutorialSheet.tutorialSign.frame.width)
+        
         addChild(tutorialSheet)
     }
 

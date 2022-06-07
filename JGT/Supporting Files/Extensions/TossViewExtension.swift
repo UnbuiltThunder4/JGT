@@ -106,6 +106,10 @@ extension TossScene {
             }
             
             if selectedNode is Cauldron || selectedNode?.name! == "goblinsNumber" {
+                if UserDefaults.standard.bool(forKey: "goblins101") == false {
+                gameLogic.tutorialEvent(index: 0, hud: hud, tutorialSheet: tutorialSheet)
+                    UserDefaults.standard.set(true, forKey: "goblins101")
+                }
                 gameLogic.shootGoblin(self, node: cameraNode, type: shootType, population: self.population, destination: cameraNode.position)
             }
             
