@@ -192,15 +192,15 @@ class GoblinRow: SKSpriteNode, Identifiable, ObservableObject {
         self.goblinFace.setScale(0.1)
         self.goblinFace.position.x = self.frame.minX + goblinFace.size.width
         
-        self.goblinName.fontName = HUDSettings.font
-        self.goblinName.fontSize = HUDSettings.fontSize
+        self.goblinName.fontName = HUDSettings.nameFont
+        self.goblinName.fontSize = HUDSettings.nameFontSize
         self.goblinName.fontColor = HUDSettings.fontColor
         self.goblinName.position = CGPoint(x: self.frame.minX + goblinName.frame.width, y: self.frame.midY)
         self.goblinName.verticalAlignmentMode = .center
         self.goblinName.horizontalAlignmentMode = .center
         
-        self.goblinStats.fontName = HUDSettings.font
-        self.goblinStats.fontSize = HUDSettings.fontSize
+        self.goblinStats.fontName = HUDSettings.nameFont
+        self.goblinStats.fontSize = HUDSettings.statsFontSize
         self.goblinStats.fontColor = HUDSettings.fontColor
         self.goblinStats.position = CGPoint(x: self.frame.maxX - goblinStats.frame.width, y: self.frame.midY)
         self.goblinStats.verticalAlignmentMode = .center

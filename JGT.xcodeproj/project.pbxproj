@@ -15,6 +15,9 @@
 		23017645284643ED00B41583 /* AttackParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 23017644284643EC00B41583 /* AttackParticle.sks */; };
 		230176472846488B00B41583 /* StunParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 230176462846488B00B41583 /* StunParticle.sks */; };
 		2301764A2846546B00B41583 /* FlameblinParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 230176492846546B00B41583 /* FlameblinParticle.sks */; };
+		2320DD05284F629F007B439F /* CrayonHandRegular2016Demo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2320DD01284F629F007B439F /* CrayonHandRegular2016Demo.ttf */; };
+		2320DD07284F629F007B439F /* Chalk-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2320DD03284F629F007B439F /* Chalk-Regular.ttf */; };
+		2320DD08284F629F007B439F /* Nightmare.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2320DD04284F629F007B439F /* Nightmare.ttf */; };
 		234D35D3283264B100D242E7 /* SpriteKitContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234D35D2283264B100D242E7 /* SpriteKitContainer.swift */; };
 		234D9CDE284E074D0077599E /* GoblinDeathParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 234D9CDD284E074D0077599E /* GoblinDeathParticle.sks */; };
 		761907F42823B8F5002A0AE2 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761907F32823B8F5002A0AE2 /* MainScreenView.swift */; };
@@ -189,6 +192,10 @@
 		23017644284643EC00B41583 /* AttackParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = AttackParticle.sks; sourceTree = "<group>"; };
 		230176462846488B00B41583 /* StunParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = StunParticle.sks; sourceTree = "<group>"; };
 		230176492846546B00B41583 /* FlameblinParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FlameblinParticle.sks; sourceTree = "<group>"; };
+		2320DCFC284F5F38007B439F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2320DD01284F629F007B439F /* CrayonHandRegular2016Demo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = CrayonHandRegular2016Demo.ttf; sourceTree = "<group>"; };
+		2320DD03284F629F007B439F /* Chalk-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Chalk-Regular.ttf"; sourceTree = "<group>"; };
+		2320DD04284F629F007B439F /* Nightmare.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Nightmare.ttf; sourceTree = "<group>"; };
 		234D35D2283264B100D242E7 /* SpriteKitContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitContainer.swift; sourceTree = "<group>"; };
 		234D9CDD284E074D0077599E /* GoblinDeathParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GoblinDeathParticle.sks; sourceTree = "<group>"; };
 		761907F32823B8F5002A0AE2 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
@@ -379,6 +386,16 @@
 				2301763828462BB900B41583 /* ElectricParticle.sks */,
 			);
 			path = Particles;
+			sourceTree = "<group>";
+		};
+		2320DCF2284F5E4E007B439F /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2320DD03284F629F007B439F /* Chalk-Regular.ttf */,
+				2320DD01284F629F007B439F /* CrayonHandRegular2016Demo.ttf */,
+				2320DD04284F629F007B439F /* Nightmare.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		2373770E283F66DE00F9E94C /* Sounds */ = {
@@ -616,7 +633,9 @@
 		7692468D2822B5ED003D5D27 /* JGT */ = {
 			isa = PBXGroup;
 			children = (
+				2320DCFC284F5F38007B439F /* Info.plist */,
 				7692468E2822B5ED003D5D27 /* JGTApp.swift */,
+				2320DCF2284F5E4E007B439F /* Fonts */,
 				2373770E283F66DE00F9E94C /* Sounds */,
 				769246922822B5EE003D5D27 /* Assets.xcassets */,
 				2301764828464C0600B41583 /* Particles */,
@@ -794,6 +813,7 @@
 				76B5F398284CD0AC00E7C071 /* flameblin-catapult-1.wav in Resources */,
 				76B5F397284CD0AC00E7C071 /* flameblin-self-catapult-1.wav in Resources */,
 				76B5F3B2284CD0AC00E7C071 /* stoneblin-transform-1.wav in Resources */,
+				2320DD05284F629F007B439F /* CrayonHandRegular2016Demo.ttf in Resources */,
 				76B5F382284CD0AC00E7C071 /* goblin-stone-1.wav in Resources */,
 				76B5F3C1284CD0AC00E7C071 /* stoneblin-burn-1.wav in Resources */,
 				76B5F39A284CD0AC00E7C071 /* dark-son-grunt.mp3 in Resources */,
@@ -829,6 +849,7 @@
 				76B5F3CB284CD0AC00E7C071 /* goblin-burn-1.wav in Resources */,
 				76B5F3B5284CD0AC00E7C071 /* stoneblin-graduation-2.wav in Resources */,
 				2301763B28462DBC00B41583 /* SmokeParticle.sks in Resources */,
+				2320DD08284F629F007B439F /* Nightmare.ttf in Resources */,
 				76B5F3AB284CD0AC00E7C071 /* stoneblin-press-2.wav in Resources */,
 				76B5F38A284CD0AC00E7C071 /* flameblin-graduation-1.wav in Resources */,
 				76B5F381284CD0AC00E7C071 /* flameblin-press-1.wav in Resources */,
@@ -841,6 +862,7 @@
 				76B5F379284CD0AC00E7C071 /* goblin-graduation-1.wav in Resources */,
 				76B5F37B284CD0AC00E7C071 /* stoneblin-fly-2.wav in Resources */,
 				76B5F387284CD0AC00E7C071 /* stoneblin-frenzy-2.wav in Resources */,
+				2320DD07284F629F007B439F /* Chalk-Regular.ttf in Resources */,
 				76B5F3BE284CD0AC00E7C071 /* gumblin-death-1.wav in Resources */,
 				76B5F374284CD0AC00E7C071 /* goblin-frenzy-1.wav in Resources */,
 				76B5F3AA284CD0AC00E7C071 /* catapult-launch.wav in Resources */,
@@ -1101,9 +1123,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"JGT/Preview Content\"";
-				DEVELOPMENT_TEAM = J92848C73R;
+				DEVELOPMENT_TEAM = 38F3PD24AD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = JGT/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1132,9 +1155,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"JGT/Preview Content\"";
-				DEVELOPMENT_TEAM = J92848C73R;
+				DEVELOPMENT_TEAM = 38F3PD24AD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = JGT/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

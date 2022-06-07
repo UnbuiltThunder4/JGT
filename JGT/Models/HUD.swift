@@ -11,9 +11,11 @@ import Foundation
 enum HUDSettings {
     static var cauldronSize = CGSize()
     static var sheetSize = CGSize()
-    static var font = "Noteworthy-Bold"
-    static var fontSize: CGFloat = 25
-    static var statsFontSize: CGFloat = 14
+    static var descFont = "Chalk-Regular"
+    static var nameFont = "Nightmare"
+    static var nameFontSize: CGFloat = 40
+    static var descFontSize: CGFloat = 25
+    static var statsFontSize: CGFloat = 15
     static var fontColor: UIColor = .red
 }
 
@@ -33,7 +35,8 @@ class HUD: SKNode {
         switch UIDevice.current.userInterfaceIdiom {
         case .phone:
             HUDSettings.cauldronSize = CGSize(width: UIScreen.main.bounds.height/5.4, height: UIScreen.main.bounds.height/5.4)
-            HUDSettings.fontSize = 13
+            HUDSettings.nameFontSize = 25
+            HUDSettings.descFontSize = 15
             break
         case .pad:
             HUDSettings.cauldronSize = CGSize(width: UIScreen.main.bounds.height/6, height: UIScreen.main.bounds.height/6)
@@ -47,21 +50,21 @@ class HUD: SKNode {
         addChild(cauldron)
         cauldron.position = position
         
-        cauldron.currentGoblinsNumberLabel.fontName = HUDSettings.font
-        cauldron.currentGoblinsNumberLabel.fontSize = HUDSettings.fontSize
+        cauldron.currentGoblinsNumberLabel.fontName = HUDSettings.nameFont
+        cauldron.currentGoblinsNumberLabel.fontSize = HUDSettings.nameFontSize
         cauldron.currentGoblinsNumberLabel.fontColor = HUDSettings.fontColor
         
-        cauldron.goblinCount.fontName = HUDSettings.font
-        cauldron.goblinCount.fontSize = HUDSettings.fontSize
+        cauldron.goblinCount.fontName = HUDSettings.nameFont
+        cauldron.goblinCount.fontSize = HUDSettings.nameFontSize
         cauldron.goblinCount.fontColor = HUDSettings.fontColor
-        cauldron.flameblinCount.fontName = HUDSettings.font
-        cauldron.flameblinCount.fontSize = HUDSettings.fontSize
+        cauldron.flameblinCount.fontName = HUDSettings.nameFont
+        cauldron.flameblinCount.fontSize = HUDSettings.nameFontSize
         cauldron.flameblinCount.fontColor = HUDSettings.fontColor
-        cauldron.rockCount.fontName = HUDSettings.font
-        cauldron.rockCount.fontSize = HUDSettings.fontSize
+        cauldron.rockCount.fontName = HUDSettings.nameFont
+        cauldron.rockCount.fontSize = HUDSettings.nameFontSize
         cauldron.rockCount.fontColor = HUDSettings.fontColor
-        cauldron.gumblingCount.fontName = HUDSettings.font
-        cauldron.gumblingCount.fontSize = HUDSettings.fontSize
+        cauldron.gumblingCount.fontName = HUDSettings.nameFont
+        cauldron.gumblingCount.fontSize = HUDSettings.nameFontSize
         cauldron.gumblingCount.fontColor = HUDSettings.fontColor
         
         cauldron.currentGoblinsNumberLabel.text = String(cauldron.currentGoblinsNumber) + "/" + String(cauldron.maxGoblinNumber)
@@ -72,13 +75,15 @@ class HUD: SKNode {
         switch UIDevice.current.userInterfaceIdiom {
         case .phone:
             HUDSettings.sheetSize = CGSize(width: UIScreen.main.bounds.width/2.9, height: UIScreen.main.bounds.height/1.1)
-            HUDSettings.fontSize = 15
+            HUDSettings.nameFontSize = 25
+            HUDSettings.descFontSize = 15
             HUDSettings.statsFontSize = 8
             break
         case .pad:
             HUDSettings.sheetSize = CGSize(width: UIScreen.main.bounds.width/2.6, height: UIScreen.main.bounds.height/1.5)
-            HUDSettings.fontSize = 28
-            HUDSettings.statsFontSize = 14
+            HUDSettings.nameFontSize = 35
+            HUDSettings.descFontSize = 25
+            HUDSettings.statsFontSize = 15
             break
         @unknown default:
             break
@@ -90,19 +95,19 @@ class HUD: SKNode {
         
         sheet.size = HUDSettings.sheetSize
         
-        sheet.nameLabel.fontName = HUDSettings.font
-        sheet.descLabel.fontName = HUDSettings.font
+        sheet.nameLabel.fontName = HUDSettings.nameFont
+        sheet.descLabel.fontName = HUDSettings.descFont
         
-        sheet.healthLabel.fontName = HUDSettings.font
-        sheet.attackLabel.fontName = HUDSettings.font
-        sheet.fearLabel.fontName = HUDSettings.font
-        sheet.ageLabel.fontName = HUDSettings.font
-        sheet.witLabel.fontName = HUDSettings.font
-        sheet.frenzyLabel.fontName = HUDSettings.font
+        sheet.healthLabel.fontName = HUDSettings.descFont
+        sheet.attackLabel.fontName = HUDSettings.descFont
+        sheet.fearLabel.fontName = HUDSettings.descFont
+        sheet.ageLabel.fontName = HUDSettings.descFont
+        sheet.witLabel.fontName = HUDSettings.descFont
+        sheet.frenzyLabel.fontName = HUDSettings.descFont
 
         
-        sheet.nameLabel.fontSize = HUDSettings.fontSize
-        sheet.descLabel.fontSize = HUDSettings.fontSize
+        sheet.nameLabel.fontSize = HUDSettings.nameFontSize
+        sheet.descLabel.fontSize = HUDSettings.descFontSize
         
         sheet.healthLabel.fontSize = HUDSettings.statsFontSize
         sheet.attackLabel.fontSize = HUDSettings.statsFontSize
@@ -175,11 +180,11 @@ class HUD: SKNode {
         scrollableMenu.descLabel.position = CGPoint(x: 0,
                                                     y: scrollableMenu.frame.maxY * 0.55)
         
-        scrollableMenu.nameLabel.fontName = HUDSettings.font
-        scrollableMenu.descLabel.fontName = HUDSettings.font
+        scrollableMenu.nameLabel.fontName = HUDSettings.nameFont
+        scrollableMenu.descLabel.fontName = HUDSettings.descFont
 
-        scrollableMenu.nameLabel.fontSize = HUDSettings.fontSize
-        scrollableMenu.descLabel.fontSize = HUDSettings.fontSize
+        scrollableMenu.nameLabel.fontSize = HUDSettings.nameFontSize
+        scrollableMenu.descLabel.fontSize = HUDSettings.descFontSize
         
 //        scrollableMenu.nameLabel.fontColor = HUDSettings.fontColor
         scrollableMenu.nameLabel.fontColor = .white
