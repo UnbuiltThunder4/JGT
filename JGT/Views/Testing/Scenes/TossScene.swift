@@ -18,6 +18,8 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     @ObservedObject var scrollableMenu: ScrollableMenu = ScrollableMenu.shared
     @ObservedObject var evilGauge: EvilGauge = EvilGauge.shared
     
+    var level = 0
+    
     var darkson = DarkSon()
     var enemies: [Enemy] = []
     var structures: [Structure] = []
@@ -45,7 +47,6 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     var hud = HUD()
     var sheet = Sheet()
     var cauldron = Cauldron(currentGoblinsNumber: 3, maxGoblinNumber: MainScreenProperties.maxGoblinsNumber)
-//    var evilGauge = EvilGauge(maxFill: MainScreenProperties.maxFill, currentFill: 20, size: (UIDevice.current.userInterfaceIdiom == .pad ? GaugeHUDSetting.ipadSize : GaugeHUDSetting.iphoneSize ))
     var evilSight = EvilSight(currentRadius: 1.0, maxRadius: 26.0)
     var pauseScreen = PauseScreen()
     var pauseButton = PauseButton()
@@ -63,7 +64,8 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override init() {
+    init(level: Int) {
+        self.level = level
         playableRect = CGRect(x: 0, y: MainScreenProperties.playableMargin, width: UIScreen.main.bounds.width, height: MainScreenProperties.playableHeight)
         
         self.enemies.append(contentsOf: gnomes)
