@@ -48,31 +48,15 @@ class Cauldron: SKSpriteNode {
         self.addChild(goblinHead)
         
         self.goblinCount.position = CGPoint(x: self.goblinHead.position.x + self.goblinHead.size.width/1.5,
-                                            y: self.goblinHead.position.y - self.goblinHead.frame.maxY * 0.30)
+                                            y: self.goblinHead.position.y - self.goblinHead.size.height * 0.25)
         self.goblinCount.zPosition = 100
         self.goblinCount.alpha = 0
         self.goblinCount.name = "goblinCount"
         self.addChild(goblinCount)
         
-        self.flameblinHead.size = CGSize(width: self.size.width/2, height: self.size.width/4)
-        self.flameblinHead.position = CGPoint(x: self.position.x + self.size.width + self.flameblinHead.size.width/4,
-                                              y: self.position.y + self.size.height/2)
-        self.flameblinHead.color = .red
-        self.flameblinHead.zPosition = 100
-        self.flameblinHead.alpha = 0
-        self.flameblinHead.name = "flameblinHead"
-        self.addChild(flameblinHead)
-        
-        self.flameblinCount.position = CGPoint(x: self.flameblinHead.position.x + self.flameblinHead.size.width/1.5,
-                                               y: self.flameblinHead.position.y - self.flameblinHead.frame.maxY * 0.10)
-        self.flameblinCount.zPosition = 100
-        self.flameblinCount.alpha = 0
-        self.flameblinCount.name = "flameblinCount"
-        self.addChild(flameblinCount)
-        
         self.rockHead.size = CGSize(width: self.size.width/2, height: self.size.width/4)
         self.rockHead.position = CGPoint(x: self.position.x + self.size.width + self.goblinHead.size.width/4,
-                                         y: self.position.y + self.size.height/4)
+                                         y: self.goblinHead.position.y + self.size.height/2.5)
         self.rockHead.color = .yellow
         self.rockHead.zPosition = 100
         self.rockHead.alpha = 0
@@ -80,15 +64,31 @@ class Cauldron: SKSpriteNode {
         self.addChild(rockHead)
         
         self.rockCount.position = CGPoint(x: self.rockHead.position.x + self.rockHead.size.width/1.5,
-                                            y: self.rockHead.position.y - self.rockHead.frame.maxY * 0.10)
+                                          y: self.rockHead.position.y - self.rockHead.size.height * 0.25)
         self.rockCount.zPosition = 100
         self.rockCount.alpha = 0
         self.rockCount.name = "rockCount"
         self.addChild(rockCount)
         
+        self.flameblinHead.size = CGSize(width: self.size.width/2, height: self.size.width/4)
+        self.flameblinHead.position = CGPoint(x: self.position.x + self.size.width + self.flameblinHead.size.width/4,
+                                              y: self.rockHead.position.y + self.size.height/2.5)
+        self.flameblinHead.color = .red
+        self.flameblinHead.zPosition = 100
+        self.flameblinHead.alpha = 0
+        self.flameblinHead.name = "flameblinHead"
+        self.addChild(flameblinHead)
+        
+        self.flameblinCount.position = CGPoint(x: self.flameblinHead.position.x + self.flameblinHead.size.width/1.5,
+                                               y: self.flameblinHead.position.y - self.flameblinHead.size.height * 0.25)
+        self.flameblinCount.zPosition = 100
+        self.flameblinCount.alpha = 0
+        self.flameblinCount.name = "flameblinCount"
+        self.addChild(flameblinCount)
+        
         self.gumblingHead.size = CGSize(width: self.size.width/2, height: self.size.width/4)
         self.gumblingHead.position = CGPoint(x: self.position.x + self.size.width + self.gumblingHead.size.width/4,
-                                             y: self.position.y - self.size.height/4)
+                                             y: self.goblinHead.position.y - self.size.height/2.5)
         self.gumblingHead.color = .yellow
         self.gumblingHead.zPosition = 100
         self.gumblingHead.alpha = 0
@@ -96,7 +96,7 @@ class Cauldron: SKSpriteNode {
         self.addChild(gumblingHead)
         
         self.gumblingCount.position = CGPoint(x: self.gumblingHead.position.x + self.gumblingHead.size.width/1.5,
-                                            y: self.gumblingHead.position.y + self.gumblingHead.frame.maxY * 0.30)
+                                              y: self.gumblingHead.position.y - self.gumblingHead.size.height * 0.25)
         self.gumblingCount.zPosition = 100
         self.gumblingCount.alpha = 0
         self.gumblingCount.name = "gumblingCount"
