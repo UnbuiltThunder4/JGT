@@ -1078,6 +1078,11 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             gameLogic.playSound(node: self, audio: Audio.EffectFiles.gumblinStone1, wait: false, muted: gameLogic.muted)
         }
         
+        if UserDefaults.standard.bool(forKey: "rockTutorial") == false {
+        gameLogic.tutorialEvent(index: 1, hud: hud, tutorialSheet: tutorialSheet)
+            UserDefaults.standard.set(true, forKey: "rockTutorial")
+        }
+        
         self.closeStructure!.removeFromParent()
         self.HWpoints += 5
         self.hasRock = true
@@ -1091,7 +1096,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                             audio: random == 0 ? Audio.EffectFiles.stoneblinTransform1 : Audio.EffectFiles.stoneblinTransform2, wait: false, muted: gameLogic.muted)
         gameLogic.playSound(node: self, audio: Audio.EffectFiles.rockEating, wait: false, muted: gameLogic.muted)
         
+        if UserDefaults.standard.bool(forKey: "stoneblinTutorial") == false {
         gameLogic.tutorialEvent(index: 1, hud: hud, tutorialSheet: tutorialSheet)
+            UserDefaults.standard.set(true, forKey: "stoneblinTutorial")
+        }
         
         self.closeStructure!.removeFromParent()
         self.type = .rock
@@ -1102,11 +1110,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func setFiretoTree() {
-        print(gameLogic.fireTutorial)
         setFireParticles()
-        if UserDefaults.standard.bool(forKey: "fireTutorial") == false {
+        if UserDefaults.standard.bool(forKey: "treeTutorial") == false {
         gameLogic.tutorialEvent(index: 0, hud: hud, tutorialSheet: tutorialSheet)
-            UserDefaults.standard.set(true, forKey: "fireTutorial")
+            UserDefaults.standard.set(true, forKey: "treeTutorial")
         }
         
         switch self.type {

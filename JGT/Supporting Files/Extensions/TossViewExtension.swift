@@ -191,7 +191,19 @@ extension TossScene {
             
             if selectedNode?.name! == "tutorialButton" {
                 self.tutorialSheet.alpha = 1.0
+                if let tutorial = selectedNode as? TutorialButton {
+                    self.tutorialSheet.tutorialName.text = tutorial.tutorialName
+                    self.tutorialSheet.tutorialDesc.text = tutorial.tutorialDesc
+                    self.tutorialSheet.screen.texture = tutorial.screen
+                }
+                selectedNode?.removeFromParent()
             }
+            
+            if selectedNode?.name! == "tutorialSign" || selectedNode?.name! == "screen" || selectedNode?.name! == "tutorialName" || selectedNode?.name! == "tutortialDesc" {
+                self.tutorialSheet.alpha = 0.0
+            }
+        
+        
             
         }
     }

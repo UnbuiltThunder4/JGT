@@ -122,6 +122,9 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         setupHUD()
         setupCamera()
         
+        UserDefaults.standard.set(false, forKey: "fireTutorial")
+        UserDefaults.standard.set(false, forKey: "rockTutorial")
+        
         player.musicVolume = 0.7
 //        playBackgroundMusic(filename: "Psycho Katana - Instrumental.wav")
         player.play(music: Audio.MusicFiles.background)

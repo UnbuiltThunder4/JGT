@@ -269,7 +269,7 @@ class HUD: SKNode, ObservableObject {
     
     func addTutorialSheet(tutorialSheet: TutorialSheet, position: CGPoint) {
     
-        tutorialSheet.zPosition = 20
+        tutorialSheet.zPosition = 50
         tutorialSheet.position = position
         
         addChild(tutorialSheet)

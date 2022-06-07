@@ -12,8 +12,20 @@ import SwiftUI
 
 class GameLogic: ObservableObject {
     
+    @State var goblins101 = UserDefaults.standard.bool(forKey: "goblins101")
     @State var fireTutorial = UserDefaults.standard.bool(forKey: "fireTutorial")
     @State var rockTutorial = UserDefaults.standard.bool(forKey: "rockTutorial")
+    @State var stoneblinTutorial = UserDefaults.standard.bool(forKey: "stoneblinTutorial")
+    @State var treeTutorial = UserDefaults.standard.bool(forKey: "treeTutorial")
+    @State var fightTutorial = UserDefaults.standard.bool(forKey: "fightTutorial")
+    @State var fearTutorial = UserDefaults.standard.bool(forKey: "fearTutorial")
+    @State var frenzyTutorial = UserDefaults.standard.bool(forKey: "frenzyTutorial")
+    @State var academyTutorial = UserDefaults.standard.bool(forKey: "academyTutorial")
+    @State var gateTutorial = UserDefaults.standard.bool(forKey: "gateTutorial")
+    @State var backdoorTutorial = UserDefaults.standard.bool(forKey: "backdoorTutorial")
+    @State var pillagingTutorial = UserDefaults.standard.bool(forKey: "pillagingTutorial")
+    @State var gumblinsTutorial = UserDefaults.standard.bool(forKey: "gumblinsTutorial")
+    @State var catapult = UserDefaults.standard.bool(forKey: "catapultTutorial")
     
     // Single instance of the class
     static let shared: GameLogic = GameLogic()
@@ -21,8 +33,43 @@ class GameLogic: ObservableObject {
     var lastScale = ZoomProperties.initialScale
     var currentScale = ZoomProperties.initialScale
     
-    var tutorials: [TutorialButton] = [TutorialButton(tutorialName: "Fire", tutorialDesc: "Fire", screen: SKTexture(imageNamed: "goblinHead")),
-                                       TutorialButton(tutorialName: "Rock", tutorialDesc: "Rock", screen: SKTexture(imageNamed: "rockHead"))]
+    var tutorials: [TutorialButton] = [TutorialButton(tutorialName: "Goblins 101", tutorialDesc: """
+“My son, by tapping the cauldronn I can summon goblins with the power of evilness alone,
+they can help you in many ways, I can throw them by dragging them wherever I want I can long press the terrain to use my evil sight and make them go in a frenzy.
+Once I tap on a Goblin I can see all of their stats, in order, I can see their Health, their Attack Power, how much they Fear death, their age, their wit and how long is their frenzy.
+If i think some of them are unworthy i can even long press on them to make them explode and get some of my power back.
+Remember, the older a goblin I sacrifice, the more evilness I will get back.”
+""", screen: SKTexture(imageNamed: "goblinHead")),
+                                       TutorialButton(tutorialName: "Lighting Up The Tree", tutorialDesc: """
+“Looks like one of our goblins decided to put a tree on fire for no actual reason, this is wonderful!
+This act of senseless violence is what we need to gain more power!
+I can use the evilness obtained to summon more goblins with the cauldronn.”
+""", screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Flameblins", tutorialDesc: """
+Rock“Seems like one of our goblins accidentally put himself on flames, since this goblins are made of pure evilness the flames don't burn them but they evolved in a new kind of goblin, the flameblin,
+a powerful and reckless fighter, now that i have this new kind of creature i can long press the cauldronn and select it to change the evilness color and summon new flameblin.”
+""", screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Fighting", tutorialDesc: """
+“Once a goblin gets close enough to an enemy it will ignore everything else and start attacking the enemy, remember that a single goblin is useless, the goblins' power comes in the number.”
+""", screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Fear and Tavern", tutorialDesc: """
+“Sadly, goblins are cowards. Based on their Fear goblins will try to flee once they get to a certain amount of health left, the tavern is full of potions and beer to help them recover and go back to fight once they’re ready.”
+""", screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Frenzy", tutorialDesc: """
+                                                      “Be it with the power of my evil sight or the power of the potions in the tavern, goblins can go in frenzy, once in this state their attack power is doubled and they fear nothing, the frenzy is not endless by tapping on a goblin I can see the duration of it’s frenzy.”
+                                                      """, screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Academy", tutorialDesc: """
+“By attending the Academy, goblins can learn many things, helping them complete tasks in a quicker and more efficient way. once a goblin finishes his studies it gets a title, because it deserves it!”
+""", screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Gate", tutorialDesc: "Rock", screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Backdoor", tutorialDesc: """
+                                                      “Our goblins have found a backdoor, once they destroy it they can use the passage to attack enemies on the enemy walls and help you attack the gates without taking any damage.”
+                                                      """, screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Rocks", tutorialDesc: "Rock", screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Stoneblins", tutorialDesc: "Stoneblins", screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Pillaging", tutorialDesc: "Pillaging", screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Gumblins", tutorialDesc: "Gumblins", screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Catapult", tutorialDesc: "Catapult", screen: SKTexture(imageNamed: "rockHead"))]
     
     // Function responsible to set up the game before it starts.
     func setUpGame() {
@@ -252,9 +299,6 @@ class GameLogic: ObservableObject {
     
     public func tutorialEvent(index: Int, hud: HUD, tutorialSheet: TutorialSheet) {
         hud.addTutorialButton(tutorialButton: tutorials[index], position: CGPoint.zero)
-        tutorialSheet.tutorialName.text = tutorials[index].tutorialName
-        tutorialSheet.tutorialDesc.text = tutorials[index].tutorialDesc
-        tutorialSheet.screen.texture = tutorials[index].screen
     }
     
 }
