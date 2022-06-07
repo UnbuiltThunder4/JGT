@@ -16,7 +16,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     @ObservedObject var evilGauge: EvilGauge = EvilGauge.shared
     
-    public let fullName: String
+    public var fullName: String
     public let backstory: String
     public var type: GoblinType
     public var age: Int = 0
@@ -64,6 +64,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private var currentTask: (() -> ())? = nil
     private var ignoreThreshold: Float = 0.0
+    
+    private var goblinTaskTime: Int = taskTime
     
     init() {
         let goblinname = GoblinConstants.names.randomElement()! + " " + GoblinConstants.surnames.randomElement()!
@@ -356,7 +358,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         if (self.closeStructure!.goblins.contains(self)) {
             self.target = nil
             self.taskCounter += 1
-            if (self.taskCounter % taskTime == 0) {
+            if (self.taskCounter % self.goblinTaskTime == 0) {
                 self.currentTask!()
                 self.currentTask = nil
                 hasToUpdateRank = true
@@ -531,7 +533,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.updateAge()
         self.removeAllActions()
         self.inTavernCounter += 1
-        if (self.inTavernCounter % taskTime == 0) {
+        if (self.inTavernCounter % self.goblinTaskTime == 0) {
             if (self.currentFrenzyTurn < self.frenzy) {
                 self.currentFrenzyTurn += 1
             }
@@ -583,6 +585,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         if (self.inAcademyCounter % structureTime == 0) {
             self.inAcademyCounter = 0
             self.isGraduated = true
+            self.goblinTaskTime /= 2
+            let temp = self.fullName
+            self.fullName = GoblinConstants.honoree.randomElement()! + " " + temp
             self.state = .idle
             self.alpha = 1.0
             if let academy = self.closeStructure as? Academy {
@@ -707,7 +712,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func stunUpdate() {
         self.updateAge()
         self.stunCounter += 1
-        if (self.stunCounter % taskTime == 0) {
+        if (self.stunCounter % self.goblinTaskTime == 0) {
             self.stunCounter = 0
             self.state = .idle
         }
@@ -720,10 +725,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             if (backdoor.isOpened) {
                 self.alpha = 0.0
                 self.climbCounter += 1
-                if (self.climbCounter % taskTime == 0) {
+                if (self.climbCounter % self.goblinTaskTime == 0) {
                     self.climbCounter = 0
-                    self.position.x += self.position.x - passageCoordinates.x
-                    self.position.y += self.position.y - passageCoordinates.y
+                    self.position.x += abs(self.position.x - passageCoordinates.x) + 50
+                    self.position.y += abs(self.position.y - passageCoordinates.y) + 25
                     self.state = .idle
                     self.alpha = 1.0
                 }
@@ -756,7 +761,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.removeAllActions()
         self.alpha = 0.0
         self.climbCounter += 1
-        if (self.climbCounter % taskTime == 0) {
+        if (self.climbCounter % self.goblinTaskTime == 0) {
             self.climbCounter = 0
             self.position.y = backdoorCoordinates.y - 100
             self.state = .idle
