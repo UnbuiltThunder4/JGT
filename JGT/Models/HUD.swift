@@ -16,7 +16,8 @@ enum HUDSettings {
     static var nameFontSize: CGFloat = 40
     static var descFontSize: CGFloat = 25
     static var statsFontSize: CGFloat = 15
-    static var fontColor: UIColor = .red
+    static var nameFontColor: UIColor = .orange
+    static var descFontColor: UIColor = .brown
 }
 
 class HUD: SKNode {
@@ -52,20 +53,20 @@ class HUD: SKNode {
         
         cauldron.currentGoblinsNumberLabel.fontName = HUDSettings.nameFont
         cauldron.currentGoblinsNumberLabel.fontSize = HUDSettings.nameFontSize
-        cauldron.currentGoblinsNumberLabel.fontColor = HUDSettings.fontColor
+        cauldron.currentGoblinsNumberLabel.fontColor = HUDSettings.nameFontColor
         
         cauldron.goblinCount.fontName = HUDSettings.nameFont
         cauldron.goblinCount.fontSize = HUDSettings.nameFontSize
-        cauldron.goblinCount.fontColor = HUDSettings.fontColor
+        cauldron.goblinCount.fontColor = HUDSettings.descFontColor
         cauldron.flameblinCount.fontName = HUDSettings.nameFont
         cauldron.flameblinCount.fontSize = HUDSettings.nameFontSize
-        cauldron.flameblinCount.fontColor = HUDSettings.fontColor
+        cauldron.flameblinCount.fontColor = HUDSettings.descFontColor
         cauldron.rockCount.fontName = HUDSettings.nameFont
         cauldron.rockCount.fontSize = HUDSettings.nameFontSize
-        cauldron.rockCount.fontColor = HUDSettings.fontColor
+        cauldron.rockCount.fontColor = HUDSettings.descFontColor
         cauldron.gumblingCount.fontName = HUDSettings.nameFont
         cauldron.gumblingCount.fontSize = HUDSettings.nameFontSize
-        cauldron.gumblingCount.fontColor = HUDSettings.fontColor
+        cauldron.gumblingCount.fontColor = HUDSettings.descFontColor
         
         cauldron.currentGoblinsNumberLabel.text = String(cauldron.currentGoblinsNumber) + "/" + String(cauldron.maxGoblinNumber)
         
@@ -116,14 +117,14 @@ class HUD: SKNode {
         sheet.witLabel.fontSize = HUDSettings.statsFontSize
         sheet.frenzyLabel.fontSize = HUDSettings.statsFontSize
         
-        sheet.nameLabel.fontColor = HUDSettings.fontColor
-        sheet.descLabel.fontColor = HUDSettings.fontColor
-        sheet.healthLabel.fontColor = HUDSettings.fontColor
-        sheet.attackLabel.fontColor = HUDSettings.fontColor
-        sheet.fearLabel.fontColor = HUDSettings.fontColor
-        sheet.ageLabel.fontColor = HUDSettings.fontColor
-        sheet.witLabel.fontColor = HUDSettings.fontColor
-        sheet.frenzyLabel.fontColor = HUDSettings.fontColor
+        sheet.nameLabel.fontColor = HUDSettings.nameFontColor
+        sheet.descLabel.fontColor = HUDSettings.descFontColor
+        sheet.healthLabel.fontColor = HUDSettings.nameFontColor
+        sheet.attackLabel.fontColor = HUDSettings.nameFontColor
+        sheet.fearLabel.fontColor = HUDSettings.nameFontColor
+        sheet.ageLabel.fontColor = HUDSettings.nameFontColor
+        sheet.witLabel.fontColor = HUDSettings.nameFontColor
+        sheet.frenzyLabel.fontColor = HUDSettings.nameFontColor
         
         sheet.typeLabel.size = CGSize(width: sheet.size.width/4, height: sheet.size.width/7)
         
@@ -186,9 +187,8 @@ class HUD: SKNode {
         scrollableMenu.nameLabel.fontSize = HUDSettings.nameFontSize
         scrollableMenu.descLabel.fontSize = HUDSettings.descFontSize
         
-//        scrollableMenu.nameLabel.fontColor = HUDSettings.fontColor
         scrollableMenu.nameLabel.fontColor = .white
-        scrollableMenu.descLabel.fontColor = HUDSettings.fontColor
+        scrollableMenu.descLabel.fontColor = HUDSettings.descFontColor
         
         scrollableMenu.nameLabel.verticalAlignmentMode = .center
         scrollableMenu.descLabel.verticalAlignmentMode = .top
@@ -207,23 +207,23 @@ class HUD: SKNode {
         pauseScreen.pauseSign.zPosition = 5
         pauseScreen.pauseSign.position = CGPoint.zero
         
-        pauseScreen.continueMessage.fontSize = HUDSettings.fontSize
-        pauseScreen.continueMessage.fontName = HUDSettings.font
-        pauseScreen.continueMessage.fontColor = HUDSettings.fontColor
+        pauseScreen.continueMessage.fontSize = HUDSettings.nameFontSize
+        pauseScreen.continueMessage.fontName = HUDSettings.nameFont
+        pauseScreen.continueMessage.fontColor = HUDSettings.nameFontColor
         pauseScreen.continueMessage.text = "Continue"
         pauseScreen.continueMessage.position = CGPoint(x:-pauseScreen.pauseSign.size.width/4, y: pauseScreen.pauseSign.size.height/5)
         pauseScreen.continueMessage.zPosition = 5
         
-        pauseScreen.exitMessage.fontSize = HUDSettings.fontSize
-        pauseScreen.exitMessage.fontName = HUDSettings.font
-        pauseScreen.exitMessage.fontColor = HUDSettings.fontColor
+        pauseScreen.exitMessage.fontSize = HUDSettings.nameFontSize
+        pauseScreen.exitMessage.fontName = HUDSettings.nameFont
+        pauseScreen.exitMessage.fontColor = HUDSettings.nameFontColor
         pauseScreen.exitMessage.text = "Level Selection"
         pauseScreen.exitMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/4, y: pauseScreen.pauseSign.size.height/5)
         pauseScreen.exitMessage.zPosition = 5
 
-        pauseScreen.restartMessage.fontSize = HUDSettings.fontSize
-        pauseScreen.restartMessage.fontName = HUDSettings.font
-        pauseScreen.restartMessage.fontColor = HUDSettings.fontColor
+        pauseScreen.restartMessage.fontSize = HUDSettings.nameFontSize
+        pauseScreen.restartMessage.fontName = HUDSettings.nameFont
+        pauseScreen.restartMessage.fontColor = HUDSettings.nameFontColor
         pauseScreen.restartMessage.text = "Restart"
         pauseScreen.restartMessage.position = CGPoint(x: 0, y: pauseScreen.pauseSign.size.height/5)
         pauseScreen.restartMessage.zPosition = 5
