@@ -169,6 +169,16 @@ extension TossScene {
                 
             }
             
+            if selectedNode?.name! == "musicButton" {
+                if player.musicVolume != 0.0 {
+                player.musicVolume = 0.0
+                self.pauseScreen.musicButton.texture = SKTexture(imageNamed: "music-off")
+                } else {
+                    player.musicVolume = 0.7
+                    self.pauseScreen.musicButton.texture = SKTexture(imageNamed: "music-on")
+                }
+            }
+            
         }
     }
     

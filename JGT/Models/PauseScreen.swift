@@ -12,13 +12,15 @@ class PauseScreen: SKSpriteNode {
     let pauseSign = SKSpriteNode(imageNamed: "structure sheet wide")
     var sheetWidth: CGFloat = CGFloat()
     var sheetHeight: CGFloat = CGFloat()
-    let continueButton = SKSpriteNode(imageNamed: "continueButton")
-    let quitButton = SKSpriteNode(imageNamed: "quitButton")
-    let restartButton = SKSpriteNode(imageNamed: "restartButton")
+    let continueButton = SKSpriteNode(imageNamed: "continue-on")
+    let quitButton = SKSpriteNode(imageNamed: "menu-on")
+    let restartButton = SKSpriteNode(imageNamed: "restart-on")
     let pauseMessage = SKSpriteNode(imageNamed: "pauseTitle")
     let continueMessage = SKSpriteNode(imageNamed: "continueMessage")
     let exitMessage = SKSpriteNode(imageNamed: "exitTitle")
     let restartMessage = SKSpriteNode(imageNamed: "restartMessage")
+    let musicButton = SKSpriteNode(imageNamed: "music-on")
+    let effectButton = SKSpriteNode(imageNamed: "effects-on")
     let littleButtonsSize = CGSize(width: UIScreen.main.bounds.width/17.0, height: UIScreen.main.bounds.width/17.0)
     
     init() {
@@ -47,10 +49,12 @@ class PauseScreen: SKSpriteNode {
         self.addChild(continueButton)
         self.addChild(quitButton)
         self.addChild(restartButton)
-        self.addChild(pauseMessage)
+//        self.addChild(pauseMessage)
         self.addChild(continueMessage)
         self.addChild(exitMessage)
         self.addChild(restartMessage)
+        self.addChild(musicButton)
+        self.addChild(effectButton)
         
         pauseSign.name = "pauseSign"
         continueButton.name = "ContinueBtn"
@@ -60,6 +64,8 @@ class PauseScreen: SKSpriteNode {
         continueMessage.name = "continueMessage"
         exitMessage.name = "exitMessage"
         restartMessage.name = "restartMessage"
+        musicButton.name = "musicButton"
+        effectButton.name = "effectButton"
         
     }
     required init?(coder aDecoder: NSCoder) {

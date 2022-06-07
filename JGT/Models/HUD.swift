@@ -207,28 +207,36 @@ class HUD: SKNode {
         pauseScreen.pauseMessage.zPosition = 5
         
         pauseScreen.continueMessage.size = CGSize(width: pauseScreen.pauseSign.size.width/5, height: pauseScreen.pauseSign.size.width/10)
-        pauseScreen.continueMessage.position = CGPoint(x: 0, y: pauseScreen.pauseSign.size.height/10)
+        pauseScreen.continueMessage.position = CGPoint(x:-pauseScreen.pauseSign.size.width/4, y: pauseScreen.pauseSign.size.height/5)
         pauseScreen.continueMessage.zPosition = 5
 
         pauseScreen.exitMessage.size = CGSize(width: pauseScreen.pauseSign.size.width/5, height: pauseScreen.pauseSign.size.width/10)
-        pauseScreen.exitMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/4, y: pauseScreen.pauseSign.size.height/10)
+        pauseScreen.exitMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/4, y: pauseScreen.pauseSign.size.height/5)
         pauseScreen.exitMessage.zPosition = 5
 
         pauseScreen.restartMessage.size = CGSize(width: pauseScreen.pauseSign.size.width/5, height: pauseScreen.pauseSign.size.width/10)
-        pauseScreen.restartMessage.position = CGPoint(x: -pauseScreen.pauseSign.size.width/4, y: pauseScreen.pauseSign.size.height/10)
+        pauseScreen.restartMessage.position = CGPoint(x: 0, y: pauseScreen.pauseSign.size.height/5)
         pauseScreen.restartMessage.zPosition = 5
         
-        pauseScreen.continueButton.size = CGSize(width: pauseScreen.pauseSign.size.width/10, height: pauseScreen.pauseSign.size.width/10)
+        pauseScreen.continueButton.size = CGSize(width: pauseScreen.pauseSign.size.width/5, height: pauseScreen.pauseSign.size.width/5)
         pauseScreen.continueButton.zPosition = 5
-        pauseScreen.continueButton.position = CGPoint(x: pauseScreen.continueMessage.position.x, y: -pauseScreen.pauseSign.size.height/5.2)
+        pauseScreen.continueButton.position = CGPoint(x: pauseScreen.continueMessage.position.x, y: pauseScreen.pauseSign.frame.midY*2)
         
-        pauseScreen.quitButton.size = CGSize(width: pauseScreen.pauseSign.size.width/10, height: pauseScreen.pauseSign.size.width/10)
-        pauseScreen.quitButton.position = CGPoint(x: pauseScreen.exitMessage.position.x, y: -pauseScreen.pauseSign.size.height/5.2)
+        pauseScreen.quitButton.size = CGSize(width: pauseScreen.pauseSign.size.width/5, height: pauseScreen.pauseSign.size.width/5)
+        pauseScreen.quitButton.position = CGPoint(x: pauseScreen.exitMessage.position.x, y: pauseScreen.pauseSign.frame.midY*2)
         pauseScreen.quitButton.zPosition = 10
     
-        pauseScreen.restartButton.size = CGSize(width: pauseScreen.pauseSign.size.width/10, height: pauseScreen.pauseSign.size.width/10)
-        pauseScreen.restartButton.position = CGPoint(x: pauseScreen.restartMessage.position.x, y: -pauseScreen.pauseSign.size.height/5.2)
+        pauseScreen.restartButton.size = CGSize(width: pauseScreen.pauseSign.size.width/5, height: pauseScreen.pauseSign.size.width/5)
+        pauseScreen.restartButton.position = CGPoint(x: pauseScreen.restartMessage.position.x, y: pauseScreen.pauseSign.frame.midY*2)
         pauseScreen.restartButton.zPosition = 5
+        
+        pauseScreen.musicButton.size = CGSize(width: pauseScreen.pauseSign.size.width/10, height: pauseScreen.pauseSign.size.width/10)
+        pauseScreen.musicButton.position = CGPoint(x: pauseScreen.pauseSign.frame.maxX/2.2, y: pauseScreen.pauseSign.frame.minY/1.5)
+        pauseScreen.musicButton.zPosition = 5
+        
+        pauseScreen.effectButton.size = CGSize(width: pauseScreen.pauseSign.size.width/10, height: pauseScreen.pauseSign.size.width/10)
+        pauseScreen.effectButton.position = CGPoint(x: pauseScreen.pauseSign.frame.maxX/1.5, y: pauseScreen.pauseSign.frame.minY/1.5)
+        pauseScreen.effectButton.zPosition = 5
     }
     
     func addPauseButton(pauseButton: PauseButton, position: CGPoint){

@@ -10,7 +10,7 @@ import SpriteKit
 
 class PauseButton: SKSpriteNode {
     init() {
-        super.init(texture: SKTexture(imageNamed: "pauseButton"), color: .clear, size: CGSize(width: UIScreen.main.bounds.width/17.0, height: UIScreen.main.bounds.width/17.0))
+        super.init(texture: SKTexture(imageNamed: "pause-on"), color: .clear, size: CGSize(width: UIScreen.main.bounds.width/17.0, height: UIScreen.main.bounds.width/17.0))
         self.name = "PauseBtn"
     }
     
