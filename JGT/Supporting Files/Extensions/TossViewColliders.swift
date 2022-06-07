@@ -70,14 +70,14 @@ extension TossScene: SKPhysicsContactDelegate {
                     switch node.type {
                     case .rock:
                         let random = Int.random(in: 0...1)
-                        gameLogic.playSound(node: node, audio: random == 0 ? Audio.EffectFiles.stoneblinFrenzy1 : Audio.EffectFiles.stoneblinFrenzy2, wait: false)
+                        gameLogic.playSound(node: node, audio: random == 0 ? Audio.EffectFiles.stoneblinFrenzy1 : Audio.EffectFiles.stoneblinFrenzy2, wait: false, muted: gameLogic.muted)
                     case .fire:
                         let random = Int.random(in: 0...1)
-                        gameLogic.playSound(node: node, audio: random == 0 ? Audio.EffectFiles.flameblinFrenzy1 : Audio.EffectFiles.flameblinFrenzy2, wait: false)
+                        gameLogic.playSound(node: node, audio: random == 0 ? Audio.EffectFiles.flameblinFrenzy1 : Audio.EffectFiles.flameblinFrenzy2, wait: false, muted: gameLogic.muted)
                     case .gum:
-                        gameLogic.playSound(node: node, audio: Audio.EffectFiles.gumblinFrenzy1, wait: false)
+                        gameLogic.playSound(node: node, audio: Audio.EffectFiles.gumblinFrenzy1, wait: false, muted: gameLogic.muted)
                     case .normal:
-                        gameLogic.playSound(node: node, audio: Audio.EffectFiles.goblinFrenzy1, wait: false)
+                        gameLogic.playSound(node: node, audio: Audio.EffectFiles.goblinFrenzy1, wait: false, muted: gameLogic.muted)
                     }
                     }
                     node.isFrenzied = true
@@ -101,14 +101,14 @@ extension TossScene: SKPhysicsContactDelegate {
                     switch node.type {
                     case .rock:
                         let random = Int.random(in: 0...1)
-                        gameLogic.playSound(node: node, audio: random == 0 ? Audio.EffectFiles.stoneblinFrenzy1 : Audio.EffectFiles.stoneblinFrenzy2, wait: false)
+                        gameLogic.playSound(node: node, audio: random == 0 ? Audio.EffectFiles.stoneblinFrenzy1 : Audio.EffectFiles.stoneblinFrenzy2, wait: false, muted: gameLogic.muted)
                     case .fire:
                         let random = Int.random(in: 0...1)
-                        gameLogic.playSound(node: node, audio: random == 0 ? Audio.EffectFiles.flameblinFrenzy1 : Audio.EffectFiles.flameblinFrenzy2, wait: false)
+                        gameLogic.playSound(node: node, audio: random == 0 ? Audio.EffectFiles.flameblinFrenzy1 : Audio.EffectFiles.flameblinFrenzy2, wait: false, muted: gameLogic.muted)
                     case .gum:
-                        gameLogic.playSound(node: node, audio: Audio.EffectFiles.gumblinFrenzy1, wait: false)
+                        gameLogic.playSound(node: node, audio: Audio.EffectFiles.gumblinFrenzy1, wait: false, muted: gameLogic.muted)
                     case .normal:
-                        gameLogic.playSound(node: node, audio: Audio.EffectFiles.goblinFrenzy1, wait: false)
+                        gameLogic.playSound(node: node, audio: Audio.EffectFiles.goblinFrenzy1, wait: false, muted: gameLogic.muted)
                     }
                     }
                     

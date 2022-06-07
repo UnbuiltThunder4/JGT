@@ -63,7 +63,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                     if (self.attackCounter % attackTime == 0) {
                         self.target!.health -= self.attack
                         self.attackCounter = 0
-                        gameLogic.playSound(node: self, audio: Audio.EffectFiles.darkSonAttack, wait: false)
+                        gameLogic.playSound(node: self, audio: Audio.EffectFiles.darkSonAttack, wait: false, muted: gameLogic.muted)
                     }
                 }
             }
@@ -81,7 +81,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                 self.position.y = self.spawnY
                 self.alpha = 0.0
                 self.respawnCounter += 1
-                gameLogic.playSound(node: self, audio: Audio.EffectFiles.darkSonGrunt, wait: false)
+                gameLogic.playSound(node: self, audio: Audio.EffectFiles.darkSonGrunt, wait: false, muted: gameLogic.muted)
             }
             else {
                 self.respawnCounter += 1
@@ -89,7 +89,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                     self.alpha = 1.0
                     self.health = self.maxHealth
                     self.isDead = false
-                    gameLogic.playSound(node: self, audio: Audio.EffectFiles.darkSonRebirth, wait: false)
+                    gameLogic.playSound(node: self, audio: Audio.EffectFiles.darkSonRebirth, wait: false, muted: gameLogic.muted)
                 }
             }
         }

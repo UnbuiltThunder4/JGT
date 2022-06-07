@@ -391,19 +391,19 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                         case .rock:
                             let random = Int.random(in: 0...1)
                             gameLogic.playSound(node: self, audio:
-                                                    random == 0 ? Audio.EffectFiles.stoneblinHit1 : Audio.EffectFiles.stoneblinHit3, wait: false)
+                                                    random == 0 ? Audio.EffectFiles.stoneblinHit1 : Audio.EffectFiles.stoneblinHit3, wait: false, muted: gameLogic.muted)
                         case .fire:
                             let random = Int.random(in: 0...1)
                             gameLogic.playSound(node: self, audio:
-                                                    random == 0 ? Audio.EffectFiles.flameblinHit2 : Audio.EffectFiles.flameblinHit3, wait: false)
+                                                    random == 0 ? Audio.EffectFiles.flameblinHit2 : Audio.EffectFiles.flameblinHit3, wait: false, muted: gameLogic.muted)
                         case .gum:
                             let random = Int.random(in: 0...1)
                             gameLogic.playSound(node: self, audio:
-                                                    random == 0 ? Audio.EffectFiles.gumblinHit2 : Audio.EffectFiles.gumblinHit4, wait: false)
+                                                    random == 0 ? Audio.EffectFiles.gumblinHit2 : Audio.EffectFiles.gumblinHit4, wait: false, muted: gameLogic.muted)
                         case .normal:
                             let random = Int.random(in: 0...1)
                             gameLogic.playSound(node: self,
-                                                audio: random == 0 ? Audio.EffectFiles.goblinHit1 : Audio.EffectFiles.goblinHit3, wait: false)
+                                                audio: random == 0 ? Audio.EffectFiles.goblinHit1 : Audio.EffectFiles.goblinHit3, wait: false, muted: gameLogic.muted)
                         }
                         
                         var dmg = self.attack
@@ -549,14 +549,14 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 switch self.type {
                 case .rock:
                     let random = Int.random(in: 0...1)
-                    gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.stoneblinFrenzy1 : Audio.EffectFiles.stoneblinFrenzy2, wait: false)
+                    gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.stoneblinFrenzy1 : Audio.EffectFiles.stoneblinFrenzy2, wait: false, muted: gameLogic.muted)
                 case .fire:
                     let random = Int.random(in: 0...1)
-                    gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.flameblinFrenzy1 : Audio.EffectFiles.flameblinFrenzy2, wait: false)
+                    gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.flameblinFrenzy1 : Audio.EffectFiles.flameblinFrenzy2, wait: false, muted: gameLogic.muted)
                 case .gum:
-                    gameLogic.playSound(node: self, audio: Audio.EffectFiles.gumblinFrenzy1, wait: false)
+                    gameLogic.playSound(node: self, audio: Audio.EffectFiles.gumblinFrenzy1, wait: false, muted: gameLogic.muted)
                 case .normal:
-                    gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinFrenzy1, wait: false)
+                    gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinFrenzy1, wait: false, muted: gameLogic.muted)
                 }
                 
                 self.isFrenzied = true
@@ -623,20 +623,20 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 
                 let random = Int.random(in: 0...1)
                 gameLogic.playSound(node: self,
-                                    audio: random == 0 ? Audio.EffectFiles.gumblinTransform1 : Audio.EffectFiles.gumblinTransform2, wait: false)
+                                    audio: random == 0 ? Audio.EffectFiles.gumblinTransform1 : Audio.EffectFiles.gumblinTransform2, wait: false, muted: gameLogic.muted)
             }
             else {
                 
                 switch self.type {
                 case .normal:
-                gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinCandy1, wait: false)
+                    gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinCandy1, wait: false, muted: gameLogic.muted)
                 case .fire:
                     let random = Int.random(in: 0...1)
                     gameLogic.playSound(node: self,
-                                        audio: random == 0 ? Audio.EffectFiles.flameblinCandy1 : Audio.EffectFiles.flameblinCandy2, wait: false)
+                                        audio: random == 0 ? Audio.EffectFiles.flameblinCandy1 : Audio.EffectFiles.flameblinCandy2, wait: false, muted: gameLogic.muted)
                 case .rock:
                     let random = Int.random(in: 0...1)
-                    gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.stoneblinCandy1 : Audio.EffectFiles.stoneblinCandy2, wait: false)
+                    gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.stoneblinCandy1 : Audio.EffectFiles.stoneblinCandy2, wait: false, muted: gameLogic.muted)
                 case .gum:
                     break
                 }
@@ -666,7 +666,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                     self.health -= 80
                     self.HWpoints -= 5
                     self.state = .stunned
-                    gameLogic.playSound(node: trap, audio: Audio.EffectFiles.trap, wait: false)
+                    gameLogic.playSound(node: trap, audio: Audio.EffectFiles.trap, wait: false, muted: gameLogic.muted)
                     
                     let stunParticle = SKEmitterNode(fileNamed: "StunParticle")
                     stunParticle!.name = "stunParticle"
@@ -801,15 +801,15 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         if (percentage <= Double(self.fear)) {
             switch self.type {
             case .rock:
-                gameLogic.playSound(node: self, audio: Audio.EffectFiles.stoneblinFear1, wait: false)
+                gameLogic.playSound(node: self, audio: Audio.EffectFiles.stoneblinFear1, wait: false, muted: gameLogic.muted)
             case .fire:
                 break
             case .gum:
                 let random = Int.random(in: 0...1)
                 gameLogic.playSound(node: self,
-                                    audio: random == 0 ? Audio.EffectFiles.gumblinFear2 : Audio.EffectFiles.gumblinFear3, wait: false)
+                                    audio: random == 0 ? Audio.EffectFiles.gumblinFear2 : Audio.EffectFiles.gumblinFear3, wait: false, muted: gameLogic.muted)
             case .normal:
-                gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinFear1, wait: false)
+                gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinFear1, wait: false, muted: gameLogic.muted)
             }
             return true
         }
@@ -985,13 +985,13 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         case .fire:
             let random = Int.random(in: 0...1)
             gameLogic.playSound(node: self,
-                                audio: random == 0 ? Audio.EffectFiles.flameblinCatapult1 : Audio.EffectFiles.flameblinCatapult2, wait: false)
+                                audio: random == 0 ? Audio.EffectFiles.flameblinCatapult1 : Audio.EffectFiles.flameblinCatapult2, wait: false, muted: gameLogic.muted)
         case .gum:
             gameLogic.playSound(node: self,
-                                audio: Audio.EffectFiles.gumblinCatapult1, wait: false)
+                                audio: Audio.EffectFiles.gumblinCatapult1, wait: false, muted: gameLogic.muted)
         case .normal:
             gameLogic.playSound(node: self,
-                                audio: Audio.EffectFiles.goblinCatapult1, wait: false)
+                                audio: Audio.EffectFiles.goblinCatapult1, wait: false, muted: gameLogic.muted)
         }
         
         self.removeAllActions()
@@ -1026,15 +1026,15 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             switch self.type {
             case .normal:
                 gameLogic.playSound(node: self,
-                                    audio: Audio.EffectFiles.goblinSelfCatapult1, wait: false)
+                                    audio: Audio.EffectFiles.goblinSelfCatapult1, wait: false, muted: gameLogic.muted)
             case .fire:
                 let random = Int.random(in: 0...1)
                 gameLogic.playSound(node: self,
-                                    audio: random == 0 ? Audio.EffectFiles.flameblinSelfCatapult1 : Audio.EffectFiles.flameblinSelfCatapult2, wait: false)
+                                    audio: random == 0 ? Audio.EffectFiles.flameblinSelfCatapult1 : Audio.EffectFiles.flameblinSelfCatapult2, wait: false, muted: gameLogic.muted)
             case .gum:
                 let random = Int.random(in: 0...1)
                 gameLogic.playSound(node: self,
-                                    audio: random == 0 ? Audio.EffectFiles.gumblinSelfCatapult1 : Audio.EffectFiles.gumblinSelfCatapult2, wait: false)
+                                    audio: random == 0 ? Audio.EffectFiles.gumblinSelfCatapult1 : Audio.EffectFiles.gumblinSelfCatapult2, wait: false, muted: gameLogic.muted)
             case .rock:
                 break
             }
@@ -1043,7 +1043,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             self.HWpoints += 10
             let random = Int.random(in: 0...1)
             gameLogic.playSound(node: self,
-                                audio: random == 0 ? Audio.EffectFiles.stoneblinFly1 : Audio.EffectFiles.stoneblinFly1, wait: false)
+                                audio: random == 0 ? Audio.EffectFiles.stoneblinFly1 : Audio.EffectFiles.stoneblinFly1, wait: false, muted: gameLogic.muted)
         }
         let prof2 = Proficency(type: .catapult, level: 2)
         if let _ = self.Proficiencies.firstIndex(where: { $0.id == prof2.id }) {
@@ -1064,13 +1064,13 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         
         switch self.type {
         case .normal:
-            gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinStone1, wait: false)
+            gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinStone1, wait: false, muted: gameLogic.muted)
         case .fire:
-            gameLogic.playSound(node: self, audio: Audio.EffectFiles.flameblinStone1, wait: false)
+            gameLogic.playSound(node: self, audio: Audio.EffectFiles.flameblinStone1, wait: false, muted: gameLogic.muted)
         case .rock:
             break
         case .gum:
-            gameLogic.playSound(node: self, audio: Audio.EffectFiles.gumblinStone1, wait: false)
+            gameLogic.playSound(node: self, audio: Audio.EffectFiles.gumblinStone1, wait: false, muted: gameLogic.muted)
         }
         
         self.closeStructure!.removeFromParent()
@@ -1083,8 +1083,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func eatRock() {
         let random = Int.random(in: 0...1)
         gameLogic.playSound(node: self,
-                            audio: random == 0 ? Audio.EffectFiles.stoneblinTransform1 : Audio.EffectFiles.stoneblinTransform2, wait: false)
-        gameLogic.playSound(node: self, audio: Audio.EffectFiles.rockEating, wait: false)
+                            audio: random == 0 ? Audio.EffectFiles.stoneblinTransform1 : Audio.EffectFiles.stoneblinTransform2, wait: false, muted: gameLogic.muted)
+        gameLogic.playSound(node: self, audio: Audio.EffectFiles.rockEating, wait: false, muted: gameLogic.muted)
         
         self.closeStructure!.removeFromParent()
         self.type = .rock
@@ -1099,18 +1099,18 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         
         switch self.type {
         case .normal:
-            gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinBurn1, wait: false)
+            gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinBurn1, wait: false, muted: gameLogic.muted)
         case .fire:
             let random = Int.random(in: 0...1)
             gameLogic.playSound(node: self,
-                                audio: random == 0 ? Audio.EffectFiles.flameblinBurn1 : Audio.EffectFiles.flameblinBurn2, wait: false)
+                                audio: random == 0 ? Audio.EffectFiles.flameblinBurn1 : Audio.EffectFiles.flameblinBurn2, wait: false, muted: gameLogic.muted)
         case .rock:
             gameLogic.playSound(node: self,
-                                audio: Audio.EffectFiles.stoneblinBurn1, wait: false)
+                                audio: Audio.EffectFiles.stoneblinBurn1, wait: false, muted: gameLogic.muted)
         case .gum:
-            gameLogic.playSound(node: self, audio: Audio.EffectFiles.gumblinBurn1, wait: false)
+            gameLogic.playSound(node: self, audio: Audio.EffectFiles.gumblinBurn1, wait: false, muted: gameLogic.muted)
         }
-        gameLogic.playSound(node: self, audio: Audio.EffectFiles.treeOnFire, wait: false)
+        gameLogic.playSound(node: self, audio: Audio.EffectFiles.treeOnFire, wait: false, muted: gameLogic.muted)
     
         self.closeStructure!.removeFromParent()
         self.evilGauge.updateGauge(goblin: nil, value: 1)
@@ -1122,8 +1122,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func setFiretoSelf() {
         setFireParticles()
         
-        gameLogic.playSound(node: self, audio: Audio.EffectFiles.flameblinTransform1, wait: false)
-        gameLogic.playSound(node: self, audio: Audio.EffectFiles.treeOnFire, wait: false)
+        gameLogic.playSound(node: self, audio: Audio.EffectFiles.flameblinTransform1, wait: false, muted: gameLogic.muted)
+        gameLogic.playSound(node: self, audio: Audio.EffectFiles.treeOnFire, wait: false, muted: gameLogic.muted)
             
         self.closeStructure!.removeFromParent()
         self.type = .fire
@@ -1211,16 +1211,16 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             switch self.type {
             case .rock:
                 let random = Int.random(in: 0...1)
-                gameLogic.playSound(node: self.parent?.scene?.camera, audio: random == 0 ? Audio.EffectFiles.stoneblinDeath2 : Audio.EffectFiles.stoneblinDeath3, wait: true)
+                gameLogic.playSound(node: self.parent?.scene?.camera, audio: random == 0 ? Audio.EffectFiles.stoneblinDeath2 : Audio.EffectFiles.stoneblinDeath3, wait: true, muted: gameLogic.muted)
             case .fire:
                 let random = Int.random(in: 0...1)
-                gameLogic.playSound(node: self.parent?.scene?.camera, audio: random == 0 ? Audio.EffectFiles.flameblinDeath2 : Audio.EffectFiles.flameblinDeath1, wait: true)
+                gameLogic.playSound(node: self.parent?.scene?.camera, audio: random == 0 ? Audio.EffectFiles.flameblinDeath2 : Audio.EffectFiles.flameblinDeath1, wait: true, muted: gameLogic.muted)
             case .gum:
                 let random = Int.random(in: 0...1)
-                gameLogic.playSound(node: self.parent?.scene?.camera, audio: random == 0 ? Audio.EffectFiles.gumblinDeath1 : Audio.EffectFiles.gumblinDeath2, wait: true)
+                gameLogic.playSound(node: self.parent?.scene?.camera, audio: random == 0 ? Audio.EffectFiles.gumblinDeath1 : Audio.EffectFiles.gumblinDeath2, wait: true, muted: gameLogic.muted)
             case .normal:
                 let random = Int.random(in: 0...1)
-                gameLogic.playSound(node: self.parent?.scene?.camera, audio: random == 0 ? Audio.EffectFiles.goblinDeath1 : Audio.EffectFiles.goblinDeath2, wait: true)
+                gameLogic.playSound(node: self.parent?.scene?.camera, audio: random == 0 ? Audio.EffectFiles.goblinDeath1 : Audio.EffectFiles.goblinDeath2, wait: true, muted: gameLogic.muted)
             }
             
             let goblinDeathParticle = SKEmitterNode(fileNamed: "GoblinDeathParticle")

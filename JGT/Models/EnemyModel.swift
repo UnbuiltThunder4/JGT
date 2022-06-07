@@ -175,9 +175,9 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                         if (self.attackCounter % attackTime == 0) {
                             
                             if self.type == .axe {
-                                gameLogic.playSound(node: self, audio: Audio.EffectFiles.axeGnomeAttack, wait: false)
+                                gameLogic.playSound(node: self, audio: Audio.EffectFiles.axeGnomeAttack, wait: false, muted: gameLogic.muted)
                             } else {
-                                gameLogic.playSound(node: self, audio: Audio.EffectFiles.smallGnomeAttack, wait: false)
+                                gameLogic.playSound(node: self, audio: Audio.EffectFiles.smallGnomeAttack, wait: false, muted: gameLogic.muted)
                             }
                             
                             if (self.target!.type == .rock) {
@@ -233,16 +233,16 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                             switch targetType {
                             case .rock:
                                 let random = Int.random(in: 0...1)
-                                gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.stoneblinDeath1 : Audio.EffectFiles.stoneblinDeath3, wait: true)
+                                gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.stoneblinDeath1 : Audio.EffectFiles.stoneblinDeath3, wait: true, muted: gameLogic.muted)
                             case .fire:
                                 let random = Int.random(in: 0...1)
-                                gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.flameblinDeath1 : Audio.EffectFiles.flameblinDeath2, wait: true)
+                                gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.flameblinDeath1 : Audio.EffectFiles.flameblinDeath2, wait: true, muted: gameLogic.muted)
                             case .gum:
                                 let random = Int.random(in: 0...1)
-                                gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.gumblinDeath1 : Audio.EffectFiles.gumblinDeath2, wait: true)
+                                gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.gumblinDeath1 : Audio.EffectFiles.gumblinDeath2, wait: true, muted: gameLogic.muted)
                             case .normal:
                                 let random = Int.random(in: 0...1)
-                                gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.goblinDeath1 : Audio.EffectFiles.goblinDeath2, wait: true)
+                                gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.goblinDeath1 : Audio.EffectFiles.goblinDeath2, wait: true, muted: gameLogic.muted)
                             case .none:
                                 break
                             }
