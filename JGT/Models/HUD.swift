@@ -202,19 +202,24 @@ class HUD: SKNode {
         pauseScreen.pauseSign.zPosition = 5
         pauseScreen.pauseSign.position = CGPoint.zero
         
-        pauseScreen.pauseMessage.size = CGSize(width: pauseScreen.pauseSign.size.width/2, height: pauseScreen.pauseSign.size.width/10)
-        pauseScreen.pauseMessage.position = CGPoint(x: 0, y: pauseScreen.pauseSign.size.height/5.2)
-        pauseScreen.pauseMessage.zPosition = 5
-        
-        pauseScreen.continueMessage.size = CGSize(width: pauseScreen.pauseSign.size.width/5, height: pauseScreen.pauseSign.size.width/10)
+        pauseScreen.continueMessage.fontSize = HUDSettings.fontSize
+        pauseScreen.continueMessage.fontName = HUDSettings.font
+        pauseScreen.continueMessage.fontColor = HUDSettings.fontColor
+        pauseScreen.continueMessage.text = "Continue"
         pauseScreen.continueMessage.position = CGPoint(x:-pauseScreen.pauseSign.size.width/4, y: pauseScreen.pauseSign.size.height/5)
         pauseScreen.continueMessage.zPosition = 5
-
-        pauseScreen.exitMessage.size = CGSize(width: pauseScreen.pauseSign.size.width/5, height: pauseScreen.pauseSign.size.width/10)
+        
+        pauseScreen.exitMessage.fontSize = HUDSettings.fontSize
+        pauseScreen.exitMessage.fontName = HUDSettings.font
+        pauseScreen.exitMessage.fontColor = HUDSettings.fontColor
+        pauseScreen.exitMessage.text = "Level Selection"
         pauseScreen.exitMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/4, y: pauseScreen.pauseSign.size.height/5)
         pauseScreen.exitMessage.zPosition = 5
 
-        pauseScreen.restartMessage.size = CGSize(width: pauseScreen.pauseSign.size.width/5, height: pauseScreen.pauseSign.size.width/10)
+        pauseScreen.restartMessage.fontSize = HUDSettings.fontSize
+        pauseScreen.restartMessage.fontName = HUDSettings.font
+        pauseScreen.restartMessage.fontColor = HUDSettings.fontColor
+        pauseScreen.restartMessage.text = "Restart"
         pauseScreen.restartMessage.position = CGPoint(x: 0, y: pauseScreen.pauseSign.size.height/5)
         pauseScreen.restartMessage.zPosition = 5
         

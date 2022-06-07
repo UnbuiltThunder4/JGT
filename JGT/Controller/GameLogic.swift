@@ -13,6 +13,7 @@ class GameLogic: ObservableObject {
     
     // Single instance of the class
     static let shared: GameLogic = GameLogic()
+    var muted = false
     var lastScale = ZoomProperties.initialScale
     var currentScale = ZoomProperties.initialScale
     
@@ -171,7 +172,7 @@ class GameLogic: ObservableObject {
             tossScene.cauldron.run(rotateAnimation)
             
 //            player.play(effect: Audio.EffectFiles.cauldronn, node: nil)
-            playSound(node: nil, audio: Audio.EffectFiles.cauldronn, wait: false)
+            playSound(node: nil, audio: Audio.EffectFiles.cauldronn, wait: false, muted: muted)
             
             newGoblin.type = type
             newGoblin.state = .launched
@@ -180,12 +181,12 @@ class GameLogic: ObservableObject {
             case .normal:
                 let random = Int.random(in: 0...1)
                 playSound(node: newGoblin,
-                          audio: random == 0 ? Audio.EffectFiles.goblinFly1 : Audio.EffectFiles.goblinFly2, wait: false)
+                          audio: random == 0 ? Audio.EffectFiles.goblinFly1 : Audio.EffectFiles.goblinFly2, wait: false, muted: muted)
                 break
             case .fire:
                 let random = Int.random(in: 0...1)
                 playSound(node: newGoblin,
-                          audio: random == 0 ? Audio.EffectFiles.flameblinFly1 : Audio.EffectFiles.flameblinFly2, wait: false)
+                          audio: random == 0 ? Audio.EffectFiles.flameblinFly1 : Audio.EffectFiles.flameblinFly2, wait: false, muted: muted)
                 newGoblin.fear = 0
                 newGoblin.maxFear = 0
                 newGoblin.texture = SKTexture(imageNamed: "fire_goblin")
@@ -197,12 +198,12 @@ class GameLogic: ObservableObject {
             case .rock:
                 let random = Int.random(in: 0...1)
                 playSound(node: newGoblin,
-                          audio: random == 0 ? Audio.EffectFiles.stoneblinFly1 : Audio.EffectFiles.stoneblinFly2, wait: false)
+                          audio: random == 0 ? Audio.EffectFiles.stoneblinFly1 : Audio.EffectFiles.stoneblinFly2, wait: false, muted: muted)
                 newGoblin.texture = SKTexture(imageNamed: "rock_goblin")
                 break
             case .gum:
                 playSound(node: newGoblin,
-                          audio: Audio.EffectFiles.gumblinFly1, wait: false)
+                          audio: Audio.EffectFiles.gumblinFly1, wait: false, muted: muted)
                 newGoblin.texture = SKTexture(imageNamed: "gum_goblin")
                 break
             }
@@ -225,7 +226,8 @@ class GameLogic: ObservableObject {
         scrollableMenu.hideRow()
     }
     
-    public func playSound(node: SKNode?, audio: Effect, wait: Bool) {
+    public func playSound(node: SKNode?, audio: Effect, wait: Bool, muted: Bool) {
+        if !muted {
         if let node = node {
             if (node.position.x > (node.parent?.scene?.camera?.position.x)! + UIScreen.main.bounds.width/2 * currentScale ||
                 node.position.y > (node.parent?.scene?.camera?.position.y)! + UIScreen.main.bounds.height/2 * currentScale) ||
@@ -239,6 +241,7 @@ class GameLogic: ObservableObject {
         } else {
             player.play(effect: audio)
         }
+       }
     }
 }
 

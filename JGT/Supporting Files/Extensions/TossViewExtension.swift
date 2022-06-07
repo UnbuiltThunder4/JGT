@@ -62,22 +62,22 @@ extension TossScene {
                     case .normal:
                         let random = Int.random(in: 0...1)
                         gameLogic.playSound(node: goblinNode,
-                                            audio: random == 0 ? Audio.EffectFiles.goblinFly1 : Audio.EffectFiles.goblinFly2, wait: false)
+                                            audio: random == 0 ? Audio.EffectFiles.goblinFly1 : Audio.EffectFiles.goblinFly2, wait: false, muted: gameLogic.muted)
                         break
                     case .fire:
                         let random = Int.random(in: 0...1)
                         gameLogic.playSound(node: goblinNode,
-                                            audio: random == 0 ? Audio.EffectFiles.flameblinFly1 : Audio.EffectFiles.flameblinFly2, wait: false)
+                                            audio: random == 0 ? Audio.EffectFiles.flameblinFly1 : Audio.EffectFiles.flameblinFly2, wait: false, muted: gameLogic.muted)
                         
                         break
                     case .rock:
                         let random = Int.random(in: 0...1)
                         gameLogic.playSound(node: goblinNode,
-                                            audio: random == 0 ? Audio.EffectFiles.stoneblinFly1 : Audio.EffectFiles.stoneblinFly2, wait: false)
+                                            audio: random == 0 ? Audio.EffectFiles.stoneblinFly1 : Audio.EffectFiles.stoneblinFly2, wait: false, muted: gameLogic.muted)
                         break
                     case .gum:
                         gameLogic.playSound(node: goblinNode,
-                                            audio: Audio.EffectFiles.gumblinFly1, wait: false)
+                                            audio: Audio.EffectFiles.gumblinFly1, wait: false, muted: gameLogic.muted)
                         break
                     }
                 }
@@ -179,6 +179,16 @@ extension TossScene {
                 }
             }
             
+            if selectedNode?.name! == "effectButton" {
+                if gameLogic.muted == false {
+                    self.pauseScreen.effectButton.texture = SKTexture(imageNamed: "effects-off")
+                    gameLogic.muted = true
+                } else {
+                    self.pauseScreen.effectButton.texture = SKTexture(imageNamed: "effects-on")
+                    gameLogic.muted = false
+                }
+            }
+            
         }
     }
     
@@ -204,14 +214,14 @@ extension TossScene {
                 switch dyingGoblin.type {
                 case .rock:
                     let random = Int.random(in: 0...1)
-                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.stoneblinPress1 : Audio.EffectFiles.stoneblinPress2, wait: true)
+                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.stoneblinPress1 : Audio.EffectFiles.stoneblinPress2, wait: true, muted: gameLogic.muted)
                 case .fire:
                     let random = Int.random(in: 0...1)
-                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.flameblinPress2 : Audio.EffectFiles.flameblinPress3, wait: true)
+                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.flameblinPress2 : Audio.EffectFiles.flameblinPress3, wait: true, muted: gameLogic.muted)
                 case .gum:
-                    gameLogic.playSound(node: cameraNode, audio: Audio.EffectFiles.gumblinPress1, wait: true)
+                    gameLogic.playSound(node: cameraNode, audio: Audio.EffectFiles.gumblinPress1, wait: true, muted: gameLogic.muted)
                 case .normal:
-                    gameLogic.playSound(node: cameraNode, audio: Audio.EffectFiles.goblinPress1, wait: true)
+                    gameLogic.playSound(node: cameraNode, audio: Audio.EffectFiles.goblinPress1, wait: true, muted: gameLogic.muted)
                 }
                 
                 

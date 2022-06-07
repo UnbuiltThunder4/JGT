@@ -15,10 +15,9 @@ class PauseScreen: SKSpriteNode {
     let continueButton = SKSpriteNode(imageNamed: "continue-on")
     let quitButton = SKSpriteNode(imageNamed: "menu-on")
     let restartButton = SKSpriteNode(imageNamed: "restart-on")
-    let pauseMessage = SKSpriteNode(imageNamed: "pauseTitle")
-    let continueMessage = SKSpriteNode(imageNamed: "continueMessage")
-    let exitMessage = SKSpriteNode(imageNamed: "exitTitle")
-    let restartMessage = SKSpriteNode(imageNamed: "restartMessage")
+    let continueMessage = SKLabelNode()
+    let exitMessage = SKLabelNode()
+    let restartMessage = SKLabelNode()
     let musicButton = SKSpriteNode(imageNamed: "music-on")
     let effectButton = SKSpriteNode(imageNamed: "effects-on")
     let littleButtonsSize = CGSize(width: UIScreen.main.bounds.width/17.0, height: UIScreen.main.bounds.width/17.0)
@@ -49,7 +48,6 @@ class PauseScreen: SKSpriteNode {
         self.addChild(continueButton)
         self.addChild(quitButton)
         self.addChild(restartButton)
-//        self.addChild(pauseMessage)
         self.addChild(continueMessage)
         self.addChild(exitMessage)
         self.addChild(restartMessage)
@@ -60,7 +58,6 @@ class PauseScreen: SKSpriteNode {
         continueButton.name = "ContinueBtn"
         quitButton.name = "QuitBtn"
         restartButton.name = "RestartBtn"
-        pauseMessage.name = "pauseMessage"
         continueMessage.name = "continueMessage"
         exitMessage.name = "exitMessage"
         restartMessage.name = "restartMessage"
