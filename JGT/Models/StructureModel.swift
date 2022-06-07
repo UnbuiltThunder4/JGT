@@ -88,8 +88,8 @@ class Structure: SKSpriteNode, ObservableObject {
             self.mask = .building
             self.width = 400
             self.height = 400
-            self.maskmodX = 0.8
-            self.maskmodY = 0.8
+            self.maskmodX = 1.0
+            self.maskmodY = 1.0
             break
             
         case .village:

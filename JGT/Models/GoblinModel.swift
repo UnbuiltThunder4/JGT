@@ -507,7 +507,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func fearedUpdate() {
         self.updateAge()
         let tavernDistance = CGVector(dx: tavernCoordinates.x - self.position.x, dy: tavernCoordinates.y - self.position.y)
-        if (isVectorSmallerThan(vector: tavernDistance, other: 330)) {
+        if (abs(tavernDistance.dx) < 250 && abs(tavernDistance.dy) < 250) {
             self.enterTavern()
         }
         if let _ = self.action(forKey: "run") {
