@@ -181,7 +181,8 @@ class HUD: SKNode {
         scrollableMenu.nameLabel.fontSize = HUDSettings.fontSize
         scrollableMenu.descLabel.fontSize = HUDSettings.fontSize
         
-        scrollableMenu.nameLabel.fontColor = HUDSettings.fontColor
+//        scrollableMenu.nameLabel.fontColor = HUDSettings.fontColor
+        scrollableMenu.nameLabel.fontColor = .white
         scrollableMenu.descLabel.fontColor = HUDSettings.fontColor
         
         scrollableMenu.nameLabel.verticalAlignmentMode = .center
