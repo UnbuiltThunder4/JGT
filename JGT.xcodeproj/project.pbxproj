@@ -379,6 +379,7 @@
 		2301764828464C0600B41583 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
+				230176462846488B00B41583 /* StunParticle.sks */,
 				234D9CDD284E074D0077599E /* GoblinDeathParticle.sks */,
 				230176492846546B00B41583 /* FlameblinParticle.sks */,
 				2301764028463DFB00B41583 /* ExplosionParticle.sks */,
@@ -386,7 +387,6 @@
 				23017642284641F200B41583 /* FrenzyParticle.sks */,
 				2301763C28462E8300B41583 /* FireParticle.sks */,
 				2301763A28462DBC00B41583 /* SmokeParticle.sks */,
-				230176462846488B00B41583 /* StunParticle.sks */,
 				2301763828462BB900B41583 /* ElectricParticle.sks */,
 			);
 			path = Particles;

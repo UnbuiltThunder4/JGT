@@ -30,6 +30,9 @@ struct MainScreenView: View {
     // Change it on the Constants.swift file
     let accentColor: Color = MainScreenProperties.accentColor
     
+    @State var isPressed: Bool = false
+    var isPressedFX: Bool = false
+    
     var body: some View {
         GeometryReader { geometry in
 //            VStack(alignment: .center, spacing: 16.0) {
@@ -55,6 +58,9 @@ struct MainScreenView: View {
                  * Customize the appearance of the **Insert a Coin** button to match the visual identity of your game
                  */
                 Spacer()
+                
+                HStack {
+                
                 Button {
                     withAnimation { self.startGame() }
                 } label: {
@@ -67,6 +73,21 @@ struct MainScreenView: View {
                 .foregroundColor(.white)
                 .background(self.accentColor)
                 .cornerRadius(15.0)
+                    
+                Button {
+                    isPressed
+                        .toggle()
+                    player.musicVolume = self.isPressed ? 0.0 : 0.7
+                } label: {
+                    Image(self.isPressed ? "music-off" : "music-on")
+                        
+                }
+                .frame(maxWidth: geometry.size.width * 0.1, maxHeight: geometry.size.height * 0.1)
+//                .padding(5)
+                .foregroundColor(.white)
+//                .background(self.accentColor)
+                    
+                }
                 
             }
             .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height)
