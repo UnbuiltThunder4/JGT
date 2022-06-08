@@ -764,6 +764,15 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                     ])
                     
                     self.run(removeSequence)
+                    
+                    if UserDefaults.standard.bool(forKey: "trapTutorial") == false {
+                    gameLogic.tutorialEvent(index: 13, hud: hud, tutorialSheet: tutorialSheet)
+                        UserDefaults.standard.set(true, forKey: "trapTutorial")
+                        hud.counter += 1
+                        hud.tutorialCounter.alpha = 1.0
+                        hud.tutorialCounter.text = String(hud.counter)
+                    }
+                    
                 }
                 else {
                     self.HWpoints += 5

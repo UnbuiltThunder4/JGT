@@ -26,6 +26,7 @@ class GameLogic: ObservableObject {
     @State var pillagingTutorial = UserDefaults.standard.bool(forKey: "pillagingTutorial")
     @State var gumblinsTutorial = UserDefaults.standard.bool(forKey: "gumblinsTutorial")
     @State var catapult = UserDefaults.standard.bool(forKey: "catapultTutorial")
+    @State var trap = UserDefaults.standard.bool(forKey: "trapTutorial")
     
     // Single instance of the class
     static let shared: GameLogic = GameLogic()
@@ -61,15 +62,34 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
                                        TutorialButton(tutorialName: "Academy", tutorialDesc: """
 “By attending the Academy, goblins can learn many things, helping them complete tasks in a quicker and more efficient way. once a goblin finishes his studies it gets a title, because it deserves it!”
 """, screen: SKTexture(imageNamed: "rockHead")),
-                                       TutorialButton(tutorialName: "Gate", tutorialDesc: "Rock", screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Gate", tutorialDesc: """
+ “Good work my son, keep attacking the gates, once they’re gone our enemies will have no way to resist, but pay attention!
+ If there are no goblins to defend you the risk is death!
+ My powers can bring you back but no more than three times so I need to use the goblins to defend you as much as you need.”
+ """, screen: SKTexture(imageNamed: "rockHead")),
                                        TutorialButton(tutorialName: "Backdoor", tutorialDesc: """
                                                       “Our goblins have found a backdoor, once they destroy it they can use the passage to attack enemies on the enemy walls and help you attack the gates without taking any damage.”
                                                       """, screen: SKTexture(imageNamed: "rockHead")),
-                                       TutorialButton(tutorialName: "Rocks", tutorialDesc: "Rock", screen: SKTexture(imageNamed: "rockHead")),
-                                       TutorialButton(tutorialName: "Stoneblins", tutorialDesc: "Stoneblins", screen: SKTexture(imageNamed: "rockHead")),
-                                       TutorialButton(tutorialName: "Pillaging", tutorialDesc: "Pillaging", screen: SKTexture(imageNamed: "rockHead")),
-                                       TutorialButton(tutorialName: "Gumblins", tutorialDesc: "Gumblins", screen: SKTexture(imageNamed: "rockHead")),
-                                       TutorialButton(tutorialName: "Catapult", tutorialDesc: "Catapult", screen: SKTexture(imageNamed: "rockHead"))]
+                                       TutorialButton(tutorialName: "Rocks", tutorialDesc: """
+                                                      “One of our goblins picked up a rock, it can be used in many ways, combat is just one of them.”
+                                                      """, screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Stoneblins", tutorialDesc: """
+                                                      “Eating a rock has a strange effect on goblins, turning them into Stoneblins, a tougher and dumber kind of Goblin, perfect for combat!”
+                                                      """, screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Candyland", tutorialDesc: """
+                                                      “One of our goblins entered the gnomes village! There it can make us gain power by stealing candies and bringing chaos!”
+                                                      """, screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Gumblins", tutorialDesc: """
+ “Eating too many candies can make a goblin evolve into a Gumblin, they act just like normal goblin but their bodies are much more resistant to arrows and practically immune to lightning!”
+ """, screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Catapult", tutorialDesc: """
+                                                      “The Catapult is a complex siege weapon for goblins, if they understand how to use it our enemies will have no hope of surviving!
+                                                      They just need to understand that a normal goblin body is not the best siege ammunition.”
+                                                      """, screen: SKTexture(imageNamed: "rockHead")),
+                                       TutorialButton(tutorialName: "Trap", tutorialDesc: """
+                                                      “The gnomes have started building electric traps to stop our goblins, if they step on one the damage will be really hard for them to survive and the electricity will make them stop for a while, the traps need some time to recharge, we need to exploit that to make our army advance, at all costs!”
+                                                      """, screen: SKTexture(imageNamed: "rockHead"))
+    ]
     
     // Function responsible to set up the game before it starts.
     func setUpGame() {
