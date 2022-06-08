@@ -136,12 +136,12 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
             return
         }
         
-//        if !tossScene.selectedNode!.isEqual(touchedNode) {
-//            tossScene.selectedNode?.removeAllActions()
-            
-            tossScene.selectedNode = touchedNode
-            
-//        }
+        //        if !tossScene.selectedNode!.isEqual(touchedNode) {
+        //            tossScene.selectedNode?.removeAllActions()
+        
+        tossScene.selectedNode = touchedNode
+        
+        //        }
         
     }
     
@@ -221,7 +221,7 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
     }
     
     public func shootGoblin(_ tossScene: TossScene, node: SKNode, type: GoblinType, population: Population, destination: CGPoint) {
-       
+        
         let spawnable = tossScene.evilGauge.checkSpawn(type: type)
         if spawnable && population.goblins.count < MainScreenProperties.maxGoblinsNumber {
             let spawnPoint = CGPoint(x: node.position.x - (tossScene.size.width/2)*currentScale + 50, y: node.position.y - (tossScene.size.height/2)*currentScale + 50)
@@ -233,7 +233,7 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
             let rotateAnimation = SKAction.sequence([rotateRight, rotateLeft])
             tossScene.cauldron.run(rotateAnimation)
             
-//            player.play(effect: Audio.EffectFiles.cauldronn, node: nil)
+            //            player.play(effect: Audio.EffectFiles.cauldronn, node: nil)
             playSound(node: nil, audio: Audio.EffectFiles.cauldronn, wait: false, muted: muted)
             
             newGoblin.type = type
@@ -273,7 +273,7 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
             
             tossScene.evilGauge.shootGauge(goblin: newGoblin)
             tossScene.cauldron.updateCauldron(amount: 1)
-                        
+            
         }
     }
     
@@ -290,24 +290,23 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
     
     public func playSound(node: SKNode?, audio: Effect, wait: Bool, muted: Bool) {
         if !muted {
-        if let node = node {
-            if (node.position.x > (node.parent?.scene?.camera?.position.x)! + UIScreen.main.bounds.width/2 * currentScale ||
-                node.position.y > (node.parent?.scene?.camera?.position.y)! + UIScreen.main.bounds.height/2 * currentScale) ||
-                (node.position.x < (node.parent?.scene?.camera?.position.x)! - UIScreen.main.bounds.width/2 * currentScale ||
-                    node.position.y < (node.parent?.scene?.camera?.position.y)! - UIScreen.main.bounds.height/2 * currentScale) 
-            {
-                print("mute")
+            if let node = node {
+                if (node.position.x > (node.parent?.scene?.camera?.position.x)! + UIScreen.main.bounds.width/2 * currentScale ||
+                    node.position.y > (node.parent?.scene?.camera?.position.y)! + UIScreen.main.bounds.height/2 * currentScale) ||
+                    (node.position.x < (node.parent?.scene?.camera?.position.x)! - UIScreen.main.bounds.width/2 * currentScale ||
+                     node.position.y < (node.parent?.scene?.camera?.position.y)! - UIScreen.main.bounds.height/2 * currentScale)
+                {
+                } else {
+                    node.run(SKAction.playSoundFileNamed(audio.filename, waitForCompletion: wait))
+                }
             } else {
-        node.run(SKAction.playSoundFileNamed(audio.filename, waitForCompletion: wait))
+                player.play(effect: audio)
             }
-        } else {
-            player.play(effect: audio)
         }
-       }
     }
     
     public func tutorialEvent(index: Int, hud: HUD, tutorialSheet: TutorialSheet) {
-        hud.addTutorialButton(tutorialButton: tutorials[index], position: CGPoint(x: 0, y: 0))
+        hud.addTutorialButton(tutorialButton: tutorials[index], position: CGPoint(x: hud.position.x + UIScreen.main.bounds.width/2.5, y: 0))
     }
     
 }
