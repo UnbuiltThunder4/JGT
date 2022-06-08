@@ -221,12 +221,13 @@ extension TossScene {
                 self.tutorialSheet.alpha = 1.0
                 self.tutorialSheet.backButton.alpha = 1.0
                 self.tutorialSheet.rightTutorial.alpha = 1.0
-//                self.tutorialSheet.leftTutorial.alpha = 1.0
+                self.tutorialSheet.tutorialCounterLabel.alpha = 1.0
                 self.tutorialSheet.isMenu = true
                 self.tutorialSheet.tutorialCounter = 0
                 self.tutorialSheet.tutorialName.text = gameLogic.tutorials[0].tutorialName
                 self.tutorialSheet.tutorialDesc.text = gameLogic.tutorials[0].tutorialDesc
                 self.tutorialSheet.screen.texture = gameLogic.tutorials[0].screen
+                self.tutorialSheet.tutorialCounterLabel.text = String("\(self.tutorialSheet.tutorialCounter + 1)/\(gameLogic.tutorials.count)")
                 player.musicVolume = 0.3
             }
             
@@ -239,6 +240,7 @@ extension TossScene {
                 self.tutorialSheet.tutorialName.text = gameLogic.tutorials[self.tutorialSheet.tutorialCounter].tutorialName
                 self.tutorialSheet.tutorialDesc.text = gameLogic.tutorials[self.tutorialSheet.tutorialCounter].tutorialDesc
                 self.tutorialSheet.screen.texture = gameLogic.tutorials[self.tutorialSheet.tutorialCounter].screen
+                self.tutorialSheet.tutorialCounterLabel.text = String("\(self.tutorialSheet.tutorialCounter + 1)/\(gameLogic.tutorials.count)")
             }
             
             if selectedNode?.name == "rightTutorial" {
@@ -250,6 +252,7 @@ extension TossScene {
                 self.tutorialSheet.tutorialName.text = gameLogic.tutorials[self.tutorialSheet.tutorialCounter].tutorialName
                 self.tutorialSheet.tutorialDesc.text = gameLogic.tutorials[self.tutorialSheet.tutorialCounter].tutorialDesc
                 self.tutorialSheet.screen.texture = gameLogic.tutorials[self.tutorialSheet.tutorialCounter].screen
+                self.tutorialSheet.tutorialCounterLabel.text = String("\(self.tutorialSheet.tutorialCounter + 1)/\(gameLogic.tutorials.count)")
             }
             
             if selectedNode?.name == "backButton" {

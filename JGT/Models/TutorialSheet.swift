@@ -13,6 +13,7 @@ class TutorialSheet: SKSpriteNode, ObservableObject {
     
     var isMenu: Bool = false
     var tutorialCounter: Int = 0
+    var tutorialCounterLabel: SKLabelNode = SKLabelNode()
     let backButton: SKSpriteNode = SKSpriteNode(imageNamed: "left-arrow")
     let leftTutorial: SKSpriteNode = SKSpriteNode(imageNamed: "back-button")
     let rightTutorial: SKSpriteNode = SKSpriteNode(imageNamed: "next-button")
@@ -28,6 +29,8 @@ class TutorialSheet: SKSpriteNode, ObservableObject {
         self.name = "tutorialSheet"
         self.alpha = 0.0
         
+        self.addChild(tutorialCounterLabel)
+        self.tutorialCounterLabel.name = "tutorialCounterLabel"
         self.addChild(backButton)
         self.backButton.name = "backButton"
         self.backButton.alpha = 0.0

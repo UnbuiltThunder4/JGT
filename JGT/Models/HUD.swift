@@ -295,6 +295,13 @@ class HUD: SKNode, ObservableObject {
         tutorialSheet.tutorialName.position = CGPoint(x: 0,
                                                       y: tutorialSheet.tutorialSign.frame.maxY * 0.75)
         
+        tutorialSheet.tutorialCounterLabel.zPosition = 20
+        tutorialSheet.tutorialCounterLabel.position = CGPoint(x: 0,
+                                                              y: tutorialSheet.tutorialSign.frame.minY/1.5)
+        
+        tutorialSheet.tutorialCounterLabel.fontColor = HUDSettings.descFontColor
+        tutorialSheet.tutorialCounterLabel.fontSize = HUDSettings.descFontSize
+        tutorialSheet.tutorialCounterLabel.fontName = HUDSettings.nameFont
         tutorialSheet.tutorialName.fontColor = HUDSettings.nameFontColor
         tutorialSheet.tutorialName.fontSize = HUDSettings.nameFontSize
         tutorialSheet.tutorialName.fontName = HUDSettings.nameFont
