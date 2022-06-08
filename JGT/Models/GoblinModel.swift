@@ -664,9 +664,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 gameLogic.playSound(node: self,
                                     audio: random == 0 ? Audio.EffectFiles.gumblinTransform1 : Audio.EffectFiles.gumblinTransform2, wait: false, muted: gameLogic.muted)
                 
-                if UserDefaults.standard.bool(forKey: "gumblinTutorial") == false {
+                if UserDefaults.standard.bool(forKey: "gumblinsTutorial") == false {
                 gameLogic.tutorialEvent(index: 12, hud: hud, tutorialSheet: tutorialSheet)
-                    UserDefaults.standard.set(true, forKey: "gumblinTutorial")
+                    UserDefaults.standard.set(true, forKey: "gumblinsTutorial")
                 }
                 
             }

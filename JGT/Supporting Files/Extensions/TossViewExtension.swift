@@ -196,15 +196,21 @@ extension TossScene {
             if selectedNode?.name! == "tutorialButton" {
                 self.tutorialSheet.alpha = 1.0
                 if let tutorial = selectedNode as? TutorialButton {
+                    paws = true
+                    self.pauseChilds(isPaused: true)
                     self.tutorialSheet.tutorialName.text = tutorial.tutorialName
                     self.tutorialSheet.tutorialDesc.text = tutorial.tutorialDesc
                     self.tutorialSheet.screen.texture = tutorial.screen
+                    player.musicVolume = 0.3
                 }
                 selectedNode?.removeFromParent()
             }
             
-            if selectedNode?.name! == "tutorialSign" || selectedNode?.name! == "screen" || selectedNode?.name! == "tutorialName" || selectedNode?.name! == "tutortialDesc" {
+            if selectedNode?.name! == "tutorialSign" || selectedNode?.name! == "screen" || selectedNode?.name! == "tutorialName" || selectedNode?.name! == "tutorialDesc" {
                 self.tutorialSheet.alpha = 0.0
+                paws = false
+                pauseChilds(isPaused: false)
+                player.musicVolume = 0.7
             }
         
         
@@ -220,8 +226,6 @@ extension TossScene {
             gameLogic.selectNodeForTouch(self, touchLocation: touchLocation)
             
             if selectedNode?.name! == "goblin" {
-                //                population.goblins.remove(at: population.getIndex(of: selectedNode as! Goblin)!)
-                
                 if let lastSelected = lastSelectedGoblin {
                     if selectedNode!.isEqual(to: lastSelected) {
                         lastSelectedGoblin = nil
@@ -244,26 +248,6 @@ extension TossScene {
                     gameLogic.playSound(node: cameraNode, audio: Audio.EffectFiles.goblinPress1, wait: true, muted: gameLogic.muted)
                 }
                 
-                
-                //                dyingGoblin.removeAllActions()
-                //                dyingGoblin.state = .inhand
-                //                dyingGoblin.pressAnimation()
-                //                switch dyingGoblin.type {
-                //                case .rock:
-                //                    let random = Int.random(in: 0...1)
-                //                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.stoneblinDeath1 : Audio.EffectFiles.stoneblinDeath3, wait: true)
-                //                case .fire:
-                //                    let random = Int.random(in: 0...1)
-                //                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.flameblinDeath1 : Audio.EffectFiles.flameblinDeath2, wait: true)
-                //                case .gum:
-                //                    let random = Int.random(in: 0...1)
-                //                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.gumblinDeath1 : Audio.EffectFiles.gumblinDeath2, wait: true)
-                //                case .normal:
-                //                    let random = Int.random(in: 0...1)
-                //                    gameLogic.playSound(node: cameraNode, audio: random == 0 ? Audio.EffectFiles.goblinDeath1 : Audio.EffectFiles.goblinDeath2, wait: true)
-                //                }
-                
-                //                selectedNode!.removeFromParent()
             }
             if selectedNode?.name! == "background" {
                 channeling = true
