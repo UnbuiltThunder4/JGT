@@ -179,6 +179,37 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             
             self.enemies.forEach {
                 if ($0.update(self)) {
+                    let gnomeDeathParticle = SKEmitterNode(fileNamed: "GoblinDeathParticle")
+                    gnomeDeathParticle!.position = $0.position
+                    gnomeDeathParticle!.name = "goblinDeathParticle"
+                    gnomeDeathParticle!.zPosition = 1
+                                            
+                    let parent = $0.parent!.scene!
+
+                    let addDeathParticle = SKAction.run({
+                        parent.addChild(gnomeDeathParticle!)
+                    })
+                    let gnomeDeathFade = SKAction.run {
+                        gnomeDeathParticle!.run(SKAction.fadeOut(withDuration: 0.4))
+                    }
+                    
+                    let particleSequence = SKAction.sequence([
+                        addDeathParticle,
+                        gnomeDeathFade
+                    ])
+
+                    let removeDeathParticle = SKAction.run({
+                        gnomeDeathParticle!.removeFromParent()
+                    })
+
+                    let removeSequence = SKAction.sequence([
+                        .wait(forDuration: 0.5),
+                        removeDeathParticle
+                    ])
+
+                    parent.run(particleSequence)
+                    parent.run(removeSequence)
+                    
                     let index = self.enemies.firstIndex(of: $0)!
                     $0.removeFromParent()
                     self.enemies.remove(at: index)
