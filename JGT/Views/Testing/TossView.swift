@@ -10,11 +10,10 @@ import SpriteKit
 
 struct TossView: View {
     
-//    var gameScene = TossScene()
+    @Binding var currentGameState: GameState
     
     var body: some View {
-//        SpriteView(scene: gameScene)
-//            .ignoresSafeArea()
+        
         SpriteKitContainer(scene: TossScene(level: 0))
             .ignoresSafeArea()
     }
@@ -22,6 +21,6 @@ struct TossView: View {
 
 struct TossView_Previews: PreviewProvider {
     static var previews: some View {
-        TossView()
+        TossView(currentGameState: .constant(GameState.playing))
     }
 }
