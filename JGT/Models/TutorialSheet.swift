@@ -11,6 +11,10 @@ import SpriteKit
 class TutorialSheet: SKSpriteNode, ObservableObject {
     static let shared: TutorialSheet = TutorialSheet()
     
+    var isMenu: Bool = false
+    var tutorialCounter: Int = 0
+    let leftTutorial: SKSpriteNode = SKSpriteNode()
+    let rightTutorial: SKSpriteNode = SKSpriteNode()
     let tutorialSign: SKSpriteNode = SKSpriteNode(imageNamed: "structure sheet wide")
     var tutorialName: SKLabelNode = SKLabelNode()
     var tutorialDesc: SKLabelNode = SKLabelNode()
@@ -22,7 +26,11 @@ class TutorialSheet: SKSpriteNode, ObservableObject {
                                                             height: UIScreen.main.bounds.height))
         self.name = "tutorialSheet"
         self.alpha = 0.0
-        
+
+        self.addChild(leftTutorial)
+        self.leftTutorial.name = "leftTutorial"
+        self.addChild(rightTutorial)
+        self.rightTutorial.name = "rightTutorial"
         self.addChild(tutorialSign)
         self.tutorialSign.name = "tutorialSign"
         self.addChild(tutorialName)
