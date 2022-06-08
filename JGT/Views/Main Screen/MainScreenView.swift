@@ -20,6 +20,7 @@ struct MainScreenView: View {
     
     // The game state is used to transition between the different states of the game
     @Binding var currentGameState: GameState
+    @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     
     // Change it on the Constants.swift file
     var gameTitle: String = MainScreenProperties.gameTitle
@@ -31,16 +32,24 @@ struct MainScreenView: View {
     let accentColor: Color = MainScreenProperties.accentColor
     
     @State var isPressed: Bool = false
-    var isPressedFX: Bool = false
+    @State var isPressedFX: Bool = false
     
     var body: some View {
         GeometryReader { geometry in
 //            VStack(alignment: .center, spacing: 16.0) {
             VStack {
-                /**
-                 * # PRO TIP!
-                 * The game title can be customized to represent the visual identity of the game
-                 */
+                
+                Button {
+                    
+                } label: {
+                    Image("info-button")
+                        
+                }
+                .frame(maxWidth: geometry.size.width * 0.1, maxHeight: geometry.size.height * 0.1)
+                .padding(.top)
+                .foregroundColor(.white)
+//                .background(self.accentColor)
+            
                 Spacer()
                 
                 Text("\(self.gameTitle)")
@@ -61,6 +70,9 @@ struct MainScreenView: View {
                 
                 HStack {
                 
+                Spacer()
+                Spacer()
+                    
                 Button {
                     withAnimation { self.startGame() }
                 } label: {
@@ -73,6 +85,8 @@ struct MainScreenView: View {
                 .foregroundColor(.white)
                 .background(self.accentColor)
                 .cornerRadius(15.0)
+                  
+                Spacer()
                     
                 Button {
                     isPressed
@@ -83,10 +97,21 @@ struct MainScreenView: View {
                         
                 }
                 .frame(maxWidth: geometry.size.width * 0.1, maxHeight: geometry.size.height * 0.1)
-//                .padding(5)
+                .padding(5)
                 .foregroundColor(.white)
 //                .background(self.accentColor)
                     
+                    Button {
+                        isPressedFX
+                            .toggle()
+                        gameLogic.muted = self.isPressedFX ? true : false
+                    } label: {
+                        Image(self.isPressedFX ? "effects-off" : "effects-on")
+                            
+                    }
+                    .frame(maxWidth: geometry.size.width * 0.1, maxHeight: geometry.size.height * 0.1)
+                    .padding(5)
+                    .foregroundColor(.white)
                 }
                 
             }
