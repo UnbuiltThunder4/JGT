@@ -212,7 +212,10 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
         let proj = Projectile(type: type, x: spawnPoint.x, y: spawnPoint.y, rotation: 0)
 //        proj.run(SKAction.move(to: CGPoint(x: destinationPoint.x, y: destinationPoint.y), duration: 1.5), withKey: "thrown")
         tossScene.background.addChild(proj)
-        proj.run(SKAction.move(to: CGPoint(x: destinationPoint.x, y: destinationPoint.y), duration: 1.5), completion: {
+        
+        let distance = CGVector(dx: destinationPoint.x - spawnPoint.x, dy: destinationPoint.y - spawnPoint.y)
+        let time = getDuration(distance: distance, speed: proj.speed)
+        proj.run(SKAction.move(to: CGPoint(x: destinationPoint.x, y: destinationPoint.y), duration: time), completion: {
             proj.removeAllActions()
             proj.removeFromParent()
         })

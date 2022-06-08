@@ -143,7 +143,7 @@ let gnomes: [Enemy] = [
     Enemy(type: .small, x: 1200, y: 2300),
     Enemy(type: .bow, x: 1250, y: 4200),
     Enemy(type: .bow, x: 2050, y: 4200),
-    Enemy(type: .axe, x: 1350, y: 3000),
+    Enemy(type: .axe, x: 1350, y: 2800),
     Enemy(type: .axe, x: 2500, y: 1450)
 ]
 
@@ -172,7 +172,7 @@ let goblinmancyCircleCoordinates = CGPoint(x: 1600, y: 550)
 let tavernCoordinates = CGPoint(x: 1100, y: 950)
 let academyCoordinates = CGPoint(x: 2650, y: 1550)
 let villageCoordinates = CGPoint(x: 1000, y: 2500)
-let catapultCoordinates = CGPoint(x: 1350, y: 3200)
+let catapultCoordinates = CGPoint(x: 1350, y: 3000)
 let gateCoordinates = CGPoint(x: 1600, y: 3750)
 let backdoorCoordinates = CGPoint(x: 500, y: 3635)
 let passageCoordinates = CGPoint(x: 500, y: 4100)

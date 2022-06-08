@@ -62,6 +62,34 @@ extension TossScene: SKPhysicsContactDelegate {
             }
         
         }
+        if (collision.matches(.projectile, .goblin)) {
+            
+            if let node = firstBody.node as? Goblin {
+                if let node2 = secondBody.node as? Projectile {
+                    if (node2.type == .arrow) {
+                        if (node.type != .gum) {
+                            node.health -= node2.damage
+                        }
+                        else {
+                            node.health -= node2.damage/4
+                        }
+                    }
+                }
+            }
+            if let node = secondBody.node as? Goblin {
+                if let node2 = firstBody.node as? Projectile {
+                    if (node2.type == .arrow) {
+                        if (node.type != .gum) {
+                            node.health -= node2.damage
+                        }
+                        else {
+                            node.health -= node2.damage/4
+                        }
+                    }
+                }
+            }
+        
+        }
         if (collision.matches(.gate, .darkson)) {
             
             if let node = firstBody.node as? DarkSon {

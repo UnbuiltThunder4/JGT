@@ -17,6 +17,7 @@ class Projectile: SKSpriteNode, ObservableObject {
     let maskmod: CGFloat
     let width: CGFloat
     let height: CGFloat
+    let damage: Int
         
     init(type: ProjectileType, x: CGFloat, y: CGFloat, rotation: Double) {
         var img = ""
@@ -30,6 +31,7 @@ class Projectile: SKSpriteNode, ObservableObject {
             self.width = 20
             self.height = 70
             self.maskmod = 1.0
+            self.damage = 50
             speed = 30
             break
             
@@ -39,6 +41,7 @@ class Projectile: SKSpriteNode, ObservableObject {
             self.width = 80
             self.height = 80
             self.maskmod = 1.0
+            self.damage = 30
             speed = 18
             break
             

@@ -263,7 +263,24 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                         removeAction(forKey: "walk")
                     }
                 } else {
-                    gameLogic.spawnProjectile(tossScene, spawnPoint: self.position, destinationPoint: self.target!.position, type: .arrow)
+                    let targetDistance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
+                    if (isVectorSmallerThan(vector: targetDistance, other: 1200)) {
+                        self.attackCounter += 1
+                        if (self.attackCounter % attackTime == 0) {
+                            self.attackCounter = 0
+                            gameLogic.spawnProjectile(tossScene, spawnPoint: self.position, destinationPoint: self.target!.position, type: .arrow)
+                        }
+                        if (self.target != nil) {
+                            if (self.target!.health <= 0) {
+                                self.target = nil
+                                self.state = .idle
+                            }
+                        }
+                    }
+                    else {
+                        self.target = nil
+                        self.state = .idle
+                    }
                 }
             }
         }
