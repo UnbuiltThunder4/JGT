@@ -87,7 +87,7 @@ struct MainScreenProperties {
     static let bgheight = bg!.size.height
     
     static let maxFill = 20
-    static let maxGoblinsNumber = 30
+    static let maxGoblinsNumber = 50 
 }
 
 let oneSecond = 60
