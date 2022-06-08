@@ -109,6 +109,9 @@ extension TossScene {
                 if UserDefaults.standard.bool(forKey: "goblins101") == false {
                     gameLogic.tutorialEvent(index: 0, hud: hud, tutorialSheet: tutorialSheet)
                     UserDefaults.standard.set(true, forKey: "goblins101")
+                    hud.counter += 1
+                    hud.tutorialCounter.alpha = 1.0
+                    hud.tutorialCounter.text = String(hud.counter)
                 }
                 gameLogic.shootGoblin(self, node: cameraNode, type: shootType, population: self.population, destination: cameraNode.position)
             }
@@ -202,6 +205,14 @@ extension TossScene {
                     self.tutorialSheet.tutorialDesc.text = tutorial.tutorialDesc
                     self.tutorialSheet.screen.texture = tutorial.screen
                     player.musicVolume = 0.3
+                    self.hud.counter -= 1
+                    self.hud.tutorialCounter.text = String(self.hud.counter)
+                    if self.hud.counter == 0 {
+                        self.hud.tutorialCounter.alpha = 0.0
+                    }
+                    else {
+                        self.hud.tutorialCounter.alpha = 1.0
+                    }
                 }
                 selectedNode?.removeFromParent()
             }

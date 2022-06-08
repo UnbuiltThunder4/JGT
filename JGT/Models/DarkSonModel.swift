@@ -67,6 +67,9 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                         if UserDefaults.standard.bool(forKey: "gateTutorial") == false {
                         gameLogic.tutorialEvent(index: 7, hud: hud, tutorialSheet: tutorialSheet)
                             UserDefaults.standard.set(true, forKey: "gateTutorial")
+                            hud.counter += 1
+                            hud.tutorialCounter.alpha = 1.0
+                            hud.tutorialCounter.text = String(hud.counter)
                         }
                         
                         self.target!.health -= self.attack

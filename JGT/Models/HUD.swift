@@ -23,10 +23,17 @@ enum HUDSettings {
 class HUD: SKNode, ObservableObject {
     
     static let shared: HUD = HUD()
+    var counter: Int = 0
+    var tutorialCounter: SKLabelNode = SKLabelNode()
     
     override init() {
         super.init()
-        name = "HUD"
+        self.tutorialCounter.zPosition = 50
+        self.addChild(tutorialCounter)
+        self.tutorialCounter.name = "tutorialHUDcounter"
+        self.tutorialCounter.alpha = 0.0
+        self.tutorialCounter.text = String(self.counter)
+        self.name = "HUD"
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -274,6 +281,13 @@ class HUD: SKNode, ObservableObject {
         tutorialButton.alpha = 1.0
         tutorialButton.zPosition = 20
         tutorialButton.position = position
+        self.tutorialCounter.fontColor = .red
+        self.tutorialCounter.fontSize = 50
+        self.tutorialCounter.fontName = HUDSettings.nameFont
+//        self.tutorialCounter.position.y = tutorialButton.position.y - self.tutorialCounter.frame.height/2
+        self.tutorialCounter.position.x = position.x
+        self.tutorialCounter.position.y = tutorialCounter.frame.minY
+        self.tutorialCounter.alpha = 1.0
         
         addChild(tutorialButton)
     }

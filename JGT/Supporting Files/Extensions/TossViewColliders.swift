@@ -70,6 +70,9 @@ extension TossScene: SKPhysicsContactDelegate {
                         if UserDefaults.standard.bool(forKey: "frenzyTutorial") == false {
                         gameLogic.tutorialEvent(index: 5, hud: hud, tutorialSheet: tutorialSheet)
                             UserDefaults.standard.set(true, forKey: "frenzyTutorial")
+                            hud.counter += 1
+                            hud.tutorialCounter.alpha = 1.0
+                            hud.tutorialCounter.text = String(hud.counter)
                         }
                         
                     switch node.type {
@@ -106,6 +109,9 @@ extension TossScene: SKPhysicsContactDelegate {
                         if UserDefaults.standard.bool(forKey: "frenzyTutorial") == false {
                         gameLogic.tutorialEvent(index: 5, hud: hud, tutorialSheet: tutorialSheet)
                             UserDefaults.standard.set(true, forKey: "frenzyTutorial")
+                            hud.counter += 1
+                            hud.tutorialCounter.alpha = 1.0
+                            hud.tutorialCounter.text = String(hud.counter)
                         }
                         
                     switch node.type {
