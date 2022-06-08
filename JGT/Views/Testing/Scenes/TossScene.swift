@@ -177,7 +177,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             }
             
             self.enemies.forEach {
-                if ($0.update()) {
+                if ($0.update(self)) {
                     let index = self.enemies.firstIndex(of: $0)!
                     $0.removeFromParent()
                     self.enemies.remove(at: index)
@@ -200,8 +200,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             if let structure = self.structures[4] as? Trap {
                 structure.update(self)
             }
-            
-            
+                        
             darkson.update()
             
             if channeling == true && evilGauge.currentFill > 0 {

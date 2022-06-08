@@ -10,12 +10,14 @@ import SwiftUI
 import SpriteKit
 
 class Projectile: SKSpriteNode, ObservableObject {
+    @ObservedObject var gameLogic: GameLogic = GameLogic.shared
+
     let type: ProjectileType
     let mask: Collision.Masks
     let maskmod: CGFloat
     let width: CGFloat
     let height: CGFloat
-    
+        
     init(type: ProjectileType, x: CGFloat, y: CGFloat, rotation: Double) {
         var img = ""
         self.type = type
@@ -51,18 +53,16 @@ class Projectile: SKSpriteNode, ObservableObject {
 
         self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
         self.physicsBody?.affectedByGravity = false
+        self.physicsBody?.isDynamic = true
         self.physicsBody?.restitution = 0.0
         self.physicsBody?.linearDamping = 0.0
         self.physicsBody?.angularDamping = 0.0
         self.physicsBody?.categoryBitMask = Collision.Masks.projectile.bitmask
         self.physicsBody?.collisionBitMask = Collision.Masks.building.bitmask
-//        self.physicsBody?.contactTestBitMask = Collision.Masks.enviroment.bitmask | Collision.Masks.goblin.bitmask
-        
-//        background.addChild(self)
+        self.physicsBody?.contactTestBitMask = Collision.Masks.enviroment.bitmask | Collision.Masks.goblin.bitmask
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
+    }    
 }

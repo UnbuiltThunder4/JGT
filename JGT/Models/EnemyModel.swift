@@ -93,7 +93,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
         return lhs.id == rhs.id
     }
     
-    public func update() -> Bool {
+    public func update(_ tossScene: TossScene) -> Bool {
         let isDead = self.checkHealth()
         switch self.state {
             
@@ -102,7 +102,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         case .fighting:
-            attackUpdate()
+            attackUpdate(tossScene)
             break
             
         default:
@@ -160,7 +160,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
         }
     }
     
-    private func attackUpdate() {
+    private func attackUpdate(_ tossScene: TossScene) {
         self.canRecoverShield = false
         self.shieldCounter = 0
         self.idleCounter = 0
@@ -249,11 +249,13 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                             
                         }
                     }
-                }
-                else {
-                    self.target = nil
-                    self.state = .idle
-                    removeAction(forKey: "walk")
+                    else {
+                        self.target = nil
+                        self.state = .idle
+                        removeAction(forKey: "walk")
+                    }
+                } else {
+                    gameLogic.spawnProjectile(tossScene, spawnPoint: self.position, destinationPoint: self.target!.position, type: .arrow)
                 }
             }
         }

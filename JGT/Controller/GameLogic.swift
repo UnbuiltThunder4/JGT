@@ -210,8 +210,12 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
     
     public func spawnProjectile(_ tossScene: TossScene, spawnPoint: CGPoint, destinationPoint: CGPoint, type: ProjectileType) {
         let proj = Projectile(type: type, x: spawnPoint.x, y: spawnPoint.y, rotation: 0)
-        proj.run(SKAction.move(to: CGPoint(x: destinationPoint.x, y: destinationPoint.y), duration: 1.5), withKey: "thrown")
+//        proj.run(SKAction.move(to: CGPoint(x: destinationPoint.x, y: destinationPoint.y), duration: 1.5), withKey: "thrown")
         tossScene.background.addChild(proj)
+        proj.run(SKAction.move(to: CGPoint(x: destinationPoint.x, y: destinationPoint.y), duration: 1.5), completion: {
+            proj.removeAllActions()
+            proj.removeFromParent()
+        })
     }
     
     public func spawnGoblin(_ tossScene: TossScene, population: Population, spawnPoint: CGPoint?) -> Goblin {
