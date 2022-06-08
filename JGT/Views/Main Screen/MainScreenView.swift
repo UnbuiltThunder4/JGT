@@ -31,51 +31,47 @@ struct MainScreenView: View {
     let accentColor: Color = MainScreenProperties.accentColor
     
     var body: some View {
-        VStack(alignment: .center, spacing: 16.0) {
-            Spacer()
-            
-            /**
-             * # PRO TIP!
-             * The game title can be customized to represent the visual identity of the game
-             */
-            Text("\(self.gameTitle)")
-                .font(.title)
-                .fontWeight(.black)
-            
-            Spacer()
-            
-            /**
-             * To customize the instructions, check the **Constants.swift** file
-             */
-            ForEach(self.gameInstructions, id: \.title) { instruction in
-                GroupBox(label: Label("\(instruction.title)", systemImage: "\(instruction.icon)").foregroundColor(self.accentColor)) {
-                    HStack {
-                        Text("\(instruction.description)")
-                            .font(.callout)
-                        Spacer()
-                    }
-                }
-            }
-            
-            Spacer()
-            
-            /**
-             * Customize the appearance of the **Insert a Coin** button to match the visual identity of your game
-             */
-            Button {
-                withAnimation { self.startGame() }
-            } label: {
-                Text("Insert a coin")
+        GeometryReader { geometry in
+//            VStack(alignment: .center, spacing: 16.0) {
+            VStack {
+                /**
+                 * # PRO TIP!
+                 * The game title can be customized to represent the visual identity of the game
+                 */
+                Spacer()
+                
+                Text("\(self.gameTitle)")
+    //                .font(.title)
+                    .font(.custom("Chalkduster", size: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 50)))
+                    .fontWeight(.black)
                     .padding()
-                    .frame(maxWidth: .infinity)
+                
+
+                /**
+                 * To customize the instructions, check the **Constants.swift** file
+                 */
+                
+                /**
+                 * Customize the appearance of the **Insert a Coin** button to match the visual identity of your game
+                 */
+                Spacer()
+                Button {
+                    withAnimation { self.startGame() }
+                } label: {
+                    Text("Play")
+                        .font(.custom("Chalkduster", size: (UIDevice.current.userInterfaceIdiom == .pad ? 30 : 15)))
+                    
+                }
+                .frame(maxWidth: geometry.size.width * 0.1, maxHeight: geometry.size.height * 0.1)
+                .padding(5)
+                .foregroundColor(.white)
+                .background(self.accentColor)
+                .cornerRadius(15.0)
+                
             }
-            .foregroundColor(.white)
-            .background(self.accentColor)
-            .cornerRadius(10.0)
-            
+            .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height)
+            .statusBar(hidden: true)
         }
-        .padding()
-        .statusBar(hidden: true)
     }
     
     /**
@@ -91,6 +87,7 @@ struct MainScreenView: View {
 struct MainScreen_Previews: PreviewProvider {
     static var previews: some View {
         MainScreenView(currentGameState: .constant(GameState.mainScreen))
+            .previewInterfaceOrientation(.landscapeLeft)
     }
 }
 

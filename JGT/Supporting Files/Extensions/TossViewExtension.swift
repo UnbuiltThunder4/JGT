@@ -200,6 +200,11 @@ extension TossScene {
                 self.tutorialSheet.alpha = 1.0
                 if let tutorial = selectedNode as? TutorialButton {
                     paws = true
+                    self.tutorialSheet.isMenu = false
+                    self.tutorialSheet.backButton.alpha = 0.0
+                    self.tutorialSheet.leftTutorial.alpha = 0.0
+                    self.tutorialSheet.rightTutorial.alpha = 0.0
+                    self.tutorialSheet.tutorialCounterLabel.alpha = 0.0
                     self.pauseChilds(isPaused: true)
                     self.tutorialSheet.tutorialName.text = tutorial.tutorialName
                     self.tutorialSheet.tutorialDesc.text = tutorial.tutorialDesc
