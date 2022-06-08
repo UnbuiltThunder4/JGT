@@ -118,8 +118,6 @@ extension TossScene: SKPhysicsContactDelegate {
 
                             parent.run(particleSequence)
                             parent.run(removeSequence)
-                        } else {
-                            gameLogic.playSound(node: self, audio: Audio.EffectFiles.axeGnomeAttack, wait: false, muted: gameLogic.muted)
                         }
                     }
                 }
