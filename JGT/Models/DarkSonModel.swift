@@ -12,6 +12,8 @@ import SpriteKit
 class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
+    @ObservedObject var hud: HUD = HUD.shared
+    @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet.shared
     
     public var lives: Int = 5
     
@@ -61,6 +63,12 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                     removeAction(forKey: "walk")
                     self.attackCounter += 1
                     if (self.attackCounter % attackTime == 0) {
+                        
+                        if UserDefaults.standard.bool(forKey: "gateTutorial") == false {
+                        gameLogic.tutorialEvent(index: 7, hud: hud, tutorialSheet: tutorialSheet)
+                            UserDefaults.standard.set(true, forKey: "gateTutorial")
+                        }
+                        
                         self.target!.health -= self.attack
                         self.attackCounter = 0
                         gameLogic.playSound(node: self, audio: Audio.EffectFiles.darkSonAttack, wait: false, muted: gameLogic.muted)

@@ -298,7 +298,7 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
     }
     
     public func tutorialEvent(index: Int, hud: HUD, tutorialSheet: TutorialSheet) {
-        hud.addTutorialButton(tutorialButton: tutorials[index], position: CGPoint.zero)
+        hud.addTutorialButton(tutorialButton: tutorials[index], position: CGPoint(x: 0, y: 0))
     }
     
 }

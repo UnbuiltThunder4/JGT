@@ -250,6 +250,12 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         case .backdooring:
+            
+            if UserDefaults.standard.bool(forKey: "backdoorTutorial") == false {
+            gameLogic.tutorialEvent(index: 8, hud: hud, tutorialSheet: tutorialSheet)
+                UserDefaults.standard.set(true, forKey: "backdoorTutorial")
+            }
+            
             hasToUpdateRank = backdooringUpdate()
             break
             
@@ -608,6 +614,20 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             let temp = self.fullName
             self.fullName = GoblinConstants.honoree.randomElement()! + " " + temp
             self.state = .idle
+            
+            switch self.type {
+            case .rock:
+                let random = Int.random(in: 0...1)
+                gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.stoneblinGraduation1 : Audio.EffectFiles.stoneblinGraduation2, wait: false, muted: gameLogic.muted)
+            case .fire:
+                let random = Int.random(in: 0...1)
+                gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.flameblinGraduation2 : Audio.EffectFiles.flameblinGraduation3, wait: false, muted: gameLogic.muted)
+            case .gum:
+                gameLogic.playSound(node: self, audio: Audio.EffectFiles.gumblinGraduation1, wait: false, muted: gameLogic.muted)
+            case .normal:
+                gameLogic.playSound(node: self, audio: Audio.EffectFiles.goblinGraduation1, wait: false, muted: gameLogic.muted)
+            }
+            
             self.alpha = 1.0
             if let academy = self.closeStructure as? Academy {
                 academy.removeGoblin(self)
@@ -643,6 +663,12 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 let random = Int.random(in: 0...1)
                 gameLogic.playSound(node: self,
                                     audio: random == 0 ? Audio.EffectFiles.gumblinTransform1 : Audio.EffectFiles.gumblinTransform2, wait: false, muted: gameLogic.muted)
+                
+                if UserDefaults.standard.bool(forKey: "gumblinTutorial") == false {
+                gameLogic.tutorialEvent(index: 12, hud: hud, tutorialSheet: tutorialSheet)
+                    UserDefaults.standard.set(true, forKey: "gumblinTutorial")
+                }
+                
             }
             else {
                 
@@ -658,6 +684,11 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                     gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.stoneblinCandy1 : Audio.EffectFiles.stoneblinCandy2, wait: false, muted: gameLogic.muted)
                 case .gum:
                     break
+                }
+                
+                if UserDefaults.standard.bool(forKey: "pillagingTutorial") == false {
+                gameLogic.tutorialEvent(index: 11, hud: hud, tutorialSheet: tutorialSheet)
+                    UserDefaults.standard.set(true, forKey: "pillagingTutorial")
                 }
                 
                 self.evilGauge.updateGauge(goblin: nil, value: 1)
@@ -975,6 +1006,12 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.state = .inacademy
         self.alpha = 0.0
         if let academy = self.closeStructure as? Academy {
+            
+            if UserDefaults.standard.bool(forKey: "academyTutorial") == false {
+            gameLogic.tutorialEvent(index: 6, hud: hud, tutorialSheet: tutorialSheet)
+                UserDefaults.standard.set(true, forKey: "academyTutorial")
+            }
+            
             academy.addGoblin(self)
         }
     }
@@ -1011,6 +1048,11 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         case .normal:
             gameLogic.playSound(node: self,
                                 audio: Audio.EffectFiles.goblinCatapult1, wait: false, muted: gameLogic.muted)
+        }
+        
+        if UserDefaults.standard.bool(forKey: "catapultTutorial") == false {
+        gameLogic.tutorialEvent(index: 13, hud: hud, tutorialSheet: tutorialSheet)
+            UserDefaults.standard.set(true, forKey: "catapultTutorial")
         }
         
         self.removeAllActions()
@@ -1057,6 +1099,12 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             case .rock:
                 break
             }
+            
+            if UserDefaults.standard.bool(forKey: "catapultTutorial") == false {
+            gameLogic.tutorialEvent(index: 13, hud: hud, tutorialSheet: tutorialSheet)
+                UserDefaults.standard.set(true, forKey: "catapultTutorial")
+            }
+            
         }
         else {
             self.HWpoints += 10

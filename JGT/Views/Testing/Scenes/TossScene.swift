@@ -128,8 +128,14 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         UserDefaults.standard.set(false, forKey: "fightTutorial")
         UserDefaults.standard.set(false, forKey: "fearTutorial")
         UserDefaults.standard.set(false, forKey: "frenzyTutorial")
+        UserDefaults.standard.set(false, forKey: "academyTutorial")
         UserDefaults.standard.set(false, forKey: "rockTutorial")
         UserDefaults.standard.set(false, forKey: "stoneblinTutorial")
+        UserDefaults.standard.set(false, forKey: "gateTutorial")
+        UserDefaults.standard.set(false, forKey: "backdoorTutorial")
+        UserDefaults.standard.set(false, forKey: "pillagingTutorial")
+        UserDefaults.standard.set(false, forKey: "gumblinsTutorial")
+        UserDefaults.standard.set(false, forKey: "catapultTutorial")
         
         player.musicVolume = 0.7
 //        playBackgroundMusic(filename: "Psycho Katana - Instrumental.wav")
