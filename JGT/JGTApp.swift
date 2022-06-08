@@ -11,7 +11,7 @@ import SwiftUI
 struct JGTApp: App {
     var body: some Scene {
         WindowGroup {
-            TossView()
+            ContentView()
         }
     }
 }

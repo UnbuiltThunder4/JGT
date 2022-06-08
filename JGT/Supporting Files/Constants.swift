@@ -61,7 +61,7 @@ typealias Instruction = (icon: String, title: String, description: String)
  */
 
 struct MainScreenProperties {
-    static let gameTitle: String = "Game Title"
+    static let gameTitle: String = "Throw Da Goblin"
     
     static let gameInstructions: [Instruction] = [
         (icon: "hand.raised", title: "Instruction 1", description: "Instruction description."),
