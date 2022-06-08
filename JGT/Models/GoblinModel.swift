@@ -821,11 +821,20 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func flyingUpdate() {
         self.updateAge()
+        
         if (self.physicsBody!.velocity.dx != 0 || self.physicsBody!.velocity.dy != 0) {
             gameLogic.friction(node: self)
+            if let _ = self.action(forKey: "flyingAnimation") {
+                
+            } else {
+                isFlyingAnimation()
+            }
         }
         else {
             self.state = .idle
+            self.removeAction(forKey: "flyingAnimation")
+            self.texture = SKTexture(imageNamed: "goblin")
+            
         }
     }
     
@@ -1361,6 +1370,16 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
     }
  
-
+    private func isFlyingAnimation() {
+        var flyingTextures : [SKTexture] = []
+        
+        for i in 1...15 {
+            flyingTextures.append(SKTexture(imageNamed: "normal_fly_\(i)"))
+        }
+        
+        let flyingAnimation = SKAction.repeatForever(SKAction.animate(with: flyingTextures, timePerFrame: 0.5))
+        
+        self.run(flyingAnimation, withKey: "flyingAnimation")
+    }
     
 }

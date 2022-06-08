@@ -194,8 +194,17 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
     
     public func friction(node: SKNode) {
         if (node.physicsBody != nil) {
-            node.physicsBody!.velocity.dx /= 1.1
-            node.physicsBody!.velocity.dy /= 1.1
+            if node.physicsBody!.velocity.dx >= 26 {
+                node.physicsBody!.velocity.dx /= 1.1
+            } else {
+                node.physicsBody!.velocity.dx = 0
+            }
+            
+            if node.physicsBody!.velocity.dy >= 26 {
+                node.physicsBody!.velocity.dy /= 1.1
+            } else {
+                node.physicsBody!.velocity.dy = 0
+            }
         }
     }
     
