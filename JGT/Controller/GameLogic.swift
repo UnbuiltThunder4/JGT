@@ -318,7 +318,18 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
     public func playSound(node: SKNode?, audio: Effect, wait: Bool, muted: Bool) {
         if !muted {
             if let node = node {
-                if (node.position.x > (node.parent?.scene?.camera?.position.x)! + UIScreen.main.bounds.width/2 * currentScale ||
+                if let node = node as? Goblin {
+                    if node.health > 0 {
+                        if (node.position.x > (node.parent?.scene?.camera?.position.x)! + UIScreen.main.bounds.width/2 * currentScale ||
+                            node.position.y > (node.parent?.scene?.camera?.position.y)! + UIScreen.main.bounds.height/2 * currentScale) ||
+                            (node.position.x < (node.parent?.scene?.camera?.position.x)! - UIScreen.main.bounds.width/2 * currentScale ||
+                             node.position.y < (node.parent?.scene?.camera?.position.y)! - UIScreen.main.bounds.height/2 * currentScale)
+                        {
+                        } else {
+                            node.run(SKAction.playSoundFileNamed(audio.filename, waitForCompletion: wait))
+                        }
+                    }
+                } else if (node.position.x > (node.parent?.scene?.camera?.position.x)! + UIScreen.main.bounds.width/2 * currentScale ||
                     node.position.y > (node.parent?.scene?.camera?.position.y)! + UIScreen.main.bounds.height/2 * currentScale) ||
                     (node.position.x < (node.parent?.scene?.camera?.position.x)! - UIScreen.main.bounds.width/2 * currentScale ||
                      node.position.y < (node.parent?.scene?.camera?.position.y)! - UIScreen.main.bounds.height/2 * currentScale)
