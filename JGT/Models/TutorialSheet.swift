@@ -13,8 +13,9 @@ class TutorialSheet: SKSpriteNode, ObservableObject {
     
     var isMenu: Bool = false
     var tutorialCounter: Int = 0
-    let leftTutorial: SKSpriteNode = SKSpriteNode()
-    let rightTutorial: SKSpriteNode = SKSpriteNode()
+    let backButton: SKSpriteNode = SKSpriteNode(imageNamed: "left-arrow")
+    let leftTutorial: SKSpriteNode = SKSpriteNode(imageNamed: "back-button")
+    let rightTutorial: SKSpriteNode = SKSpriteNode(imageNamed: "next-button")
     let tutorialSign: SKSpriteNode = SKSpriteNode(imageNamed: "structure sheet wide")
     var tutorialName: SKLabelNode = SKLabelNode()
     var tutorialDesc: SKLabelNode = SKLabelNode()
@@ -26,11 +27,16 @@ class TutorialSheet: SKSpriteNode, ObservableObject {
                                                             height: UIScreen.main.bounds.height))
         self.name = "tutorialSheet"
         self.alpha = 0.0
-
+        
+        self.addChild(backButton)
+        self.backButton.name = "backButton"
+        self.backButton.alpha = 0.0
         self.addChild(leftTutorial)
         self.leftTutorial.name = "leftTutorial"
+        self.leftTutorial.alpha = 0.0
         self.addChild(rightTutorial)
         self.rightTutorial.name = "rightTutorial"
+        self.rightTutorial.alpha = 0.0
         self.addChild(tutorialSign)
         self.tutorialSign.name = "tutorialSign"
         self.addChild(tutorialName)

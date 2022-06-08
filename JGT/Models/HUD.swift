@@ -280,9 +280,18 @@ class HUD: SKNode, ObservableObject {
     
     func addTutorialSheet(tutorialSheet: TutorialSheet, position: CGPoint) {
     
-        tutorialSheet.zPosition = 50
+        tutorialSheet.zPosition = 300
         tutorialSheet.position = position
         
+        tutorialSheet.backButton.zPosition = 20
+        tutorialSheet.backButton.position = CGPoint(x: -tutorialSheet.tutorialSign.frame.maxX/1.5,
+                                                       y: -tutorialSheet.tutorialSign.frame.minY/1.5)
+        tutorialSheet.rightTutorial.zPosition = 20
+        tutorialSheet.rightTutorial.position = CGPoint(x: tutorialSheet.tutorialSign.frame.maxX/1.5,
+                                                       y: tutorialSheet.tutorialSign.frame.minY/1.5)
+        tutorialSheet.leftTutorial.zPosition = 20
+        tutorialSheet.leftTutorial.position = CGPoint(x: -tutorialSheet.tutorialSign.frame.maxX/1.5,
+                                                       y: tutorialSheet.tutorialSign.frame.minY/1.5)
         tutorialSheet.tutorialName.position = CGPoint(x: 0,
                                                       y: tutorialSheet.tutorialSign.frame.maxY * 0.75)
         

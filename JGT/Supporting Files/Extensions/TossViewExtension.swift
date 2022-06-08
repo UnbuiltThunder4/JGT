@@ -107,7 +107,7 @@ extension TossScene {
             
             if selectedNode is Cauldron || selectedNode?.name! == "goblinsNumber" {
                 if UserDefaults.standard.bool(forKey: "goblins101") == false {
-                gameLogic.tutorialEvent(index: 0, hud: hud, tutorialSheet: tutorialSheet)
+                    gameLogic.tutorialEvent(index: 0, hud: hud, tutorialSheet: tutorialSheet)
                     UserDefaults.standard.set(true, forKey: "goblins101")
                 }
                 gameLogic.shootGoblin(self, node: cameraNode, type: shootType, population: self.population, destination: cameraNode.position)
@@ -175,8 +175,8 @@ extension TossScene {
             
             if selectedNode?.name! == "musicButton" {
                 if player.musicVolume != 0.0 {
-                player.musicVolume = 0.0
-                self.pauseScreen.musicButton.texture = SKTexture(imageNamed: "music-off")
+                    player.musicVolume = 0.0
+                    self.pauseScreen.musicButton.texture = SKTexture(imageNamed: "music-off")
                 } else {
                     player.musicVolume = 0.7
                     self.pauseScreen.musicButton.texture = SKTexture(imageNamed: "music-on")
@@ -206,14 +206,57 @@ extension TossScene {
                 selectedNode?.removeFromParent()
             }
             
-            if selectedNode?.name! == "tutorialSign" || selectedNode?.name! == "screen" || selectedNode?.name! == "tutorialName" || selectedNode?.name! == "tutorialDesc" {
-                self.tutorialSheet.alpha = 0.0
-                paws = false
-                pauseChilds(isPaused: false)
-                player.musicVolume = 0.7
+            if selectedNode?.name! == "tutorialSign" || selectedNode?.name! == "screen" ||
+                selectedNode?.name! == "tutorialName" || selectedNode?.name! == "tutorialDesc" {
+                if !self.tutorialSheet.isMenu {
+                    self.tutorialSheet.alpha = 0.0
+                    paws = false
+                    pauseChilds(isPaused: false)
+                    player.musicVolume = 0.7
+                }
             }
-        
-        
+            
+            if selectedNode?.name == "tutorialSheetButton" {
+                self.pauseScreen.alpha = 0.0
+                self.tutorialSheet.alpha = 1.0
+                self.tutorialSheet.backButton.alpha = 1.0
+                self.tutorialSheet.rightTutorial.alpha = 1.0
+//                self.tutorialSheet.leftTutorial.alpha = 1.0
+                self.tutorialSheet.isMenu = true
+                self.tutorialSheet.tutorialCounter = 0
+                self.tutorialSheet.tutorialName.text = gameLogic.tutorials[0].tutorialName
+                self.tutorialSheet.tutorialDesc.text = gameLogic.tutorials[0].tutorialDesc
+                self.tutorialSheet.screen.texture = gameLogic.tutorials[0].screen
+                player.musicVolume = 0.3
+            }
+            
+            if selectedNode?.name == "leftTutorial" {
+                self.tutorialSheet.tutorialCounter -= 1
+                self.tutorialSheet.rightTutorial.alpha = 1.0
+                if self.tutorialSheet.tutorialCounter == 0 {
+                    self.tutorialSheet.leftTutorial.alpha = 0.0
+                }
+                self.tutorialSheet.tutorialName.text = gameLogic.tutorials[self.tutorialSheet.tutorialCounter].tutorialName
+                self.tutorialSheet.tutorialDesc.text = gameLogic.tutorials[self.tutorialSheet.tutorialCounter].tutorialDesc
+                self.tutorialSheet.screen.texture = gameLogic.tutorials[self.tutorialSheet.tutorialCounter].screen
+            }
+            
+            if selectedNode?.name == "rightTutorial" {
+                self.tutorialSheet.tutorialCounter += 1
+                self.tutorialSheet.leftTutorial.alpha = 1.0
+                if self.tutorialSheet.tutorialCounter == gameLogic.tutorials.count - 1 {
+                    self.tutorialSheet.rightTutorial.alpha = 0.0
+                }
+                self.tutorialSheet.tutorialName.text = gameLogic.tutorials[self.tutorialSheet.tutorialCounter].tutorialName
+                self.tutorialSheet.tutorialDesc.text = gameLogic.tutorials[self.tutorialSheet.tutorialCounter].tutorialDesc
+                self.tutorialSheet.screen.texture = gameLogic.tutorials[self.tutorialSheet.tutorialCounter].screen
+            }
+            
+            if selectedNode?.name == "backButton" {
+                self.tutorialSheet.isMenu = false
+                self.tutorialSheet.alpha = 0.0
+                self.pauseScreen.alpha = 1.0
+            }
             
         }
     }
