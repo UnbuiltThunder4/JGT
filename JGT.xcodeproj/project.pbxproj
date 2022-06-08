@@ -20,6 +20,7 @@
 		2320DD08284F629F007B439F /* Nightmare.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2320DD04284F629F007B439F /* Nightmare.ttf */; };
 		234D35D3283264B100D242E7 /* SpriteKitContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 234D35D2283264B100D242E7 /* SpriteKitContainer.swift */; };
 		234D9CDE284E074D0077599E /* GoblinDeathParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 234D9CDD284E074D0077599E /* GoblinDeathParticle.sks */; };
+		23F342792851132C00BB8DA8 /* CauldronnShootParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 23F342782851132C00BB8DA8 /* CauldronnShootParticle.sks */; };
 		761907F42823B8F5002A0AE2 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761907F32823B8F5002A0AE2 /* MainScreenView.swift */; };
 		761907F72823B91D002A0AE2 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761907F62823B91D002A0AE2 /* GameView.swift */; };
 		761907F92823B961002A0AE2 /* GameDurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761907F82823B961002A0AE2 /* GameDurationView.swift */; };
@@ -200,6 +201,7 @@
 		2320DD04284F629F007B439F /* Nightmare.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Nightmare.ttf; sourceTree = "<group>"; };
 		234D35D2283264B100D242E7 /* SpriteKitContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteKitContainer.swift; sourceTree = "<group>"; };
 		234D9CDD284E074D0077599E /* GoblinDeathParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GoblinDeathParticle.sks; sourceTree = "<group>"; };
+		23F342782851132C00BB8DA8 /* CauldronnShootParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CauldronnShootParticle.sks; sourceTree = "<group>"; };
 		761907F32823B8F5002A0AE2 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		761907F62823B91D002A0AE2 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		761907F82823B961002A0AE2 /* GameDurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDurationView.swift; sourceTree = "<group>"; };
@@ -379,6 +381,7 @@
 		2301764828464C0600B41583 /* Particles */ = {
 			isa = PBXGroup;
 			children = (
+				23F342782851132C00BB8DA8 /* CauldronnShootParticle.sks */,
 				230176462846488B00B41583 /* StunParticle.sks */,
 				234D9CDD284E074D0077599E /* GoblinDeathParticle.sks */,
 				230176492846546B00B41583 /* FlameblinParticle.sks */,
@@ -888,6 +891,7 @@
 				76B5F3C6284CD0AC00E7C071 /* goblin-fly-1.wav in Resources */,
 				76B5F3A4284CD0AC00E7C071 /* goblin-hit-3.wav in Resources */,
 				76B5F39F284CD0AC00E7C071 /* goblin-catapult-1.wav in Resources */,
+				23F342792851132C00BB8DA8 /* CauldronnShootParticle.sks in Resources */,
 				76B5F38D284CD0AC00E7C071 /* goblin-hit-1.wav in Resources */,
 				76B5F3D5284CD0AC00E7C071 /* goblin-self-catapult-1.wav in Resources */,
 				76B5F3C2284CD0AC00E7C071 /* stoneblin-self-catapult-1.wav in Resources */,

@@ -266,6 +266,26 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
             newGoblin.type = type
             newGoblin.state = .launched
             
+            let cauldronnShootParticle = SKEmitterNode(fileNamed: "CauldronnShootParticle")
+            cauldronnShootParticle!.position = CGPoint(x: 0, y: 0)
+            cauldronnShootParticle!.name = "cauldronnShootParticle"
+            cauldronnShootParticle!.zPosition = -1
+            
+            let addParticle = SKAction.run({
+                tossScene.cauldron.addChild(cauldronnShootParticle!)
+            })
+            let removeParticle = SKAction.run({
+                cauldronnShootParticle!.removeFromParent()
+            })
+            
+            let sequence = SKAction.sequence([
+                addParticle,
+                .wait(forDuration: 0.5),
+                removeParticle
+            ])
+            
+            tossScene.cauldron.run(sequence, withKey: "cauldronnShootParticle")
+            
             switch type {
             case .normal:
                 let random = Int.random(in: 0...1)
