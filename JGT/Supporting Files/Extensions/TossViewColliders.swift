@@ -73,6 +73,52 @@ extension TossScene: SKPhysicsContactDelegate {
                         else {
                             node.health -= node2.damage/4
                         }
+                        
+                        if node.health <= 0 {
+                            let goblinDeathParticle = SKEmitterNode(fileNamed: "GoblinDeathParticle")
+                            goblinDeathParticle!.position = node.position
+                            goblinDeathParticle!.name = "goblinDeathParticle"
+                            goblinDeathParticle!.zPosition = 1
+                            goblinDeathParticle!.particleColorSequence = nil
+                            goblinDeathParticle!.particleColorBlendFactor = 1.0
+                            
+                            switch node.type {
+                            case .rock:
+                                goblinDeathParticle!.particleColor = UIColor(red: 110/255, green: 110/255, blue: 110/255, alpha: 1.0)
+                            case .fire:
+                                goblinDeathParticle!.particleColor = UIColor(red: 224/255, green: 53/255, blue: 50/255, alpha: 1.0)
+                            case .gum:
+                                goblinDeathParticle!.particleColor = UIColor(red: 255/255, green: 141/255, blue: 157/255, alpha: 1.0)
+                            case .normal:
+                                goblinDeathParticle!.particleColor = UIColor(red: 11/255, green: 129/255, blue: 80/255, alpha: 1.0)
+                            }
+                                                    
+                            let parent = node.parent!.scene!
+
+                            let addDeathParticle = SKAction.run({
+                                parent.addChild(goblinDeathParticle!)
+                            })
+                            let goblinDeathFade = SKAction.run {
+                                goblinDeathParticle!.run(SKAction.fadeOut(withDuration: 0.4))
+                            }
+                            
+                            let particleSequence = SKAction.sequence([
+                                addDeathParticle,
+                                goblinDeathFade
+                            ])
+
+                            let removeDeathParticle = SKAction.run({
+                                goblinDeathParticle!.removeFromParent()
+                            })
+
+                            let removeSequence = SKAction.sequence([
+                                .wait(forDuration: 0.5),
+                                removeDeathParticle
+                            ])
+
+                            parent.run(particleSequence)
+                            parent.run(removeSequence)
+                        }
                     }
                 }
             }
@@ -84,6 +130,52 @@ extension TossScene: SKPhysicsContactDelegate {
                         }
                         else {
                             node.health -= node2.damage/4
+                        }
+                        
+                        if node.health <= 0 {
+                            let goblinDeathParticle = SKEmitterNode(fileNamed: "GoblinDeathParticle")
+                            goblinDeathParticle!.position = node.position
+                            goblinDeathParticle!.name = "goblinDeathParticle"
+                            goblinDeathParticle!.zPosition = 1
+                            goblinDeathParticle!.particleColorSequence = nil
+                            goblinDeathParticle!.particleColorBlendFactor = 1.0
+                            
+                            switch node.type {
+                            case .rock:
+                                goblinDeathParticle!.particleColor = UIColor(red: 110/255, green: 110/255, blue: 110/255, alpha: 1.0)
+                            case .fire:
+                                goblinDeathParticle!.particleColor = UIColor(red: 224/255, green: 53/255, blue: 50/255, alpha: 1.0)
+                            case .gum:
+                                goblinDeathParticle!.particleColor = UIColor(red: 255/255, green: 141/255, blue: 157/255, alpha: 1.0)
+                            case .normal:
+                                goblinDeathParticle!.particleColor = UIColor(red: 11/255, green: 129/255, blue: 80/255, alpha: 1.0)
+                            }
+                                                    
+                            let parent = node.parent!.scene!
+
+                            let addDeathParticle = SKAction.run({
+                                parent.addChild(goblinDeathParticle!)
+                            })
+                            let goblinDeathFade = SKAction.run {
+                                goblinDeathParticle!.run(SKAction.fadeOut(withDuration: 0.4))
+                            }
+                            
+                            let particleSequence = SKAction.sequence([
+                                addDeathParticle,
+                                goblinDeathFade
+                            ])
+
+                            let removeDeathParticle = SKAction.run({
+                                goblinDeathParticle!.removeFromParent()
+                            })
+
+                            let removeSequence = SKAction.sequence([
+                                .wait(forDuration: 0.5),
+                                removeDeathParticle
+                            ])
+
+                            parent.run(particleSequence)
+                            parent.run(removeSequence)
                         }
                     }
                 }
