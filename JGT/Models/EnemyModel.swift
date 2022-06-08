@@ -29,6 +29,8 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     
     private var initialx: CGFloat
     private var initialy: CGFloat
+    public let maskmodX: CGFloat
+    public let maskmodY: CGFloat
     
     private var canRecoverShield: Bool = true
     
@@ -51,6 +53,8 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             self.maxShield = 100
             self.shield = 100
             self.attack = 20
+            self.maskmodX = 2.5
+            self.maskmodY = 2.5
             width = 60
             height = 120
             imgname = "gnomesmall"
@@ -62,6 +66,8 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             self.maxShield = 150
             self.shield = 150
             self.attack = 50
+            self.maskmodX = 5
+            self.maskmodY = 10
             width = 100
             height = 140
             imgname = "gnomebow"
@@ -73,6 +79,8 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             self.maxShield = 200
             self.shield = 200
             self.attack = 20
+            self.maskmodX = 2.5
+            self.maskmodY = 2.5
             width = 160
             height = 160
             imgname = "gnomeaxe"

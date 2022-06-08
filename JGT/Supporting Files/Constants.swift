@@ -141,8 +141,8 @@ public enum EnemyType: Int {
 let gnomes: [Enemy] = [
     Enemy(type: .small, x: 800, y: 2300),
     Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .bow, x: 1400, y: 4050),
-    Enemy(type: .bow, x: 1800, y: 4050),
+    Enemy(type: .bow, x: 1250, y: 4200),
+    Enemy(type: .bow, x: 2050, y: 4200),
     Enemy(type: .axe, x: 1350, y: 3000),
     Enemy(type: .axe, x: 2500, y: 1450)
 ]
@@ -174,8 +174,8 @@ let academyCoordinates = CGPoint(x: 2650, y: 1550)
 let villageCoordinates = CGPoint(x: 1000, y: 2500)
 let catapultCoordinates = CGPoint(x: 1350, y: 3200)
 let gateCoordinates = CGPoint(x: 1600, y: 3750)
-let backdoorCoordinates = CGPoint(x: 600, y: 3635)
-let passageCoordinates = CGPoint(x: 600, y: 4100)
+let backdoorCoordinates = CGPoint(x: 500, y: 3635)
+let passageCoordinates = CGPoint(x: 500, y: 4100)
 
 let levelstructures: [Structure] = [
     Structure(type: .wall, x: 1680, y: 3900, rotation: 0),

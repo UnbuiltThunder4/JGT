@@ -12,12 +12,14 @@ struct Collision {
         case goblin
         case darkson
         case map
-        case enemy
+        case meleeEnemy
+        case rangedEnemy
         case building
         case gate
         case enviroment
         case projectile
         case evilSight
+        case nothing
         var bitmask: UInt32 {return 1 << self.rawValue}
     }
     let masks: (first: UInt32, second: UInt32)

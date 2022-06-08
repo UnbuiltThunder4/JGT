@@ -28,7 +28,7 @@ class Projectile: SKSpriteNode, ObservableObject {
             img = "arrow"
             self.mask = .projectile
             self.width = 20
-            self.height = 100
+            self.height = 70
             self.maskmod = 1.0
             speed = 30
             break
@@ -53,13 +53,12 @@ class Projectile: SKSpriteNode, ObservableObject {
 
         self.physicsBody = SKPhysicsBody(rectangleOf: self.size)
         self.physicsBody?.affectedByGravity = false
-        self.physicsBody?.isDynamic = true
         self.physicsBody?.restitution = 0.0
         self.physicsBody?.linearDamping = 0.0
         self.physicsBody?.angularDamping = 0.0
         self.physicsBody?.categoryBitMask = Collision.Masks.projectile.bitmask
-        self.physicsBody?.collisionBitMask = Collision.Masks.building.bitmask
-        self.physicsBody?.contactTestBitMask = Collision.Masks.enviroment.bitmask | Collision.Masks.goblin.bitmask
+        self.physicsBody?.collisionBitMask = Collision.Masks.enviroment.bitmask
+        self.physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask
     }
     
     required init?(coder aDecoder: NSCoder) {

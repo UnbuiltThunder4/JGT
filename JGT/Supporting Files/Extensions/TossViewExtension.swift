@@ -391,7 +391,7 @@ extension TossScene {
             goblins[i].physicsBody?.allowsRotation = false
             goblins[i].physicsBody?.categoryBitMask = Collision.Masks.goblin.bitmask
             goblins[i].physicsBody?.collisionBitMask = Collision.Masks.building.bitmask | Collision.Masks.gate.bitmask
-            goblins[i].physicsBody?.contactTestBitMask = Collision.Masks.enviroment.bitmask | Collision.Masks.enemy.bitmask
+            goblins[i].physicsBody?.contactTestBitMask = Collision.Masks.enviroment.bitmask | Collision.Masks.meleeEnemy.bitmask | Collision.Masks.rangedEnemy.bitmask
             
             background.addChild(goblins[i])
         }
@@ -401,16 +401,25 @@ extension TossScene {
         for i in 0..<enemies.count {
             enemies[i].zPosition = 4
             
-            enemies[i].physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: enemies[i].size.width*2.5,
-                                                                       height: enemies[i].size.height*2.5))
+            enemies[i].physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: enemies[i].size.width*enemies[i].maskmodX,
+                                                                       height: enemies[i].size.height*enemies[i].maskmodY))
             enemies[i].physicsBody?.affectedByGravity = false
+            enemies[i].physicsBody?.isDynamic = true
             enemies[i].physicsBody?.restitution = 0.0
             enemies[i].physicsBody?.linearDamping = 0.0
             enemies[i].physicsBody?.angularDamping = 0.0
             enemies[i].physicsBody?.allowsRotation = false
-            enemies[i].physicsBody?.categoryBitMask = Collision.Masks.enemy.bitmask
-            enemies[i].physicsBody?.collisionBitMask = Collision.Masks.building.bitmask | Collision.Masks.gate.bitmask
-            enemies[i].physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask | Collision.Masks.enviroment.bitmask
+            if enemies[i].type == .bow {
+//                enemies[i].physicsBody?.isDynamic = false
+                enemies[i].physicsBody?.categoryBitMask = Collision.Masks.rangedEnemy.bitmask
+                enemies[i].physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask | Collision.Masks.enviroment.bitmask
+                enemies[i].physicsBody?.collisionBitMask = Collision.Masks.building.bitmask
+            } else {
+//                enemies[i].physicsBody?.isDynamic = true
+                enemies[i].physicsBody?.categoryBitMask = Collision.Masks.meleeEnemy.bitmask
+                enemies[i].physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask | Collision.Masks.enviroment.bitmask
+                enemies[i].physicsBody?.collisionBitMask = Collision.Masks.building.bitmask | Collision.Masks.gate.bitmask
+            }
             
             background.addChild(enemies[i])
         }
