@@ -13,8 +13,8 @@ class EvilSight: SKSpriteNode {
     var currentRadius: CGFloat
     let maxRadius: CGFloat
     
-    var evilCounter: Int = 19
-    let halfSecond = 20
+    var evilCounter: Int = 9
+    let halfSecond = 10
     
     init(currentRadius: CGFloat, maxRadius: CGFloat) {
         
