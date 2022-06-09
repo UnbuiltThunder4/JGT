@@ -274,4 +274,3 @@ struct Plain: ActivationFunction {
         return 1
     }
 }
-

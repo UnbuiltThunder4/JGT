@@ -912,7 +912,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
         else {
             self.frenzyCounter += 1
-            if (self.frenzyCounter % oneSecond == 0) {
+            if (self.frenzyCounter % taskTime == 0) {
                 self.currentFrenzyTurn -= 1
                 self.frenzyCounter = 0
             }
