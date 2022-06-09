@@ -163,6 +163,7 @@
 		76B5F3D9284CD92400E7C071 /* Psycho Katana - Instrumental.wav in Resources */ = {isa = PBXBuildFile; fileRef = 76B5F3D8284CD92400E7C071 /* Psycho Katana - Instrumental.wav */; };
 		76B5F3DF284F895900E7C071 /* TutorialButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5F3DE284F895900E7C071 /* TutorialButton.swift */; };
 		76B5F3E1284F8B0E00E7C071 /* TutorialSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5F3E0284F8B0E00E7C071 /* TutorialSheet.swift */; };
+		76B5F3E32851E12400E7C071 /* LevelSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B5F3E22851E12400E7C071 /* LevelSelectionView.swift */; };
 		76BEE61728325DB400E4A610 /* CollisionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BEE61628325DB400E4A610 /* CollisionModel.swift */; };
 		76C24C3B282BB60A00F76B8E /* TossViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C24C3A282BB60A00F76B8E /* TossViewExtension.swift */; };
 		76EE5B48283B7FE300ED6635 /* ProjectileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76EE5B47283B7FE300ED6635 /* ProjectileModel.swift */; };
@@ -347,6 +348,7 @@
 		76B5F3D8284CD92400E7C071 /* Psycho Katana - Instrumental.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Psycho Katana - Instrumental.wav"; sourceTree = "<group>"; };
 		76B5F3DE284F895900E7C071 /* TutorialButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialButton.swift; sourceTree = "<group>"; };
 		76B5F3E0284F8B0E00E7C071 /* TutorialSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialSheet.swift; sourceTree = "<group>"; };
+		76B5F3E22851E12400E7C071 /* LevelSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelSelectionView.swift; sourceTree = "<group>"; };
 		76BEE61628325DB400E4A610 /* CollisionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionModel.swift; sourceTree = "<group>"; };
 		76C24C3A282BB60A00F76B8E /* TossViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TossViewExtension.swift; sourceTree = "<group>"; };
 		76EE5B47283B7FE300ED6635 /* ProjectileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectileModel.swift; sourceTree = "<group>"; };
@@ -518,6 +520,7 @@
 			isa = PBXGroup;
 			children = (
 				761907F32823B8F5002A0AE2 /* MainScreenView.swift */,
+				76B5F3E22851E12400E7C071 /* LevelSelectionView.swift */,
 			);
 			path = "Main Screen";
 			sourceTree = "<group>";
@@ -958,6 +961,7 @@
 				76EE5B48283B7FE300ED6635 /* ProjectileModel.swift in Sources */,
 				76C24C3B282BB60A00F76B8E /* TossViewExtension.swift in Sources */,
 				76F5FC96283CFF0F00DAD596 /* DarkSonModel.swift in Sources */,
+				76B5F3E32851E12400E7C071 /* LevelSelectionView.swift in Sources */,
 				761908062823BD13002A0AE2 /* Functions.swift in Sources */,
 				76A53505282FE4EC00DEC317 /* SheetModel.swift in Sources */,
 				7619080A2823BD8B002A0AE2 /* GoblinModel.swift in Sources */,

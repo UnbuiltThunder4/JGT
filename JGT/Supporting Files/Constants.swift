@@ -48,6 +48,7 @@ enum ZoomProperties {
 enum GameState {
     case mainScreen
     case playing
+    case selection
     case gameOver
 }
 
