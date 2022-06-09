@@ -48,7 +48,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     
     var sheet = Sheet()
     var cauldron = Cauldron(currentGoblinsNumber: 3, maxGoblinNumber: MainScreenProperties.maxGoblinsNumber)
-    var evilSight = EvilSight(currentRadius: 1.0, maxRadius: 26.0)
+    var evilSight = EvilSight(currentRadius: 1.0, maxRadius: 30.0)
     var pauseScreen = PauseScreen()
     var pauseButton = PauseButton()
     
