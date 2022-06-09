@@ -63,6 +63,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private var taskCounter: Int = 0
     private var climbCounter: Int = 0
     private var stunCounter: Int = 0
+    private var stuckCounter: Int = 0
     
     private var currentTask: (() -> ())? = nil
     private var ignoreThreshold: Float = 0.0
@@ -305,6 +306,13 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 }
                 else {
                     if let _ = self.action(forKey: "walk") {
+                        self.stuckCounter += 1
+                        if (self.stuckCounter % fiveSeconds == 0) {
+                            self.stuckCounter = 0
+                            self.destination = CGPoint(
+                                x: Double.random(in: 60...MainScreenProperties.bgwidth - 60),
+                                y: Double.random(in: 60...MainScreenProperties.bgheight - 900))
+                        }
                         if (self.closeStructure != nil && self.isFrenzied == false) {
                             let targetDistance = CGVector(dx: self.closeStructure!.position.x - self.position.x, dy: self.closeStructure!.position.y - self.position.y)
                             if (isVectorSmallerThan(vector: targetDistance, other: 330)) {
@@ -354,7 +362,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                         else {
                             self.destination = CGPoint(
                                 x: Double.random(in: 60...MainScreenProperties.bgwidth - 60),
-                                y: Double.random(in: 60...MainScreenProperties.bgheight - 60))
+                                y: Double.random(in: 60...MainScreenProperties.bgheight - 900))
                             distance = CGVector(dx: self.destination.x - position.x, dy: self.destination.y - position.y)
                             distance = limitVector(vector: distance, max: 100)
                             distance.dx = distance.dx * CGFloat.random(in: 0.2...1.8)
@@ -545,11 +553,27 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func fearedUpdate() {
         self.updateAge()
-        let tavernDistance = CGVector(dx: tavernCoordinates.x - self.position.x, dy: tavernCoordinates.y - self.position.y)
+        var tavernDistance = CGVector(dx: tavernCoordinates.x - self.position.x, dy: tavernCoordinates.y - self.position.y)
         if (abs(tavernDistance.dx) < 250 && abs(tavernDistance.dy) < 250) {
             self.enterTavern()
         }
         if let _ = self.action(forKey: "run") {
+            if (self.closeStructure != nil) {
+                self.stuckCounter += 1
+                if (self.stuckCounter % taskTime == 0) {
+                    self.stuckCounter = 0
+                    self.removeAction(forKey: "run")
+                    tavernDistance = CGVector(dx: self.position.x + 500, dy: tavernCoordinates.y - self.position.y)
+                    let distance = limitVector(vector: tavernDistance, max: 150)
+                    let time = getDuration(distance: distance, speed: self.speed * 2)
+                    let run = SKAction.move(by: distance, duration: time)
+                    self.run(run, withKey: "run")
+                }
+                let structureDistance = CGVector(dx: self.closeStructure!.position.x - self.position.x, dy: self.closeStructure!.position.y - self.position.y)
+                if (!isVectorSmallerThan(vector: structureDistance, other: 330)) {
+                    self.closeStructure = nil
+                }
+            }
         }
         else {
             var distance = limitVector(vector: tavernDistance, max: 50)

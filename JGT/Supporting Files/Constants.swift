@@ -92,6 +92,7 @@ struct MainScreenProperties {
 
 let oneSecond = 60
 let threeSeconds = 180
+let fiveSeconds = 300
 let tenSeconds = 600
 let twentySeconds = 1200
 let taskTime = 120
