@@ -860,7 +860,21 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         else {
             self.state = .idle
             self.removeAction(forKey: "flyingAnimation")
-            self.texture = SKTexture(imageNamed: "goblin")
+            
+            switch self.type {
+            case .normal:
+                self.texture = SKTexture(imageNamed: "goblin")
+                break
+            case .fire:
+                self.texture = SKTexture(imageNamed: "fire_goblin")
+                break
+            case .gum:
+                self.texture = SKTexture(imageNamed: "gum_goblin")
+                break
+            case .rock:
+                self.texture = SKTexture(imageNamed: "rock_goblin")
+                break
+            }
             
         }
     }
