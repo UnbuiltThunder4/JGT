@@ -82,13 +82,17 @@ extension TossScene: SKPhysicsContactDelegate {
             if let node = firstBody.node as? DarkSon {
                 if let node2 = secondBody.node as? Projectile {
                     if (node2.type == .arrow) {
-                            node.health -= node2.damage/4
+                            node.health -= node2.damage
                         
                         if node.health <= 0 {
                             let darkSonDeathParticle = SKEmitterNode(fileNamed: "GoblinDeathParticle")
                             darkSonDeathParticle!.position = node.position
                             darkSonDeathParticle!.name = "darkSonDeathParticle"
                             darkSonDeathParticle!.zPosition = 1
+                            darkSonDeathParticle!.particleColorSequence = nil
+                            darkSonDeathParticle!.particleColorBlendFactor = 1.0
+                            darkSonDeathParticle!.particleColor = .black
+                            darkSonDeathParticle!.setScale(3)
                                                     
                             let parent = node.parent!.scene!
 
@@ -122,13 +126,17 @@ extension TossScene: SKPhysicsContactDelegate {
             if let node = secondBody.node as? DarkSon {
                 if let node2 = firstBody.node as? Projectile {
                     if (node2.type == .arrow) {
-                        node.health -= node2.damage/4
+                        node.health -= node2.damage
                         
                     if node.health <= 0 {
                         let darkSonDeathParticle = SKEmitterNode(fileNamed: "GoblinDeathParticle")
                         darkSonDeathParticle!.position = node.position
                         darkSonDeathParticle!.name = "darkSonDeathParticle"
                         darkSonDeathParticle!.zPosition = 1
+                        darkSonDeathParticle!.particleColorSequence = nil
+                        darkSonDeathParticle!.particleColorBlendFactor = 1.0
+                        darkSonDeathParticle!.particleColor = .black
+                        darkSonDeathParticle!.setScale(3)
                                                 
                         let parent = node.parent!.scene!
 
