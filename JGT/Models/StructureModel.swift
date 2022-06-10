@@ -320,7 +320,7 @@ class Gate: Structure {
     
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     
-    var health: Int = 40
+    var health: Int = 200
     
     init(x: CGFloat, y: CGFloat) {
         super.init(type: .gate, x: x, y: y, rotation: 0)

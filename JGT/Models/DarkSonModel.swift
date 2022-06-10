@@ -96,6 +96,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
             }
             else {
                 self.respawnCounter += 1
+                self.target = nil
                 if (self.respawnCounter % tenSeconds == 0) {
                     self.alpha = 1.0
                     self.health = self.maxHealth
