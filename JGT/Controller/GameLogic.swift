@@ -40,7 +40,7 @@ class GameLogic: ObservableObject {
 """, screen: SKTexture(imageNamed: "rockHead")),
                                        TutorialButton(tutorialName: "Goblins 101 - The Dark Lord eyes", tutorialDesc: """
                                    “Once I tap on a Goblin I can see all of their stats, in order, I can see their Health, their Attack Power, how much they Fear death, their age, their wit and how long is their frenzy.”
-                                   """, screen: SKTexture(imageNamed: "rockHead")),
+                                   """, screen: SKTexture(imageNamed: "Tutorial0")),
                                        TutorialButton(tutorialName: "Goblins 101 - Sacrificing Goblins", tutorialDesc: """
                                    “If I think some of them are unworthy I can even long press on them to make them explode and get some of my power back. Remember, the older a goblin I sacrifice, the more evilness I will get back.”
                                    """, screen: SKTexture(imageNamed: "rockHead")),

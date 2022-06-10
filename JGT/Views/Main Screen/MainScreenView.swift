@@ -69,9 +69,6 @@ struct MainScreenView: View {
                 Spacer()
                 
                 HStack {
-                
-                Spacer()
-                Spacer()
                     
                 Button {
                     withAnimation { self.startGame() }
@@ -85,8 +82,7 @@ struct MainScreenView: View {
                 .foregroundColor(.white)
                 .background(self.accentColor)
                 .cornerRadius(15.0)
-                  
-                Spacer()
+    
                     
                 }
                 

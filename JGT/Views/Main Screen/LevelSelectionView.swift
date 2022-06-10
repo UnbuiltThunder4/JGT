@@ -47,9 +47,6 @@ struct LevelSelectionView: View {
 
                 
                 HStack {
-                
-                Spacer()
-                Spacer()
                     
                 Button {
                     withAnimation { self.startGame() }
@@ -63,8 +60,6 @@ struct LevelSelectionView: View {
                 .foregroundColor(.white)
                 .background(self.accentColor)
                 .cornerRadius(15.0)
-                  
-                Spacer()
                     
                 }
                 

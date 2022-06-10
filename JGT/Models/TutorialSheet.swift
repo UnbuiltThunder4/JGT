@@ -20,7 +20,7 @@ class TutorialSheet: SKSpriteNode, ObservableObject {
     let tutorialSign: SKSpriteNode = SKSpriteNode(imageNamed: "structure sheet wide")
     var tutorialName: SKLabelNode = SKLabelNode()
     var tutorialDesc: SKLabelNode = SKLabelNode()
-    var screen: SKSpriteNode = SKSpriteNode(imageNamed: "goblinHead")
+    var screen: SKSpriteNode = SKSpriteNode(imageNamed: "0")
     let darkLordEye: SKSpriteNode = SKSpriteNode(imageNamed: "darkLordEye")
     
     init() {
@@ -48,7 +48,7 @@ class TutorialSheet: SKSpriteNode, ObservableObject {
         self.tutorialDesc.name = "tutorialDesc"
         self.addChild(screen)
         self.screen.name = "screen"
-//        self.addChild(darkLordEye)
+        self.addChild(darkLordEye)
         self.darkLordEye.name = "darkLordEye"
     }
     

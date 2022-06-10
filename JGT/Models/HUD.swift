@@ -18,6 +18,9 @@ enum HUDSettings {
     static var statsFontSize: CGFloat = 15
     static var nameFontColor: UIColor = .orange
     static var descFontColor: UIColor = .brown
+    static var tutorialNameFontSize: CGFloat = 50
+    static var tutorialCounterFontSize: CGFloat = 50
+    static var tutorialDescFontSize: CGFloat = 40
 }
 
 class HUD: SKNode, ObservableObject {
@@ -216,32 +219,32 @@ class HUD: SKNode, ObservableObject {
         pauseScreen.pauseSign.zPosition = 5
         pauseScreen.pauseSign.position = CGPoint.zero
         
-        pauseScreen.continueMessage.fontSize = HUDSettings.nameFontSize
+        pauseScreen.continueMessage.fontSize = HUDSettings.tutorialNameFontSize
         pauseScreen.continueMessage.fontName = HUDSettings.nameFont
         pauseScreen.continueMessage.fontColor = HUDSettings.nameFontColor
         pauseScreen.continueMessage.text = "Continue"
-        pauseScreen.continueMessage.position = CGPoint(x:-pauseScreen.pauseSign.size.width/3.3, y: pauseScreen.pauseSign.size.height/5)
+        pauseScreen.continueMessage.position = CGPoint(x:-pauseScreen.pauseSign.size.width/3.3, y: pauseScreen.pauseSign.size.height/5.5)
         pauseScreen.continueMessage.zPosition = 5
         
-        pauseScreen.exitMessage.fontSize = HUDSettings.nameFontSize
+        pauseScreen.exitMessage.fontSize = HUDSettings.tutorialNameFontSize
         pauseScreen.exitMessage.fontName = HUDSettings.nameFont
         pauseScreen.exitMessage.fontColor = HUDSettings.nameFontColor
         pauseScreen.exitMessage.text = "Level Selection"
-        pauseScreen.exitMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/3.3, y: pauseScreen.pauseSign.size.height/5)
+        pauseScreen.exitMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/3.3, y: pauseScreen.pauseSign.size.height/5.5)
         pauseScreen.exitMessage.zPosition = 5
 
-        pauseScreen.restartMessage.fontSize = HUDSettings.nameFontSize
+        pauseScreen.restartMessage.fontSize = HUDSettings.tutorialNameFontSize
         pauseScreen.restartMessage.fontName = HUDSettings.nameFont
         pauseScreen.restartMessage.fontColor = HUDSettings.nameFontColor
         pauseScreen.restartMessage.text = "Restart"
-        pauseScreen.restartMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/10, y: pauseScreen.pauseSign.size.height/5)
+        pauseScreen.restartMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/10, y: pauseScreen.pauseSign.size.height/5.5)
         pauseScreen.restartMessage.zPosition = 5
         
-        pauseScreen.tutorialMessage.fontSize = HUDSettings.nameFontSize
+        pauseScreen.tutorialMessage.fontSize = HUDSettings.tutorialNameFontSize
         pauseScreen.tutorialMessage.fontName = HUDSettings.nameFont
         pauseScreen.tutorialMessage.fontColor = HUDSettings.nameFontColor
         pauseScreen.tutorialMessage.text = "Tutorial"
-        pauseScreen.tutorialMessage.position = CGPoint(x: -pauseScreen.pauseSign.size.width/10, y: pauseScreen.pauseSign.size.height/5)
+        pauseScreen.tutorialMessage.position = CGPoint(x: -pauseScreen.pauseSign.size.width/10, y: pauseScreen.pauseSign.size.height/5.5)
         pauseScreen.tutorialMessage.zPosition = 5
         
         pauseScreen.continueButton.size = CGSize(width: pauseScreen.pauseSign.size.width/5.5, height: pauseScreen.pauseSign.size.width/5.5)
@@ -296,34 +299,48 @@ class HUD: SKNode, ObservableObject {
         tutorialSheet.position = position
         
         tutorialSheet.backButton.zPosition = 20
-        tutorialSheet.backButton.position = CGPoint(x: -tutorialSheet.tutorialSign.frame.maxX/1.5,
-                                                       y: -tutorialSheet.tutorialSign.frame.minY/1.5)
+        tutorialSheet.backButton.position = CGPoint(x: tutorialSheet.tutorialSign.frame.minX/1.3,
+                                                    y: tutorialSheet.tutorialSign.frame.maxY/1.3)
+        tutorialSheet.backButton.size = CGSize(width: tutorialSheet.tutorialSign.frame.width/10, height: tutorialSheet.tutorialSign.frame.width/10)
+        
         tutorialSheet.rightTutorial.zPosition = 20
         tutorialSheet.rightTutorial.position = CGPoint(x: tutorialSheet.tutorialSign.frame.maxX/1.5,
-                                                       y: tutorialSheet.tutorialSign.frame.minY/1.5)
+                                                       y: tutorialSheet.tutorialSign.frame.minY/1.4)
+        tutorialSheet.rightTutorial.size = CGSize(width: tutorialSheet.tutorialSign.frame.width/10, height: tutorialSheet.tutorialSign.frame.width/10)
+        
         tutorialSheet.leftTutorial.zPosition = 20
         tutorialSheet.leftTutorial.position = CGPoint(x: -tutorialSheet.tutorialSign.frame.maxX/1.5,
-                                                       y: tutorialSheet.tutorialSign.frame.minY/1.5)
+                                                       y: tutorialSheet.tutorialSign.frame.minY/1.4)
+        tutorialSheet.leftTutorial.size = CGSize(width: tutorialSheet.tutorialSign.frame.width/10, height: tutorialSheet.tutorialSign.frame.width/10)
+        
         tutorialSheet.tutorialName.position = CGPoint(x: 0,
                                                       y: tutorialSheet.tutorialSign.frame.maxY * 0.75)
         
         tutorialSheet.tutorialCounterLabel.zPosition = 20
-        tutorialSheet.tutorialCounterLabel.position = CGPoint(x: 0,
-                                                              y: tutorialSheet.tutorialSign.frame.minY/1.5)
         
-        tutorialSheet.tutorialCounterLabel.fontColor = HUDSettings.descFontColor
-        tutorialSheet.tutorialCounterLabel.fontSize = HUDSettings.descFontSize
+        tutorialSheet.tutorialCounterLabel.fontColor = .white
+        tutorialSheet.tutorialCounterLabel.fontSize = HUDSettings.tutorialCounterFontSize
         tutorialSheet.tutorialCounterLabel.fontName = HUDSettings.nameFont
-        tutorialSheet.tutorialName.fontColor = HUDSettings.nameFontColor
-        tutorialSheet.tutorialName.fontSize = HUDSettings.nameFontSize
+        tutorialSheet.tutorialName.fontColor = .black
+        tutorialSheet.tutorialName.fontSize = HUDSettings.tutorialNameFontSize
         tutorialSheet.tutorialName.fontName = HUDSettings.nameFont
         tutorialSheet.tutorialDesc.fontColor = HUDSettings.descFontColor
-        tutorialSheet.tutorialDesc.fontSize = HUDSettings.descFontSize
+        tutorialSheet.tutorialDesc.fontSize = HUDSettings.tutorialDescFontSize
         tutorialSheet.tutorialDesc.fontName = HUDSettings.descFont
         tutorialSheet.tutorialDesc.verticalAlignmentMode = .top
-        tutorialSheet.tutorialDesc.preferredMaxLayoutWidth = tutorialSheet.tutorialSign.frame.width - tutorialSheet.tutorialSign.frame.width/6
+        tutorialSheet.tutorialDesc.preferredMaxLayoutWidth = tutorialSheet.tutorialSign.frame.width - tutorialSheet.tutorialSign.frame.width/2
         tutorialSheet.tutorialDesc.numberOfLines = Int(tutorialSheet.tutorialDesc.frame.width / tutorialSheet.tutorialSign.frame.width)
+        tutorialSheet.tutorialDesc.position = CGPoint(x: -tutorialSheet.frame.width/7.5,
+                                                      y: tutorialSheet.frame.height/4.5)
         
+        tutorialSheet.darkLordEye.size = CGSize(width: tutorialSheet.tutorialSign.frame.width/6.5,
+                                                height: tutorialSheet.tutorialSign.frame.width/6.5)
+        tutorialSheet.darkLordEye.position = CGPoint(x: 0,
+                                                       y: tutorialSheet.tutorialSign.frame.minY/1.4)
+        tutorialSheet.tutorialCounterLabel.position = tutorialSheet.darkLordEye.position
+        tutorialSheet.screen.size = CGSize(width: tutorialSheet.tutorialSign.frame.width/3.7,
+                                           height: tutorialSheet.tutorialSign.frame.height/3.2)
+        tutorialSheet.screen.position.x = tutorialSheet.tutorialSign.frame.maxX/2.0
         addChild(tutorialSheet)
     }
 
