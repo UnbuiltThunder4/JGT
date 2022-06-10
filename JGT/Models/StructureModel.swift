@@ -36,7 +36,7 @@ class Structure: SKSpriteNode, ObservableObject {
             self.width = 380
             self.height = 380
             self.maskmodX = 1.0
-            self.maskmodY = 1.3
+            self.maskmodY = 0.5
             break
             
         case .backdoor:

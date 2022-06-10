@@ -311,7 +311,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                     }
                 } else {
                     let targetDistance = CGVector(dx: self.target!.position.x - self.position.x, dy: self.target!.position.y - self.position.y)
-                    if (isVectorSmallerThan(vector: targetDistance, other: 1200)) {
+                    if (isVectorSmallerThan(vector: targetDistance, other: 1000)) {
                         self.attackCounter += 1
                         if (self.attackCounter % attackTime == 0) {
                             self.attackCounter = 0
@@ -338,7 +338,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             } else {
                 if darkTarget != nil {
                     let targetDistance = CGVector(dx: self.darkTarget!.position.x - self.position.x, dy: self.darkTarget!.position.y - self.position.y)
-                    if (isVectorSmallerThan(vector: targetDistance, other: 1200)) {
+                    if (isVectorSmallerThan(vector: targetDistance, other: 1000)) {
                         self.attackCounter += 1
                         if (self.attackCounter % attackTime == 0) {
                             self.attackCounter = 0

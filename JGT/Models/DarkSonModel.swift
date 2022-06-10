@@ -17,7 +17,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     
     public var lives: Int = 5
     
-    public let maxHealth: Int = 500
+    public let maxHealth: Int = 200
     public var health: Int = 500
     public let attack: Int = 10
     
@@ -34,12 +34,12 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     init() {
         super.init(texture: SKTexture(imageNamed: "darkson"), color: .red, size: CGSize(width: 300, height: 300))
         self.name = "darkson"
-        self.speed = 36.0
+        self.speed = 6.0
         self.position.x = self.spawnX
         self.position.y = self.spawnY
         self.zPosition = 1
 
-        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width * 1.5, height: self.size.height * 1.5))
+        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width * 1.5, height: self.size.height * 1))
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.restitution = 0.0
         self.physicsBody?.linearDamping = 0.0
@@ -57,7 +57,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     
     func update() {
         if (self.health > 0) {
-            var distance = CGVector(dx: gateCoordinates.x - position.x, dy: gateCoordinates.y - 400 - position.y)
+            var distance = CGVector(dx: gateCoordinates.x - position.x, dy: gateCoordinates.y - 50 - position.y)
             if let _ = self.action(forKey: "walk") {
                 if (self.target != nil) {
                     removeAction(forKey: "walk")
