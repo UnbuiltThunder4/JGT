@@ -204,7 +204,7 @@ extension TossScene: SKPhysicsContactDelegate {
                     
                     if !node.isFrenzied {
                         if UserDefaults.standard.bool(forKey: "frenzyTutorial") == false {
-                        gameLogic.tutorialEvent(index: 5, hud: hud, tutorialSheet: tutorialSheet)
+                        gameLogic.tutorialEvent(index: 7, hud: hud, tutorialSheet: tutorialSheet)
                             UserDefaults.standard.set(true, forKey: "frenzyTutorial")
                             hud.counter += 1
                             hud.tutorialCounter.alpha = 1.0
@@ -243,7 +243,7 @@ extension TossScene: SKPhysicsContactDelegate {
                     
                     if !node.isFrenzied {
                         if UserDefaults.standard.bool(forKey: "frenzyTutorial") == false {
-                        gameLogic.tutorialEvent(index: 5, hud: hud, tutorialSheet: tutorialSheet)
+                        gameLogic.tutorialEvent(index: 7, hud: hud, tutorialSheet: tutorialSheet)
                             UserDefaults.standard.set(true, forKey: "frenzyTutorial")
                             hud.counter += 1
                             hud.tutorialCounter.alpha = 1.0
