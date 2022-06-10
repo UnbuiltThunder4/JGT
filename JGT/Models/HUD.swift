@@ -284,9 +284,7 @@ class HUD: SKNode, ObservableObject {
         self.tutorialCounter.fontColor = .red
         self.tutorialCounter.fontSize = 50
         self.tutorialCounter.fontName = HUDSettings.nameFont
-//        self.tutorialCounter.position.y = tutorialButton.position.y - self.tutorialCounter.frame.height/2
-        self.tutorialCounter.position.x = position.x
-        self.tutorialCounter.position.y = -position.y
+        self.tutorialCounter.position = CGPoint(x: self.position.x + UIScreen.main.bounds.width/2.5, y: -UIScreen.main.bounds.height/14)
         self.tutorialCounter.alpha = 1.0
         
         addChild(tutorialButton)
