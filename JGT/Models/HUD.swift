@@ -220,43 +220,43 @@ class HUD: SKNode, ObservableObject {
         pauseScreen.continueMessage.fontName = HUDSettings.nameFont
         pauseScreen.continueMessage.fontColor = HUDSettings.nameFontColor
         pauseScreen.continueMessage.text = "Continue"
-        pauseScreen.continueMessage.position = CGPoint(x:-pauseScreen.pauseSign.size.width/4, y: pauseScreen.pauseSign.size.height/5)
+        pauseScreen.continueMessage.position = CGPoint(x:-pauseScreen.pauseSign.size.width/3.3, y: pauseScreen.pauseSign.size.height/5)
         pauseScreen.continueMessage.zPosition = 5
         
         pauseScreen.exitMessage.fontSize = HUDSettings.nameFontSize
         pauseScreen.exitMessage.fontName = HUDSettings.nameFont
         pauseScreen.exitMessage.fontColor = HUDSettings.nameFontColor
         pauseScreen.exitMessage.text = "Level Selection"
-        pauseScreen.exitMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/4, y: pauseScreen.pauseSign.size.height/5)
+        pauseScreen.exitMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/3.3, y: pauseScreen.pauseSign.size.height/5)
         pauseScreen.exitMessage.zPosition = 5
 
         pauseScreen.restartMessage.fontSize = HUDSettings.nameFontSize
         pauseScreen.restartMessage.fontName = HUDSettings.nameFont
         pauseScreen.restartMessage.fontColor = HUDSettings.nameFontColor
         pauseScreen.restartMessage.text = "Restart"
-        pauseScreen.restartMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/8, y: pauseScreen.pauseSign.size.height/5)
+        pauseScreen.restartMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/10, y: pauseScreen.pauseSign.size.height/5)
         pauseScreen.restartMessage.zPosition = 5
         
         pauseScreen.tutorialMessage.fontSize = HUDSettings.nameFontSize
         pauseScreen.tutorialMessage.fontName = HUDSettings.nameFont
         pauseScreen.tutorialMessage.fontColor = HUDSettings.nameFontColor
         pauseScreen.tutorialMessage.text = "Tutorial"
-        pauseScreen.tutorialMessage.position = CGPoint(x: -pauseScreen.pauseSign.size.width/8, y: pauseScreen.pauseSign.size.height/5)
+        pauseScreen.tutorialMessage.position = CGPoint(x: -pauseScreen.pauseSign.size.width/10, y: pauseScreen.pauseSign.size.height/5)
         pauseScreen.tutorialMessage.zPosition = 5
         
-        pauseScreen.continueButton.size = CGSize(width: pauseScreen.pauseSign.size.width/5, height: pauseScreen.pauseSign.size.width/5)
+        pauseScreen.continueButton.size = CGSize(width: pauseScreen.pauseSign.size.width/5.5, height: pauseScreen.pauseSign.size.width/5.5)
         pauseScreen.continueButton.zPosition = 5
         pauseScreen.continueButton.position = CGPoint(x: pauseScreen.continueMessage.position.x, y: pauseScreen.pauseSign.frame.midY*2)
         
-        pauseScreen.quitButton.size = CGSize(width: pauseScreen.pauseSign.size.width/5, height: pauseScreen.pauseSign.size.width/5)
+        pauseScreen.quitButton.size = CGSize(width: pauseScreen.pauseSign.size.width/5.5, height: pauseScreen.pauseSign.size.width/5.5)
         pauseScreen.quitButton.position = CGPoint(x: pauseScreen.exitMessage.position.x, y: pauseScreen.pauseSign.frame.midY*2)
         pauseScreen.quitButton.zPosition = 10
         
-        pauseScreen.tutorialButton.size = CGSize(width: pauseScreen.pauseSign.size.width/5, height: pauseScreen.pauseSign.size.width/5)
+        pauseScreen.tutorialButton.size = CGSize(width: pauseScreen.pauseSign.size.width/5.5, height: pauseScreen.pauseSign.size.width/5.5)
         pauseScreen.tutorialButton.position = CGPoint(x: pauseScreen.tutorialMessage.position.x, y: pauseScreen.pauseSign.frame.midY*2)
         pauseScreen.tutorialButton.zPosition = 10
     
-        pauseScreen.restartButton.size = CGSize(width: pauseScreen.pauseSign.size.width/5, height: pauseScreen.pauseSign.size.width/5)
+        pauseScreen.restartButton.size = CGSize(width: pauseScreen.pauseSign.size.width/5.5, height: pauseScreen.pauseSign.size.width/5.5)
         pauseScreen.restartButton.position = CGPoint(x: pauseScreen.restartMessage.position.x, y: pauseScreen.pauseSign.frame.midY*2)
         pauseScreen.restartButton.zPosition = 5
         
@@ -286,7 +286,7 @@ class HUD: SKNode, ObservableObject {
         self.tutorialCounter.fontName = HUDSettings.nameFont
 //        self.tutorialCounter.position.y = tutorialButton.position.y - self.tutorialCounter.frame.height/2
         self.tutorialCounter.position.x = position.x
-        self.tutorialCounter.position.y = tutorialCounter.frame.minY
+        self.tutorialCounter.position.y = -position.y
         self.tutorialCounter.alpha = 1.0
         
         addChild(tutorialButton)
