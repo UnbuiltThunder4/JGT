@@ -233,7 +233,9 @@ extension TossScene {
                     self.tutorialSheet.tutorialName.text = tutorial.tutorialName
                     self.tutorialSheet.tutorialDesc.text = tutorial.tutorialDesc
                     self.tutorialSheet.screen.texture = tutorial.screen
+                    if player.musicVolume != 0.0 {
                     player.musicVolume = 0.3
+                    }
                     self.hud.counter -= 1
                     self.hud.tutorialCounter.text = String(self.hud.counter)
                     if self.hud.counter == 0 {
@@ -252,7 +254,9 @@ extension TossScene {
                     self.tutorialSheet.alpha = 0.0
                     paws = false
                     pauseChilds(isPaused: false)
+                    if player.musicVolume != 0.0 {
                     player.musicVolume = 0.7
+                    }
                 }
             }
             
@@ -546,10 +550,11 @@ extension TossScene {
         cameraNode.addChild(hud)
         hud.addSheet(sheet: sheet, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/4.5, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
         hud.addEvilGauge(evilGauge: evilGauge, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width + UIScreen.main.bounds.height/6.5, y: cameraNode.position.y - UIScreen.main.bounds.height + UIScreen.main.bounds.height/2.5))
-        evilGauge.zPosition = 80
+//        evilGauge.zPosition = 80
         hud.addCauldron(cauldron: cauldron, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width + UIScreen.main.bounds.height/6.6, y: cameraNode.position.y - UIScreen.main.bounds.height + UIScreen.main.bounds.height/7.5))
         hud.addScrollableMenu(scrollableMenu: scrollableMenu, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/4.5, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
         hud.addPauseScreen(pauseScreen: pauseScreen, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/2, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
+        pauseScreen.zPosition = 300
         hud.addPauseButton(pauseButton: pauseButton, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/10, y: cameraNode.position.y - pauseButton.size.height*1.1))
         hud.addTutorialSheet(tutorialSheet: tutorialSheet, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/2, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
     }

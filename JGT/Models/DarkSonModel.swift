@@ -92,7 +92,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                 self.position.y = self.spawnY
                 self.alpha = 0.0
                 self.respawnCounter += 1
-                gameLogic.playSound(node: self, audio: Audio.EffectFiles.darkSonGrunt, wait: false, muted: gameLogic.muted)
+                gameLogic.playSound(node: self.parent?.scene?.camera, audio: Audio.EffectFiles.darkSonGrunt, wait: false, muted: gameLogic.muted)
             }
             else {
                 self.respawnCounter += 1
