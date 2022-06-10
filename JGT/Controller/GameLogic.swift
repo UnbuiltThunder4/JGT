@@ -267,25 +267,35 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
             newGoblin.type = type
             newGoblin.state = .launched
             
-            let goblinLaunchedParticle = SKEmitterNode(fileNamed: "SmokeParticle")
-            goblinLaunchedParticle!.position = CGPoint(x: 0, y: 0)
-            goblinLaunchedParticle!.name = "goblinLaunchedParticle"
-            goblinLaunchedParticle!.zPosition = -1
-
-            let addParticle = SKAction.run({
-                newGoblin.addChild(goblinLaunchedParticle!)
-            })
-            let removeParticle = SKAction.run({
-                goblinLaunchedParticle!.removeFromParent()
-            })
-
-            let sequence = SKAction.sequence([
-                addParticle,
-                .wait(forDuration: 0.5),
-                removeParticle
-            ])
-
-            newGoblin.run(sequence, withKey: "goblinLaunchedParticle")
+//            let goblinLaunchedParticle = SKEmitterNode(fileNamed: "SmokeParticle")
+//            goblinLaunchedParticle!.position = CGPoint(x: 0, y: 0)
+//            goblinLaunchedParticle!.name = "goblinLaunchedParticle"
+//            goblinLaunchedParticle!.zPosition = -1
+//
+//            let addParticle = SKAction.run({
+//                newGoblin.addChild(goblinLaunchedParticle!)
+//            })
+//            let fadeSmoke = SKAction.run {
+//                goblinLaunchedParticle!.run(SKAction.fadeOut(withDuration: 0.4))
+//            }
+//            let removeParticle = SKAction.run({
+//                goblinLaunchedParticle!.removeFromParent()
+//            })
+//
+//            let addSequence = SKAction.sequence([
+//                addParticle,
+//                .wait(forDuration: 0.5),
+//                fadeSmoke
+//            ])
+//
+//            newGoblin.run(addSequence, withKey: "goblinLaunchedParticle")
+//            
+//            let removeSequence = SKAction.sequence([
+//                .wait(forDuration: 0.5),
+//                removeParticle
+//            ])
+//            
+//            newGoblin.run(removeSequence)
             
             switch type {
             case .normal:

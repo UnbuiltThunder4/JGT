@@ -62,6 +62,20 @@ extension TossScene: SKPhysicsContactDelegate {
             }
         
         }
+        if (collision.matches(.rangedEnemy, .darkson)) {
+            
+            if let node = firstBody.node as? DarkSon {
+                if let node2 = secondBody.node as? Enemy {
+                    node2.darkTarget = node
+                }
+            }
+            if let node = secondBody.node as? DarkSon {
+                if let node2 = firstBody.node as? Enemy {
+                    node2.darkTarget = node
+                }
+            }
+        
+        }
         if (collision.matches(.projectile, .goblin)) {
             
             if let node = firstBody.node as? Goblin {

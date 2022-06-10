@@ -25,6 +25,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     public var attack: Int
     
     public var target: Goblin? = nil
+    public var darkTarget: DarkSon? = nil
     public var targetQueue: [Goblin] = []
     
     private var initialx: CGFloat
@@ -152,6 +153,9 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
         if (self.target == nil) {
             if (self.targetQueue.isEmpty) {
                 self.walkToOrigin()
+                if self.type == .bow && self.darkTarget != nil {
+                    self.state = .fighting
+                }
             }
             else {
                 self.target = self.targetQueue[0]
@@ -328,8 +332,34 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             }
         }
         else {
-            self.state = .idle
-            removeAction(forKey: "walk")
+            if self.type != .bow {
+                self.state = .idle
+                removeAction(forKey: "walk")
+            } else {
+                if darkTarget != nil {
+                    let targetDistance = CGVector(dx: self.darkTarget!.position.x - self.position.x, dy: self.darkTarget!.position.y - self.position.y)
+                    if (isVectorSmallerThan(vector: targetDistance, other: 1200)) {
+                        self.attackCounter += 1
+                        if (self.attackCounter % attackTime == 0) {
+                            self.attackCounter = 0
+                            gameLogic.spawnProjectile(tossScene, spawnPoint: self.position, destinationPoint: self.darkTarget!.position, type: .arrow)
+                        }
+                        if (self.darkTarget != nil) {
+                            if (self.darkTarget!.health <= 0) {
+                                self.darkTarget = nil
+                                self.state = .idle
+                            }
+                        }
+                    }
+                    else {
+                        self.darkTarget = nil
+                        self.state = .idle
+                    }
+                }
+                else {
+                    self.state = .idle
+                }
+            }
         }
     }
     

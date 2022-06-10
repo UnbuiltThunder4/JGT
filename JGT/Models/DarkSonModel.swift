@@ -34,7 +34,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     init() {
         super.init(texture: SKTexture(imageNamed: "darkson"), color: .red, size: CGSize(width: 300, height: 300))
         self.name = "darkson"
-        self.speed = 6.0
+        self.speed = 36.0
         self.position.x = self.spawnX
         self.position.y = self.spawnY
         self.zPosition = 1
@@ -48,7 +48,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
         self.physicsBody?.isDynamic = true
         self.physicsBody?.categoryBitMask = Collision.Masks.darkson.bitmask
         self.physicsBody?.collisionBitMask = Collision.Masks.building.bitmask | Collision.Masks.gate.bitmask
-        self.physicsBody?.contactTestBitMask = Collision.Masks.projectile.bitmask
+        self.physicsBody?.contactTestBitMask = Collision.Masks.projectile.bitmask | Collision.Masks.rangedEnemy.bitmask
     }
     
     required init?(coder aDecoder: NSCoder) {
