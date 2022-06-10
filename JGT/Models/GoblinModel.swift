@@ -220,7 +220,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             
         case .feared:
             if UserDefaults.standard.bool(forKey: "fearTutorial") == false {
-            gameLogic.tutorialEvent(index: 4, hud: hud, tutorialSheet: tutorialSheet)
+            gameLogic.tutorialEvent(index: 6, hud: hud, tutorialSheet: tutorialSheet)
                 UserDefaults.standard.set(true, forKey: "fearTutorial")
                 hud.counter += 1
                 hud.tutorialCounter.alpha = 1.0
@@ -231,7 +231,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             
         case .intavern:
             if UserDefaults.standard.bool(forKey: "frenzyTutorial") == false {
-            gameLogic.tutorialEvent(index: 5, hud: hud, tutorialSheet: tutorialSheet)
+            gameLogic.tutorialEvent(index: 7, hud: hud, tutorialSheet: tutorialSheet)
                 UserDefaults.standard.set(true, forKey: "frenzyTutorial")
                 hud.counter += 1
                 hud.tutorialCounter.alpha = 1.0
@@ -259,7 +259,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         case .backdooring:
             
             if UserDefaults.standard.bool(forKey: "backdoorTutorial") == false {
-            gameLogic.tutorialEvent(index: 8, hud: hud, tutorialSheet: tutorialSheet)
+            gameLogic.tutorialEvent(index: 10, hud: hud, tutorialSheet: tutorialSheet)
                 UserDefaults.standard.set(true, forKey: "backdoorTutorial")
                 hud.counter += 1
                 hud.tutorialCounter.alpha = 1.0
@@ -419,7 +419,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             if (self.target != nil) {
                 
                 if UserDefaults.standard.bool(forKey: "fightTutorial") == false {
-                gameLogic.tutorialEvent(index: 3, hud: hud, tutorialSheet: tutorialSheet)
+                gameLogic.tutorialEvent(index: 5, hud: hud, tutorialSheet: tutorialSheet)
                     UserDefaults.standard.set(true, forKey: "fightTutorial")
                     hud.counter += 1
                     hud.tutorialCounter.alpha = 1.0
@@ -701,7 +701,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                                     audio: random == 0 ? Audio.EffectFiles.gumblinTransform1 : Audio.EffectFiles.gumblinTransform2, wait: false, muted: gameLogic.muted)
                 
                 if UserDefaults.standard.bool(forKey: "gumblinsTutorial") == false {
-                gameLogic.tutorialEvent(index: 12, hud: hud, tutorialSheet: tutorialSheet)
+                gameLogic.tutorialEvent(index: 14, hud: hud, tutorialSheet: tutorialSheet)
                     UserDefaults.standard.set(true, forKey: "gumblinsTutorial")
                     hud.counter += 1
                     hud.tutorialCounter.alpha = 1.0
@@ -726,7 +726,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 }
                 
                 if UserDefaults.standard.bool(forKey: "pillagingTutorial") == false {
-                gameLogic.tutorialEvent(index: 11, hud: hud, tutorialSheet: tutorialSheet)
+                gameLogic.tutorialEvent(index: 13, hud: hud, tutorialSheet: tutorialSheet)
                     UserDefaults.standard.set(true, forKey: "pillagingTutorial")
                     hud.counter += 1
                     hud.tutorialCounter.alpha = 1.0
@@ -790,7 +790,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                     self.run(removeSequence)
                     
                     if UserDefaults.standard.bool(forKey: "trapTutorial") == false {
-                    gameLogic.tutorialEvent(index: 14, hud: hud, tutorialSheet: tutorialSheet)
+                    gameLogic.tutorialEvent(index: 16, hud: hud, tutorialSheet: tutorialSheet)
                         UserDefaults.standard.set(true, forKey: "trapTutorial")
                         hud.counter += 1
                         hud.tutorialCounter.alpha = 1.0
@@ -1082,7 +1082,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         if let academy = self.closeStructure as? Academy {
             
             if UserDefaults.standard.bool(forKey: "academyTutorial") == false {
-            gameLogic.tutorialEvent(index: 6, hud: hud, tutorialSheet: tutorialSheet)
+            gameLogic.tutorialEvent(index: 8, hud: hud, tutorialSheet: tutorialSheet)
                 UserDefaults.standard.set(true, forKey: "academyTutorial")
                 hud.counter += 1
                 hud.tutorialCounter.alpha = 1.0
@@ -1128,7 +1128,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
         
         if UserDefaults.standard.bool(forKey: "catapultTutorial") == false {
-        gameLogic.tutorialEvent(index: 13, hud: hud, tutorialSheet: tutorialSheet)
+        gameLogic.tutorialEvent(index: 15, hud: hud, tutorialSheet: tutorialSheet)
             UserDefaults.standard.set(true, forKey: "catapultTutorial")
             hud.counter += 1
             hud.tutorialCounter.alpha = 1.0
@@ -1181,7 +1181,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             }
             
             if UserDefaults.standard.bool(forKey: "catapultTutorial") == false {
-            gameLogic.tutorialEvent(index: 13, hud: hud, tutorialSheet: tutorialSheet)
+            gameLogic.tutorialEvent(index: 15, hud: hud, tutorialSheet: tutorialSheet)
                 UserDefaults.standard.set(true, forKey: "catapultTutorial")
                 hud.counter += 1
                 hud.tutorialCounter.alpha = 1.0
@@ -1224,7 +1224,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
         
         if UserDefaults.standard.bool(forKey: "rockTutorial") == false {
-        gameLogic.tutorialEvent(index: 9, hud: hud, tutorialSheet: tutorialSheet)
+        gameLogic.tutorialEvent(index: 11, hud: hud, tutorialSheet: tutorialSheet)
             UserDefaults.standard.set(true, forKey: "rockTutorial")
             hud.counter += 1
             hud.tutorialCounter.alpha = 1.0
@@ -1245,7 +1245,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         gameLogic.playSound(node: self, audio: Audio.EffectFiles.rockEating, wait: false, muted: gameLogic.muted)
         
         if UserDefaults.standard.bool(forKey: "stoneblinTutorial") == false {
-        gameLogic.tutorialEvent(index: 10, hud: hud, tutorialSheet: tutorialSheet)
+        gameLogic.tutorialEvent(index: 12, hud: hud, tutorialSheet: tutorialSheet)
             UserDefaults.standard.set(true, forKey: "stoneblinTutorial")
             hud.counter += 1
             hud.tutorialCounter.alpha = 1.0
@@ -1263,7 +1263,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func setFiretoTree() {
         setFireParticles()
         if UserDefaults.standard.bool(forKey: "treeTutorial") == false {
-        gameLogic.tutorialEvent(index: 1, hud: hud, tutorialSheet: tutorialSheet)
+        gameLogic.tutorialEvent(index: 3, hud: hud, tutorialSheet: tutorialSheet)
             UserDefaults.standard.set(true, forKey: "treeTutorial")
             hud.counter += 1
             hud.tutorialCounter.alpha = 1.0
@@ -1295,7 +1295,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func setFiretoSelf() {
         setFireParticles()
         if UserDefaults.standard.bool(forKey: "fireTutorial") == false {
-        gameLogic.tutorialEvent(index: 2, hud: hud, tutorialSheet: tutorialSheet)
+        gameLogic.tutorialEvent(index: 4, hud: hud, tutorialSheet: tutorialSheet)
             UserDefaults.standard.set(true, forKey: "fireTutorial")
             hud.counter += 1
             hud.tutorialCounter.alpha = 1.0
