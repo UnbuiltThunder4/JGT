@@ -92,7 +92,7 @@ extension TossScene: SKPhysicsContactDelegate {
                             darkSonDeathParticle!.particleColorSequence = nil
                             darkSonDeathParticle!.particleColorBlendFactor = 1.0
                             darkSonDeathParticle!.particleColor = .black
-                            darkSonDeathParticle!.setScale(3)
+                            darkSonDeathParticle!.setScale(2.5)
                                                     
                             let parent = node.parent!.scene!
 
@@ -136,7 +136,7 @@ extension TossScene: SKPhysicsContactDelegate {
                         darkSonDeathParticle!.particleColorSequence = nil
                         darkSonDeathParticle!.particleColorBlendFactor = 1.0
                         darkSonDeathParticle!.particleColor = .black
-                        darkSonDeathParticle!.setScale(3)
+                        darkSonDeathParticle!.setScale(2.5)
                                                 
                         let parent = node.parent!.scene!
 
