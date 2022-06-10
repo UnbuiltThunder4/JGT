@@ -80,7 +80,7 @@ struct LevelSelectionView: View {
      */
     private func startGame() {
         print("- Starting the game...")
-        self.currentGameState = .playing
+        gameLogic.gameState = .playing
     }
 }
 

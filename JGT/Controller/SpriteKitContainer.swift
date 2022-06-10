@@ -9,7 +9,6 @@ import SwiftUI
 import SpriteKit
 
 struct SpriteKitContainer : UIViewRepresentable {
-    
     var skScene: SKScene!
     
     init(scene: SKScene) {

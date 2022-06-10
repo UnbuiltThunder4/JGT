@@ -19,7 +19,8 @@ import SwiftUI
 struct GameOverView: View {
     
     @Binding var currentGameState: GameState
-    
+    @ObservedObject var gameLogic: GameLogic = GameLogic.shared
+
     var body: some View {
         ZStack {
             Color.white
@@ -55,11 +56,11 @@ struct GameOverView: View {
     }
     
     private func backToMainScreen() {
-        self.currentGameState = .mainScreen
+        gameLogic.gameState = .mainScreen
     }
     
     private func restartGame() {
-        self.currentGameState = .playing
+        gameLogic.gameState = .playing
     }
 }
 

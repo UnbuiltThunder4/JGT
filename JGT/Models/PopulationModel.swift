@@ -141,8 +141,8 @@ class Population: ObservableObject {
             randomGoblin2: name2
         )
         
-        goblin.checkStatsCap(goblin)
         goblin.mutate(goblin: goblin, mutationRate: self.mutationRate)
+        goblin.checkStatsCap(goblin)
         
         return goblin
     }

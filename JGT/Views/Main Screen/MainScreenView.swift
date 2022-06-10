@@ -102,7 +102,7 @@ struct MainScreenView: View {
      */
     private func startGame() {
         print("- Starting the game...")
-        self.currentGameState = .selection
+        gameLogic.gameState = .selection
     }
 }
 

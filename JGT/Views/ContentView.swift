@@ -20,26 +20,26 @@ struct ContentView: View {
     @State var currentGameState: GameState = .mainScreen
     
     // The game logic is a singleton object shared among the different views of the application
-    @StateObject var gameLogic: GameLogic = GameLogic()
-    
+    @ObservedObject var gameLogic: GameLogic = GameLogic.shared
+
     var body: some View {
         
-        switch currentGameState {
+        switch gameLogic.gameState {
         case .mainScreen:
             MainScreenView(currentGameState: $currentGameState)
-                .environmentObject(gameLogic)
+//                .environmentObject(gameLogic)
         
         case .playing:
             TossView(currentGameState: $currentGameState)
-                .environmentObject(gameLogic)
+//                .environmentObject(gameLogic)
         
         case .gameOver:
             GameOverView(currentGameState: $currentGameState)
-                .environmentObject(gameLogic)
+//                .environmentObject(gameLogic)
             
         case .selection:
             LevelSelectionView(currentGameState: $currentGameState)
-                .environmentObject(gameLogic)
+//                .environmentObject(gameLogic)
         }
     }
 }

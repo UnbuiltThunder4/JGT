@@ -11,6 +11,7 @@ import AVFoundation
 import SwiftUI
 
 class GameLogic: ObservableObject {
+    @Published var gameState: GameState = .mainScreen
     
     @State var goblins101 = UserDefaults.standard.bool(forKey: "goblins101")
     @State var fireTutorial = UserDefaults.standard.bool(forKey: "fireTutorial")
@@ -266,25 +267,25 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
             newGoblin.type = type
             newGoblin.state = .launched
             
-            let cauldronnShootParticle = SKEmitterNode(fileNamed: "CauldronnShootParticle")
-            cauldronnShootParticle!.position = CGPoint(x: 0, y: 0)
-            cauldronnShootParticle!.name = "cauldronnShootParticle"
-            cauldronnShootParticle!.zPosition = -1
-            
+            let goblinLaunchedParticle = SKEmitterNode(fileNamed: "SmokeParticle")
+            goblinLaunchedParticle!.position = CGPoint(x: 0, y: 0)
+            goblinLaunchedParticle!.name = "goblinLaunchedParticle"
+            goblinLaunchedParticle!.zPosition = -1
+
             let addParticle = SKAction.run({
-                tossScene.cauldron.addChild(cauldronnShootParticle!)
+                newGoblin.addChild(goblinLaunchedParticle!)
             })
             let removeParticle = SKAction.run({
-                cauldronnShootParticle!.removeFromParent()
+                goblinLaunchedParticle!.removeFromParent()
             })
-            
+
             let sequence = SKAction.sequence([
                 addParticle,
                 .wait(forDuration: 0.5),
                 removeParticle
             ])
-            
-            tossScene.cauldron.run(sequence, withKey: "cauldronnShootParticle")
+
+            newGoblin.run(sequence, withKey: "goblinLaunchedParticle")
             
             switch type {
             case .normal:

@@ -19,7 +19,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     @ObservedObject var evilGauge: EvilGauge = EvilGauge.shared
     @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet.shared
     @ObservedObject var hud: HUD = HUD.shared
-
+    
     var level = 1
     
     var darkson = DarkSon()
