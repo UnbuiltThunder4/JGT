@@ -76,6 +76,92 @@ extension TossScene: SKPhysicsContactDelegate {
             }
         
         }
+        
+        if (collision.matches(.projectile, .darkson)) {
+            
+            if let node = firstBody.node as? DarkSon {
+                if let node2 = secondBody.node as? Projectile {
+                    if (node2.type == .arrow) {
+                            node.health -= node2.damage/4
+                        
+                        if node.health <= 0 {
+                            let darkSonDeathParticle = SKEmitterNode(fileNamed: "GoblinDeathParticle")
+                            darkSonDeathParticle!.position = node.position
+                            darkSonDeathParticle!.name = "darkSonDeathParticle"
+                            darkSonDeathParticle!.zPosition = 1
+                                                    
+                            let parent = node.parent!.scene!
+
+                            let addDeathParticle = SKAction.run({
+                                parent.addChild(darkSonDeathParticle!)
+                            })
+                            let darkSonDeathFade = SKAction.run {
+                                darkSonDeathParticle!.run(SKAction.fadeOut(withDuration: 0.4))
+                            }
+                            
+                            let particleSequence = SKAction.sequence([
+                                addDeathParticle,
+                                darkSonDeathFade
+                            ])
+
+                            let removeDeathParticle = SKAction.run({
+                                darkSonDeathParticle!.removeFromParent()
+                            })
+
+                            let removeSequence = SKAction.sequence([
+                                .wait(forDuration: 0.5),
+                                removeDeathParticle
+                            ])
+
+                            parent.run(particleSequence)
+                            parent.run(removeSequence)
+                        }
+                    }
+                }
+            }
+            if let node = secondBody.node as? DarkSon {
+                if let node2 = firstBody.node as? Projectile {
+                    if (node2.type == .arrow) {
+                        node.health -= node2.damage/4
+                        
+                    if node.health <= 0 {
+                        let darkSonDeathParticle = SKEmitterNode(fileNamed: "GoblinDeathParticle")
+                        darkSonDeathParticle!.position = node.position
+                        darkSonDeathParticle!.name = "darkSonDeathParticle"
+                        darkSonDeathParticle!.zPosition = 1
+                                                
+                        let parent = node.parent!.scene!
+
+                        let addDeathParticle = SKAction.run({
+                            parent.addChild(darkSonDeathParticle!)
+                        })
+                        let darkSonDeathFade = SKAction.run {
+                            darkSonDeathParticle!.run(SKAction.fadeOut(withDuration: 0.4))
+                        }
+                        
+                        let particleSequence = SKAction.sequence([
+                            addDeathParticle,
+                            darkSonDeathFade
+                        ])
+
+                        let removeDeathParticle = SKAction.run({
+                            darkSonDeathParticle!.removeFromParent()
+                        })
+
+                        let removeSequence = SKAction.sequence([
+                            .wait(forDuration: 0.5),
+                            removeDeathParticle
+                        ])
+
+                        parent.run(particleSequence)
+                        parent.run(removeSequence)
+                    }
+                }
+                }
+            }
+        
+        }
+        
         if (collision.matches(.projectile, .goblin)) {
             
             if let node = firstBody.node as? Goblin {
