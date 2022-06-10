@@ -99,6 +99,12 @@ extension TossScene {
                 self.sheet.alpha = 0.0
                 self.scrollableMenu.closeMenu()
                 self.scrollableMenu.openMenu(structure: structure)
+                if let lastGoblin = lastSelectedGoblin as? Goblin {
+                    if lastGoblin.isPaused == true {
+                    lastGoblin.state = .idle
+                    lastGoblin.isPaused = false
+                    }
+                }
             }
             
             if let goblinRow = selectedNode as? GoblinRow {
@@ -145,9 +151,19 @@ extension TossScene {
             
             if let goblinNode = selectedNode as? Goblin {
                 self.scrollableMenu.alpha = 0.0
-                self.lastSelectedGoblin = goblinNode
                 self.sheet.alpha = 1.0
-                self.sheet.updateSheet(goblin: lastSelectedGoblin as! Goblin)
+                self.sheet.updateSheet(goblin: goblinNode)
+//                if goblinNode.isEqual(to: self.lastSelectedGoblin as! Goblin) {}
+//                else
+//                {
+                if let lastGoblin = lastSelectedGoblin as? Goblin {
+                    lastGoblin.state = .idle
+                    lastGoblin.isPaused = false
+                }
+                    self.lastSelectedGoblin = goblinNode
+                    goblinNode.state = .paused
+                    goblinNode.isPaused = true
+//                }
                 self.cauldron.closeSpawn()
             }
             
@@ -156,6 +172,12 @@ extension TossScene {
                 self.scrollableMenu.closeMenu()
                 self.scrollableMenu.alpha = 0.0
                 self.cauldron.closeSpawn()
+                if let lastGoblin = lastSelectedGoblin as? Goblin {
+                    if lastGoblin.isPaused == true {
+                    lastGoblin.state = .idle
+                    lastGoblin.isPaused = false
+                    }
+                }
             }
             
             if selectedNode?.name! == "PauseBtn" {
@@ -340,6 +362,12 @@ extension TossScene {
                 
             }
             if selectedNode?.name! == "background" {
+                if let lastGoblin = lastSelectedGoblin as? Goblin {
+                    if lastGoblin.isPaused == true {
+                    lastGoblin.state = .idle
+                    lastGoblin.isPaused = false
+                    }
+                }
                 channeling = true
                 touchPoint = touchLocation
             }
