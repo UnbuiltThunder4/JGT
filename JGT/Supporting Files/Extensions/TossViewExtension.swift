@@ -157,12 +157,16 @@ extension TossScene {
 //                else
 //                {
                 if let lastGoblin = lastSelectedGoblin as? Goblin {
+                    if lastGoblin.isPaused == true {
                     lastGoblin.state = .idle
                     lastGoblin.isPaused = false
+                   }
                 }
                     self.lastSelectedGoblin = goblinNode
+                if goblinNode.state != .feared && goblinNode.state != .fighting {
                     goblinNode.state = .paused
                     goblinNode.isPaused = true
+                }
 //                }
                 self.cauldron.closeSpawn()
             }
