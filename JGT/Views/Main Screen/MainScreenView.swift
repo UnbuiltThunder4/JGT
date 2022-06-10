@@ -88,30 +88,6 @@ struct MainScreenView: View {
                   
                 Spacer()
                     
-                Button {
-                    isPressed
-                        .toggle()
-                    player.musicVolume = self.isPressed ? 0.0 : 0.7
-                } label: {
-                    Image(self.isPressed ? "music-off" : "music-on")
-                        
-                }
-                .frame(maxWidth: geometry.size.width * 0.1, maxHeight: geometry.size.height * 0.1)
-                .padding(5)
-                .foregroundColor(.white)
-//                .background(self.accentColor)
-                    
-                    Button {
-                        isPressedFX
-                            .toggle()
-                        gameLogic.muted = self.isPressedFX ? true : false
-                    } label: {
-                        Image(self.isPressedFX ? "effects-off" : "effects-on")
-                            
-                    }
-                    .frame(maxWidth: geometry.size.width * 0.1, maxHeight: geometry.size.height * 0.1)
-                    .padding(5)
-                    .foregroundColor(.white)
                 }
                 
             }
@@ -126,7 +102,7 @@ struct MainScreenView: View {
      */
     private func startGame() {
         print("- Starting the game...")
-        self.currentGameState = .playing
+        self.currentGameState = .selection
     }
 }
 

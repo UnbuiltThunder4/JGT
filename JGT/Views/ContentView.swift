@@ -36,6 +36,10 @@ struct ContentView: View {
         case .gameOver:
             GameOverView(currentGameState: $currentGameState)
                 .environmentObject(gameLogic)
+            
+        case .selection:
+            LevelSelectionView(currentGameState: $currentGameState)
+                .environmentObject(gameLogic)
         }
     }
 }
