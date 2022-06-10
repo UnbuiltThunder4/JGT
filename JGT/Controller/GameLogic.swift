@@ -35,26 +35,14 @@ class GameLogic: ObservableObject {
     var lastScale = ZoomProperties.initialScale
     var currentScale = ZoomProperties.initialScale
     
-    var tutorials: [TutorialButton] = [TutorialButton(tutorialName: "Goblins 101", tutorialDesc: """
-“My son, by tapping the cauldronn I can summon goblins with the power of evilness alone,
-they can help you in many ways, I can throw them by dragging them wherever I want I can long press the terrain to use my evil sight and make them go in a frenzy.
-Once I tap on a Goblin I can see all of their stats, in order, I can see their Health, their Attack Power, how much they Fear death, their age, their wit and how long is their frenzy.
-If i think some of them are unworthy i can even long press on them to make them explode and get some of my power back.
-Remember, the older a goblin I sacrifice, the more evilness I will get back.”
+    var tutorials: [TutorialButton] = [TutorialButton(tutorialName: "Goblins 101 - The Dark Lord command", tutorialDesc: """
+“My son, by tapping the cauldronn I can summon goblins with the power of evilness alone, they can help you in many ways, I can throw them by dragging them wherever I want I can long press the terrain to use my evil sight and make them go in a frenzy. “”
 """, screen: SKTexture(imageNamed: "rockHead")),
-                                       TutorialButton(tutorialName: "Goblins 101", tutorialDesc: """
-                                   “My son, by tapping the cauldronn I can summon goblins with the power of evilness alone,
-                                   they can help you in many ways, I can throw them by dragging them wherever I want I can long press the terrain to use my evil sight and make them go in a frenzy.
-                                   Once I tap on a Goblin I can see all of their stats, in order, I can see their Health, their Attack Power, how much they Fear death, their age, their wit and how long is their frenzy.
-                                   If i think some of them are unworthy i can even long press on them to make them explode and get some of my power back.
-                                   Remember, the older a goblin I sacrifice, the more evilness I will get back.”
+                                       TutorialButton(tutorialName: "Goblins 101 - The Dark Lord eyes", tutorialDesc: """
+                                   “Once I tap on a Goblin I can see all of their stats, in order, I can see their Health, their Attack Power, how much they Fear death, their age, their wit and how long is their frenzy.”
                                    """, screen: SKTexture(imageNamed: "rockHead")),
-                                       TutorialButton(tutorialName: "Goblins 101", tutorialDesc: """
-                                   “My son, by tapping the cauldronn I can summon goblins with the power of evilness alone,
-                                   they can help you in many ways, I can throw them by dragging them wherever I want I can long press the terrain to use my evil sight and make them go in a frenzy.
-                                   Once I tap on a Goblin I can see all of their stats, in order, I can see their Health, their Attack Power, how much they Fear death, their age, their wit and how long is their frenzy.
-                                   If i think some of them are unworthy i can even long press on them to make them explode and get some of my power back.
-                                   Remember, the older a goblin I sacrifice, the more evilness I will get back.”
+                                       TutorialButton(tutorialName: "Goblins 101 - Sacrificing Goblins", tutorialDesc: """
+                                   “If I think some of them are unworthy I can even long press on them to make them explode and get some of my power back. Remember, the older a goblin I sacrifice, the more evilness I will get back.”
                                    """, screen: SKTexture(imageNamed: "rockHead")),
                                        TutorialButton(tutorialName: "Lighting Up The Tree", tutorialDesc: """
 “Looks like one of our goblins decided to put a tree on fire for no actual reason, this is wonderful!

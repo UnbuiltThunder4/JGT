@@ -113,9 +113,9 @@ extension TossScene {
             
             if selectedNode is Cauldron || selectedNode?.name! == "goblinsNumber" {
                 if UserDefaults.standard.bool(forKey: "goblins101") == false {
-                    gameLogic.tutorialEvent(index: 0, hud: hud, tutorialSheet: tutorialSheet)
-                    gameLogic.tutorialEvent(index: 1, hud: hud, tutorialSheet: tutorialSheet)
                     gameLogic.tutorialEvent(index: 2, hud: hud, tutorialSheet: tutorialSheet)
+                    gameLogic.tutorialEvent(index: 1, hud: hud, tutorialSheet: tutorialSheet)
+                    gameLogic.tutorialEvent(index: 0, hud: hud, tutorialSheet: tutorialSheet)
                     UserDefaults.standard.set(true, forKey: "goblins101")
                     hud.counter += 3
                     hud.tutorialCounter.alpha = 1.0
