@@ -1330,6 +1330,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         fireParticle!.position = closeStructure!.position
         fireParticle!.position.y -= 100
         fireParticle!.zPosition = -1
+//        fireParticle!.particleColorSequence = nil
+//        fireParticle!.particleColorBlendFactor = 1.0
+//        fireParticle!.particleColor = UIColor(red: 125/255, green: 61/255, blue: 204/255, alpha: 1.0)
         fireParticle!.setScale(3)
         
         let smokeParticle = SKEmitterNode(fileNamed: "SmokeParticle")

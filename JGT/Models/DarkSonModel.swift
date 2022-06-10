@@ -98,6 +98,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                 self.respawnCounter += 1
                 self.target = nil
                 if (self.respawnCounter % tenSeconds == 0) {
+                    self.setFireParticles()
                     self.alpha = 1.0
                     self.health = self.maxHealth
                     self.isDead = false
@@ -106,6 +107,64 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
             }
         }
     }
-    
+   
+    private func setFireParticles() {
+        let fireParticle = SKEmitterNode(fileNamed: "FireParticle")
+        fireParticle!.name = "fireParticle"
+        fireParticle!.position.x = spawnX
+        fireParticle!.position.y = spawnY
+        fireParticle!.position.y -= 100
+        fireParticle!.zPosition = -1
+        fireParticle!.particleColorSequence = nil
+        fireParticle!.particleColorBlendFactor = 1.0
+        fireParticle!.particleColor = UIColor(red: 125/255, green: 61/255, blue: 204/255, alpha: 1.0)
+        fireParticle!.setScale(3)
+        
+        let smokeParticle = SKEmitterNode(fileNamed: "SmokeParticle")
+        smokeParticle!.name = "smokeParticle"
+        smokeParticle!.position.x = spawnX
+        smokeParticle!.position.y = spawnY
+        smokeParticle!.position.y -= 100
+        smokeParticle!.zPosition = -1
+        smokeParticle!.setScale(3)
+        
+        let addFireParticle = SKAction.run({
+            self.parent!.scene!.addChild(fireParticle!)
+        })
+        let removeFireParticle = SKAction.run({
+            fireParticle!.removeFromParent()
+        })
+        
+        let addSmokeParticle = SKAction.run({
+            self.parent!.scene!.addChild(smokeParticle!)
+        })
+        let removeSmokeParticle = SKAction.run({
+            smokeParticle!.removeFromParent()
+        })
+
+        let fireFade = SKAction.run({
+            fireParticle!.run(SKAction.fadeOut(withDuration: 0.7))
+        })
+        let smokeFade = SKAction.run({
+            smokeParticle!.run(SKAction.fadeOut(withDuration: 2))
+        })
+        
+        let burnSequence = SKAction.sequence([
+            addSmokeParticle,
+            addFireParticle,
+            fireFade,
+            smokeFade,
+        ])
+        
+        self.parent!.run(burnSequence, withKey: "burnTreeParticle")
+        
+        let removeSequence = SKAction.sequence([
+            .wait(forDuration: 3),
+            removeFireParticle,
+            removeSmokeParticle
+        ])
+        
+        self.parent!.run(removeSequence, withKey: "removeParticle")
+    }
 }
 
