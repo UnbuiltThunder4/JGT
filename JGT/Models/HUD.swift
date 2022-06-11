@@ -28,6 +28,7 @@ class HUD: SKNode, ObservableObject {
     static let shared: HUD = HUD()
     var counter: Int = 0
     var tutorialCounter: SKLabelNode = SKLabelNode()
+    var livesCounter: SKLabelNode = SKLabelNode()
     
     override init() {
         super.init()
@@ -36,6 +37,9 @@ class HUD: SKNode, ObservableObject {
         self.tutorialCounter.name = "tutorialHUDcounter"
         self.tutorialCounter.alpha = 0.0
         self.tutorialCounter.text = String(self.counter)
+        self.livesCounter.name = "livesCounter"
+        self.livesCounter.text = "X 4"
+        self.addChild(livesCounter)
         self.name = "HUD"
     }
     
@@ -342,6 +346,18 @@ class HUD: SKNode, ObservableObject {
                                            height: tutorialSheet.tutorialSign.frame.height/3.2)
         tutorialSheet.screen.position.x = tutorialSheet.tutorialSign.frame.maxX/2.0
         addChild(tutorialSheet)
+    }
+    
+    func addDarkSonLives(position: CGPoint) {
+        let dsFace: SKSpriteNode = SKSpriteNode(imageNamed: "dark-son-lives")
+        dsFace.position = position
+        dsFace.zPosition = 5
+        addChild(dsFace)
+        self.livesCounter.position.x = position.x + dsFace.frame.width/2
+        self.livesCounter.position.y = position.y - dsFace.frame.height/4
+        self.livesCounter.fontName = HUDSettings.nameFont
+        self.livesCounter.fontSize = HUDSettings.tutorialCounterFontSize
+        self.livesCounter.fontColor = .white
     }
 
 }

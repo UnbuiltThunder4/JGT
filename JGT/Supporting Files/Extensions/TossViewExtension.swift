@@ -153,9 +153,7 @@ extension TossScene {
                 self.scrollableMenu.alpha = 0.0
                 self.sheet.alpha = 1.0
                 self.sheet.updateSheet(goblin: goblinNode)
-//                if goblinNode.isEqual(to: self.lastSelectedGoblin as! Goblin) {}
-//                else
-//                {
+
                 if let lastGoblin = lastSelectedGoblin as? Goblin {
                     if lastGoblin.isPaused == true {
                     lastGoblin.state = .idle
@@ -167,7 +165,6 @@ extension TossScene {
                     goblinNode.state = .paused
                     goblinNode.isPaused = true
                 }
-//                }
                 self.cauldron.closeSpawn()
             }
             
@@ -589,6 +586,7 @@ extension TossScene {
         pauseScreen.zPosition = 300
         hud.addPauseButton(pauseButton: pauseButton, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/10, y: cameraNode.position.y - pauseButton.size.height*1.1))
         hud.addTutorialSheet(tutorialSheet: tutorialSheet, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/2, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
+        hud.addDarkSonLives(position: CGPoint(x: -(cameraNode.position.x - UIScreen.main.bounds.width/10), y: cameraNode.position.y - pauseButton.size.height*1.1))
     }
     
     func setupCamera() {
