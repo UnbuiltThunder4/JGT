@@ -321,6 +321,7 @@ class Gate: Structure {
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     
     var health: Int = 200
+    let maxHealth: Int = 200
     
     init(x: CGFloat, y: CGFloat) {
         super.init(type: .gate, x: x, y: y, rotation: 0)
@@ -331,6 +332,18 @@ class Gate: Structure {
     }
     
     public func update(_ tossScene: TossScene) {
+        let healthpercentage = (self.maxHealth / self.health) * 100
+        
+        if (healthpercentage < 25) {
+            self.texture = SKTexture(imageNamed: "gate_break_3")
+        }
+        else if (healthpercentage < 50) {
+            self.texture = SKTexture(imageNamed: "gate_break_2")
+        }
+        else if (healthpercentage < 75) {
+            self.texture = SKTexture(imageNamed: "gate_break_1")
+        }
+        
         if (self.health <= 0) {
             self.removeFromParent()
             tossScene.darkson.target = nil
