@@ -1461,9 +1461,21 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
  
     private func isFlyingAnimation() {
         var flyingTextures : [SKTexture] = []
+        var maxRange = 0
         
-        for i in 1...15 {
-            flyingTextures.append(SKTexture(imageNamed: "normal_fly_\(i)"))
+        switch self.type {
+        case .normal:
+            maxRange = 15
+        case .rock:
+            maxRange = 12
+        case .gum:
+            maxRange = 13
+        case .fire:
+            maxRange = 13
+        }
+              
+        for i in 1...maxRange {
+            flyingTextures.append(SKTexture(imageNamed: "\(self.type)_fly (\(i))"))
         }
         
         let flyingAnimation = SKAction.repeatForever(SKAction.animate(with: flyingTextures, timePerFrame: 0.5))

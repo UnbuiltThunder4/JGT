@@ -63,7 +63,8 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                     removeAction(forKey: "walk")
                     self.attackCounter += 1
                     if (self.attackCounter % attackTime == 0) {
-                        
+                        self.setGateParticles()
+
                         if UserDefaults.standard.bool(forKey: "gateTutorial") == false {
                         gameLogic.tutorialEvent(index: 9, hud: hud, tutorialSheet: tutorialSheet)
                             UserDefaults.standard.set(true, forKey: "gateTutorial")
@@ -114,18 +115,18 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
         fireParticle!.position.x = spawnX
         fireParticle!.position.y = spawnY
         fireParticle!.position.y -= 100
-        fireParticle!.zPosition = -1
+//        fireParticle!.zPosition = -1
         fireParticle!.particleColorSequence = nil
         fireParticle!.particleColorBlendFactor = 1.0
         fireParticle!.particleColor = UIColor(red: 125/255, green: 61/255, blue: 204/255, alpha: 1.0)
-        fireParticle!.setScale(3)
+        fireParticle!.setScale(6)
         
         let smokeParticle = SKEmitterNode(fileNamed: "SmokeParticle")
         smokeParticle!.name = "smokeParticle"
         smokeParticle!.position.x = spawnX
         smokeParticle!.position.y = spawnY
         smokeParticle!.position.y -= 100
-        smokeParticle!.zPosition = -1
+//        smokeParticle!.zPosition = -1
         smokeParticle!.setScale(3)
         
         let addFireParticle = SKAction.run({
@@ -165,6 +166,41 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
         ])
         
         self.parent!.run(removeSequence, withKey: "removeParticle")
+    }
+    
+    private func setGateParticles() {
+        let explosionParticle = SKEmitterNode(fileNamed: "ExplosionParticle")
+        explosionParticle!.name = "explosionParticle"
+        explosionParticle!.position.x = target!.position.x + CGFloat.random(in: -30...30)
+        explosionParticle!.position.y = target!.position.y + CGFloat.random(in: -40...40)
+        explosionParticle!.zPosition = -1
+        explosionParticle!.particleColorSequence = nil
+        explosionParticle!.particleColorBlendFactor = 1.0
+        explosionParticle!.particleColor = UIColor(red: 125/255, green: 61/255, blue: 204/255, alpha: 1.0)
+        
+        let addExplosionParticle = SKAction.run({
+            self.parent!.scene!.addChild(explosionParticle!)
+        })
+        let removeExplosionParticle = SKAction.run({
+            explosionParticle!.removeFromParent()
+        })
+        let explosionFade = SKAction.run({
+            explosionParticle!.run(SKAction.fadeOut(withDuration: 0.3))
+        })
+        
+        let explosionSequence = SKAction.sequence([
+            addExplosionParticle,
+            explosionFade
+        ])
+        
+        self.parent!.run(explosionSequence, withKey: "explosionParticle")
+        
+        let removeSequence = SKAction.sequence([
+            .wait(forDuration: 1),
+            removeExplosionParticle
+        ])
+        
+        self.parent!.run(removeSequence, withKey: "removeExplosionParticle")
     }
 }
 
