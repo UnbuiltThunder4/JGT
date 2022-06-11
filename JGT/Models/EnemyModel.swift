@@ -23,6 +23,8 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     public var maxShield: Int
     public var shield: Int
     public var attack: Int
+    public var fullName: String = ""
+    public var desc: String = ""
     
     public var target: Goblin? = nil
     public var darkTarget: DarkSon? = nil
@@ -54,6 +56,8 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             self.maxShield = 100
             self.shield = 100
             self.attack = 20
+            self.fullName = "Infamous Gnome"
+            self.desc = "“The Infamous gnomes are known for their knife passion.”"
             self.maskmodX = 2.5
             self.maskmodY = 2.5
             width = 60
@@ -67,6 +71,8 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             self.maxShield = 150
             self.shield = 150
             self.attack = 50
+            self.fullName = "Archer Gnome"
+            self.desc = "“The ranged soldiers of the gnome army, but everybody knows that ranged weapons are for cowards, so goblins can’t use them.”"
             self.maskmodX = 5
             self.maskmodY = 10
             width = 100
@@ -80,6 +86,8 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             self.maxShield = 200
             self.shield = 200
             self.attack = 20
+            self.fullName = "Axe-Wielding Gnome"
+            self.desc = "“The bigger and bulkiest type of gnomes, they’re not really strong but are extremely hard to kill.”"
             self.maskmodX = 2.5
             self.maskmodY = 2.5
             width = 160

@@ -58,6 +58,14 @@ class Sheet: SKSpriteNode {
     }
     
     func updateSheet(goblin: Goblin) {
+        
+        self.healthLabel.alpha = 1.0
+        self.attackLabel.alpha = 1.0
+        self.fearLabel.alpha = 1.0
+        self.ageLabel.alpha = 1.0
+        self.witLabel.alpha = 1.0
+        self.frenzyLabel.alpha = 1.0
+        
         switch goblin.type {
         case .normal:
             typeLabel.texture = SKTexture(imageNamed: "normalHead")
@@ -81,6 +89,39 @@ class Sheet: SKSpriteNode {
         ageLabel.text = "\(String(goblin.age))"
         witLabel.text = "\(String(Int(goblin.HWpoints)/(goblin.age+1)))"
         frenzyLabel.text = "\(String(goblin.frenzy))"
+    }
+    
+    func updateSheet(enemy: Enemy) {
+        
+        self.healthLabel.alpha = 0.0
+        self.attackLabel.alpha = 0.0
+        self.fearLabel.alpha = 0.0
+        self.ageLabel.alpha = 0.0
+        self.witLabel.alpha = 0.0
+        self.frenzyLabel.alpha = 0.0
+        self.nameLabel.text = enemy.fullName
+        self.descLabel.text = enemy.desc
+        
+        switch enemy.type {
+        case .small:
+            self.typeLabel.texture = SKTexture()
+        case .bow:
+            self.typeLabel.texture = SKTexture()
+        case .axe:
+            self.typeLabel.texture = SKTexture()
+        }
+    }
+    
+    func updateSheet(darkSon: DarkSon) {
+        self.healthLabel.alpha = 0.0
+        self.attackLabel.alpha = 0.0
+        self.fearLabel.alpha = 0.0
+        self.ageLabel.alpha = 0.0
+        self.witLabel.alpha = 0.0
+        self.frenzyLabel.alpha = 0.0
+        self.nameLabel.text = "Dark Son"
+        self.descLabel.text = darkSon.desc
+        self.typeLabel.texture = SKTexture(imageNamed: "dark-son-lives")
     }
     
     required init?(coder aDecoder: NSCoder) {

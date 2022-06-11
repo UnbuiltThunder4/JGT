@@ -33,6 +33,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     var selectedNode: SKNode?
     var lastSelectedGoblin: SKNode?
     var lastSelectedStructure: SKNode?
+    var lastSelectedGnome: SKNode?
     var shootType: GoblinType = .normal
     var touchPoint: CGPoint = CGPoint()
     var panning = false
@@ -139,17 +140,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         UserDefaults.standard.set(false, forKey: "trapTutorial")
         
         player.musicVolume = 0.7
-//        playBackgroundMusic(filename: "Psycho Katana - Instrumental.wav")
         player.play(music: Audio.MusicFiles.background)
-        
-        //        for _ in 0..<10 {
-        //        structures[5].addGoblin(Goblin(health: 1, attack: 1, wit: NeuralNetwork(
-        //            layers: [
-        //                DenseLayer(inputSize: 2, neuronsCount: 2, functionRaw: .sigmoid), //INPUTS  1) GOBLIN TYPE          2) OBJECT
-        //                DenseLayer(inputSize: 2, neuronsCount: 4, functionRaw: .sigmoid),
-        //                DenseLayer(inputSize: 4, neuronsCount: 2, functionRaw: .sigmoid)  //OUTPUTS 1) 1ST INTERACTION      2) 2ND INTERACTION
-        //            ]), fear: 1, frenzy: 1, randomGoblin1: "", randomGoblin2: ""))
-        //        }
     }
     
     //MARK: Update
@@ -183,9 +174,9 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
                     gnomeDeathParticle!.position = $0.position
                     gnomeDeathParticle!.name = "goblinDeathParticle"
                     gnomeDeathParticle!.zPosition = 1
-                                            
+                    
                     let parent = $0.parent!.scene!
-
+                    
                     let addDeathParticle = SKAction.run({
                         parent.addChild(gnomeDeathParticle!)
                     })
@@ -197,16 +188,16 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
                         addDeathParticle,
                         gnomeDeathFade
                     ])
-
+                    
                     let removeDeathParticle = SKAction.run({
                         gnomeDeathParticle!.removeFromParent()
                     })
-
+                    
                     let removeSequence = SKAction.sequence([
                         .wait(forDuration: 0.5),
                         removeDeathParticle
                     ])
-
+                    
                     parent.run(particleSequence)
                     parent.run(removeSequence)
                     
@@ -232,7 +223,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             if let structure = self.structures[4] as? Trap {
                 structure.update(self)
             }
-                        
+            
             darkson.update()
             
             if channeling == true && evilGauge.currentFill > 0 {
@@ -243,16 +234,22 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             
             if let lastSelectedGoblin = lastSelectedGoblin as? Goblin {
                 sheet.updateSheet(goblin: lastSelectedGoblin)
+            } else if let gnomeSelected = lastSelectedGnome as? Enemy {
+                sheet.updateSheet(enemy: gnomeSelected)
             } else {
+                if let dsSelected = lastSelectedGnome as? DarkSon {
+                    sheet.updateSheet(darkSon: dsSelected)
+                }
                 sheet.alpha = 0.0
             }
+            
             
             if self.pressed == true && self.isDead == false {
                 print(self.pressed)
                 if let dyingGoblin = selectedNode as? Goblin {
                     self.isDead = dyingGoblin.pressAnimation()
                 } else {
-//                    selectedNode = nil
+                    //                    selectedNode = nil
                 }
             }
         }

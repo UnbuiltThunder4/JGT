@@ -20,6 +20,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     public let maxHealth: Int = 500
     public var health: Int = 500
     public let attack: Int = 10
+    public let desc: String = "“It’s my stupid and spoiled son, he’s strong as much as he’s stupid but I need to help him to become my successor”"
     
     public var target: Gate?  = nil
     
@@ -110,7 +111,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                     self.health = self.maxHealth
                     self.isDead = false
                     gameLogic.playSound(node: self, audio: Audio.EffectFiles.darkSonRebirth, wait: false, muted: gameLogic.muted)
-                }
+                    }
                 }
             }
         }

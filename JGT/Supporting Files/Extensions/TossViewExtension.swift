@@ -168,7 +168,40 @@ extension TossScene {
                 self.cauldron.closeSpawn()
             }
             
-            if selectedNode?.name! == "background" || selectedNode?.name! == "rock" || selectedNode?.name! == "wall" || selectedNode?.name! == "backdoor-up" || selectedNode?.name! == "dark-son-lives" {
+            if let gnomeNode = selectedNode as? Enemy {
+                self.lastSelectedGnome = gnomeNode
+                self.scrollableMenu.alpha = 0.0
+                self.sheet.alpha = 1.0
+                
+                if let lastGoblin = lastSelectedGoblin as? Goblin {
+                    if lastGoblin.isPaused == true {
+                    lastGoblin.state = .idle
+                    lastGoblin.isPaused = false
+                   }
+                }
+                self.lastSelectedGoblin = nil
+                self.sheet.updateSheet(enemy: gnomeNode)
+                self.cauldron.closeSpawn()
+            }
+            
+            if let dsNode = selectedNode as? DarkSon {
+                
+                if let lastGoblin = lastSelectedGoblin as? Goblin {
+                    if lastGoblin.isPaused == true {
+                    lastGoblin.state = .idle
+                    lastGoblin.isPaused = false
+                   }
+                }
+                
+                self.lastSelectedGoblin = nil
+                self.lastSelectedGnome = dsNode
+                self.sheet.alpha = 1.0
+                self.sheet.updateSheet(darkSon: dsNode)
+            }
+            
+            if selectedNode?.name! == "background" || selectedNode?.name! == "rock" ||
+                selectedNode?.name! == "wall" || selectedNode?.name! == "backdoor-up" ||
+                selectedNode?.name! == "dark-son-lives" {
                 self.sheet.alpha = 0.0
                 self.scrollableMenu.closeMenu()
                 self.scrollableMenu.alpha = 0.0
