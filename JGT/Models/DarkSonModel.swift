@@ -15,7 +15,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     @ObservedObject var hud: HUD = HUD.shared
     @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet.shared
     
-    public var lives: Int = 5
+//    public var lives: Int = 5
     
     public let maxHealth: Int = 500
     public var health: Int = 500
@@ -57,7 +57,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     func update() {
-        hud.livesCounter.text = "X \(lives)"
+        hud.livesCounter.text = "X \(gameLogic.lives)"
 
         if (self.health > 0) {
             var distance = CGVector(dx: gateCoordinates.x - position.x, dy: gateCoordinates.y - 50 - position.y)
@@ -95,11 +95,11 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                 self.position.y = self.spawnY
                 self.alpha = 0.0
                 self.respawnCounter += 1
-                self.lives -= 1
+                gameLogic.lives -= 1
                 gameLogic.playSound(node: self.parent?.scene?.camera, audio: Audio.EffectFiles.darkSonGrunt, wait: false, muted: gameLogic.muted)
             }
             else {
-                if self.lives == 0 {
+                if gameLogic.lives == 0 {
 //                    gameLogic.gameState = .mainScreen
                 }
                 else {

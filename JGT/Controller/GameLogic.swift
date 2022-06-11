@@ -29,6 +29,8 @@ class GameLogic: ObservableObject {
     @State var catapult = UserDefaults.standard.bool(forKey: "catapultTutorial")
     @State var trap = UserDefaults.standard.bool(forKey: "trapTutorial")
     
+    @Published var lives = 5
+    
     // Single instance of the class
     static let shared: GameLogic = GameLogic()
     var muted = false
