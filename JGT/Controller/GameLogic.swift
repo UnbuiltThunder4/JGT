@@ -134,9 +134,10 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
     @Published var isGameOver: Bool = false
     
     func finishTheGame() {
-        if self.isGameOver == false {
-            self.isGameOver = true
-        }
+//        if self.isGameOver == false {
+//            self.isGameOver = true
+            self.gameState = .gameOver
+//        }
     }
     
     func boundLayerPos(_ tossScene: TossScene, aNewPosition: CGPoint) -> CGPoint {

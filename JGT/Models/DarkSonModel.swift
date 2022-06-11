@@ -15,7 +15,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     @ObservedObject var hud: HUD = HUD.shared
     @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet.shared
     
-    public var lives: Int = 5
+    public var lives: Int = 1
     
     public let maxHealth: Int = 200
     public var health: Int = 500
@@ -34,7 +34,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     init() {
         super.init(texture: SKTexture(imageNamed: "darkson"), color: .red, size: CGSize(width: 300, height: 300))
         self.name = "darkson"
-        self.speed = 6.0
+        self.speed = 20.0
         self.position.x = self.spawnX
         self.position.y = self.spawnY
         self.zPosition = 1
@@ -92,9 +92,15 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                 self.position.y = self.spawnY
                 self.alpha = 0.0
                 self.respawnCounter += 1
+                self.lives -= 1
+                hud.livesCounter.text = "X \(lives-1)"
                 gameLogic.playSound(node: self.parent?.scene?.camera, audio: Audio.EffectFiles.darkSonGrunt, wait: false, muted: gameLogic.muted)
             }
             else {
+                if self.lives == 0 {
+                    gameLogic.gameState = .mainScreen
+                }
+                else {
                 self.respawnCounter += 1
                 self.target = nil
                 if (self.respawnCounter % tenSeconds == 0) {
@@ -103,6 +109,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                     self.health = self.maxHealth
                     self.isDead = false
                     gameLogic.playSound(node: self, audio: Audio.EffectFiles.darkSonRebirth, wait: false, muted: gameLogic.muted)
+                }
                 }
             }
         }
