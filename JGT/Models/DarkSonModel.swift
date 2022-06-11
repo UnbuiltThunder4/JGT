@@ -15,7 +15,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     @ObservedObject var hud: HUD = HUD.shared
     @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet.shared
     
-    public var lives: Int = 1
+    public var lives: Int = 5
     
     public let maxHealth: Int = 200
     public var health: Int = 500
@@ -99,7 +99,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
             }
             else {
                 if self.lives == 0 {
-                    gameLogic.gameState = .mainScreen
+//                    gameLogic.gameState = .mainScreen
                 }
                 else {
                 self.respawnCounter += 1
