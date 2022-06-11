@@ -988,11 +988,17 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         case .catapult:
             if (input == 2 && self.hasRock == true) {
                 removeAction(forKey: "walk")
+                if let catapult = self.closeStructure as? Catapult {
+                    catapult.texture = SKTexture(imageNamed: "catapult-down")
+                }
                 self.state = .working
                 self.currentTask = self.throwRock
             }
             else if (input == 1) {
                 removeAction(forKey: "walk")
+                if let catapult = self.closeStructure as? Catapult {
+                    catapult.texture = SKTexture(imageNamed: "catapult-down")
+                }
                 self.state = .working
                 self.currentTask = self.throwSelf
             }
@@ -1160,7 +1166,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func throwSelf() {
         self.removeAllActions()
-        self.run(SKAction.move(to: CGPoint(x: 2000, y: 2000), duration: 1.5), withKey: "thrown")
+        self.run(SKAction.move(to: CGPoint(x: catapultCoordinates.x, y: catapultCoordinates.y + 500), duration: 1.5), withKey: "thrown")
+        if let catapult = self.closeStructure as? Catapult {
+            catapult.launchedGoblin = true
+        }
         if (self.type != .rock) {
             self.HWpoints += 5
             

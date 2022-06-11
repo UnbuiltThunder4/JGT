@@ -299,6 +299,7 @@ class Catapult: Structure {
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     
     var hasRock: Bool = false
+    var launchedGoblin: Bool = false
     
     init(x: CGFloat, y: CGFloat) {
         super.init(type: .catapult, x: x, y: y, rotation: 0)
@@ -309,8 +310,13 @@ class Catapult: Structure {
     }
     
     public func update(_ tossScene: TossScene) {
+        if (self.launchedGoblin) {
+            self.texture = SKTexture(imageNamed: "catapult")
+            self.launchedGoblin = false
+        }
         if (self.hasRock) {
             gameLogic.spawnProjectile(tossScene, spawnPoint: CGPoint(x: self.position.x, y: self.position.y), destinationPoint: CGPoint(x: self.position.x + 500, y: self.position.y + 500), type: .rock)
+            self.texture = SKTexture(imageNamed: "catapult")
             self.hasRock = false
         }
     }
