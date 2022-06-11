@@ -239,8 +239,9 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             } else {
                 if let dsSelected = lastSelectedGnome as? DarkSon {
                     sheet.updateSheet(darkSon: dsSelected)
-                }
+                } else {
                 sheet.alpha = 0.0
+                }
             }
             
             
