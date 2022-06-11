@@ -350,11 +350,13 @@ class HUD: SKNode, ObservableObject {
     
     func addDarkSonLives(position: CGPoint) {
         let dsFace: SKSpriteNode = SKSpriteNode(imageNamed: "dark-son-lives")
+        dsFace.name = "dark-son-lives"
         dsFace.position = position
         dsFace.zPosition = 5
         addChild(dsFace)
         self.livesCounter.position.x = position.x + dsFace.frame.width/2
         self.livesCounter.position.y = position.y - dsFace.frame.height/4
+        self.livesCounter.zPosition = 5
         self.livesCounter.fontName = HUDSettings.nameFont
         self.livesCounter.fontSize = HUDSettings.tutorialCounterFontSize
         self.livesCounter.fontColor = .white

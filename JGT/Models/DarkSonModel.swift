@@ -56,6 +56,8 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     func update() {
+        hud.livesCounter.text = "X \(lives)"
+
         if (self.health > 0) {
             var distance = CGVector(dx: gateCoordinates.x - position.x, dy: gateCoordinates.y - 50 - position.y)
             if let _ = self.action(forKey: "walk") {
@@ -93,7 +95,6 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                 self.alpha = 0.0
                 self.respawnCounter += 1
                 self.lives -= 1
-                hud.livesCounter.text = "X \(lives-1)"
                 gameLogic.playSound(node: self.parent?.scene?.camera, audio: Audio.EffectFiles.darkSonGrunt, wait: false, muted: gameLogic.muted)
             }
             else {
