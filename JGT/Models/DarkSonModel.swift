@@ -17,7 +17,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     
     public var lives: Int = 5
     
-    public let maxHealth: Int = 200
+    public let maxHealth: Int = 500
     public var health: Int = 500
     public let attack: Int = 10
     
@@ -72,7 +72,6 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                             hud.tutorialCounter.alpha = 1.0
                             hud.tutorialCounter.text = String(hud.counter)
                         }
-                        
                         self.target!.health -= self.attack
                         self.attackCounter = 0
                         gameLogic.playSound(node: self, audio: Audio.EffectFiles.darkSonAttack, wait: false, muted: gameLogic.muted)
