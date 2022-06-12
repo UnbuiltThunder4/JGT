@@ -49,7 +49,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
         self.physicsBody?.isDynamic = true
         self.physicsBody?.categoryBitMask = Collision.Masks.darkson.bitmask
         self.physicsBody?.collisionBitMask = Collision.Masks.building.bitmask | Collision.Masks.gate.bitmask
-        self.physicsBody?.contactTestBitMask = Collision.Masks.projectile.bitmask | Collision.Masks.rangedEnemy.bitmask
+        self.physicsBody?.contactTestBitMask = Collision.Masks.projectile.bitmask | Collision.Masks.rangedEnemy.bitmask | Collision.Masks.meleeEnemy.bitmask
     }
     
     required init?(coder aDecoder: NSCoder) {

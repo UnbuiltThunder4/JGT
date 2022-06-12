@@ -70,8 +70,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private var goblinTaskTime: Int = taskTime
     
-    var fireTutorial = false
-    var rockTutorial = false
+    var actionCloud: SKSpriteNode = SKSpriteNode(imageNamed: "cloud-attack")
     
     init() {
         let goblinname = GoblinConstants.names.randomElement()! + " " + GoblinConstants.surnames.randomElement()!
@@ -92,6 +91,12 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         super.init(texture: SKTexture(imageNamed: "goblin"), color: .red, size: CGSize(width: 100, height: 100))
         self.name = "goblin"
         self.speed = 10.0
+        self.actionCloud.position.y = self.frame.height/1.2
+        self.actionCloud.position.x = -self.frame.width/4.5
+        self.actionCloud.size = CGSize(width: self.size.width, height: self.size.height/1.5)
+        self.actionCloud.alpha = 0.0
+        self.actionCloud.name = "actionCloud"
+        self.addChild(actionCloud)
     }
     
     init(health: Int, attack: Int, wit: NeuralNetwork, fear: Int, frenzy: Int) {
@@ -112,6 +117,12 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         super.init(texture: SKTexture(imageNamed: "goblin"), color: .red, size: CGSize(width: 100, height: 100))
         self.name = "goblin"
         self.speed = 10.0
+        self.actionCloud.position.y = self.frame.height/1.2
+        self.actionCloud.position.x = -self.frame.width/4.5
+        self.actionCloud.size = CGSize(width: self.size.width, height: self.size.height/1.5)
+        self.actionCloud.alpha = 0.0
+        self.actionCloud.name = "actionCloud"
+        self.addChild(actionCloud)
     }
     
     init(health: Int, attack: Int, wit: NeuralNetwork, fear: Int, frenzy: Int, randomGoblin1: String, randomGoblin2: String) {
@@ -132,6 +143,12 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         super.init(texture: SKTexture(imageNamed: "goblin"), color: .red, size: CGSize(width: 100, height: 100))
         self.name = "goblin"
         self.speed = 10.0
+        self.actionCloud.position.y = self.frame.height/1.2
+        self.actionCloud.position.x = -self.frame.width/4.5
+        self.actionCloud.size = CGSize(width: self.size.width, height: self.size.height/1.5)
+        self.actionCloud.alpha = 0.0
+        self.actionCloud.name = "actionCloud"
+        self.addChild(actionCloud)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -226,6 +243,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 hud.tutorialCounter.alpha = 1.0
                 hud.tutorialCounter.text = String(hud.counter)
             }
+            self.actionCloud.texture = SKTexture(imageNamed: "cloud_fear")
+            self.actionCloud.alpha = 1.0
             fearedUpdate()
             break
             
@@ -394,12 +413,45 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         if (self.closeStructure!.goblins.contains(self)) {
             self.target = nil
             self.taskCounter += 1
+            
+            switch self.closeStructure?.type {
+                
+            case .tree:
+                self.actionCloud.texture = SKTexture(imageNamed: "cloud_tree")
+            case .rock:
+                self.actionCloud.texture = SKTexture(imageNamed: "cloud_rock")
+            case .none:
+                break
+            case .catapult:
+                self.actionCloud.texture = SKTexture(imageNamed: "cloud_catapult")
+            case .some(.backdoor):
+                break
+            case .some(.academy):
+                break
+            case .some(.village):
+                break
+            case .some(.tavern):
+                break
+            case .some(.trap):
+                break
+            case .some(.gate):
+                break
+            case .some(.passage):
+                break
+            case .some(.goblincircle):
+                break
+            case .some(.wall):
+                break
+            }
+        
+            self.actionCloud.alpha = 1.0
             if (self.taskCounter % self.goblinTaskTime == 0) {
                 self.currentTask!()
                 self.currentTask = nil
                 hasToUpdateRank = true
                 self.state = .idle
                 self.taskCounter = 0
+                self.actionCloud.alpha = 0.0
             }
         }
         else {
@@ -417,6 +469,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
         if (!self.checkFear()) {
             if (self.target != nil) {
+                
+                self.actionCloud.texture = SKTexture(imageNamed: "cloud_attack")
+                self.actionCloud.alpha = 1.0
                 
                 if UserDefaults.standard.bool(forKey: "fightTutorial") == false {
                 gameLogic.tutorialEvent(index: 5, hud: hud, tutorialSheet: tutorialSheet)
@@ -532,6 +587,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 }
                 if (self.target != nil) {
                     if (self.target!.health <= 0) {
+                        self.actionCloud.alpha = 0.0
                         self.target = nil
                         self.state = .idle
                         removeAction(forKey: "walk")
@@ -555,6 +611,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.updateAge()
         var tavernDistance = CGVector(dx: tavernCoordinates.x - self.position.x, dy: tavernCoordinates.y - self.position.y)
         if (abs(tavernDistance.dx) < 250 && abs(tavernDistance.dy) < 250) {
+            self.actionCloud.alpha = 0.0
             self.enterTavern()
         }
         if let _ = self.action(forKey: "run") {
@@ -1186,7 +1243,8 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 gameLogic.playSound(node: self,
                                     audio: random == 0 ? Audio.EffectFiles.gumblinSelfCatapult1 : Audio.EffectFiles.gumblinSelfCatapult2, wait: false, muted: gameLogic.muted)
             case .rock:
-                break
+                let random = Int.random(in: 0...1)
+                gameLogic.playSound(node: self, audio: random == 0 ? Audio.EffectFiles.stoneblinSelfCatapult1 : Audio.EffectFiles.stoneblinSelfCatapult2, wait: false, muted: gameLogic.muted)
             }
             
             if UserDefaults.standard.bool(forKey: "catapultTutorial") == false {

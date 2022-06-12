@@ -569,7 +569,7 @@ extension TossScene {
             } else {
 //                enemies[i].physicsBody?.isDynamic = true
                 enemies[i].physicsBody?.categoryBitMask = Collision.Masks.meleeEnemy.bitmask
-                enemies[i].physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask | Collision.Masks.enviroment.bitmask
+                enemies[i].physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask | Collision.Masks.enviroment.bitmask | Collision.Masks.darkson.bitmask
                 enemies[i].physicsBody?.collisionBitMask = Collision.Masks.building.bitmask | Collision.Masks.gate.bitmask
             }
             
