@@ -65,11 +65,8 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     }
     
     override init() {
-
-        playableRect = CGRect(x: 0, y: MainScreenProperties.playableMargin, width: UIScreen.main.bounds.width, height: MainScreenProperties.playableHeight)
         
-        self.enemies.append(contentsOf: gnomes)
-        self.structures.append(contentsOf: levelstructures)
+        playableRect = CGRect(x: 0, y: MainScreenProperties.playableMargin, width: UIScreen.main.bounds.width, height: MainScreenProperties.playableHeight)
         
         super.init(size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         
@@ -90,13 +87,27 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         
         physicsWorld.contactDelegate = self
         
-        setGoblins(population.goblins, spawnPoint: nil)
-        setEnemies(self.enemies)
-        setStructures(self.structures)
         background.addChild(darkson)
         
         evilSight.position.x = UIScreen.main.bounds.width
         background.addChild(evilSight)
+        
+        switch gameLogic.level {
+        case 1:
+        self.enemies.append(contentsOf: gnomes)
+        self.structures.append(contentsOf: levelstructures)
+        setGoblins(population.goblins, spawnPoint: nil)
+        setEnemies(self.enemies)
+        setStructures(self.structures)
+        case 2:
+            break
+        case 3:
+            break
+        default:
+            break
+        }
+        
+        
     }
     
     override func didMove(to view: SKView) {
