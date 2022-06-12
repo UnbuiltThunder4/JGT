@@ -21,6 +21,8 @@ class Structure: SKSpriteNode, ObservableObject {
     let maskmodY: CGFloat
     let width: CGFloat
     let height: CGFloat
+    let goblinCloud: SKSpriteNode = SKSpriteNode(imageNamed: "cloud_structure_full")
+    var goblinCounter: SKLabelNode = SKLabelNode()
     
     init(type: StructureType, x: CGFloat, y: CGFloat, rotation: Double) {
         var img = ""
@@ -187,6 +189,16 @@ class Tavern: Structure {
     
     init(x: CGFloat, y: CGFloat) {
         super.init(type: .tavern, x: x, y: y, rotation: 0)
+        self.goblinCloud.alpha = 0.0
+        self.goblinCloud.name = "goblinCloud"
+        self.goblinCounter.name = "goblinCounter"
+        self.goblinCounter.alpha = 0.0
+        self.goblinCounter.zPosition = 20
+        self.goblinCounter.fontName = HUDSettings.nameFont
+        self.goblinCounter.fontSize = 50
+        self.goblinCounter.fontColor = .red
+        self.addChild(goblinCloud)
+        self.addChild(goblinCounter)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -194,7 +206,10 @@ class Tavern: Structure {
     }
     
     override func addGoblin(_ goblin: Goblin) {
+        self.goblinCloud.alpha = 1.0
+        self.goblinCounter.alpha = 1.0
         self.goblins.append(goblin)
+        self.goblinCounter.text = String(self.goblins.count)
         if scrollableMenu.currentStructure == self.name! {
             scrollableMenu.goblinTable.addRow(row: GoblinRow(goblin: goblin))
             scrollableMenu.tableSize += scrollableMenu.rowsSize.height
@@ -208,9 +223,14 @@ class Tavern: Structure {
             if scrollableMenu.currentStructure == self.name! {
                 if let scrollIndex = scrollableMenu.goblinTable.rows.firstIndex(where: { $0.goblinID == goblin.id }) {
                     scrollableMenu.goblinTable.deleteRow(row: scrollableMenu.goblinTable.rows[scrollIndex], structure: self)
+                    }
                 }
-            }
             self.goblins.remove(at: index)
+            self.goblinCounter.text = String(self.goblins.count)
+            if self.goblins.isEmpty {
+                self.goblinCloud.alpha = 0.0
+                self.goblinCounter.alpha = 0.0
+            }
         }
     }
 }
@@ -221,6 +241,16 @@ class Academy: Structure {
     
     init(x: CGFloat, y: CGFloat) {
         super.init(type: .academy, x: x, y: y, rotation: 0)
+        self.goblinCloud.alpha = 0.0
+        self.goblinCloud.name = "goblinCloud"
+        self.goblinCounter.name = "goblinCounter"
+        self.goblinCounter.alpha = 0.0
+        self.goblinCounter.zPosition = 20
+        self.goblinCounter.fontName = HUDSettings.nameFont
+        self.goblinCounter.fontSize = 50
+        self.goblinCounter.fontColor = .red
+        self.addChild(goblinCloud)
+        self.addChild(goblinCounter)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -228,7 +258,10 @@ class Academy: Structure {
     }
     
     override func addGoblin(_ goblin: Goblin) {
+        self.goblinCloud.alpha = 1.0
+        self.goblinCounter.alpha = 1.0
         self.goblins.append(goblin)
+        self.goblinCounter.text = String(self.goblins.count)
         if scrollableMenu.currentStructure == self.name! {
             scrollableMenu.goblinTable.addRow(row: GoblinRow(goblin: goblin))
             scrollableMenu.tableSize += scrollableMenu.rowsSize.height
@@ -258,6 +291,11 @@ class Academy: Structure {
                 }
             }
             self.goblins.remove(at: index)
+            self.goblinCounter.text = String(self.goblins.count)
+            if self.goblins.isEmpty {
+                self.goblinCloud.alpha = 0.0
+                self.goblinCounter.alpha = 0.0
+            }
         }
     }
 }
@@ -266,6 +304,16 @@ class Village: Structure {
     
     init(x: CGFloat, y: CGFloat) {
         super.init(type: .village, x: x, y: y, rotation: 0)
+        self.goblinCloud.alpha = 0.0
+        self.goblinCloud.name = "goblinCloud"
+        self.goblinCounter.name = "goblinCounter"
+        self.goblinCounter.alpha = 0.0
+        self.goblinCounter.zPosition = 20
+        self.goblinCounter.fontName = HUDSettings.nameFont
+        self.goblinCounter.fontSize = 50
+        self.goblinCounter.fontColor = .red
+        self.addChild(goblinCloud)
+        self.addChild(goblinCounter)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -273,7 +321,10 @@ class Village: Structure {
     }
     
     override func addGoblin(_ goblin: Goblin) {
+        self.goblinCloud.alpha = 1.0
+        self.goblinCounter.alpha = 1.0
         self.goblins.append(goblin)
+        self.goblinCounter.text = String(self.goblins.count)
         if scrollableMenu.currentStructure == self.name! {
             scrollableMenu.goblinTable.addRow(row: GoblinRow(goblin: goblin))
             scrollableMenu.tableSize += scrollableMenu.rowsSize.height
@@ -290,6 +341,11 @@ class Village: Structure {
                 }
             }
             self.goblins.remove(at: index)
+            self.goblinCounter.text = String(self.goblins.count)
+            if self.goblins.isEmpty {
+                self.goblinCloud.alpha = 0.0
+                self.goblinCounter.alpha = 0.0
+            }
         }
     }
 }

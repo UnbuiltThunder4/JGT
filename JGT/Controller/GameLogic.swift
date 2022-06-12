@@ -355,9 +355,14 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
         structure.goblins[strIndex!].state = .idle
         structure.goblins[strIndex!].alpha = 1.0
         structure.goblins.remove(at: strIndex!)
+        structure.goblinCounter.text = String(structure.goblins.count)
         scrollableMenu.goblinTable.deleteRow(row: goblinRow, structure: structure)
         scrollableMenu.tableSize -= scrollableMenu.rowsSize.height
         scrollableMenu.hideRow()
+        if structure.goblins.isEmpty {
+            structure.goblinCloud.alpha = 0.0
+            structure.goblinCounter.alpha = 0.0
+        }
     }
     
     public func playSound(node: SKNode?, audio: Effect, wait: Bool, muted: Bool) {
