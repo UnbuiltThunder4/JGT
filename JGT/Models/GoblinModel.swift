@@ -224,6 +224,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         switch self.state {
             
         case .idle:
+            self.actionCloud.alpha = 0.0
             hasToUpdateRank = idleUpdate()
             break
             
@@ -272,6 +273,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         case .inhand:
+            self.actionCloud.alpha = 0.0
             inHandUpdate()
             break
             
