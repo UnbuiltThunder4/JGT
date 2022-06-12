@@ -29,7 +29,7 @@ class GameLogic: ObservableObject {
     @State var catapult = UserDefaults.standard.bool(forKey: "catapultTutorial")
     @State var trap = UserDefaults.standard.bool(forKey: "trapTutorial")
     
-    @Published var lives = 5
+    @Published var lives = 1
     
     // Single instance of the class
     static let shared: GameLogic = GameLogic()
@@ -135,11 +135,26 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
     // Game Over Conditions
     @Published var isGameOver: Bool = false
     
-    func finishTheGame() {
-//        if self.isGameOver == false {
-//            self.isGameOver = true
+    func finishTheGame(_ tossScene: TossScene) {
+        if self.isGameOver == true {
             self.gameState = .gameOver
-//        }
+            tossScene.background.children.forEach { bgchild in
+                bgchild.children.forEach { bggrandson in
+                    bggrandson.children.forEach { bggrandgrandson in
+                        bggrandgrandson.children.forEach { bggrandgrandgrandson in
+                            bggrandgrandgrandson.children.forEach { what in
+                                what.removeFromParent()
+                            }
+                            bggrandgrandgrandson.removeFromParent()
+                        }
+                        bggrandgrandson.removeFromParent()
+                    }
+                    bggrandson.removeFromParent()
+                }
+                bgchild.removeFromParent()
+            }
+            tossScene.background.removeFromParent()
+        }
     }
     
     func boundLayerPos(_ tossScene: TossScene, aNewPosition: CGPoint) -> CGPoint {
@@ -162,13 +177,7 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
             return
         }
         
-        //        if !tossScene.selectedNode!.isEqual(touchedNode) {
-        //            tossScene.selectedNode?.removeAllActions()
-        
         tossScene.selectedNode = touchedNode
-        
-        //        }
-        
     }
     
     func panForTranslation(_ tossScene: TossScene, translation: CGPoint) {

@@ -147,7 +147,6 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         if paws == false {
-            
             var hasToUpdateRank = false
             
             self.population.goblins.forEach {
@@ -253,6 +252,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
                     //                    selectedNode = nil
                 }
             }
+            gameLogic.finishTheGame(self)
         }
     }
     

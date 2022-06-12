@@ -166,7 +166,7 @@ class GoblinRow: SKSpriteNode, Identifiable, ObservableObject {
         self.goblinName.name = "goblinName"
         self.goblinStats.name = "goblinStats"
         
-        super.init(texture: SKTexture(imageNamed: "gauge"), color: .yellow, size: CGSize())
+        super.init(texture: SKTexture(imageNamed: "row"), color: .yellow, size: CGSize())
         
         self.size = CGSize(width: scrollableMenu.rowsSize.width, height: scrollableMenu.rowsSize.height)
         

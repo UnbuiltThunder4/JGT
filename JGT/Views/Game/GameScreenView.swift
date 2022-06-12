@@ -74,7 +74,7 @@ extension ArcadeGameScene {
         
         // TODO: Customize!
         
-        self.gameLogic.finishTheGame()
+//        self.gameLogic.finishTheGame()
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
