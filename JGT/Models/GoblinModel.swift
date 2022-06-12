@@ -813,8 +813,61 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 trap.isActive = true
                 let closeTrap = SKAction.setTexture(SKTexture(imageNamed: "closed-trap"))
                 trap.run(closeTrap)
+                if self.health - 80 <= 0 {
+                    
+                    let goblinDeathParticle = SKEmitterNode(fileNamed: "GoblinDeathParticle")
+                    goblinDeathParticle!.position = self.position
+                    goblinDeathParticle!.name = "goblinDeathParticle"
+                    goblinDeathParticle!.zPosition = 1
+                    goblinDeathParticle!.particleColorSequence = nil
+                    goblinDeathParticle!.particleColorBlendFactor = 1.0
+                    
+                    switch self.type {
+                    case .rock:
+                        let random = Int.random(in: 0...1)
+                        gameLogic.playSound(node: trap, audio: random == 0 ? Audio.EffectFiles.stoneblinDeath1 : Audio.EffectFiles.stoneblinDeath3, wait: true, muted: gameLogic.muted)
+                        goblinDeathParticle!.particleColor = UIColor(red: 110/255, green: 110/255, blue: 110/255, alpha: 1.0)
+                    case .fire:
+                        let random = Int.random(in: 0...1)
+                        gameLogic.playSound(node: trap, audio: random == 0 ? Audio.EffectFiles.flameblinDeath1 : Audio.EffectFiles.flameblinDeath2, wait: true, muted: gameLogic.muted)
+                        goblinDeathParticle!.particleColor = UIColor(red: 224/255, green: 53/255, blue: 50/255, alpha: 1.0)
+                    case .gum:
+                        break
+                    case .normal:
+                        let random = Int.random(in: 0...1)
+                        gameLogic.playSound(node: trap, audio: random == 0 ? Audio.EffectFiles.goblinDeath1 : Audio.EffectFiles.goblinDeath2, wait: true, muted: gameLogic.muted)
+                        goblinDeathParticle!.particleColor = UIColor(red: 11/255, green: 129/255, blue: 80/255, alpha: 1.0)
+                    }
+                    
+                    let parent = self.parent!.scene!
+
+                    let addDeathParticle = SKAction.run({
+                        parent.addChild(goblinDeathParticle!)
+                    })
+                    let goblinDeathFade = SKAction.run {
+                        goblinDeathParticle!.run(SKAction.fadeOut(withDuration: 0.4))
+                    }
+                    
+                    let particleSequence = SKAction.sequence([
+                        addDeathParticle,
+                        goblinDeathFade
+                    ])
+
+                    let removeDeathParticle = SKAction.run({
+                        goblinDeathParticle!.removeFromParent()
+                    })
+
+                    let removeSequence = SKAction.sequence([
+                        .wait(forDuration: 0.5),
+                        removeDeathParticle
+                    ])
+
+                    parent.run(particleSequence)
+                    parent.run(removeSequence)
+                    
+                }
                 if (self.type != .gum) {
-                    self.health -= 10
+                    self.health -= 80
                     self.HWpoints -= 5
                     self.state = .stunned
                     gameLogic.playSound(node: trap, audio: Audio.EffectFiles.trap, wait: false, muted: gameLogic.muted)

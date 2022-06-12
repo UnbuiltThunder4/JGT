@@ -29,7 +29,7 @@ class GameLogic: ObservableObject {
     @State var catapult = UserDefaults.standard.bool(forKey: "catapultTutorial")
     @State var trap = UserDefaults.standard.bool(forKey: "trapTutorial")
     
-    @Published var lives = 1
+    @Published var lives = 5
     
     // Single instance of the class
     static let shared: GameLogic = GameLogic()
@@ -70,7 +70,7 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
                                        TutorialButton(tutorialName: "Gate", tutorialDesc: """
  “Good work my son, keep attacking the gates, once they’re gone our enemies will have no way to resist, but pay attention!
  If there are no goblins to defend you the risk is death!
- My powers can bring you back but no more than three times so I need to use the goblins to defend you as much as you need.”
+ My powers can bring you back but no more than five times so I need to use the goblins to defend you as much as you need.”
  """, screen: SKTexture(imageNamed: "rockHead")),
                                        TutorialButton(tutorialName: "Backdoor", tutorialDesc: """
                                                       “Our goblins have found a backdoor, once they destroy it they can use the passage to attack enemies on the enemy walls and help you attack the gates without taking any damage.”
