@@ -100,7 +100,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
             }
             else {
                 if gameLogic.lives == 0 {
-                    gameLogic.isGameOver = true
+//                    gameLogic.isGameOver = true
                 }
                 else {
                 self.respawnCounter += 1

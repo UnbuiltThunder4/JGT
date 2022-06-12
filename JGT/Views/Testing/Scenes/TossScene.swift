@@ -252,6 +252,11 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
                     //                    selectedNode = nil
                 }
             }
+            
+            if self.evilGauge.currentFill == 0 && self.population.goblins.isEmpty {
+                gameLogic.isGameOver = true
+            }
+            
             gameLogic.finishTheGame(self)
         }
     }
