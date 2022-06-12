@@ -14,7 +14,7 @@ struct TossView: View {
     
     var body: some View {
         
-        SpriteKitContainer(scene: TossScene(level: 0))
+        SpriteKitContainer(scene: TossScene())
             .ignoresSafeArea()
     }
 }

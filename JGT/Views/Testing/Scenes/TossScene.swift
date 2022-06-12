@@ -20,8 +20,6 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet.shared
     @ObservedObject var hud: HUD = HUD.shared
     
-    var level = 1
-    
     var darkson = DarkSon()
     var enemies: [Enemy] = []
     var structures: [Structure] = []
@@ -66,8 +64,8 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(level: Int) {
-        self.level = level
+    override init() {
+
         playableRect = CGRect(x: 0, y: MainScreenProperties.playableMargin, width: UIScreen.main.bounds.width, height: MainScreenProperties.playableHeight)
         
         self.enemies.append(contentsOf: gnomes)

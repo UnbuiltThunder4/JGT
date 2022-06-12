@@ -30,6 +30,7 @@ class GameLogic: ObservableObject {
     @State var trap = UserDefaults.standard.bool(forKey: "trapTutorial")
     
     @Published var lives = 5
+    @Published var level = 1
     
     // Single instance of the class
     static let shared: GameLogic = GameLogic()

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import Pages
 
 /**
  * # MainScreenView
@@ -32,8 +33,6 @@ struct LevelSelectionView: View {
     // Change it on the Constants.swift file
     let accentColor: Color = MainScreenProperties.accentColor
     
-    @State var isPressed: Bool = false
-    @State var isPressedFX: Bool = false
     @State var index: Int = 0
     
     var body: some View {
@@ -41,27 +40,32 @@ struct LevelSelectionView: View {
             
             VStack {
                 
-                
+                Pages(
+                        currentPage: $index,
+//                        transitionStyle: .pageCurl,
+                        hasControl: false
+                ) {
+                             Text("Level 1")
+                             Text("Level 2")
+                             Text("Level 3")
+                }
             
-                Spacer()
-
-                
-                HStack {
-                    
                 Button {
-                    withAnimation { self.startGame() }
+                    withAnimation {
+                        gameLogic.level = self.index + 1
+                        gameLogic.gameState = .playing
+                        print(gameLogic.level)
+                    }
                 } label: {
                     Text("Play")
                         .font(.custom("Chalkduster", size: (UIDevice.current.userInterfaceIdiom == .pad ? 30 : 15)))
-                    
+
                 }
                 .frame(maxWidth: geometry.size.width * 0.1, maxHeight: geometry.size.height * 0.1)
                 .padding(5)
                 .foregroundColor(.white)
                 .background(self.accentColor)
                 .cornerRadius(15.0)
-                    
-                }
                 
             }
             .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height)
@@ -73,10 +77,10 @@ struct LevelSelectionView: View {
      * Function responsible to start the game.
      * It changes the current game state to present the view which houses the game scene.
      */
-    private func startGame() {
-        print("- Starting the game...")
-        gameLogic.gameState = .playing
-    }
+//    func startGame() {
+//        print("- Starting the game...")
+//        gameLogic.gameState = .playing
+//    }
 }
 
 
