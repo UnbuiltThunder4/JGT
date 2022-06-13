@@ -18,7 +18,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     @ObservedObject var scrollableMenu: ScrollableMenu = ScrollableMenu.shared
     @ObservedObject var evilGauge: EvilGauge = EvilGauge.shared
     @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet.shared
-    @ObservedObject var hud: HUD = HUD.shared
+    @ObservedObject var hud = HUD()
     
     var darkson = DarkSon()
     var enemies: [Enemy] = []
@@ -159,7 +159,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             var hasToUpdateRank = false
             
             self.population.goblins.forEach {
-                if ($0.update()) {
+                if ($0.update(hud: self.hud)) {
                     hasToUpdateRank = true
                 }
                 if ($0.health <= 0) {
@@ -232,7 +232,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
                 structure.update(self)
             }
             
-            darkson.update()
+            darkson.update(hud: self.hud)
             
             if channeling == true && evilGauge.currentFill > 0 {
                 evilGauge.channelingSight()

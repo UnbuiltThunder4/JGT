@@ -12,7 +12,7 @@ import SpriteKit
 class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
-    @ObservedObject var hud: HUD = HUD.shared
+    //@ObservedObject var hud: HUD
     @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet.shared
     
     //    public var lives: Int = 5
@@ -55,7 +55,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update() {
+    func update(hud: HUD) {
         hud.livesCounter.text = "X \(gameLogic.lives)"
         
         if (self.health > 0) {

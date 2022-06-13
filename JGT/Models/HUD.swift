@@ -24,7 +24,6 @@ enum HUDSettings {
 }
 
 class HUD: SKNode, ObservableObject {
-    static let shared: HUD = HUD()
     var counter: Int = 0
     var tutorialCounter: SKLabelNode = SKLabelNode()
     var livesCounter: SKLabelNode = SKLabelNode()

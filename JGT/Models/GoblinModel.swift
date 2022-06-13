@@ -15,7 +15,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     @ObservedObject var evilGauge: EvilGauge = EvilGauge.shared
-    @ObservedObject var hud: HUD = HUD.shared
+    //@ObservedObject var hud: HUD
     @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet.shared
     
     public var fullName: String
@@ -65,7 +65,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private var stunCounter: Int = 0
     private var stuckCounter: Int = 0
     
-    private var currentTask: (() -> ())? = nil
+    private var currentTask: ((HUD) -> ())? = nil
     private var ignoreThreshold: Float = 0.0
     
     private var goblinTaskTime: Int = taskTime
@@ -219,21 +219,21 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         return fit
     }
     
-    public func update() -> Bool {
+    public func update(hud: HUD) -> Bool {
         var hasToUpdateRank = false
         switch self.state {
             
         case .idle:
             self.actionCloud.alpha = 0.0
-            hasToUpdateRank = idleUpdate()
+            hasToUpdateRank = idleUpdate(hud)
             break
             
         case .working:
-            hasToUpdateRank = workingUpdate(func: self.currentTask)
+            hasToUpdateRank = workingUpdate(func: self.currentTask, hud: hud)
             break
             
         case .fighting:
-            fightingUpdate()
+            fightingUpdate(hud)
             break
             
         case .feared:
@@ -265,11 +265,11 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         case .invillage:
-            hasToUpdateRank = inVillageUpdate()
+            hasToUpdateRank = inVillageUpdate(hud)
             break
             
         case .intrap:
-            hasToUpdateRank = inTrapUpdate()
+            hasToUpdateRank = inTrapUpdate(hud)
             break
             
         case .inhand:
@@ -307,13 +307,13 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         default:
-            hasToUpdateRank = idleUpdate()
+            hasToUpdateRank = idleUpdate(hud)
             break
         }
         return hasToUpdateRank
     }
     
-    private func idleUpdate() -> Bool {
+    private func idleUpdate(_ hud: HUD) -> Bool {
         var hasToUpdateRank = false
         self.updateAge()
         if (self.isFrenzied) {
@@ -338,7 +338,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                             let targetDistance = CGVector(dx: self.closeStructure!.position.x - self.position.x, dy: self.closeStructure!.position.y - self.position.y)
                             if (isVectorSmallerThan(vector: targetDistance, other: 330)) {
                                 if (self.closeStructure!.type == .trap || self.closeStructure!.type == .backdoor || self.closeStructure!.type == .passage) {
-                                    hasToUpdateRank = self.checkInterations(input: 0)
+                                    hasToUpdateRank = self.checkInterations(input: 0, hud: hud)
                                 }
                                 if (self.closeStructure!.type != .tavern || !(self.isGraduated && self.closeStructure!.type == .academy)) {
                                     let prediction = self.wit.predict(
@@ -358,7 +358,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                                     if(output > 0) {
                                         self.ignoreThreshold = 0.0
                                         print("action \(output): value \(prediction[output-1])")
-                                        hasToUpdateRank = self.checkInterations(input: output)
+                                        hasToUpdateRank = self.checkInterations(input: output, hud: hud)
                                     }
                                     else {
                                         print("ignored")
@@ -407,7 +407,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         return hasToUpdateRank
     }
     
-    private func workingUpdate(func: (() -> ())?) -> Bool {
+    private func workingUpdate(func: ((HUD) -> ())?, hud: HUD) -> Bool {
         var hasToUpdateRank = false
         if (self.closeStructure!.goblins.isEmpty) {
             self.closeStructure!.goblins.append(self)
@@ -448,7 +448,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         
             self.actionCloud.alpha = 1.0
             if (self.taskCounter % self.goblinTaskTime == 0) {
-                self.currentTask!()
+                self.currentTask!(hud)
                 self.currentTask = nil
                 hasToUpdateRank = true
                 self.state = .idle
@@ -464,7 +464,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         return hasToUpdateRank
     }
     
-    private func fightingUpdate() {
+    private func fightingUpdate(_ hud: HUD) {
         self.updateAge()
         if (self.isFrenzied) {
             self.checkFrenzy()
@@ -734,7 +734,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         return hasToUpdateRank
     }
     
-    private func inVillageUpdate() -> Bool {
+    private func inVillageUpdate(_ hud: HUD) -> Bool {
         var hasToUpdateRank = false
         self.updateAge()
         self.removeAllActions()
@@ -805,7 +805,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         return hasToUpdateRank
     }
     
-    private func inTrapUpdate() -> Bool {
+    private func inTrapUpdate(_ hud: HUD) -> Bool {
         var hasToUpdateRank = false
         self.updateAge()
         if let trap = self.closeStructure as? Trap {
@@ -1054,7 +1054,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
     }
     
-    private func checkInterations(input: Int) -> Bool {
+    private func checkInterations(input: Int, hud: HUD) -> Bool {
         var hasToUpdateRank = false
         switch self.closeStructure!.type {
             
@@ -1065,7 +1065,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         case .academy:
             if (!self.isGraduated) {
                 removeAction(forKey: "walk")
-                self.enterAcademy()
+                self.enterAcademy(hud)
             }
             else {
                 self.closeStructure = nil
@@ -1179,7 +1179,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         return hasToUpdateRank
     }
     
-    private func enterAcademy() {
+    private func enterAcademy(_ hud: HUD) {
         self.state = .inacademy
         self.alpha = 0.0
         if let academy = self.closeStructure as? Academy {
@@ -1213,7 +1213,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
     }
     
-    private func throwRock() {
+    private func throwRock(hud: HUD) {
         
         switch self.type {
         case .rock:
@@ -1261,7 +1261,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.closeStructure = nil
     }
     
-    private func throwSelf() {
+    private func throwSelf(_ hud: HUD) {
         self.removeAllActions()
         self.run(SKAction.move(to: CGPoint(x: gateCoordinates.x, y: gateCoordinates.y - 100), duration: 1.5), withKey: "thrown")
         if let catapult = self.closeStructure as? Catapult {
@@ -1317,7 +1317,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.closeStructure = nil
     }
     
-    private func pickUpRock() {
+    private func pickUpRock(_ hud: HUD) {
         
         switch self.type {
         case .normal:
@@ -1345,7 +1345,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.closeStructure = nil
     }
     
-    private func eatRock() {
+    private func eatRock(_ hud: HUD) {
         let random = Int.random(in: 0...1)
         gameLogic.playSound(node: self,
                             audio: random == 0 ? Audio.EffectFiles.stoneblinTransform1 : Audio.EffectFiles.stoneblinTransform2, wait: false, muted: gameLogic.muted)
@@ -1367,7 +1367,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.closeStructure = nil
     }
     
-    private func setFiretoTree() {
+    private func setFiretoTree(_ hud: HUD) {
         setFireParticles()
         if UserDefaults.standard.bool(forKey: "treeTutorial") == false {
         gameLogic.tutorialEvent(index: 3, hud: hud, tutorialSheet: tutorialSheet)
@@ -1399,7 +1399,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.closeStructure = nil
     }
     
-    private func setFiretoSelf() {
+    private func setFiretoSelf(_ hud: HUD) {
         setFireParticles()
         if UserDefaults.standard.bool(forKey: "fireTutorial") == false {
         gameLogic.tutorialEvent(index: 4, hud: hud, tutorialSheet: tutorialSheet)

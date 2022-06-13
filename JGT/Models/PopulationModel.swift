@@ -31,11 +31,11 @@ class Population: ObservableObject {
         return self.goblins.firstIndex(where: { $0.id == of.id })
     }
     
-    public func update() {
+    public func update(hud: HUD) {
         var hasToUpdateRank = false
         
         self.goblins.forEach {
-            if ($0.update()) {
+            if ($0.update(hud: hud)) {
                 hasToUpdateRank = true
             }
             if ($0.health <= 0) {
