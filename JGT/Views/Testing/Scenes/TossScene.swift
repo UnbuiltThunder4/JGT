@@ -15,9 +15,10 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     @ObservedObject var population = Population(size: 3, mutationRate: 10)
-    @ObservedObject var scrollableMenu: ScrollableMenu = ScrollableMenu.shared
-    @ObservedObject var evilGauge: EvilGauge = EvilGauge.shared
-    @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet.shared
+    @ObservedObject var scrollableMenu: ScrollableMenu = ScrollableMenu()
+    @ObservedObject var evilGauge: EvilGauge = EvilGauge(maxFill: MainScreenProperties.maxFill, currentFill: 20,
+                                                         size: (UIDevice.current.userInterfaceIdiom == .pad ? GaugeHUDSetting.ipadSize : GaugeHUDSetting.iphoneSize ))
+    @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet()
     @ObservedObject var hud = HUD()
     
     var darkson = DarkSon()
