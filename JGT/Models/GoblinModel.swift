@@ -1263,7 +1263,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func throwSelf() {
         self.removeAllActions()
-        self.run(SKAction.move(to: CGPoint(x: catapultCoordinates.x, y: catapultCoordinates.y + 500), duration: 1.5), withKey: "thrown")
+        self.run(SKAction.move(to: CGPoint(x: gateCoordinates.x, y: gateCoordinates.y - 100), duration: 1.5), withKey: "thrown")
         if let catapult = self.closeStructure as? Catapult {
             catapult.launchedGoblin = true
         }
