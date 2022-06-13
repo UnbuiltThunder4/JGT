@@ -161,7 +161,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
         if (self.target == nil) {
             if (self.targetQueue.isEmpty) {
                 self.walkToOrigin()
-                if self.type == .bow && self.darkTarget != nil {
+                if (self.darkTarget != nil) {
                     self.state = .fighting
                 }
             }
@@ -263,9 +263,9 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                             case .normal:
                                 goblinDeathParticle!.particleColor = UIColor(red: 11/255, green: 129/255, blue: 80/255, alpha: 1.0)
                             }
-                                                    
+                            
                             let parent = self.parent!.scene!
-
+                            
                             let addDeathParticle = SKAction.run({
                                 parent.addChild(goblinDeathParticle!)
                             })
@@ -277,19 +277,19 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                                 addDeathParticle,
                                 goblinDeathFade
                             ])
-
+                            
                             let removeDeathParticle = SKAction.run({
                                 goblinDeathParticle!.removeFromParent()
                             })
-
+                            
                             let removeSequence = SKAction.sequence([
                                 .wait(forDuration: 0.5),
                                 removeDeathParticle
                             ])
-
+                            
                             parent.run(particleSequence)
                             parent.run(removeSequence)
-                                                        
+                            
                             self.target = nil
                             self.state = .idle
                             removeAction(forKey: "walk")
@@ -341,8 +341,111 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
         }
         else {
             if self.type != .bow {
-                self.state = .idle
-                removeAction(forKey: "walk")
+                if darkTarget != nil {
+                    let originalPosDistance = CGVector(dx: self.initialx - self.position.x, dy: self.initialy - self.position.y)
+                    let targetDistance = CGVector(dx: self.darkTarget!.position.x - self.position.x, dy: self.darkTarget!.position.y - self.position.y)
+                    if (isVectorSmallerThan(vector: targetDistance, other: 100)) {
+                        self.attackCounter += 1
+                        if (self.attackCounter % attackTime == 0) {
+                            
+                            if self.type == .axe {
+                                gameLogic.playSound(node: self, audio: Audio.EffectFiles.axeGnomeAttack, wait: false, muted: gameLogic.muted)
+                            } else {
+                                gameLogic.playSound(node: self, audio: Audio.EffectFiles.smallGnomeAttack, wait: false, muted: gameLogic.muted)
+                            }
+                            
+                            self.darkTarget!.health -= self.attack
+                            
+                            self.attackCounter = 0
+                            let attackParticle = SKEmitterNode(fileNamed: "AttackParticle")
+                            attackParticle!.position = CGPoint(x: 0, y: 0)
+                            attackParticle!.name = "attackParticle"
+                            let addParticle = SKAction.run({
+                                self.addChild(attackParticle!)
+                            })
+                            let removeParticle = SKAction.run({
+                                attackParticle!.removeFromParent()
+                            })
+                            
+                            let sequence = SKAction.sequence([
+                                addParticle,
+                                .wait(forDuration: 0.5),
+                                removeParticle
+                            ])
+                            
+                            self.run(sequence, withKey: "attackParticle")
+                        }
+                    }
+                    else {
+                        let walkDistance = limitVector(vector: targetDistance, max: 50)
+                        if (abs(originalPosDistance.dx) > 300 || abs(originalPosDistance.dy) > 300) {
+                            self.state = .idle
+                            self.darkTarget = nil
+                            removeAction(forKey: "walk")
+                        }
+                        else {
+                            if let _ = self.action(forKey: "walk") {
+                                
+                            }
+                            else {
+                                let time = getDuration(distance: walkDistance, speed: self.speed)
+                                let walk = SKAction.move(by: walkDistance, duration: time)
+                                self.run(walk, withKey: "walk")
+                            }
+                        }
+                    }
+                    if (self.darkTarget != nil) {
+                        if (self.darkTarget!.health <= 0) {
+                            let darkSonDeathParticle = SKEmitterNode(fileNamed: "GoblinDeathParticle")
+                            darkSonDeathParticle!.position = self.darkTarget!.position
+                            darkSonDeathParticle!.name = "darkSonDeathParticle"
+                            darkSonDeathParticle!.zPosition = 1
+                            darkSonDeathParticle!.particleColorSequence = nil
+                            darkSonDeathParticle!.particleColorBlendFactor = 1.0
+                            darkSonDeathParticle!.particleColor = .black
+                            darkSonDeathParticle!.setScale(2.5)
+                                                    
+                            let parent = self.darkTarget!.parent!.scene!
+
+                            let addDeathParticle = SKAction.run({
+                                parent.addChild(darkSonDeathParticle!)
+                            })
+                            let darkSonDeathFade = SKAction.run {
+                                darkSonDeathParticle!.run(SKAction.fadeOut(withDuration: 0.4))
+                            }
+                            
+                            let particleSequence = SKAction.sequence([
+                                addDeathParticle,
+                                darkSonDeathFade
+                            ])
+
+                            let removeDeathParticle = SKAction.run({
+                                darkSonDeathParticle!.removeFromParent()
+                            })
+
+                            let removeSequence = SKAction.sequence([
+                                .wait(forDuration: 0.5),
+                                removeDeathParticle
+                            ])
+
+                            parent.run(particleSequence)
+                            parent.run(removeSequence)
+                            self.darkTarget = nil
+                            self.state = .idle
+                            removeAction(forKey: "walk")
+                            
+                        }
+                    }
+                    else {
+                        self.darkTarget = nil
+                        self.state = .idle
+                        removeAction(forKey: "walk")
+                    }
+                }
+                else {
+                    self.state = .idle
+                    removeAction(forKey: "walk")
+                }
             } else {
                 if darkTarget != nil {
                     let targetDistance = CGVector(dx: self.darkTarget!.position.x - self.position.x, dy: self.darkTarget!.position.y - self.position.y)

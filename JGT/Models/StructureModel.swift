@@ -371,7 +371,7 @@ class Catapult: Structure {
             self.launchedGoblin = false
         }
         if (self.hasRock) {
-            gameLogic.spawnProjectile(tossScene, spawnPoint: CGPoint(x: self.position.x, y: self.position.y), destinationPoint: CGPoint(x: self.position.x + 500, y: self.position.y + 500), type: .rock)
+            gameLogic.spawnProjectile(tossScene, spawnPoint: CGPoint(x: self.position.x, y: self.position.y), destinationPoint: CGPoint(x: gateCoordinates.x, y: gateCoordinates.y - 100), type: .rock)
             self.texture = SKTexture(imageNamed: "catapult")
             self.hasRock = false
         }
