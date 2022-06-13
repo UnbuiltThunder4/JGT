@@ -49,6 +49,7 @@ enum GameState {
     case mainScreen
     case playing
     case selection
+    case pezzotto
     case gameOver
 }
 
@@ -149,6 +150,56 @@ let gnomes: [Enemy] = [
     Enemy(type: .axe, x: 2500, y: 1450)
 ]
 
+let gnomes1: [Enemy] = [
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .bow, x: 1250, y: 4200),
+    Enemy(type: .bow, x: 2050, y: 4200),
+    Enemy(type: .bow, x: 1250, y: 4200),
+    Enemy(type: .bow, x: 2050, y: 4200),
+    Enemy(type: .axe, x: 1350, y: 2800),
+    Enemy(type: .axe, x: 2500, y: 1450),
+    Enemy(type: .axe, x: 1350, y: 2800),
+    Enemy(type: .axe, x: 2500, y: 1450),
+    Enemy(type: .axe, x: 1350, y: 2800),
+    Enemy(type: .axe, x: 2500, y: 1450),
+    Enemy(type: .axe, x: 1350, y: 2800),
+    Enemy(type: .axe, x: 2500, y: 1450),
+    Enemy(type: .axe, x: 1350, y: 2800),
+    Enemy(type: .axe, x: 2500, y: 1450)
+]
+
+let gnomes2: [Enemy] = [
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .bow, x: 1250, y: 4200),
+    Enemy(type: .bow, x: 2050, y: 4200),
+    Enemy(type: .axe, x: 1350, y: 2800),
+    Enemy(type: .axe, x: 2500, y: 1450)
+]
+
 public enum ProficencyType {
     case catapult
     case trap
@@ -179,6 +230,24 @@ let gateCoordinates = CGPoint(x: 1600, y: 3750)
 let backdoorCoordinates = CGPoint(x: 500, y: 3635)
 let passageCoordinates = CGPoint(x: 500, y: 4100)
 
+let goblinmancyCircleCoordinates2 = CGPoint(x: 1600, y: 550)
+let tavernCoordinates2 = CGPoint(x: 1100, y: 950)
+let academyCoordinates2 = CGPoint(x: 2650, y: 1550)
+let villageCoordinates2 = CGPoint(x: 1000, y: 2500)
+let catapultCoordinates2 = CGPoint(x: 1350, y: 3000)
+let gateCoordinates2 = CGPoint(x: 2000, y: 3750)
+let backdoorCoordinates2 = CGPoint(x: 500, y: 3635)
+let passageCoordinates2 = CGPoint(x: 500, y: 4100)
+
+let goblinmancyCircleCoordinates3 = CGPoint(x: 1600, y: 550)
+let tavernCoordinates3 = CGPoint(x: 1100, y: 950)
+let academyCoordinates3 = CGPoint(x: 2650, y: 1550)
+let villageCoordinates3 = CGPoint(x: 1000, y: 2500)
+let catapultCoordinates3 = CGPoint(x: 1350, y: 3000)
+let gateCoordinates3 = CGPoint(x: 1600, y: 3750)
+let backdoorCoordinates3 = CGPoint(x: 500, y: 3635)
+let passageCoordinates3 = CGPoint(x: 500, y: 4100)
+
 let levelstructures: [Structure] = [
     Structure(type: .wall, x: 1680, y: 3900, rotation: 0),
     Gate(x: gateCoordinates.x, y: gateCoordinates.y), // THIS HAS TO BE ON INDEX 1
@@ -190,6 +259,108 @@ let levelstructures: [Structure] = [
     Village(x: villageCoordinates.x, y: villageCoordinates.y),
     Structure(type: .passage, x: passageCoordinates.x, y: passageCoordinates.y, rotation: 0),
     Structure(type: .goblincircle, x: goblinmancyCircleCoordinates.x, y: goblinmancyCircleCoordinates.y, rotation: 0),
+    Structure(type: .tree, x: 350, y: 1350, rotation: 0),
+    Structure(type: .tree, x: 1950, y: 800, rotation: 0),
+    Structure(type: .tree, x: 600, y: 750, rotation: 0),
+    Structure(type: .tree, x: 1850, y: 500, rotation: 0),
+    Structure(type: .tree, x: 2650, y: 370, rotation: 0),
+    Structure(type: .tree, x: 650, y: 3000, rotation: 0),
+    Structure(type: .tree, x: 1250, y: 1700, rotation: 0),
+    Structure(type: .tree, x: 550, y: 1580, rotation: 0),
+    Structure(type: .tree, x: 750, y: 400, rotation: 0),
+    Structure(type: .rock, x: 2100, y: 700, rotation: 0),
+    Structure(type: .rock, x: 650, y: 1450, rotation: 0),
+    Structure(type: .rock, x: 1950, y: 1350, rotation: 0),
+    Structure(type: .rock, x: 1400, y: 350, rotation: 0),
+    Structure(type: .rock, x: 1300, y: 2660, rotation: 0),
+    Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
+    Structure(type: .rock, x: 1890, y: 1720, rotation: 0),
+    Structure(type: .rock, x: 2690, y: 2620, rotation: 0)
+]
+
+let levelstructures2: [Structure] = [
+    Structure(type: .wall, x: 1680, y: 3900, rotation: 0),
+    Gate(x: gateCoordinates2.x, y: gateCoordinates2.y), // THIS HAS TO BE ON INDEX 1
+    Backdoor(x: backdoorCoordinates2.x, y: backdoorCoordinates2.y),  // THIS HAS TO BE ON INDEX 2
+    Catapult(x: catapultCoordinates2.x, y: catapultCoordinates2.y), // THIS HAS TO BE ON INDEX 3
+    Tavern(x: tavernCoordinates2.x, y: tavernCoordinates2.y),
+    Academy(x: academyCoordinates2.x, y: academyCoordinates2.y),
+    Structure(type: .passage, x: passageCoordinates2.x, y: passageCoordinates2.y, rotation: 0),
+    Structure(type: .goblincircle, x: goblinmancyCircleCoordinates2.x, y: goblinmancyCircleCoordinates2.y, rotation: 0),
+    Structure(type: .tree, x: 350, y: 1350, rotation: 0),
+    Structure(type: .tree, x: 1950, y: 800, rotation: 0),
+    Structure(type: .tree, x: 600, y: 750, rotation: 0),
+    Structure(type: .tree, x: 1850, y: 500, rotation: 0),
+    Structure(type: .tree, x: 2650, y: 370, rotation: 0),
+    Structure(type: .tree, x: 650, y: 3000, rotation: 0),
+    Structure(type: .tree, x: 1250, y: 1700, rotation: 0),
+    Structure(type: .tree, x: 550, y: 1580, rotation: 0),
+    Structure(type: .tree, x: 750, y: 400, rotation: 0),
+    Structure(type: .tree, x: 350, y: 1350, rotation: 0),
+    Structure(type: .tree, x: 1950, y: 800, rotation: 0),
+    Structure(type: .tree, x: 600, y: 750, rotation: 0),
+    Structure(type: .tree, x: 1850, y: 500, rotation: 0),
+    Structure(type: .tree, x: 2650, y: 370, rotation: 0),
+    Structure(type: .tree, x: 650, y: 3000, rotation: 0),
+    Structure(type: .tree, x: 1250, y: 1700, rotation: 0),
+    Structure(type: .tree, x: 550, y: 1580, rotation: 0),
+    Structure(type: .tree, x: 750, y: 400, rotation: 0),
+    Structure(type: .tree, x: 350, y: 1350, rotation: 0),
+    Structure(type: .tree, x: 1950, y: 800, rotation: 0),
+    Structure(type: .tree, x: 600, y: 750, rotation: 0),
+    Structure(type: .tree, x: 1850, y: 500, rotation: 0),
+    Structure(type: .tree, x: 2650, y: 370, rotation: 0),
+    Structure(type: .tree, x: 650, y: 3000, rotation: 0),
+    Structure(type: .tree, x: 1250, y: 1700, rotation: 0),
+    Structure(type: .tree, x: 550, y: 1580, rotation: 0),
+    Structure(type: .tree, x: 750, y: 400, rotation: 0),
+    Structure(type: .tree, x: 1850, y: 500, rotation: 0),
+    Structure(type: .tree, x: 2650, y: 370, rotation: 0),
+    Structure(type: .tree, x: 650, y: 3000, rotation: 0),
+    Structure(type: .tree, x: 1250, y: 1700, rotation: 0),
+    Structure(type: .tree, x: 550, y: 1580, rotation: 0),
+    Structure(type: .tree, x: 750, y: 400, rotation: 0),
+    Structure(type: .rock, x: 2100, y: 700, rotation: 0),
+    Structure(type: .rock, x: 650, y: 1450, rotation: 0),
+    Structure(type: .rock, x: 1950, y: 1350, rotation: 0),
+    Structure(type: .rock, x: 1400, y: 350, rotation: 0),
+    Structure(type: .rock, x: 1300, y: 2660, rotation: 0),
+    Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
+    Structure(type: .rock, x: 1890, y: 1720, rotation: 0),
+    Structure(type: .rock, x: 2100, y: 700, rotation: 0),
+    Structure(type: .rock, x: 650, y: 1450, rotation: 0),
+    Structure(type: .rock, x: 1950, y: 1350, rotation: 0),
+    Structure(type: .rock, x: 1400, y: 350, rotation: 0),
+    Structure(type: .rock, x: 1300, y: 2660, rotation: 0),
+    Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
+    Structure(type: .rock, x: 1890, y: 1720, rotation: 0),
+    Structure(type: .rock, x: 2690, y: 2620, rotation: 0),
+    Structure(type: .rock, x: 2100, y: 700, rotation: 0),
+    Structure(type: .rock, x: 650, y: 1450, rotation: 0),
+    Structure(type: .rock, x: 1950, y: 1350, rotation: 0),
+    Structure(type: .rock, x: 1400, y: 350, rotation: 0),
+    Structure(type: .rock, x: 1300, y: 2660, rotation: 0),
+    Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
+    Structure(type: .rock, x: 1890, y: 1720, rotation: 0),
+    Structure(type: .rock, x: 2690, y: 2620, rotation: 0),
+    Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
+    Structure(type: .rock, x: 1890, y: 1720, rotation: 0),
+    Structure(type: .rock, x: 2690, y: 2620, rotation: 0),
+    Structure(type: .rock, x: 2690, y: 2620, rotation: 0),
+    Structure(type: .rock, x: 2690, y: 2620, rotation: 0)
+]
+
+let levelstructures3: [Structure] = [
+    Structure(type: .wall, x: 1680, y: 3900, rotation: 0),
+    Gate(x: gateCoordinates3.x, y: gateCoordinates3.y), // THIS HAS TO BE ON INDEX 1
+    Backdoor(x: backdoorCoordinates3.x, y: backdoorCoordinates3.y),  // THIS HAS TO BE ON INDEX 2
+    Catapult(x: catapultCoordinates3.x, y: catapultCoordinates3.y), // THIS HAS TO BE ON INDEX 3
+    Trap(x: catapultCoordinates3.x + 1000, y: catapultCoordinates3.y),  // THIS HAS TO BE ON INDEX 4
+    Tavern(x: tavernCoordinates3.x, y: tavernCoordinates3.y),
+    Academy(x: academyCoordinates3.x, y: academyCoordinates3.y),
+    Village(x: villageCoordinates3.x, y: villageCoordinates3.y),
+    Structure(type: .passage, x: passageCoordinates2.x, y: passageCoordinates2.y, rotation: 0),
+    Structure(type: .goblincircle, x: goblinmancyCircleCoordinates2.x, y: goblinmancyCircleCoordinates2.y, rotation: 0),
     Structure(type: .tree, x: 350, y: 1350, rotation: 0),
     Structure(type: .tree, x: 1950, y: 800, rotation: 0),
     Structure(type: .tree, x: 600, y: 750, rotation: 0),
