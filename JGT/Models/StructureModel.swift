@@ -394,11 +394,13 @@ class Gate: Structure {
     }
     
     public func update(_ tossScene: TossScene) {
-        if (self.health <= 0) {
+        if (self.health <= 0 && self.health > -100) {
+            self.texture = SKTexture(imageNamed: "gate_break_4")
 //            self.removeFromParent()
             tossScene.darkson.target = nil
 //            gameLogic.playSound(node: nil, audio: Audio.EffectFiles.darkSonGateDestroyed, wait: false)
             //HERE YOU WIN
+            self.health = -101
         }
         else {
             let healthpercentage: Float = (Float(self.health) / Float(self.maxHealth)) * 100.0
