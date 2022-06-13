@@ -10,17 +10,18 @@ import SpriteKit
 
 struct TossView: View {
     
-    @Binding var currentGameState: GameState
+//    @Binding var currentGameState: GameState
+    @State var scene = SpriteKitContainer(scene: TossScene())
+    @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     
     var body: some View {
         
-        SpriteKitContainer(scene: TossScene())
+        scene
             .ignoresSafeArea()
-    }
-}
-
-struct TossView_Previews: PreviewProvider {
-    static var previews: some View {
-        TossView(currentGameState: .constant(GameState.playing))
+            .onChange(of: gameLogic.gameState) { newValue in
+                if newValue == .selection {
+                    scene = SpriteKitContainer(scene: TossScene())
+                }
+            }
     }
 }

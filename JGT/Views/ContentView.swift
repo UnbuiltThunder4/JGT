@@ -30,7 +30,7 @@ struct ContentView: View {
 //                .environmentObject(gameLogic)
         
         case .playing:
-            TossView(currentGameState: $currentGameState)
+            TossView()
 //                .environmentObject(gameLogic)
         
         case .gameOver:
