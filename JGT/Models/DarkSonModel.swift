@@ -15,8 +15,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     @ObservedObject var hud: HUD = HUD.shared
     @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet.shared
     
-//    public var lives: Int = 5
-    
+    //    public var lives: Int = 5
     public let maxHealth: Int = 500
     public var health: Int = 500
     public let attack: Int = 10
@@ -39,7 +38,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
         self.position.x = self.spawnX
         self.position.y = self.spawnY
         self.zPosition = 1
-
+        
         self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width * 1.5, height: self.size.height * 1))
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.restitution = 0.0
@@ -58,37 +57,53 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     
     func update() {
         hud.livesCounter.text = "X \(gameLogic.lives)"
-
+        
         if (self.health > 0) {
             var distance = CGVector(dx: gateCoordinates.x - position.x, dy: gateCoordinates.y - 50 - position.y)
-            if let _ = self.action(forKey: "walk") {
-                if (self.target != nil) {
-                    removeAction(forKey: "walk")
-                    self.attackCounter += 1
-                    if (self.attackCounter % attackTime == 0) {
-                        self.setGateParticles()
-
-                        if UserDefaults.standard.bool(forKey: "gateTutorial") == false {
-                        gameLogic.tutorialEvent(index: 9, hud: hud, tutorialSheet: tutorialSheet)
-                            UserDefaults.standard.set(true, forKey: "gateTutorial")
-                            hud.counter += 1
-                            hud.tutorialCounter.alpha = 1.0
-                            hud.tutorialCounter.text = String(hud.counter)
-                        }
-                        self.target!.health -= self.attack
-                        self.attackCounter = 0
-                        gameLogic.playSound(node: self, audio: Audio.EffectFiles.darkSonAttack, wait: false, muted: gameLogic.muted)
-                    }
+            if (self.target != nil) {
+                if let _ = self.action(forKey: "attackAnimation") {
                 }
+                else {
+                    darkSonAttackAnimation()
+                }
+                
+                self.attackCounter += 1
+                if (self.attackCounter % attackTime == 0) {
+                    self.setGateParticles()
+                    
+                    
+                    if UserDefaults.standard.bool(forKey: "gateTutorial") == false {
+                        gameLogic.tutorialEvent(index: 9, hud: hud, tutorialSheet: tutorialSheet)
+                        UserDefaults.standard.set(true, forKey: "gateTutorial")
+                        hud.counter += 1
+                        hud.tutorialCounter.alpha = 1.0
+                        hud.tutorialCounter.text = String(hud.counter)
+                    }
+                    self.target!.health -= self.attack
+                    self.attackCounter = 0
+                    gameLogic.playSound(node: self, audio: Audio.EffectFiles.darkSonAttack, wait: false, muted: gameLogic.muted)
+                }
+                
+            }
+            if let _ = self.action(forKey: "walk") {
             }
             else {
                 distance = limitVector(vector: distance, max: 100)
                 let time = getDuration(distance: distance, speed: self.speed)
                 let walk = SKAction.move(by: distance, duration: time)
                 self.run(walk, withKey: "walk")
+                if let _ = self.action(forKey: "walkAnimation") {
+                }
+                else {
+                    darkSonWalkAnimation()
+                }
             }
         }
         else {
+            removeAction(forKey: "walk")
+            removeAction(forKey: "walkAnimation")
+            removeAction(forKey: "attackAnimation")
+            
             if (!self.isDead) {
                 self.isDead = true
                 self.position.x = self.spawnX
@@ -100,30 +115,30 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
             }
             else {
                 if gameLogic.lives == 0 {
-//                    gameLogic.isGameOver = true
+                    //                    gameLogic.isGameOver = true
                 }
                 else {
-                self.respawnCounter += 1
-                self.target = nil
-                if (self.respawnCounter % tenSeconds == 0) {
-                    self.setFireParticles()
-                    self.alpha = 1.0
-                    self.health = self.maxHealth
-                    self.isDead = false
-                    gameLogic.playSound(node: self, audio: Audio.EffectFiles.darkSonRebirth, wait: false, muted: gameLogic.muted)
+                    self.respawnCounter += 1
+                    self.target = nil
+                    if (self.respawnCounter % tenSeconds == 0) {
+                        self.setFireParticles()
+                        self.alpha = 1.0
+                        self.health = self.maxHealth
+                        self.isDead = false
+                        gameLogic.playSound(node: self, audio: Audio.EffectFiles.darkSonRebirth, wait: false, muted: gameLogic.muted)
                     }
                 }
             }
         }
     }
-   
+    
     private func setFireParticles() {
         let fireParticle = SKEmitterNode(fileNamed: "FireParticle")
         fireParticle!.name = "fireParticle"
         fireParticle!.position.x = spawnX
         fireParticle!.position.y = spawnY
         fireParticle!.position.y -= 100
-//        fireParticle!.zPosition = -1
+        //        fireParticle!.zPosition = -1
         fireParticle!.particleColorSequence = nil
         fireParticle!.particleColorBlendFactor = 1.0
         fireParticle!.particleColor = UIColor(red: 125/255, green: 61/255, blue: 204/255, alpha: 1.0)
@@ -134,7 +149,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
         smokeParticle!.position.x = spawnX
         smokeParticle!.position.y = spawnY
         smokeParticle!.position.y -= 100
-//        smokeParticle!.zPosition = -1
+        //        smokeParticle!.zPosition = -1
         smokeParticle!.setScale(3)
         
         let addFireParticle = SKAction.run({
@@ -150,7 +165,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
         let removeSmokeParticle = SKAction.run({
             smokeParticle!.removeFromParent()
         })
-
+        
         let fireFade = SKAction.run({
             fireParticle!.run(SKAction.fadeOut(withDuration: 0.7))
         })
@@ -210,6 +225,35 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
         ])
         
         self.parent!.run(removeSequence, withKey: "removeExplosionParticle")
+    }
+    
+    public func darkSonWalkAnimation() {
+        var walkAnimationTextures : [SKTexture] = []
+        
+        for i in 1...8 {
+            walkAnimationTextures.append(SKTexture(imageNamed: "walk\(i)"))
+        }
+        
+        let walkAnimation = SKAction.animate(with: walkAnimationTextures, timePerFrame: 0.5)
+        let walkAnimationSequence = SKAction.sequence([
+            walkAnimation,
+            walkAnimation.reversed()
+        ])
+        let walkAnimationRepeated = SKAction.repeatForever(walkAnimationSequence)
+        
+        self.run(walkAnimationRepeated, withKey: "walkAnimation")
+    }
+    
+    public func darkSonAttackAnimation() {
+        var attackAnimationTextures : [SKTexture] = []
+        
+        for i in 1...7 {
+            attackAnimationTextures.append(SKTexture(imageNamed: "attack\(i)"))
+        }
+        
+        let attackAnimation = SKAction.animate(with: attackAnimationTextures, timePerFrame: 0.5)
+        
+        self.run(attackAnimation, withKey: "attackAnimation")
     }
 }
 

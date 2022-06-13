@@ -312,13 +312,15 @@ extension TossScene: SKPhysicsContactDelegate {
             if let node = firstBody.node as? DarkSon {
                 if let node2 = secondBody.node as? Gate {
                     node.target = node2
-                    print("done")
+                    node.removeAction(forKey: "walk")
+                    node.removeAction(forKey: "walkAnimation")
                 }
             }
             if let node = secondBody.node as? DarkSon {
                 if let node2 = firstBody.node as? Gate {
                     node.target = node2
-                    print("done")
+                    node.removeAction(forKey: "walk")
+                    node.removeAction(forKey: "walkAnimation")
                 }
             }
         
