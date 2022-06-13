@@ -81,14 +81,11 @@ extension TossScene: SKPhysicsContactDelegate {
             if let node = firstBody.node as? DarkSon {
                 if let node2 = secondBody.node as? Enemy {
                     node2.darkTarget = node
-                    print("a")
                 }
             }
             if let node = secondBody.node as? DarkSon {
                 if let node2 = firstBody.node as? Enemy {
                     node2.darkTarget = node
-                    print("a")
-
                 }
             }
         
