@@ -413,6 +413,9 @@ class Gate: Structure {
             case 25:
                 self.texture = SKTexture(imageNamed: "gate_break_3")
                 break
+            case 0:
+                self.texture = SKTexture(imageNamed: "gate_break_4")
+                break
             default:
                 break
             }
