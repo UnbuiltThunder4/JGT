@@ -185,6 +185,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
         explosionParticle!.particleColorSequence = nil
         explosionParticle!.particleColorBlendFactor = 1.0
         explosionParticle!.particleColor = UIColor(red: 125/255, green: 61/255, blue: 204/255, alpha: 1.0)
+        explosionParticle!.setScale(1.3)
         
         let addExplosionParticle = SKAction.run({
             self.parent!.scene!.addChild(explosionParticle!)
@@ -204,7 +205,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
         self.parent!.run(explosionSequence, withKey: "explosionParticle")
         
         let removeSequence = SKAction.sequence([
-            .wait(forDuration: 1),
+            .wait(forDuration: 2),
             removeExplosionParticle
         ])
         
