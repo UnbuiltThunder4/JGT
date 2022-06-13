@@ -342,11 +342,25 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
                 newGoblin.texture = SKTexture(imageNamed: "gum_goblin")
                 break
             }
-            newGoblin.run(SKAction.move(by: distance, duration: 3.0), withKey: "launched")
             
+            self.isFlyingAnimation(goblin: newGoblin)
+
+            newGoblin.run(SKAction.move(by: distance, duration: 3.0), completion: {
+                newGoblin.state = .idle
+                let removeFlyingAction = SKAction.run {
+                    self.removeFlyingAnimation(goblin: newGoblin)
+                }
+                
+                let removeFlyingSequence = SKAction.sequence([
+                    .wait(forDuration: 2),
+                    removeFlyingAction
+                ])
+                
+                newGoblin.run(removeFlyingSequence)
+            })
+                        
             tossScene.evilGauge.shootGauge(goblin: newGoblin)
             tossScene.cauldron.updateCauldron(amount: 1)
-            
         }
     }
     
@@ -396,6 +410,49 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
     
     public func tutorialEvent(index: Int, hud: HUD, tutorialSheet: TutorialSheet) {
         hud.addTutorialButton(tutorialButton: tutorials[index], position: CGPoint(x: hud.position.x + UIScreen.main.bounds.width/2.5, y: 0))
+    }
+    
+    public func isFlyingAnimation(goblin: Goblin) {
+        var flyingTextures : [SKTexture] = []
+        var maxRange = 0
+        
+        switch goblin.type {
+        case .normal:
+            maxRange = 15
+        case .rock:
+            maxRange = 12
+        case .gum:
+            maxRange = 13
+        case .fire:
+            maxRange = 13
+        }
+              
+        for i in 1...maxRange {
+            flyingTextures.append(SKTexture(imageNamed: "\(goblin.type)_fly (\(i))"))
+        }
+        
+        let flyingAnimation = SKAction.repeatForever(SKAction.animate(with: flyingTextures, timePerFrame: 0.5))
+        
+        goblin.run(flyingAnimation, withKey: "flyingAnimation")
+    }
+    
+    public func removeFlyingAnimation(goblin: Goblin) {
+        goblin.removeAction(forKey: "flyingAnimation")
+        
+        switch goblin.type {
+        case .normal:
+            goblin.texture = SKTexture(imageNamed: "goblin")
+            break
+        case .fire:
+            goblin.texture = SKTexture(imageNamed: "fire_goblin")
+            break
+        case .gum:
+            goblin.texture = SKTexture(imageNamed: "gum_goblin")
+            break
+        case .rock:
+            goblin.texture = SKTexture(imageNamed: "rock_goblin")
+            break
+        }
     }
     
 }

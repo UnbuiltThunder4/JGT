@@ -990,28 +990,13 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             if let _ = self.action(forKey: "flyingAnimation") {
                 
             } else {
-                isFlyingAnimation()
+                gameLogic.isFlyingAnimation(goblin: self)
             }
         }
         else {
             self.state = .idle
-            self.removeAction(forKey: "flyingAnimation")
             
-            switch self.type {
-            case .normal:
-                self.texture = SKTexture(imageNamed: "goblin")
-                break
-            case .fire:
-                self.texture = SKTexture(imageNamed: "fire_goblin")
-                break
-            case .gum:
-                self.texture = SKTexture(imageNamed: "gum_goblin")
-                break
-            case .rock:
-                self.texture = SKTexture(imageNamed: "rock_goblin")
-                break
-            }
-            
+            gameLogic.removeFlyingAnimation(goblin: self)
         }
     }
     
@@ -1581,28 +1566,28 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
     }
  
-    private func isFlyingAnimation() {
-        var flyingTextures : [SKTexture] = []
-        var maxRange = 0
-        
-        switch self.type {
-        case .normal:
-            maxRange = 15
-        case .rock:
-            maxRange = 12
-        case .gum:
-            maxRange = 13
-        case .fire:
-            maxRange = 13
-        }
-              
-        for i in 1...maxRange {
-            flyingTextures.append(SKTexture(imageNamed: "\(self.type)_fly (\(i))"))
-        }
-        
-        let flyingAnimation = SKAction.repeatForever(SKAction.animate(with: flyingTextures, timePerFrame: 0.5))
-        
-        self.run(flyingAnimation, withKey: "flyingAnimation")
-    }
+//    private func isFlyingAnimation() {
+//        var flyingTextures : [SKTexture] = []
+//        var maxRange = 0
+//        
+//        switch self.type {
+//        case .normal:
+//            maxRange = 15
+//        case .rock:
+//            maxRange = 12
+//        case .gum:
+//            maxRange = 13
+//        case .fire:
+//            maxRange = 13
+//        }
+//              
+//        for i in 1...maxRange {
+//            flyingTextures.append(SKTexture(imageNamed: "\(self.type)_fly (\(i))"))
+//        }
+//        
+//        let flyingAnimation = SKAction.repeatForever(SKAction.animate(with: flyingTextures, timePerFrame: 0.5))
+//        
+//        self.run(flyingAnimation, withKey: "flyingAnimation")
+//    }
     
 }
