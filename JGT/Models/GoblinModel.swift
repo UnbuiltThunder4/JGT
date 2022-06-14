@@ -1490,7 +1490,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.pressCounter += 1
         self.state = .inhand
         self.removeAllActions()
-        print("\(twoSecond - self.pressCounter)")
+//        print("\(twoSecond - self.pressCounter)")
         if (twoSecond - self.pressCounter == 0 && isDead == false) {
             self.pressCounter = 0
             isDead = true

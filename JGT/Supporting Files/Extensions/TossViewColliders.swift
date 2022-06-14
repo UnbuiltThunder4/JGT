@@ -351,8 +351,8 @@ extension TossScene: SKPhysicsContactDelegate {
                     node.isFrenzied = true
                     node.fear = 0
                     node.currentFrenzyTurn = node.frenzy
-                    print(node.fullName)
-                    print(node.isFrenzied)
+//                    print(node.fullName)
+//                    print(node.isFrenzied)
                     
                     let frenzyParticle = SKEmitterNode(fileNamed: "FrenzyParticle")
                     frenzyParticle!.name = "frenzyParticle"
@@ -393,8 +393,8 @@ extension TossScene: SKPhysicsContactDelegate {
                     node.fear = 0
                     node.currentFrenzyTurn = node.frenzy
                     
-                    print(node.fullName)
-                    print(node.isFrenzied)
+//                    print(node.fullName)
+//                    print(node.isFrenzied)
                 }
             }
         }

@@ -93,20 +93,26 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         evilSight.position.x = UIScreen.main.bounds.width
         background.addChild(evilSight)
         
-        switch gameLogic.level {
-        case 1:
         self.enemies.append(contentsOf: gnomes)
         self.structures.append(contentsOf: levelstructures)
         setGoblins(population.goblins, spawnPoint: nil)
         setEnemies(self.enemies)
         setStructures(self.structures)
-        case 2:
-            break
-        case 3:
-            break
-        default:
-            break
-        }
+        
+//        switch gameLogic.level {
+//        case 1:
+//        self.enemies.append(contentsOf: gnomes)
+//        self.structures.append(contentsOf: levelstructures)
+//        setGoblins(population.goblins, spawnPoint: nil)
+//        setEnemies(self.enemies)
+//        setStructures(self.structures)
+//        case 2:
+//            break
+//        case 3:
+//            break
+//        default:
+//            break
+//        }
         
         
     }

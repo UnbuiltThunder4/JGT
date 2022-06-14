@@ -36,7 +36,7 @@ class HUD: SKNode, ObservableObject {
         self.tutorialCounter.alpha = 0.0
         self.tutorialCounter.text = String(self.counter)
         self.livesCounter.name = "livesCounter"
-        self.livesCounter.text = "X 4"
+        self.livesCounter.text = "X 5"
         self.addChild(livesCounter)
         self.name = "HUD"
     }

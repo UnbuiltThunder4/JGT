@@ -15,7 +15,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     //@ObservedObject var hud: HUD
     @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet.shared
     
-    //    public var lives: Int = 5
+    public var lives: Int = 5
     public let maxHealth: Int = 500
     public var health: Int = 500
     public let attack: Int = 10
@@ -34,7 +34,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     init() {
         super.init(texture: SKTexture(imageNamed: "darkson"), color: .red, size: CGSize(width: 300, height: 300))
         self.name = "darkson"
-        self.speed = 6.0
+        self.speed = 36.0
         self.position.x = self.spawnX
         self.position.y = self.spawnY
         self.zPosition = 1
@@ -56,8 +56,6 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     func update(hud: HUD) {
-        hud.livesCounter.text = "X \(gameLogic.lives)"
-        
         if (self.health > 0) {
             var distance = CGVector(dx: gateCoordinates.x - position.x, dy: gateCoordinates.y - 50 - position.y)
             if (self.target != nil) {
@@ -110,11 +108,12 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                 self.position.y = self.spawnY
                 self.alpha = 0.0
                 self.respawnCounter += 1
-                gameLogic.lives -= 1
+                self.lives -= 1
+                hud.livesCounter.text = "X \(self.lives)"
                 gameLogic.playSound(node: self.parent?.scene?.camera, audio: Audio.EffectFiles.darkSonGrunt, wait: false, muted: gameLogic.muted)
             }
             else {
-                if gameLogic.lives == 0 {
+                if self.lives == 0 {
                     //                    gameLogic.isGameOver = true
                 }
                 else {

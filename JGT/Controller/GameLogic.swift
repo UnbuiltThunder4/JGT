@@ -29,7 +29,6 @@ class GameLogic: ObservableObject {
     @State var catapult = UserDefaults.standard.bool(forKey: "catapultTutorial")
     @State var trap = UserDefaults.standard.bool(forKey: "trapTutorial")
     
-    @Published var lives = 5
     @Published var level = 1
     
     // Single instance of the class
@@ -154,7 +153,12 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
                 }
                 bgchild.removeFromParent()
             }
-            tossScene.background.removeFromParent()
+            for i in 0...tossScene.population.goblins.count {
+                tossScene.population.kill(tossScene.population.goblins[i])
+            }
+            tossScene.removeAllChildren()
+            tossScene.removeFromParent()
+            
         }
     }
     
@@ -454,6 +458,7 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
             break
         }
     }
+    
     
 }
 
