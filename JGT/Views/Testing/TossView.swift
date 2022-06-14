@@ -10,16 +10,17 @@ import SpriteKit
 
 struct TossView: View {
     
-    @Binding var currentScene: SpriteKitContainer
+    @Binding var container: SpriteKitContainer?
+    @Binding var currentScene: SKScene?
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     
     var body: some View {
         
-        currentScene
+        container
             .ignoresSafeArea()
             .onChange(of: gameLogic.gameState) { newValue in
                 if newValue != .playing {
-                    currentScene = SpriteKitContainer(scene: TossScene())
+                    currentScene = TossScene()
                 }
             }
     }

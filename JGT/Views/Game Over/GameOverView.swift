@@ -19,7 +19,7 @@ import SwiftUI
 struct GameOverView: View {
     
 //    @Binding var currentGameState: GameState
-    @Binding var currentScene: SpriteKitContainer
+    @Binding var currentScene: SpriteKitContainer?
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
 
     var body: some View {
