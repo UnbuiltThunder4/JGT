@@ -69,8 +69,8 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             self.desc = "“The Infamous gnomes are known for their knife passion.”"
             self.maskmodX = 2.5
             self.maskmodY = 2.5
-            width = 60
-            height = 120
+            width = 82
+            height = 114
             imgname = "gnomesmall"
             break
             
@@ -84,8 +84,8 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             self.desc = "“The ranged soldiers of the gnome army, but everybody knows that ranged weapons are for cowards, so goblins can’t use them.”"
             self.maskmodX = 5
             self.maskmodY = 10
-            width = 100
-            height = 140
+            width = 80
+            height = 160
             imgname = "gnomebow"
             break
             
@@ -99,8 +99,8 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             self.desc = "“The bigger and bulkiest type of gnomes, they’re not really strong but are extremely hard to kill.”"
             self.maskmodX = 2.5
             self.maskmodY = 2.5
-            width = 160
-            height = 160
+            width = 169
+            height = 144
             imgname = "gnomeaxe"
             break
         }

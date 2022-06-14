@@ -32,14 +32,14 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     private var respawnCounter: Int = 0
     
     init() {
-        super.init(texture: SKTexture(imageNamed: "darkson"), color: .red, size: CGSize(width: 300, height: 300))
+        super.init(texture: SKTexture(imageNamed: "darkson"), color: .red, size: CGSize(width: 233, height: 333))
         self.name = "darkson"
         self.speed = 6.0
         self.position.x = self.spawnX
         self.position.y = self.spawnY
         self.zPosition = 1
         
-        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width * 1.5, height: self.size.height * 1))
+        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width * 1.0, height: self.size.height * 0.8))
         self.physicsBody?.affectedByGravity = false
         self.physicsBody?.restitution = 0.0
         self.physicsBody?.linearDamping = 0.0

@@ -535,7 +535,7 @@ extension TossScene {
             }
             goblins[i].zPosition = 4
             
-            goblins[i].physicsBody = SKPhysicsBody(rectangleOf: goblins[i].size)
+            goblins[i].physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: goblins[i].size.width * 1.2, height: goblins[i].size.height * 1.2))
             goblins[i].physicsBody?.affectedByGravity = false
             goblins[i].physicsBody?.restitution = 0.0
             goblins[i].physicsBody?.linearDamping = 0.0
