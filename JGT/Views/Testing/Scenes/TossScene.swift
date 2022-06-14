@@ -93,26 +93,20 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         evilSight.position.x = UIScreen.main.bounds.width
         background.addChild(evilSight)
         
+        switch gameLogic.level {
+        case 1:
         self.enemies.append(contentsOf: gnomes)
         self.structures.append(contentsOf: levelstructures)
         setGoblins(population.goblins, spawnPoint: nil)
         setEnemies(self.enemies)
         setStructures(self.structures)
-        
-//        switch gameLogic.level {
-//        case 1:
-//        self.enemies.append(contentsOf: gnomes)
-//        self.structures.append(contentsOf: levelstructures)
-//        setGoblins(population.goblins, spawnPoint: nil)
-//        setEnemies(self.enemies)
-//        setStructures(self.structures)
-//        case 2:
-//            break
-//        case 3:
-//            break
-//        default:
-//            break
-//        }
+        case 2:
+            break
+        case 3:
+            break
+        default:
+            break
+        }
         
         
     }
@@ -239,7 +233,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
                 structure.update(self)
             }
             
-            darkson.update(hud: self.hud)
+            darkson.update(self)
             
             if channeling == true && evilGauge.currentFill > 0 {
                 evilGauge.channelingSight()
@@ -270,10 +264,8 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             }
             
             if self.evilGauge.currentFill == 0 && self.population.goblins.isEmpty {
-                gameLogic.isGameOver = true
+                gameLogic.finishTheGame(self)
             }
-            
-            gameLogic.finishTheGame(self)
         }
     }
     

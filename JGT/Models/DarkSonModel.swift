@@ -12,7 +12,7 @@ import SpriteKit
 class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
-    //@ObservedObject var hud: HUD
+    //@ObservedObject var tossScene.hud: tossScene.hud
     @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet.shared
     
     public var lives: Int = 5
@@ -55,7 +55,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(hud: HUD) {
+    func update(_ tossScene: TossScene) {
         if (self.health > 0) {
             var distance = CGVector(dx: gateCoordinates.x - position.x, dy: gateCoordinates.y - 50 - position.y)
             if (self.target != nil) {
@@ -71,11 +71,11 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                     
                     
                     if UserDefaults.standard.bool(forKey: "gateTutorial") == false {
-                        gameLogic.tutorialEvent(index: 9, hud: hud, tutorialSheet: tutorialSheet)
+                        gameLogic.tutorialEvent(index: 9, hud: tossScene.hud, tutorialSheet: tutorialSheet)
                         UserDefaults.standard.set(true, forKey: "gateTutorial")
-                        hud.counter += 1
-                        hud.tutorialCounter.alpha = 1.0
-                        hud.tutorialCounter.text = String(hud.counter)
+                        tossScene.hud.counter += 1
+                        tossScene.hud.tutorialCounter.alpha = 1.0
+                        tossScene.hud.tutorialCounter.text = String(tossScene.hud.counter)
                     }
                     self.target!.health -= self.attack
                     self.attackCounter = 0
@@ -108,24 +108,22 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                 self.position.y = self.spawnY
                 self.alpha = 0.0
                 self.respawnCounter += 1
-                self.lives -= 1
-                hud.livesCounter.text = "X \(self.lives)"
+                self.lives -= 5
+                tossScene.hud.livesCounter.text = "X \(self.lives)"
                 gameLogic.playSound(node: self.parent?.scene?.camera, audio: Audio.EffectFiles.darkSonGrunt, wait: false, muted: gameLogic.muted)
+                if self.lives == 0 {
+                    gameLogic.finishTheGame(tossScene)
+                }
             }
             else {
-                if self.lives == 0 {
-                    //                    gameLogic.isGameOver = true
-                }
-                else {
-                    self.respawnCounter += 1
-                    self.target = nil
-                    if (self.respawnCounter % tenSeconds == 0) {
-                        self.setFireParticles()
-                        self.alpha = 1.0
-                        self.health = self.maxHealth
-                        self.isDead = false
-                        gameLogic.playSound(node: self, audio: Audio.EffectFiles.darkSonRebirth, wait: false, muted: gameLogic.muted)
-                    }
+                self.respawnCounter += 1
+                self.target = nil
+                if (self.respawnCounter % tenSeconds == 0) {
+                    self.setFireParticles()
+                    self.alpha = 1.0
+                    self.health = self.maxHealth
+                    self.isDead = false
+                    gameLogic.playSound(node: self, audio: Audio.EffectFiles.darkSonRebirth, wait: false, muted: gameLogic.muted)
                 }
             }
         }

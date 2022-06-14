@@ -135,7 +135,7 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
     // Game Over Conditions
     @Published var isGameOver: Bool = false
     
-    func finishTheGame(_ tossScene: TossScene) {
+    func genocideFunction(_ tossScene: TossScene) {
         if self.isGameOver == true {
             self.gameState = .gameOver
             tossScene.background.children.forEach { bgchild in
@@ -153,9 +153,9 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
                 }
                 bgchild.removeFromParent()
             }
-            for i in 0...tossScene.population.goblins.count {
-                tossScene.population.kill(tossScene.population.goblins[i])
-            }
+//            for i in 0...tossScene.population.goblins.count {
+//                tossScene.population.kill(tossScene.population.goblins[i])
+//            }
             tossScene.removeAllChildren()
             tossScene.removeFromParent()
             
@@ -459,6 +459,9 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
         }
     }
     
-    
+    public func finishTheGame(_ tossScene: TossScene) {
+        self.isGameOver = true
+        self.genocideFunction(tossScene)
+    }
 }
 
