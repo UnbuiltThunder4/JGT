@@ -357,6 +357,7 @@ extension TossScene: SKPhysicsContactDelegate {
                     let frenzyParticle = SKEmitterNode(fileNamed: "FrenzyParticle")
                     frenzyParticle!.name = "frenzyParticle"
                     frenzyParticle!.position = CGPoint(x: 0.0, y: 0.0)
+                    frenzyParticle!.zPosition = -1
                     frenzyParticle!.setScale(1.5)
                     
                     node.addChild(frenzyParticle!)
