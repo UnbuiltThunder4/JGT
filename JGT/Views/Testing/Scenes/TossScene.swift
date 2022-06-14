@@ -125,6 +125,10 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         self.enemyPopulation.enemies.forEach({
             $0.target = nil
             $0.targetQueue = []
+            $0.health = $0.maxHealth
+            $0.shield = $0.maxShield
+            $0.alpha = 1.0
+            $0.notDead = true
         })
         
         self.population.goblins.forEach({
@@ -168,24 +172,8 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
                     bgchild.removeFromParent()
                 }
             }
-        self.population = Population(size: 3, mutationRate: 10)
-        self.enemyPopulation.enemies = []
-        self.structuresList.structures = []
         
-        switch gameLogic.level {
-        case 1:
-        self.enemyPopulation.enemies.append(contentsOf: gnomes)
-        self.structuresList.structures.append(contentsOf: levelstructures)
-        setGoblins(population.goblins, spawnPoint: nil)
-        setEnemies(self.enemyPopulation)
-        setStructures(self.structuresList)
-        case 2:
-            break
-        case 3:
-            break
-        default:
-            break
-        }
+        
         
         }
 
@@ -262,7 +250,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             }
             
             self.enemyPopulation.enemies.forEach {
-                if ($0.update(self)) {
+                if ($0.update(self) && $0.notDead) {
                     let gnomeDeathParticle = SKEmitterNode(fileNamed: "GoblinDeathParticle")
                     gnomeDeathParticle!.position = $0.position
                     gnomeDeathParticle!.name = "goblinDeathParticle"
@@ -293,10 +281,12 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
                     
                     parent.run(particleSequence)
                     parent.run(removeSequence)
+                    $0.notDead = false
                     
-                    let index = self.enemyPopulation.enemies.firstIndex(of: $0)!
-                    $0.removeFromParent()
-                    self.enemyPopulation.enemies.remove(at: index)
+//                    let index = self.enemyPopulation.enemies.firstIndex(of: $0)!
+//                    $0.removeFromParent()
+                    $0.alpha = 0.0
+//                    self.enemyPopulation.enemies.remove(at: index)
                     evilGauge.updateGauge(goblin: nil, value: 5)
                 }
             }

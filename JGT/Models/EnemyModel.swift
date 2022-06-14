@@ -25,6 +25,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     public var type: EnemyType
     
     public var state: EnemyState = .idle
+    public var notDead: Bool = true
     
     public var maxHealth: Int
     public var health: Int
@@ -119,22 +120,24 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     public func update(_ tossScene: TossScene) -> Bool {
-        let isDead = self.checkHealth()
-        switch self.state {
-            
-        case .idle:
-            idleUpdate()
-            break
-            
-        case .fighting:
-            attackUpdate(tossScene)
-            break
-            
-        default:
-            idleUpdate()
-            break
+        let Dead = self.checkHealth()
+        if (self.health > 0) {
+            switch self.state {
+                
+            case .idle:
+                idleUpdate()
+                break
+                
+            case .fighting:
+                attackUpdate(tossScene)
+                break
+                
+            default:
+                idleUpdate()
+                break
+            }
         }
-        return isDead
+        return Dead
     }
     
     private func checkHealth() -> Bool {
