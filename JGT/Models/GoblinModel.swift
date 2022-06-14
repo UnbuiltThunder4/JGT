@@ -287,7 +287,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 hud.tutorialCounter.text = String(hud.counter)
             }
             
-            hasToUpdateRank = backdooringUpdate()
+            backdooringUpdate()
             break
             
         case .passaging:
@@ -727,7 +727,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             if let academy = self.closeStructure as? Academy {
                 academy.removeGoblin(self)
             }
-            self.HWpoints += 10
+            self.HWpoints += 100
             self.fitness = self.getFitness()
             hasToUpdateRank = true
         }
@@ -751,7 +751,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 }
                 self.type = .gum
                 self.texture = SKTexture(imageNamed: "gum_goblin")
-                self.HWpoints += 15
+                self.HWpoints += 150
                 self.fitness = self.getFitness()
                 hasToUpdateRank = true
                 
@@ -868,7 +868,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 }
                 if (self.type != .gum) {
                     self.health -= 80
-                    self.HWpoints -= 5
+                    self.HWpoints -= 50
                     self.state = .stunned
                     gameLogic.playSound(node: trap, audio: Audio.EffectFiles.trap, wait: false, muted: gameLogic.muted)
                     
@@ -911,7 +911,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                     
                 }
                 else {
-                    self.HWpoints += 5
+                    self.HWpoints += 50
                 }
                 self.fitness = self.getFitness()
                 if (self.health > 0) {
@@ -931,8 +931,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
     }
     
-    private func backdooringUpdate() -> Bool {
-        var hasToUpdateRank = false
+    private func backdooringUpdate() {
         self.updateAge()
         if let backdoor = self.closeStructure as? Backdoor {
             if (backdoor.isOpened) {
@@ -956,9 +955,6 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                         dmg += self.attack
                     }
                     backdoor.health -= dmg
-                    self.HWpoints += 1
-                    self.fitness = self.getFitness()
-                    hasToUpdateRank = true
                 }
             }
         }
@@ -966,7 +962,6 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             self.attackCounter = 0
             self.state = .idle
         }
-        return hasToUpdateRank
     }
     
     private func passagingUpdate() {
@@ -1253,7 +1248,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.addProficency(type: .catapult, level: 2)
             }
         }
-        self.HWpoints += 8
+        self.HWpoints += 75
         self.fitness = self.getFitness()
         if let structure = self.closeStructure as? Catapult {
             structure.hasRock = true
@@ -1268,7 +1263,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             catapult.launchedGoblin = true
         }
         if (self.type != .rock) {
-            self.HWpoints += 5
+            self.HWpoints += 50
             
             switch self.type {
             case .normal:
@@ -1297,7 +1292,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             
         }
         else {
-            self.HWpoints += 10
+            self.HWpoints += 100
             let random = Int.random(in: 0...1)
             gameLogic.playSound(node: self,
                                 audio: random == 0 ? Audio.EffectFiles.stoneblinFly1 : Audio.EffectFiles.stoneblinFly1, wait: false, muted: gameLogic.muted)
@@ -1339,7 +1334,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
         
         self.closeStructure!.removeFromParent()
-        self.HWpoints += 5
+        self.HWpoints += 50
         self.hasRock = true
         self.fitness = self.getFitness()
         self.closeStructure = nil
@@ -1362,7 +1357,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.closeStructure!.removeFromParent()
         self.type = .rock
         self.texture = SKTexture(imageNamed: "rock_goblin")
-        self.HWpoints += 15
+        self.HWpoints += 150
         self.fitness = self.getFitness()
         self.closeStructure = nil
     }
@@ -1394,7 +1389,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
         self.closeStructure!.removeFromParent()
         self.evilGauge.updateGauge(goblin: nil, value: 1)
-        self.HWpoints += 5
+        self.HWpoints += 50
         self.fitness = self.getFitness()
         self.closeStructure = nil
     }
@@ -1421,7 +1416,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         flameblinParticle!.position = CGPoint(x: 0, y: 0)
         self.addChild(flameblinParticle!)
         flameblinParticle!.zPosition = -1
-        self.HWpoints += 15
+        self.HWpoints += 150
         self.fitness = self.getFitness()
         self.closeStructure = nil
     }
