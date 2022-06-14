@@ -135,32 +135,33 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
     // Game Over Conditions
     @Published var isGameOver: Bool = false
     
-    func genocideFunction(_ tossScene: TossScene) {
-        if self.isGameOver == true {
-            self.gameState = .gameOver
-            tossScene.background.children.forEach { bgchild in
-                bgchild.children.forEach { bggrandson in
-                    bggrandson.children.forEach { bggrandgrandson in
-                        bggrandgrandson.children.forEach { bggrandgrandgrandson in
-                            bggrandgrandgrandson.children.forEach { what in
-                                what.removeFromParent()
-                            }
-                            bggrandgrandgrandson.removeFromParent()
-                        }
-                        bggrandgrandson.removeFromParent()
-                    }
-                    bggrandson.removeFromParent()
-                }
-                bgchild.removeFromParent()
-            }
-//            for i in 0...tossScene.population.goblins.count {
-//                tossScene.population.kill(tossScene.population.goblins[i])
+//    func genocideFunction(_ tossScene: TossScene) {
+//        //        if self.isGameOver == true {
+//        tossScene.children.forEach { bgchild in
+//            bgchild.children.forEach { bggrandson in
+//                bggrandson.children.forEach { bggrandgrandson in
+//                    bggrandgrandson.children.forEach { bggrandgrandgrandson in
+//                        bggrandgrandgrandson.children.forEach { what in
+//                            what.removeAllActions()
+//                            what.removeFromParent()
+//                        }
+//                        bggrandgrandgrandson.removeAllActions()
+//                        bggrandgrandgrandson.removeFromParent()
+//                    }
+//                    bggrandgrandson.removeAllActions()
+//                    bggrandgrandson.removeFromParent()
+//                }
+//                bggrandson.removeAllActions()
+//                bggrandson.removeFromParent()
 //            }
-            tossScene.removeAllChildren()
-            tossScene.removeFromParent()
-            
-        }
-    }
+//            bgchild.removeAllActions()
+//            bgchild.removeFromParent()
+//        }
+////        tossScene.population.goblins = []
+////        tossScene.enemies = []
+//        self.gameState = .gameOver
+//        //        }
+//    }
     
     func boundLayerPos(_ tossScene: TossScene, aNewPosition: CGPoint) -> CGPoint {
         let winSize = tossScene.size
@@ -460,8 +461,8 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
     }
     
     public func finishTheGame(_ tossScene: TossScene) {
+        tossScene.cleanScene()
         self.isGameOver = true
-        self.genocideFunction(tossScene)
+        self.gameState = .gameOver
     }
 }
-

@@ -549,62 +549,62 @@ extension TossScene {
         }
     }
     
-    func setEnemies(_ enemies: [Enemy]) {
-        for i in 0..<enemies.count {
-            enemies[i].zPosition = 4
+    func setEnemies(_ enemypopulation: EnemyPopulation) {
+        for i in 0..<enemypopulation.enemies.count {
+            enemypopulation.enemies[i].zPosition = 4
             
-            enemies[i].physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: enemies[i].size.width*enemies[i].maskmodX,
-                                                                       height: enemies[i].size.height*enemies[i].maskmodY))
-            enemies[i].physicsBody?.affectedByGravity = false
-            enemies[i].physicsBody?.isDynamic = true
-            enemies[i].physicsBody?.restitution = 0.0
-            enemies[i].physicsBody?.linearDamping = 0.0
-            enemies[i].physicsBody?.angularDamping = 0.0
-            enemies[i].physicsBody?.allowsRotation = false
-            if enemies[i].type == .bow {
+            enemypopulation.enemies[i].physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: enemypopulation.enemies[i].size.width*enemypopulation.enemies[i].maskmodX,
+                                                                                       height: enemypopulation.enemies[i].size.height*enemypopulation.enemies[i].maskmodY))
+            enemypopulation.enemies[i].physicsBody?.affectedByGravity = false
+            enemypopulation.enemies[i].physicsBody?.isDynamic = true
+            enemypopulation.enemies[i].physicsBody?.restitution = 0.0
+            enemypopulation.enemies[i].physicsBody?.linearDamping = 0.0
+            enemypopulation.enemies[i].physicsBody?.angularDamping = 0.0
+            enemypopulation.enemies[i].physicsBody?.allowsRotation = false
+            if enemypopulation.enemies[i].type == .bow {
 //                enemies[i].physicsBody?.isDynamic = false
-                enemies[i].physicsBody?.categoryBitMask = Collision.Masks.rangedEnemy.bitmask
-                enemies[i].physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask | Collision.Masks.darkson.bitmask
-                enemies[i].physicsBody?.collisionBitMask = Collision.Masks.building.bitmask
+                enemypopulation.enemies[i].physicsBody?.categoryBitMask = Collision.Masks.rangedEnemy.bitmask
+                enemypopulation.enemies[i].physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask | Collision.Masks.darkson.bitmask
+                enemypopulation.enemies[i].physicsBody?.collisionBitMask = Collision.Masks.building.bitmask
             } else {
 //                enemies[i].physicsBody?.isDynamic = true
-                enemies[i].physicsBody?.categoryBitMask = Collision.Masks.meleeEnemy.bitmask
-                enemies[i].physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask | Collision.Masks.enviroment.bitmask | Collision.Masks.darkson.bitmask
-                enemies[i].physicsBody?.collisionBitMask = Collision.Masks.building.bitmask | Collision.Masks.gate.bitmask
+                enemypopulation.enemies[i].physicsBody?.categoryBitMask = Collision.Masks.meleeEnemy.bitmask
+                enemypopulation.enemies[i].physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask | Collision.Masks.enviroment.bitmask | Collision.Masks.darkson.bitmask
+                enemypopulation.enemies[i].physicsBody?.collisionBitMask = Collision.Masks.building.bitmask | Collision.Masks.gate.bitmask
             }
             
-            background.addChild(enemies[i])
+            background.addChild(enemypopulation.enemies[i])
         }
     }
     
-    func setStructures(_ structures: [Structure]) {
-        for i in 0..<structures.count {
-            structures[i].zPosition = 0
-            if (structures[i].type == .passage) {
-                structures[i].zPosition = 4
+    func setStructures(_ structuresList: StructureList) {
+        for i in 0..<structuresList.structures.count {
+            structuresList.structures[i].zPosition = 0
+            if (structuresList.structures[i].type == .passage) {
+                structuresList.structures[i].zPosition = 4
             }
             
-            structures[i].physicsBody = SKPhysicsBody(rectangleOf:
-                                                        CGSize(width: structures[i].size.width*structures[i].maskmodX,
-                                                               height: structures[i].size.height*structures[i].maskmodY))
-            structures[i].physicsBody?.affectedByGravity = false
-            structures[i].physicsBody?.restitution = 0.0
-            structures[i].physicsBody?.linearDamping = 0.0
-            structures[i].physicsBody?.angularDamping = 0.0
-            structures[i].physicsBody?.allowsRotation = false
-            structures[i].physicsBody?.categoryBitMask = structures[i].mask.bitmask
-            if(structures[i].type == .tavern || structures[i].type == .village || structures[i].type == .academy) {
-                structures[i].physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask
+            structuresList.structures[i].physicsBody = SKPhysicsBody(rectangleOf:
+                                                                        CGSize(width: structuresList.structures[i].size.width*structuresList.structures[i].maskmodX,
+                                                                               height: structuresList.structures[i].size.height*structuresList.structures[i].maskmodY))
+            structuresList.structures[i].physicsBody?.affectedByGravity = false
+            structuresList.structures[i].physicsBody?.restitution = 0.0
+            structuresList.structures[i].physicsBody?.linearDamping = 0.0
+            structuresList.structures[i].physicsBody?.angularDamping = 0.0
+            structuresList.structures[i].physicsBody?.allowsRotation = false
+            structuresList.structures[i].physicsBody?.categoryBitMask = structuresList.structures[i].mask.bitmask
+            if(structuresList.structures[i].type == .tavern || structuresList.structures[i].type == .village || structuresList.structures[i].type == .academy) {
+                structuresList.structures[i].physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask
             }
-            else if (structures[i].type == .gate) {
-                structures[i].physicsBody?.contactTestBitMask = Collision.Masks.darkson.bitmask
+            else if (structuresList.structures[i].type == .gate) {
+                structuresList.structures[i].physicsBody?.contactTestBitMask = Collision.Masks.darkson.bitmask
             }
             else {
-                structures[i].physicsBody?.collisionBitMask = Collision.Masks.goblin.bitmask
+                structuresList.structures[i].physicsBody?.collisionBitMask = Collision.Masks.goblin.bitmask
             }
-            structures[i].physicsBody?.isDynamic = false
+            structuresList.structures[i].physicsBody?.isDynamic = false
             
-            background.addChild(structures[i])
+            background.addChild(structuresList.structures[i])
         }
     }
     

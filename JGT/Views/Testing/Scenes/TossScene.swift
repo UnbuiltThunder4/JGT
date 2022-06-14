@@ -21,9 +21,9 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
     @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet()
     @ObservedObject var hud = HUD()
     
-    var darkson = DarkSon()
-    var enemies: [Enemy] = []
-    var structures: [Structure] = []
+    @ObservedObject var darkson = DarkSon()
+    @ObservedObject var enemyPopulation = EnemyPopulation(enemies: [])
+    @ObservedObject var structuresList = StructureList(structures: [])
     
     let background = SKSpriteNode(imageNamed: "forest")
     let trueBackground = SKSpriteNode(imageNamed: "background")
@@ -95,11 +95,11 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         
         switch gameLogic.level {
         case 1:
-        self.enemies.append(contentsOf: gnomes)
-        self.structures.append(contentsOf: levelstructures)
+        self.enemyPopulation.enemies.append(contentsOf: gnomes)
+        self.structuresList.structures.append(contentsOf: levelstructures)
         setGoblins(population.goblins, spawnPoint: nil)
-        setEnemies(self.enemies)
-        setStructures(self.structures)
+        setEnemies(self.enemyPopulation)
+        setStructures(self.structuresList)
         case 2:
             break
         case 3:
@@ -109,6 +109,90 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         }
         
         
+    }
+    
+    deinit {
+        print("DEINIT")
+        self.population.goblins = []
+        self.enemyPopulation = EnemyPopulation(enemies: [])
+        self.structuresList = StructureList(structures: [])
+    }
+    
+    func cleanScene() {
+        
+        self.darkson.target = nil
+        
+        self.enemyPopulation.enemies.forEach({
+            $0.target = nil
+            $0.targetQueue = []
+        })
+        
+        self.population.goblins.forEach({
+            $0.target = nil
+            $0.targetQueue = []
+        })
+        
+        self.structuresList.structures.forEach({
+            $0.goblins = []
+            if let gate = $0 as? Gate {
+                gate.health = gate.maxHealth
+            }
+            if let trap = $0 as? Trap {
+                trap.isActive = false
+            }
+            if let catapult = $0 as? Catapult {
+                catapult.hasRock = false
+            }
+        })
+        
+        if let s = self.view?.scene {
+            NotificationCenter.default.removeObserver(self)
+                self.children.forEach { bgchild in
+                    bgchild.children.forEach { bggrandson in
+                        bggrandson.children.forEach { bggrandgrandson in
+                            bggrandgrandson.children.forEach { bggrandgrandgrandson in
+                                bggrandgrandgrandson.children.forEach { what in
+                                    what.removeAllActions()
+                                    what.removeFromParent()
+                                }
+                                bggrandgrandgrandson.removeAllActions()
+                                bggrandgrandgrandson.removeFromParent()
+                            }
+                            bggrandgrandson.removeAllActions()
+                            bggrandgrandson.removeFromParent()
+                        }
+                        bggrandson.removeAllActions()
+                        bggrandson.removeFromParent()
+                    }
+                    bgchild.removeAllActions()
+                    bgchild.removeFromParent()
+                }
+            }
+        self.population = Population(size: 3, mutationRate: 10)
+        self.enemyPopulation.enemies = []
+        self.structuresList.structures = []
+        
+        switch gameLogic.level {
+        case 1:
+        self.enemyPopulation.enemies.append(contentsOf: gnomes)
+        self.structuresList.structures.append(contentsOf: levelstructures)
+        setGoblins(population.goblins, spawnPoint: nil)
+        setEnemies(self.enemyPopulation)
+        setStructures(self.structuresList)
+        case 2:
+            break
+        case 3:
+            break
+        default:
+            break
+        }
+        
+        }
+
+    override func willMove(from view: SKView) {
+        cleanScene()
+        self.removeAllActions()
+        self.removeAllChildren()
     }
     
     override func didMove(to view: SKView) {
@@ -177,7 +261,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
                 self.population.rankPerFitness()
             }
             
-            self.enemies.forEach {
+            self.enemyPopulation.enemies.forEach {
                 if ($0.update(self)) {
                     let gnomeDeathParticle = SKEmitterNode(fileNamed: "GoblinDeathParticle")
                     gnomeDeathParticle!.position = $0.position
@@ -210,27 +294,29 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
                     parent.run(particleSequence)
                     parent.run(removeSequence)
                     
-                    let index = self.enemies.firstIndex(of: $0)!
+                    let index = self.enemyPopulation.enemies.firstIndex(of: $0)!
                     $0.removeFromParent()
-                    self.enemies.remove(at: index)
+                    self.enemyPopulation.enemies.remove(at: index)
                     evilGauge.updateGauge(goblin: nil, value: 5)
                 }
             }
             
-            if let structure = self.structures[1] as? Gate {
-                structure.update(self)
-            }
-            
-            if let structure = self.structures[2] as? Backdoor {
-                structure.update(self)
-            }
-            
-            if let structure = self.structures[3] as? Catapult {
-                structure.update(self)
-            }
-            
-            if let structure = self.structures[4] as? Trap {
-                structure.update(self)
+            if (!self.structuresList.structures.isEmpty) {
+                if let structure = self.structuresList.structures[1] as? Gate {
+                    structure.update(self)
+                }
+                
+                if let structure = self.structuresList.structures[2] as? Backdoor {
+                    structure.update(self)
+                }
+                
+                if let structure = self.structuresList.structures[3] as? Catapult {
+                    structure.update(self)
+                }
+                
+                if let structure = self.structuresList.structures[4] as? Trap {
+                    structure.update(self)
+                }
             }
             
             darkson.update(self)

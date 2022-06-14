@@ -9,11 +9,11 @@ import SwiftUI
 import SpriteKit
 
 struct SpriteKitContainer : UIViewRepresentable {
-    @Binding var skScene: SKScene!
+    var skScene: SKScene!
     
-//    init(scene: SKScene) {
-//        skScene = scene
-//    }
+    init(scene: SKScene) {
+        skScene = scene
+    }
     
     class Coordinator: NSObject {
         var scene: SKScene?

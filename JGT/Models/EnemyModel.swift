@@ -9,6 +9,14 @@ import Foundation
 import SwiftUI
 import SpriteKit
 
+class EnemyPopulation: ObservableObject {
+    @Published public var enemies: [Enemy]
+    
+    init(enemies: [Enemy]) {
+        self.enemies = enemies
+    }
+}
+
 class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     public let id = UUID()
     

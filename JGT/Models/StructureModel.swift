@@ -9,6 +9,14 @@ import Foundation
 import SwiftUI
 import SpriteKit
 
+class StructureList: ObservableObject {
+    @Published public var structures: [Structure]
+    
+    init(structures: [Structure]) {
+        self.structures = structures
+    }
+}
+
 class Structure: SKSpriteNode, ObservableObject {
     @ObservedObject var scrollableMenu: ScrollableMenu = ScrollableMenu.shared
     
