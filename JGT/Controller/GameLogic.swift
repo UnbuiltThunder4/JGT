@@ -465,4 +465,8 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
         self.isGameOver = true
         self.gameState = .gameOver
     }
+    
+    public func farmEvilPoints(_ tossScene: TossScene){
+        tossScene.evilGauge.updateGauge(goblin: nil, value: 1)
+    }
 }

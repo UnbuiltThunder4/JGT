@@ -45,7 +45,6 @@
 		769246A02822B5EE003D5D27 /* JGTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7692469F2822B5EE003D5D27 /* JGTTests.swift */; };
 		769246AA2822B5EE003D5D27 /* JGTUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769246A92822B5EE003D5D27 /* JGTUITests.swift */; };
 		769246AC2822B5EE003D5D27 /* JGTUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 769246AB2822B5EE003D5D27 /* JGTUITestsLaunchTests.swift */; };
-		7693F2CB28567D7C005D623E /* Pages in Frameworks */ = {isa = PBXBuildFile; productRef = 7693F2CA28567D7C005D623E /* Pages */; };
 		76A534F9282BA32100DEC317 /* TossScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A534F8282BA32100DEC317 /* TossScene.swift */; };
 		76A534FB282BA59A00DEC317 /* TossView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A534FA282BA59A00DEC317 /* TossView.swift */; };
 		76A534FD282BF15100DEC317 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A534FC282BF15100DEC317 /* HUD.swift */; };
@@ -361,7 +360,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7693F2CB28567D7C005D623E /* Pages in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -714,7 +712,6 @@
 			);
 			name = JGT;
 			packageProductDependencies = (
-				7693F2CA28567D7C005D623E /* Pages */,
 			);
 			productName = JGT;
 			productReference = 7692468B2822B5ED003D5D27 /* JGT.app */;
@@ -789,7 +786,6 @@
 			);
 			mainGroup = 769246822822B5ED003D5D27;
 			packageReferences = (
-				7693F2C928567D7B005D623E /* XCRemoteSwiftPackageReference "Pages" */,
 			);
 			productRefGroup = 7692468C2822B5ED003D5D27 /* Products */;
 			projectDirPath = "";
@@ -1319,25 +1315,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		7693F2C928567D7B005D623E /* XCRemoteSwiftPackageReference "Pages" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nachonavarro/Pages";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.5;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		7693F2CA28567D7C005D623E /* Pages */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7693F2C928567D7B005D623E /* XCRemoteSwiftPackageReference "Pages" */;
-			productName = Pages;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 769246832822B5ED003D5D27 /* Project object */;
 }

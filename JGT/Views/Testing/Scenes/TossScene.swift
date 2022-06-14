@@ -107,7 +107,8 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         default:
             break
         }
-        
+        player.play(music: Audio.MusicFiles.background)
+        player.musicVolume = 0.7
         
     }
     
@@ -116,6 +117,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         self.population.goblins = []
         self.enemyPopulation = EnemyPopulation(enemies: [])
         self.structuresList = StructureList(structures: [])
+        player.musicVolume = 0.0
     }
     
     func cleanScene() {
@@ -221,8 +223,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         UserDefaults.standard.set(false, forKey: "catapultTutorial")
         UserDefaults.standard.set(false, forKey: "trapTutorial")
         
-        player.musicVolume = 0.7
-        player.play(music: Audio.MusicFiles.background)
+        
     }
     
     //MARK: Update

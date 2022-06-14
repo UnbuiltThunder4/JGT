@@ -235,24 +235,9 @@ extension TossScene {
             }
             
             if selectedNode?.name! == "QuitBtn" {
-                gameLogic.gameState = .selection
                 
-                self.background.children.forEach { bgchild in
-                    bgchild.children.forEach { bggrandson in
-                        bggrandson.children.forEach { bggrandgrandson in
-                            bggrandgrandson.children.forEach { bggrandgrandgrandson in
-                                bggrandgrandgrandson.children.forEach { what in
-                                    what.removeFromParent()
-                                }
-                                bggrandgrandgrandson.removeFromParent()
-                            }
-                            bggrandgrandson.removeFromParent()
-                        }
-                        bggrandson.removeFromParent()
-                    }
-                    bgchild.removeFromParent()
-                }
-                self.background.removeFromParent()
+                self.cleanScene()
+                gameLogic.gameState = .selection
                 
             }
             

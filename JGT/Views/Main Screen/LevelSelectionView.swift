@@ -7,7 +7,6 @@
 
 import SwiftUI
 import UIKit
-import Pages
 
 /**
  * # MainScreenView
@@ -40,24 +39,15 @@ struct LevelSelectionView: View {
             
             VStack {
                 
-                Pages(
-                        currentPage: $index,
-//                        transitionStyle: .pageCurl,
-                        hasControl: false
-                ) {
-                             Text("Level 1")
-                             Text("Level 2")
-                             Text("Level 3")
-                }
-            
+                HStack {
                 Button {
                     withAnimation {
-                        gameLogic.level = self.index + 1
+                        gameLogic.level = 1
                         gameLogic.gameState = .playing
                         print(gameLogic.level)
                     }
                 } label: {
-                    Text("Play")
+                    Text("Play 1")
                         .font(.custom("Chalkduster", size: (UIDevice.current.userInterfaceIdiom == .pad ? 30 : 15)))
 
                 }
@@ -66,6 +56,42 @@ struct LevelSelectionView: View {
                 .foregroundColor(.white)
                 .background(self.accentColor)
                 .cornerRadius(15.0)
+                    
+                    Button {
+                        withAnimation {
+                            gameLogic.level = 2
+                            gameLogic.gameState = .playing
+                            print(gameLogic.level)
+                        }
+                    } label: {
+                        Text("Play 2")
+                            .font(.custom("Chalkduster", size: (UIDevice.current.userInterfaceIdiom == .pad ? 30 : 15)))
+
+                    }
+                    .frame(maxWidth: geometry.size.width * 0.1, maxHeight: geometry.size.height * 0.1)
+                    .padding(5)
+                    .foregroundColor(.white)
+                    .background(self.accentColor)
+                    .cornerRadius(15.0)
+                    
+                    Button {
+                        withAnimation {
+                            gameLogic.level = 3
+                            gameLogic.gameState = .playing
+                            print(gameLogic.level)
+                        }
+                    } label: {
+                        Text("Play 3")
+                            .font(.custom("Chalkduster", size: (UIDevice.current.userInterfaceIdiom == .pad ? 30 : 15)))
+
+                    }
+                    .frame(maxWidth: geometry.size.width * 0.1, maxHeight: geometry.size.height * 0.1)
+                    .padding(5)
+                    .foregroundColor(.white)
+                    .background(self.accentColor)
+                    .cornerRadius(15.0)
+                    
+                }
                 
             }
             .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height)
@@ -73,79 +99,8 @@ struct LevelSelectionView: View {
         }
     }
     
-    /**
-     * Function responsible to start the game.
-     * It changes the current game state to present the view which houses the game scene.
-     */
-//    func startGame() {
-//        print("- Starting the game...")
-//        gameLogic.gameState = .playing
-//    }
 }
 
-
-
-
-
-//class ViewController: UIViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
-//    var pageController: UIPageViewController!
-//    var controllers = [UIViewController]()
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//
-//        pageController = UIPageViewController(transitionStyle: .pageCurl, navigationOrientation: .horizontal, options: nil)
-//        pageController.dataSource = self
-//        pageController.delegate = self
-//
-//        addChild(pageController)
-//        view.addSubview(pageController.view)
-//
-//        let views = ["pageController": pageController.view] as [String: AnyObject]
-//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[pageController]|", options: [], metrics: nil, views: views))
-//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[pageController]|", options: [], metrics: nil, views: views))
-//
-//        for _ in 1 ... 5 {
-//            let vc = UIViewController()
-//            vc.view.backgroundColor = randomColor()
-//            controllers.append(vc)
-//        }
-//
-//        pageController.setViewControllers([controllers[0]], direction: .forward, animated: false)
-//    }
-//
-//    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-//        if let index = controllers.firstIndex(of: viewController) {
-//            if index > 0 {
-//                return controllers[index - 1]
-//            } else {
-//                return nil
-//            }
-//        }
-//
-//        return nil
-//    }
-//
-//    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-//        if let index = controllers.firstIndex(of: viewController) {
-//            if index < controllers.count - 1 {
-//                return controllers[index + 1]
-//            } else {
-//                return nil
-//            }
-//        }
-//
-//        return nil
-//    }
-//
-//    func randomCGFloat() -> CGFloat {
-//        return CGFloat(arc4random()) / CGFloat(UInt32.max)
-//    }
-//
-//    func randomColor() -> UIColor {
-//        return UIColor(red: randomCGFloat(), green: randomCGFloat(), blue: randomCGFloat(), alpha: 1)
-//    }
-//}
 
 struct LevelSelectionView_Previews: PreviewProvider {
     static var previews: some View {
