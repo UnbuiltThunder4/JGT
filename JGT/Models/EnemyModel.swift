@@ -298,7 +298,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                                 goblinDeathParticle!.particleColor = UIColor(red: 11/255, green: 129/255, blue: 80/255, alpha: 1.0)
                             }
                             
-                            let parent = self.parent!.scene!
+                            let parent = self.parent!
                             
                             let addDeathParticle = SKAction.run({
                                 parent.addChild(goblinDeathParticle!)
@@ -444,7 +444,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                             darkSonDeathParticle!.particleColor = .black
                             darkSonDeathParticle!.setScale(2.5)
                                                     
-                            let parent = self.darkTarget!.parent!.scene!
+                            let parent = self.darkTarget!.parent!
 
                             let addDeathParticle = SKAction.run({
                                 parent.addChild(darkSonDeathParticle!)

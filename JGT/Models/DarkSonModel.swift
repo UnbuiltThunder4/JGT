@@ -34,9 +34,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     init() {
         super.init(texture: SKTexture(imageNamed: "darkson"), color: .red, size: CGSize(width: 233, height: 333))
         self.name = "darkson"
-        self.speed = 26.0
-//        self.position.x = self.spawnX
-//        self.position.y = self.spawnY
+        self.speed = 6.0
         
         self.zPosition = 1
         
