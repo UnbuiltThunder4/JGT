@@ -155,6 +155,8 @@ class Structure: SKSpriteNode, ObservableObject {
             
         case .rock:
             img = "rock"
+            self.fullName = "Rock"
+            self.desc = "“The first weapon ever used and an useful tool for goblins, they can use it for both uses, maybe they can even found new ones…”"
             self.mask = .enviroment
             self.width = 80
             self.height = 80
