@@ -316,13 +316,17 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func idleUpdate(_ hud: HUD) -> Bool {
         var hasToUpdateRank = false
         self.updateAge()
-        if let _ = self.action(forKey: "walkingAnimation") {
-        }
-        else {
-            if (targetQueue.isEmpty) {
-                gameLogic.isWalkingAnimation(goblin: self)
+        
+        if let _ = self.action(forKey: "walk") {
+            if let _ = self.action(forKey: "walkingAnimation") {
+            }
+            else {
+                if (targetQueue.isEmpty) {
+                    gameLogic.isWalkingAnimation(goblin: self)
+                }
             }
         }
+        
         if (self.isFrenzied) {
             self.checkFrenzy()
         }
@@ -623,7 +627,6 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         else {
             self.state = .feared
             gameLogic.removeAnimation(goblin: self)
-            gameLogic.isWalkingAnimation(goblin: self)
             self.target = nil
             self.targetQueue = []
             removeAction(forKey: "walk")
@@ -632,6 +635,15 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func fearedUpdate() {
         self.updateAge()
+        
+        if let _ = self.action(forKey: "run") {
+            if let _ = self.action(forKey: "walkingAnimation") {
+            }
+            else {
+                gameLogic.isWalkingAnimation(goblin: self)
+            }
+        }
+        
         var tavernDistance = CGVector(dx: tavernCoordinates.x - self.position.x, dy: tavernCoordinates.y - self.position.y)
         if (abs(tavernDistance.dx) < 250 && abs(tavernDistance.dy) < 250) {
             self.actionCloud.alpha = 0.0

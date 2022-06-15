@@ -499,6 +499,68 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
         }
     }
     
+    public func isWalkingAnimation(enemy: Enemy) {
+        var walkTextures : [SKTexture] = []
+        var maxRange = 0
+        
+        switch enemy.type {
+        case .small:
+            maxRange = 14
+        case .bow:
+            maxRange = 0
+        case .axe:
+            maxRange = 10
+        }
+        
+        if (maxRange != 0) {
+            for i in 1...maxRange {
+                walkTextures.append(SKTexture(imageNamed: "\(enemy.type)_walk (\(i))"))
+            }
+            let walkAnimation = SKAction.repeatForever(SKAction.animate(with: walkTextures, timePerFrame: 0.5))
+            
+            enemy.run(walkAnimation, withKey: "walkAnimation")
+        }
+    }
+    
+    public func isFightingAnimation(enemy: Enemy) {
+        var attackTextures : [SKTexture] = []
+        var maxRange = 0
+        
+        switch enemy.type {
+        case .small:
+            maxRange = 28
+        case .bow:
+            maxRange = 5
+        case .axe:
+            maxRange = 32
+        }
+        
+        for i in 1...maxRange {
+            attackTextures.append(SKTexture(imageNamed: "\(enemy.type)_attack (\(i))"))
+        }
+        
+        let attackAnimation = SKAction.repeatForever(SKAction.animate(with: attackTextures, timePerFrame: 0.5))
+        
+        enemy.run(attackAnimation, withKey: "attackAnimation")
+    }
+    
+    public func removeAnimation(enemy: Enemy) {
+        enemy.removeAction(forKey: "attackAnimation")
+        enemy.removeAction(forKey: "walkAnimation")
+        
+        switch enemy.type {
+        case .axe:
+            enemy.texture = SKTexture(imageNamed: "gnomeaxe")
+            break
+        case .bow:
+            enemy.texture = SKTexture(imageNamed: "gnomebow")
+            break
+        case .small:
+            enemy.texture = SKTexture(imageNamed: "gnomesmall")
+            break
+        }
+    }
+    
     public func finishTheGame(_ tossScene: TossScene) {
         tossScene.cleanScene()
         self.isGameOver = true
