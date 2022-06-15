@@ -316,6 +316,13 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func idleUpdate(_ hud: HUD) -> Bool {
         var hasToUpdateRank = false
         self.updateAge()
+        if let _ = self.action(forKey: "walkingAnimation") {
+        }
+        else {
+            if (targetQueue.isEmpty) {
+                gameLogic.isWalkingAnimation(goblin: self)
+            }
+        }
         if (self.isFrenzied) {
             self.checkFrenzy()
         }
@@ -398,6 +405,12 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             else {
                 self.state = .fighting
                 removeAction(forKey: "walk")
+                gameLogic.removeAnimation(goblin: self)
+                if let _ = self.action(forKey: "attackAnimation") {
+                }
+                else {
+                    gameLogic.isFightingAnimation(goblin: self)
+                }
             }
         }
         else {
@@ -411,6 +424,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         var hasToUpdateRank = false
         if (self.closeStructure!.goblins.isEmpty) {
             self.closeStructure!.goblins.append(self)
+            gameLogic.isTaskingAnimation(goblin: self)
         }
         if (self.closeStructure!.goblins.contains(self)) {
             self.target = nil
@@ -454,12 +468,14 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.state = .idle
                 self.taskCounter = 0
                 self.actionCloud.alpha = 0.0
+                gameLogic.removeAnimation(goblin: self)
             }
         }
         else {
             self.closeStructure = nil
             self.currentTask = nil
             self.state = .idle
+            gameLogic.removeAnimation(goblin: self)
         }
         return hasToUpdateRank
     }
@@ -578,6 +594,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                         if (abs(targetDistance.dx) > 300 || abs(targetDistance.dy) > 300) {
                             self.state = .idle
                             self.target = nil
+                            gameLogic.removeAnimation(goblin: self)
                             removeAction(forKey: "walk")
                         }
                     }
@@ -592,17 +609,21 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                         self.actionCloud.alpha = 0.0
                         self.target = nil
                         self.state = .idle
+                        gameLogic.removeAnimation(goblin: self)
                         removeAction(forKey: "walk")
                     }
                 }
             }
             else {
                 self.state = .idle
+                gameLogic.removeAnimation(goblin: self)
                 removeAction(forKey: "walk")
             }
         }
         else {
             self.state = .feared
+            gameLogic.removeAnimation(goblin: self)
+            gameLogic.isWalkingAnimation(goblin: self)
             self.target = nil
             self.targetQueue = []
             removeAction(forKey: "walk")
@@ -647,11 +668,13 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func inHandUpdate() {
         self.target = nil
         self.removeAllActions()
+        gameLogic.removeAnimation(goblin: self)
     }
     
     private func inTavernUpdate() {
         self.updateAge()
         self.removeAllActions()
+        gameLogic.removeAnimation(goblin: self)
         self.inTavernCounter += 1
         if (self.inTavernCounter % self.goblinTaskTime == 0) {
             if (self.currentFrenzyTurn < self.frenzy) {
@@ -702,6 +725,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         var hasToUpdateRank = false
         self.updateAge()
         self.removeAllActions()
+        gameLogic.removeAnimation(goblin: self)
         self.inAcademyCounter += 1
         if (self.inAcademyCounter % structureTime == 0) {
             self.inAcademyCounter = 0
@@ -739,6 +763,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         var hasToUpdateRank = false
         self.updateAge()
         self.removeAllActions()
+        gameLogic.removeAnimation(goblin: self)
         self.inVillageCounter += 1
         if (self.inVillageCounter % structureTime == 0) {
             //GIVE EVIL POINTS
@@ -809,6 +834,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func inTrapUpdate(_ hud: HUD) -> Bool {
         var hasToUpdateRank = false
         self.updateAge()
+        gameLogic.removeAnimation(goblin: self)
         if let trap = self.closeStructure as? Trap {
             if (!trap.isActive) {
                 trap.isActive = true
@@ -934,6 +960,12 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func backdooringUpdate() {
         self.updateAge()
+        gameLogic.removeAnimation(goblin: self)
+        if let _ = self.action(forKey: "attackAnimation") {
+        }
+        else {
+            gameLogic.isFightingAnimation(goblin: self)
+        }
         if let backdoor = self.closeStructure as? Backdoor {
             if (backdoor.isOpened) {
                 self.alpha = 0.0
@@ -944,6 +976,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                     self.position.y += abs(self.position.y - passageCoordinates.y) + 25
                     self.state = .idle
                     self.alpha = 1.0
+                    gameLogic.removeAnimation(goblin: self)
                 }
             }
             else {
@@ -962,6 +995,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         if (self.target != nil) {
             self.attackCounter = 0
             self.state = .idle
+            gameLogic.removeAnimation(goblin: self)
         }
     }
     
@@ -975,6 +1009,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             self.position.y = backdoorCoordinates.y - 100
             self.state = .idle
             self.alpha = 1.0
+            gameLogic.removeAnimation(goblin: self)
         }
     }
     
@@ -992,16 +1027,22 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         else {
             self.state = .idle
             
-            gameLogic.removeFlyingAnimation(goblin: self)
+            gameLogic.removeAnimation(goblin: self)
         }
     }
     
     private func launchedUpdate() {
         self.updateAge()
         if let _ = self.action(forKey: "launched") {
+            if let _ = self.action(forKey: "flyingAnimation") {
+            }
+            else {
+                gameLogic.isFlyingAnimation(goblin: self)
+            }
         }
         else {
             self.state = .idle
+            gameLogic.removeAnimation(goblin: self)
         }
     }
     
@@ -1194,6 +1235,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func enterTavern() {
         self.removeAllActions()
+        gameLogic.removeAnimation(goblin: self)
         self.state = .intavern
         self.alpha = 0.0
         if let tavern = self.closeStructure as? Tavern {
@@ -1204,6 +1246,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private func enterVillage() {
         self.state = .invillage
         self.alpha = 0.0
+        gameLogic.removeAnimation(goblin: self)
         if let village = self.closeStructure as? Village {
             village.addGoblin(self)
         }
@@ -1259,7 +1302,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func throwSelf(_ hud: HUD) {
         self.removeAllActions()
+        gameLogic.removeAnimation(goblin: self)
+        gameLogic.isFlyingAnimation(goblin: self)
         self.run(SKAction.move(to: CGPoint(x: gateCoordinates.x, y: gateCoordinates.y - 100), duration: 1.5), completion: {
+            self.gameLogic.removeAnimation(goblin: self)
             if (self.type != .rock) {
                 self.health -= 50
                 if (self.gate != nil) {
