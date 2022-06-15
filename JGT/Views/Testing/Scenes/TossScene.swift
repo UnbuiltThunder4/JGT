@@ -196,6 +196,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             $0.goblins = []
             if let gate = $0 as? Gate {
                 gate.health = gate.maxHealth
+                gate.texture = SKTexture(imageNamed: "gate")
             }
             if let trap = $0 as? Trap {
                 trap.isActive = false
