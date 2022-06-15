@@ -297,6 +297,10 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             passagingUpdate()
             break
             
+        case .gating:
+            gatingUpdate()
+            break
+            
         case .stunned:
             stunUpdate()
             break
@@ -348,6 +352,17 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                                 x: Double.random(in: 60...MainScreenProperties.bgwidth - 60),
                                 y: Double.random(in: 200...MainScreenProperties.bgheight - 450))
                         }
+                        if (self.closeStructure == nil && self.gate != nil) {
+                            let targetDistance = CGVector(dx: self.gate!.position.x - self.position.x, dy: self.gate!.position.y - self.position.y)
+                            if (isVectorSmallerThan(vector: targetDistance, other: 330)) {
+                                self.removeAction(forKey: "walk")
+                                gameLogic.removeAnimation(goblin: self)
+                                self.state = .gating
+                            }
+                            else {
+                                self.gate = nil
+                            }
+                        }
                         if (self.closeStructure != nil && self.isFrenzied == false) {
                             let targetDistance = CGVector(dx: self.closeStructure!.position.x - self.position.x, dy: self.closeStructure!.position.y - self.position.y)
                             if (isVectorSmallerThan(vector: targetDistance, other: 330)) {
@@ -385,6 +400,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                                 self.closeStructure = nil
                             }
                             self.removeAction(forKey: "walk")
+                            gameLogic.removeAnimation(goblin: self)
                         }
                     }
                     else {
@@ -544,6 +560,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                         if (self.isFrenzied) {
                             dmg += self.attack
                         }
+                        if (self.hasRock) {
+                            dmg += 5
+                        }
                         self.target!.health -= max(0, dmg - self.target!.shield)
                         self.target!.shield = max(0, self.target!.shield - dmg)
                         if (self.type == .fire) {
@@ -690,7 +709,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func inHandUpdate() {
-        self.target = nil
+//        self.target = nil
+//        self.gate = nil
+//        self.closeStructure = nil
         self.removeAllActions()
         gameLogic.removeAnimation(goblin: self)
     }
@@ -1011,6 +1032,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                     if (self.isFrenzied) {
                         dmg += self.attack
                     }
+                    if (self.hasRock) {
+                        dmg += 5
+                    }
                     backdoor.health -= dmg
                 }
             }
@@ -1032,6 +1056,33 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             self.position.y = backdoorCoordinates.y - 100
             self.state = .idle
             self.alpha = 1.0
+            gameLogic.removeAnimation(goblin: self)
+        }
+    }
+    
+    private func gatingUpdate() {
+        self.updateAge()
+        if let _ = self.action(forKey: "attackAnimation") {
+        }
+        else {
+            gameLogic.isFightingAnimation(goblin: self)
+        }
+        if let gate = self.gate as? Gate {
+            self.attackCounter += 1
+            if (self.attackCounter % attackTime == 0) {
+                self.attackCounter = 0
+                
+                var dmg = 1
+                if (self.isFrenzied) {
+                    dmg = 2
+                }
+                gate.health -= dmg
+            }
+        }
+        if (self.target != nil) {
+            self.gate = nil
+            self.attackCounter = 0
+            self.state = .idle
             gameLogic.removeAnimation(goblin: self)
         }
     }
