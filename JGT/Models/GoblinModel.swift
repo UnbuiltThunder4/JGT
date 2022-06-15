@@ -1125,7 +1125,13 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         case .academy:
-            if (!self.isGraduated) {
+            var canEnter = true
+            if let academy = self.closeStructure! as? Academy {
+                if academy.goblins.count >= 6 {
+                    canEnter = false
+                }
+            }
+            if (!self.isGraduated && canEnter) {
                 removeAction(forKey: "walk")
                 self.enterAcademy(hud)
             }
@@ -1135,7 +1141,13 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         case .village:
-            if (self.type != .gum) {
+            var canEnter = true
+            if let academy = self.closeStructure! as? Academy {
+                if academy.goblins.count >= 6 {
+                    canEnter = false
+                }
+            }
+            if (self.type != .gum && canEnter) {
                 removeAction(forKey: "walk")
                 self.enterVillage()
             }
