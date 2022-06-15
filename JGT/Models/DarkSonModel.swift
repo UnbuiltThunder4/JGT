@@ -15,7 +15,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     //@ObservedObject var tossScene.hud: tossScene.hud
     @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet.shared
     
-    public var lives: Int = 5
+    public var lives: Int = 10
     public let maxHealth: Int = 500
     public var health: Int = 500
     public let attack: Int = 10
@@ -107,7 +107,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
                 self.position.y = self.spawnY!
                 self.alpha = 0.0
                 self.respawnCounter += 1
-                self.lives -= 5
+                self.lives -= 1
                 tossScene.hud.livesCounter.text = "X \(self.lives)"
                 gameLogic.playSound(node: self.parent?.scene?.camera, audio: Audio.EffectFiles.darkSonGrunt, wait: false, muted: gameLogic.muted)
                 if self.lives == 0 {
