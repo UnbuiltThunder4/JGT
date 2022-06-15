@@ -162,7 +162,7 @@ let gnomes1: [Enemy] = [
     Enemy(type: .small, x: 2900, y: 3250),
     Enemy(type: .small, x: 2800, y: 3150),
     
-    Enemy(type: .bow, x: 2800, y: 2400), //backdoor gnome
+//    Enemy(type: .bow, x: 2800, y: 2400), //backdoor gnome
     
     Enemy(type: .small, x: 750, y: 3050), //upper left gnome
     
