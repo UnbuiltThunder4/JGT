@@ -20,10 +20,6 @@ struct ContentView: View {
     // Each state presents a different view on the SwiftUI app structure
     @State var currentGameState: GameState = .mainScreen
     
-//    @State var currentScene: SKScene? = TossScene()
-    
-//    @State var container : SpriteKitContainer?
-    
     // The game logic is a singleton object shared among the different views of the application
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
 
@@ -32,28 +28,15 @@ struct ContentView: View {
         switch gameLogic.gameState {
         case .mainScreen:
             MainScreenView(currentGameState: $currentGameState)
-//                .onAppear{
-//                    container = SpriteKitContainer(skScene: $currentScene)
-//                }
-//                .environmentObject(gameLogic)
         
         case .playing:
             TossView()
-//                .environmentObject(gameLogic)
         
         case .gameOver:
             GameOverView()
-//                .environmentObject(gameLogic)
             
         case .selection:
             LevelSelectionView(currentGameState: $currentGameState)
-//                .environmentObject(gameLogic)
         }
     }
 }
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-//}
