@@ -290,7 +290,6 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 hud.tutorialCounter.alpha = 1.0
                 hud.tutorialCounter.text = String(hud.counter)
             }
-            
             backdooringUpdate()
             break
             
@@ -985,7 +984,6 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func backdooringUpdate() {
         self.updateAge()
-        gameLogic.removeAnimation(goblin: self)
         if let _ = self.action(forKey: "attackAnimation") {
         }
         else {
@@ -1239,11 +1237,13 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         case .backdoor:
             removeAction(forKey: "walk")
             self.state = .backdooring
+            gameLogic.removeAnimation(goblin: self)
             break
             
         case .passage:
             removeAction(forKey: "walk")
             self.state = .passaging
+            gameLogic.removeAnimation(goblin: self)
             break
             
         default:
