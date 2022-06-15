@@ -222,8 +222,6 @@ let gnomes2: [Enemy] = [
 let gnomes3: [Enemy] = [
     Enemy(type: .small, x: 800, y: 2300),
     Enemy(type: .small, x: 1200, y: 2300),
-//    Enemy(type: .bow, x: 1250, y: 4200),
-//    Enemy(type: .bow, x: 2050, y: 4200),
     Enemy(type: .axe, x: 1350, y: 2800),
     Enemy(type: .axe, x: 2500, y: 1450)
 ]
@@ -258,7 +256,7 @@ let gateCoordinates1 = CGPoint(x: 1672, y: 3750)
 let backdoorCoordinates1 = CGPoint(x: 2800, y: 3635)
 let passageCoordinates1 = CGPoint(x: 2800, y: 4100)
 
-let goblinmancyCircleCoordinates2 = CGPoint(x: 850, y: 240)
+let goblinmancyCircleCoordinates2 = CGPoint(x: 350, y: 240)
 let tavernCoordinates2 = CGPoint(x: 1572, y: 950)
 let academyCoordinates2 = CGPoint(x: 2900, y: 1250)
 let villageCoordinates2 = CGPoint(x: 1000, y: 2500)
@@ -377,34 +375,53 @@ let levelstructures2: [Structure] = [
     
     
     
-    Structure(type: .rock, x: 2100, y: 700, rotation: 0),
-    Structure(type: .rock, x: 650, y: 1450, rotation: 0),
-    Structure(type: .rock, x: 1950, y: 1350, rotation: 0),
-    Structure(type: .rock, x: 1400, y: 350, rotation: 0),
-    Structure(type: .rock, x: 1300, y: 2660, rotation: 0),
-    Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
-    Structure(type: .rock, x: 1890, y: 1720, rotation: 0),
-    Structure(type: .rock, x: 2100, y: 700, rotation: 0),
-    Structure(type: .rock, x: 650, y: 1450, rotation: 0),
-    Structure(type: .rock, x: 1950, y: 1350, rotation: 0),
-    Structure(type: .rock, x: 1400, y: 350, rotation: 0),
-    Structure(type: .rock, x: 1300, y: 2660, rotation: 0),
-    Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
-    Structure(type: .rock, x: 1890, y: 1720, rotation: 0),
-    Structure(type: .rock, x: 2690, y: 2620, rotation: 0),
-    Structure(type: .rock, x: 2100, y: 700, rotation: 0),
-    Structure(type: .rock, x: 650, y: 1450, rotation: 0),
-    Structure(type: .rock, x: 1950, y: 1350, rotation: 0),
-    Structure(type: .rock, x: 1400, y: 350, rotation: 0),
-    Structure(type: .rock, x: 1300, y: 2660, rotation: 0),
-    Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
-    Structure(type: .rock, x: 1890, y: 1720, rotation: 0),
-    Structure(type: .rock, x: 2690, y: 2620, rotation: 0),
-    Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
-    Structure(type: .rock, x: 1890, y: 1720, rotation: 0),
-    Structure(type: .rock, x: 2690, y: 2620, rotation: 0),
-    Structure(type: .rock, x: 2690, y: 2620, rotation: 0),
-    Structure(type: .rock, x: 2690, y: 2620, rotation: 0)
+    Structure(type: .rock, x: 1450, y: 500, rotation: 0), //rock low center
+    Structure(type: .rock, x: 1910, y: 500, rotation: 0),
+    Structure(type: .rock, x: 1350, y: 150, rotation: 0),
+    Structure(type: .rock, x: 1930, y: 150, rotation: 0),
+    
+    Structure(type: .rock, x: 100, y: 1110, rotation: 0), //rock left above circle
+    Structure(type: .rock, x: 450, y: 1160, rotation: 0),
+    
+    Structure(type: .rock, x: 2340, y: 900, rotation: 0), //rock alone
+    
+    Structure(type: .rock, x: 2040, y: 1550, rotation: 0), //far apart group on right
+    Structure(type: .rock, x: 2360, y: 1700, rotation: 0),
+    Structure(type: .rock, x: 2800, y: 1850, rotation: 0),
+    Structure(type: .rock, x: 2510, y: 2020, rotation: 0),
+    
+    Structure(type: .rock, x: 360, y: 2000, rotation: 0), //left triangle
+    Structure(type: .rock, x: 660, y: 2000, rotation: 0),
+    Structure(type: .rock, x: 460, y: 2200, rotation: 0),
+    
+    Structure(type: .rock, x: 750, y: 2600, rotation: 0), //left 2 that do a \
+    Structure(type: .rock, x: 550, y: 2800, rotation: 0),
+    
+    Structure(type: .rock, x: 1470, y: 2900, rotation: 0), //one on top of the other
+    Structure(type: .rock, x: 1470, y: 2550, rotation: 0)
+
+    
+//    Structure(type: .rock, x: 2100, y: 700, rotation: 0),
+//    Structure(type: .rock, x: 650, y: 1450, rotation: 0),
+//    Structure(type: .rock, x: 1950, y: 1350, rotation: 0),
+//    Structure(type: .rock, x: 1400, y: 350, rotation: 0),
+//    Structure(type: .rock, x: 1300, y: 2660, rotation: 0),
+//    Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
+//    Structure(type: .rock, x: 1890, y: 1720, rotation: 0),
+//    Structure(type: .rock, x: 2690, y: 2620, rotation: 0),
+//    Structure(type: .rock, x: 2100, y: 700, rotation: 0),
+//    Structure(type: .rock, x: 650, y: 1450, rotation: 0),
+//    Structure(type: .rock, x: 1950, y: 1350, rotation: 0),
+//    Structure(type: .rock, x: 1400, y: 350, rotation: 0),
+//    Structure(type: .rock, x: 1300, y: 2660, rotation: 0),
+//    Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
+//    Structure(type: .rock, x: 1890, y: 1720, rotation: 0),
+//    Structure(type: .rock, x: 2690, y: 2620, rotation: 0),
+//    Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
+//    Structure(type: .rock, x: 1890, y: 1720, rotation: 0),
+//    Structure(type: .rock, x: 2690, y: 2620, rotation: 0),
+//    Structure(type: .rock, x: 2690, y: 2620, rotation: 0),
+//    Structure(type: .rock, x: 2690, y: 2620, rotation: 0)
 ]
 
 let levelstructures3: [Structure] = [
