@@ -15,7 +15,6 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     @ObservedObject var evilGauge: EvilGauge = EvilGauge.shared
-    //@ObservedObject var hud: HUD
     @ObservedObject var tutorialSheet: TutorialSheet = TutorialSheet.shared
     
     public var fullName: String
@@ -48,6 +47,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     public var isFrenzied: Bool = false
     
     public var closeStructure: Structure? = nil
+    public var gate: Gate? = nil
     public var hasRock: Bool = false
     
     public var target: Enemy? = nil
@@ -1259,7 +1259,19 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func throwSelf(_ hud: HUD) {
         self.removeAllActions()
-        self.run(SKAction.move(to: CGPoint(x: gateCoordinates.x, y: gateCoordinates.y - 100), duration: 1.5), withKey: "thrown")
+        self.run(SKAction.move(to: CGPoint(x: gateCoordinates.x, y: gateCoordinates.y - 100), duration: 1.5), completion: {
+            if (self.type != .rock) {
+                self.health -= 50
+                if (self.gate != nil) {
+                    self.gate!.health -= 3
+                }
+            }
+            else {
+                if (self.gate != nil) {
+                    self.gate!.health -= 10
+                }
+            }
+        })
         if let catapult = self.closeStructure as? Catapult {
             catapult.launchedGoblin = true
         }

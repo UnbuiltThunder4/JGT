@@ -60,8 +60,14 @@ class Projectile: SKSpriteNode, ObservableObject {
         self.physicsBody?.linearDamping = 0.0
         self.physicsBody?.angularDamping = 0.0
         self.physicsBody?.categoryBitMask = Collision.Masks.projectile.bitmask
-        self.physicsBody?.collisionBitMask = Collision.Masks.enviroment.bitmask
         self.physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask
+        
+        if (self.type == .arrow) {
+            self.physicsBody?.collisionBitMask = Collision.Masks.enviroment.bitmask
+        }
+        else {
+            self.physicsBody?.collisionBitMask = Collision.Masks.gate.bitmask
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

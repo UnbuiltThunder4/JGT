@@ -30,6 +30,21 @@ extension TossScene: SKPhysicsContactDelegate {
             }
         
         }
+        if (collision.matches(.gate, .goblin)) {
+            
+            if let node = firstBody.node as? Goblin {
+                if let node2 = secondBody.node as? Gate {
+                    node.gate = node2
+                }
+            }
+            
+            if let node = secondBody.node as? Goblin {
+                if let node2 = firstBody.node as? Gate {
+                    node.gate = node2
+                }
+            }
+        
+        }
         if (collision.matches(.meleeEnemy, .goblin)) {
             
             if let node = firstBody.node as? Goblin {
@@ -318,6 +333,25 @@ extension TossScene: SKPhysicsContactDelegate {
                     node.target = node2
                     node.removeAction(forKey: "walk")
                     node.removeAction(forKey: "walkAnimation")
+                }
+            }
+        
+        }
+        if (collision.matches(.gate, .projectile)) {
+            
+            if let node = firstBody.node as? Gate {
+                if let node2 = secondBody.node as? Projectile {
+                    if (node2.type == .rock) {
+                        node.health -= 5
+                    }
+                }
+            }
+            
+            if let node = secondBody.node as? Gate {
+                if let node2 = firstBody.node as? Projectile {
+                    if (node2.type == .rock) {
+                        node.health -= 5
+                    }
                 }
             }
         
