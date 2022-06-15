@@ -199,8 +199,9 @@ extension TossScene {
                 self.sheet.updateSheet(darkSon: dsNode)
             }
             
-            if selectedNode?.name! == "background" || selectedNode?.name! == "rock" ||
-                selectedNode?.name! == "wall" || selectedNode?.name! == "backdoor-up" ||
+            if selectedNode?.name! == "background" ||
+                selectedNode?.name! == "wall" ||
+                selectedNode?.name! == "backdoor-up" ||
                 selectedNode?.name! == "dark-son-lives" {
                 self.sheet.alpha = 0.0
                 self.scrollableMenu.closeMenu()
