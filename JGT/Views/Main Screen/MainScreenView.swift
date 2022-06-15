@@ -42,6 +42,7 @@ class MenuScene: SKScene {
         self.darkLordEye.size = CGSize(width: 119, height: 131)
         self.darkLordEye.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.darkLordEye.position = CGPoint(x: self.darkLordTower.frame.midX, y: self.darkLordTower.frame.maxY * 0.94)
+        self.darkLordEye.alpha = 0.0
         self.addChild(darkLordEye)
         
         self.mountainsFront.name = "mountainsFront"
@@ -61,14 +62,44 @@ class MenuScene: SKScene {
         self.darkSon.name = "darkSon"
         self.darkSon.size = CGSize(width: 233, height: 333)
         self.darkSon.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        self.darkSon.position = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.maxY * 0.85)
+        self.darkSon.position = CGPoint(x: UIScreen.main.bounds.maxX, y: UIScreen.main.bounds.maxY * 0.2)
         self.addChild(darkSon)
+        
+        let endPosition = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.maxY * 0.2)
+        let movingDarkSon = SKAction.move(to: endPosition, duration: 1.0)
+        self.darkSon.run(movingDarkSon)
         
         self.gameTitle.name = "gameTitle"
         self.gameTitle.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.gameTitle.position = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.maxY * 0.85)
         self.addChild(gameTitle)
         
+    }
+    
+    public func genocideFunction() {
+        if let s = self.view?.scene {
+            NotificationCenter.default.removeObserver(self)
+                self.children.forEach { bgchild in
+                    bgchild.children.forEach { bggrandson in
+                        bggrandson.children.forEach { bggrandgrandson in
+                            bggrandgrandson.children.forEach { bggrandgrandgrandson in
+                                bggrandgrandgrandson.children.forEach { what in
+                                    what.removeAllActions()
+                                    what.removeFromParent()
+                                }
+                                bggrandgrandgrandson.removeAllActions()
+                                bggrandgrandgrandson.removeFromParent()
+                            }
+                            bggrandgrandson.removeAllActions()
+                            bggrandgrandson.removeFromParent()
+                        }
+                        bggrandson.removeAllActions()
+                        bggrandson.removeFromParent()
+                    }
+                    bgchild.removeAllActions()
+                    bgchild.removeFromParent()
+                }
+            }
     }
 }
 
@@ -132,6 +163,7 @@ struct MainScreenView: View {
     private func startGame() {
         print("- Starting the game...")
         gameLogic.gameState = .selection
+        self.currentScene.genocideFunction()
     }
 }
 
