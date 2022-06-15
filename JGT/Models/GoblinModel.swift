@@ -318,7 +318,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.updateAge()
         
         if let _ = self.action(forKey: "walk") {
-            if let _ = self.action(forKey: "walkingAnimation") {
+            if let _ = self.action(forKey: "walkAnimation") {
             }
             else {
                 if (targetQueue.isEmpty) {
@@ -410,11 +410,6 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.state = .fighting
                 removeAction(forKey: "walk")
                 gameLogic.removeAnimation(goblin: self)
-                if let _ = self.action(forKey: "attackAnimation") {
-                }
-                else {
-                    gameLogic.isFightingAnimation(goblin: self)
-                }
             }
         }
         else {
@@ -486,6 +481,20 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     private func fightingUpdate(_ hud: HUD) {
         self.updateAge()
+        
+        if let _ = self.action(forKey: "walk") {
+            gameLogic.removeAnimation(goblin: self)
+            gameLogic.isWalkingAnimation(goblin: self)
+        }
+        else {
+            if let _ = self.action(forKey: "attackAnimation") {
+            }
+            else {
+                gameLogic.removeAnimation(goblin: self)
+                gameLogic.isFightingAnimation(goblin: self)
+            }
+        }
+        
         if (self.isFrenzied) {
             self.checkFrenzy()
         }
@@ -637,7 +646,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.updateAge()
         
         if let _ = self.action(forKey: "run") {
-            if let _ = self.action(forKey: "walkingAnimation") {
+            if let _ = self.action(forKey: "walkAnimation") {
             }
             else {
                 gameLogic.isWalkingAnimation(goblin: self)
