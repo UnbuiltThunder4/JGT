@@ -6,21 +6,77 @@
 //
 
 import SwiftUI
+import SpriteKit
 
-/**
- * # MainScreenView
- *
- *   This view is responsible for presenting the game name, the game intructions and to start the game.
- *  - Customize it as much as you want.
- *  - Experiment with colors and effects on the interface
- *  - Adapt the "Insert a Coin Button" to the visual identity of your game
- **/
+class MenuScene: SKScene {
+    var background = SKSpriteNode(imageNamed: "menu-background")
+    var mountainsBack = SKSpriteNode(imageNamed: "menu-mountains-back")
+    var darkLordTower = SKSpriteNode(imageNamed: "menu-dark-lord-tower")
+    var darkLordEye = SKSpriteNode(imageNamed: "darkLordEye")
+    var mountainsFront = SKSpriteNode(imageNamed: "menu-mountains-front")
+    var ground = SKSpriteNode(imageNamed: "menu-ground")
+    var darkSon = SKSpriteNode(imageNamed: "darkson")
+    var gameTitle = SKSpriteNode(imageNamed: "title")
+    
+    override func didMove(to view: SKView) {
+        self.background.name = "background"
+        self.background.size = UIScreen.main.bounds.size
+        self.background.anchorPoint = CGPoint(x: 0, y: 0)
+        self.background.position = CGPoint(x: 0.0, y: 0.0)
+        self.addChild(background)
+        
+        self.mountainsBack.name = "mountainsBack"
+        self.mountainsBack.size.width = UIScreen.main.bounds.size.width
+        self.mountainsBack.size.height = UIScreen.main.bounds.maxY * 0.7
+        self.mountainsBack.anchorPoint = CGPoint(x: 0, y: 0)
+        self.mountainsBack.position = CGPoint(x: 0.0, y: 0.0)
+        self.addChild(mountainsBack)
+        
+        self.darkLordTower.name = "darkLordTower"
+        self.darkLordTower.size = CGSize(width: 300, height: 600)
+        self.darkLordTower.anchorPoint = CGPoint(x: 0, y: 0)
+        self.darkLordTower.position = CGPoint(x: UIScreen.main.bounds.maxX * 0.05, y: UIScreen.main.bounds.maxY * 0.2)
+        self.addChild(darkLordTower)
+        
+        self.darkLordEye.name = "darkLordEye"
+        self.darkLordEye.size = CGSize(width: 119, height: 131)
+        self.darkLordEye.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.darkLordEye.position = CGPoint(x: self.darkLordTower.frame.midX, y: self.darkLordTower.frame.maxY * 0.94)
+        self.addChild(darkLordEye)
+        
+        self.mountainsFront.name = "mountainsFront"
+        self.mountainsFront.size.width = UIScreen.main.bounds.size.width
+        self.mountainsFront.size.height = UIScreen.main.bounds.maxY * 0.4
+        self.mountainsFront.anchorPoint = CGPoint(x: 0, y: 0)
+        self.mountainsFront.position = CGPoint(x: 0.0, y: 0.0)
+        self.addChild(mountainsFront)
+        
+        self.ground.name = "ground"
+        self.ground.size = UIScreen.main.bounds.size
+        self.ground.size.height = UIScreen.main.bounds.maxY * 0.1
+        self.ground.anchorPoint = CGPoint(x: 0, y: 0)
+        self.ground.position = CGPoint(x: 0.0, y: 0.0)
+        self.addChild(ground)
+        
+        self.darkSon.name = "darkSon"
+        self.darkSon.size = CGSize(width: 233, height: 333)
+        self.darkSon.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.darkSon.position = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.maxY * 0.85)
+        self.addChild(darkSon)
+        
+        self.gameTitle.name = "gameTitle"
+        self.gameTitle.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.gameTitle.position = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.maxY * 0.85)
+        self.addChild(gameTitle)
+        
+    }
+}
 
 struct MainScreenView: View {
-    
-    // The game state is used to transition between the different states of the game
     @Binding var currentGameState: GameState
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
+    
+    var currentScene = MenuScene()
     
     // Change it on the Constants.swift file
     var gameTitle: String = MainScreenProperties.gameTitle
@@ -36,66 +92,43 @@ struct MainScreenView: View {
     
     var body: some View {
         GeometryReader { geometry in
-//            VStack(alignment: .center, spacing: 16.0) {
-            VStack {
-                
-                Button {
+            ZStack {
+                SpriteKitContainer(scene: currentScene)
+                    .ignoresSafeArea()
+                VStack {
                     
-                } label: {
-                    Image("info-button")
+                    //                Button {
+                    //
+                    //                } label: {
+                    //                    Image("info-button")
+                    //
+                    //                }
+                    //                .frame(maxWidth: geometry.size.width * 0.1, maxHeight: geometry.size.height * 0.1)
+                    //                .padding(.top)
+                    //                .foregroundColor(.white)
+                    
+                    //                Spacer()
+                    
+                    Button {
+                        withAnimation { self.startGame() }
+                    } label: {
+                        Text("Play")
+                            .font(.custom("Chalkduster", size: (UIDevice.current.userInterfaceIdiom == .pad ? 30 : 15)))
                         
-                }
-                .frame(maxWidth: geometry.size.width * 0.1, maxHeight: geometry.size.height * 0.1)
-                .padding(.top)
-                .foregroundColor(.white)
-//                .background(self.accentColor)
-            
-                Spacer()
-                
-                Text("\(self.gameTitle)")
-    //                .font(.title)
-                    .font(.custom("Chalkduster", size: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 50)))
-                    .fontWeight(.black)
-                    .padding()
-                
-
-                /**
-                 * To customize the instructions, check the **Constants.swift** file
-                 */
-                
-                /**
-                 * Customize the appearance of the **Insert a Coin** button to match the visual identity of your game
-                 */
-                Spacer()
-                
-                HStack {
-                    
-                Button {
-                    withAnimation { self.startGame() }
-                } label: {
-                    Text("Play")
-                        .font(.custom("Chalkduster", size: (UIDevice.current.userInterfaceIdiom == .pad ? 30 : 15)))
+                    }
+                    .frame(maxWidth: geometry.size.width * 0.1, maxHeight: geometry.size.height * 0.1)
+                    .padding(5)
+                    .foregroundColor(.white)
+                    .background(.green)
+                    .cornerRadius(15.0)
                     
                 }
-                .frame(maxWidth: geometry.size.width * 0.1, maxHeight: geometry.size.height * 0.1)
-                .padding(5)
-                .foregroundColor(.white)
-                .background(self.accentColor)
-                .cornerRadius(15.0)
-    
-                    
-                }
-                
-            }
-            .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height)
+                .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height)
             .statusBar(hidden: true)
+            }
         }
     }
     
-    /**
-     * Function responsible to start the game.
-     * It changes the current game state to present the view which houses the game scene.
-     */
     private func startGame() {
         print("- Starting the game...")
         gameLogic.gameState = .selection
