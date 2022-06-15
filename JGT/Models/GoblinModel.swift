@@ -347,7 +347,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                             self.stuckCounter = 0
                             self.destination = CGPoint(
                                 x: Double.random(in: 60...MainScreenProperties.bgwidth - 60),
-                                y: Double.random(in: 60...MainScreenProperties.bgheight - 900))
+                                y: Double.random(in: 200...MainScreenProperties.bgheight - 450))
                         }
                         if (self.closeStructure != nil && self.isFrenzied == false) {
                             let targetDistance = CGVector(dx: self.closeStructure!.position.x - self.position.x, dy: self.closeStructure!.position.y - self.position.y)

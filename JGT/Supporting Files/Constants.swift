@@ -168,7 +168,6 @@ let gnomes1: [Enemy] = [
     
     Enemy(type: .bow, x: 1870, y: 4200), //on gate gnomes
     Enemy(type: .bow, x: 1470, y: 4200),
-    Enemy(type: .bow, x: 1670, y: 4200),
 
 
     Enemy(type: .axe, x: 1250, y: 2350), //near academy gnomes
