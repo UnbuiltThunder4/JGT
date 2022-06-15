@@ -79,7 +79,7 @@ class MenuScene: SKScene {
             self.goblins[i].name = "goblin"
             self.goblins[i].size = CGSize(width: 100, height: 100)
             self.goblins[i].anchorPoint = CGPoint(x: 0.5, y: 0.5)
-            self.goblins[i].position = CGPoint(x: UIScreen.main.bounds.maxX + CGFloat(i*70), y: UIScreen.main.bounds.maxY * 0.1)
+            self.goblins[i].position = CGPoint(x: UIScreen.main.bounds.maxX + CGFloat((i+1)*100), y: UIScreen.main.bounds.maxY * 0.1)
             self.goblinSpawn[i] = self.goblins[i].position
             self.goblins[i].zPosition = 4
             self.addChild(self.goblins[i])
@@ -88,7 +88,7 @@ class MenuScene: SKScene {
         self.darkSon.name = "darkSon"
         self.darkSon.size = CGSize(width: 233, height: 333)
         self.darkSon.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        self.darkSon.position = CGPoint(x: UIScreen.main.bounds.maxX, y: UIScreen.main.bounds.maxY * 0.2)
+        self.darkSon.position = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.maxY + 100)
         self.darkSon.zPosition = 4
         self.addChild(darkSon)
         
@@ -125,12 +125,43 @@ class MenuScene: SKScene {
         
         let movingDarkSon = SKAction.move(to: endDarkPosition, duration: 1.0)
         self.darkSon.run(movingDarkSon) {
-            self.darkLordEye.run(darkEyeSequence)
+            self.darkSon.texture = SKTexture(imageNamed: "attack1")
+            
+            let fly = SKAction.move(to: CGPoint(x: self.darkSon.position.x, y: self.darkSon.position.y + 30), duration: self.getDuration(pointA: self.darkSon.position, pointB: CGPoint(x: self.darkSon.position.x, y: self.darkSon.position.y + 30), speed: 30))
+            
+            let flyBack = SKAction.move(to: CGPoint(x: self.darkSon.position.x, y: self.darkSon.position.y - 30), duration: self.getDuration(pointA: self.darkSon.position, pointB: CGPoint(x: self.darkSon.position.x, y: self.darkSon.position.y - 30), speed: 30))
+                        
+            let flySequence = SKAction.sequence([
+                fly,
+                flyBack
+            ])
+            
+            let flySequenceForever = SKAction.repeatForever(flySequence)
+            
+            self.darkSon.run(flySequenceForever)
+            
+            self.darkLordEye.run(darkEyeSequence) {
+                let eyeTextures : [SKTexture] = [
+                    SKTexture(imageNamed: "darkLordEye"),
+                    SKTexture(imageNamed: "darkLordEye-Left"),
+                    SKTexture(imageNamed: "darkLordEye"),
+                    SKTexture(imageNamed: "darkLordEye-Right"),
+                    SKTexture(imageNamed: "darkLordEye")
+                ]
+                
+                let eyeAnimation = SKAction.animate(with: eyeTextures, timePerFrame: 0.5)
+                
+                let eyeSequence = SKAction.sequence([
+                    eyeAnimation,
+                    .wait(forDuration: 2)
+                ])
+                
+                let eyeSequenceAnimation = SKAction.repeatForever(eyeSequence)
+                
+                self.darkLordEye.run(eyeSequenceAnimation, withKey: "eyeAnimation")
+            }
             for i in 0...2 {
-                let movingGoblin = SKAction.move(to: endGoblinPosition, duration: self.getDuration(pointA: endGoblinPosition, pointB: self.goblinSpawn[i], speed: CGFloat.random(in: 150...250)))
-                self.isWalkingAnimation(goblin: self.goblins[i])
-                self.shouldFlip(oldPosition: self.goblinSpawn[i], newPosition: endGoblinPosition, node: self.goblins[i])
-                self.goblins[i].run(movingGoblin)
+                self.moveGoblins(goblin: self.goblins[i], initialGoblinPosition: self.goblinSpawn[i], endGoblinPosition: endGoblinPosition)
             }
         }
     }
@@ -162,6 +193,28 @@ class MenuScene: SKScene {
         }
         if Int(oldPosition.x) < Int(newPosition.x) {
             node.xScale = 1
+        }
+    }
+    
+    public func moveGoblins(goblin: SKSpriteNode, initialGoblinPosition: CGPoint, endGoblinPosition: CGPoint) {
+        if goblin.position != endGoblinPosition {
+            let movingGoblin = SKAction.move(to: endGoblinPosition, duration: self.getDuration(pointA: endGoblinPosition, pointB: initialGoblinPosition, speed: CGFloat.random(in: 200...250)))
+            
+            self.isWalkingAnimation(goblin: goblin)
+            self.shouldFlip(oldPosition: initialGoblinPosition, newPosition: endGoblinPosition, node: goblin)
+            goblin.run(movingGoblin) {
+                self.moveGoblins(goblin: goblin, initialGoblinPosition: endGoblinPosition, endGoblinPosition: initialGoblinPosition)
+            }
+        } else {
+            let movingGoblin = SKAction.move(to: initialGoblinPosition, duration: self.getDuration(pointA: endGoblinPosition, pointB: initialGoblinPosition, speed: CGFloat.random(in: 150...250)))
+            
+            self.isWalkingAnimation(goblin: goblin)
+            self.shouldFlip(oldPosition: endGoblinPosition, newPosition: initialGoblinPosition, node: goblin)
+            goblin.run(movingGoblin) {
+                goblin.run(movingGoblin) {
+                    self.moveGoblins(goblin: goblin, initialGoblinPosition: initialGoblinPosition, endGoblinPosition: endGoblinPosition)
+                }
+            }
         }
     }
     
