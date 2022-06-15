@@ -614,8 +614,8 @@ extension TossScene {
             ZoomProperties.initialScale = 3.0
             ZoomProperties.maximumZoom = 4.0
             ZoomProperties.minimumZoom = 1.5
-            ZoomProperties.cameraOffsetx = 90.0
-            ZoomProperties.cameraOffsety = 40.0
+            ZoomProperties.cameraOffsetx = 190.0
+            ZoomProperties.cameraOffsety = 140.0
             ZoomProperties.initialOffsetx = 230.0
             ZoomProperties.initialOffsety = 120.0
             cameraNode.xScale = ZoomProperties.initialScale
@@ -625,8 +625,8 @@ extension TossScene {
             ZoomProperties.initialScale = 1.0
             ZoomProperties.maximumZoom = 2.0
             ZoomProperties.minimumZoom = 0.8
-            ZoomProperties.cameraOffsetx = 50.0
-            ZoomProperties.cameraOffsety = 50.0
+            ZoomProperties.cameraOffsetx = 150.0
+            ZoomProperties.cameraOffsety = 150.0
             ZoomProperties.initialOffsetx = 50.0
             ZoomProperties.initialOffsety = 50.0
             cameraNode.xScale = ZoomProperties.initialScale
