@@ -66,7 +66,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     private var stunCounter: Int = 0
     private var stuckCounter: Int = 0
     
-    private var currentTask: ((HUD) -> ())? = nil
+    private var currentTask: ((HUD, EvilGauge) -> ())? = nil
     private var ignoreThreshold: Float = 0.0
     
     private var goblinTaskTime: Int = taskTime
@@ -220,7 +220,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         return fit
     }
     
-    public func update(hud: HUD) -> Bool {
+    public func update(hud: HUD, evilGauge: EvilGauge) -> Bool {
         var hasToUpdateRank = false
         
         self.shouldFlip()
@@ -233,7 +233,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         case .working:
-            hasToUpdateRank = workingUpdate(func: self.currentTask, hud: hud)
+            hasToUpdateRank = workingUpdate(func: self.currentTask, hud: hud, evilGauge: evilGauge)
             break
             
         case .fighting:
@@ -269,7 +269,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         case .invillage:
-            hasToUpdateRank = inVillageUpdate(hud)
+            hasToUpdateRank = inVillageUpdate(hud, evilGauge)
             break
             
         case .intrap:
@@ -347,7 +347,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                             self.stuckCounter = 0
                             self.destination = CGPoint(
                                 x: Double.random(in: 60...MainScreenProperties.bgwidth - 60),
-                                y: Double.random(in: 60...MainScreenProperties.bgheight - 900))
+                                y: Double.random(in: 200...MainScreenProperties.bgheight - 450))
                         }
                         if (self.closeStructure != nil && self.isFrenzied == false) {
                             let targetDistance = CGVector(dx: self.closeStructure!.position.x - self.position.x, dy: self.closeStructure!.position.y - self.position.y)
@@ -423,7 +423,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         return hasToUpdateRank
     }
     
-    private func workingUpdate(func: ((HUD) -> ())?, hud: HUD) -> Bool {
+    private func workingUpdate(func: ((HUD, EvilGauge) -> ())?, hud: HUD, evilGauge: EvilGauge) -> Bool {
         var hasToUpdateRank = false
         if (self.closeStructure!.goblins.isEmpty) {
             self.closeStructure!.goblins.append(self)
@@ -465,7 +465,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         
             self.actionCloud.alpha = 1.0
             if (self.taskCounter % self.goblinTaskTime == 0) {
-                self.currentTask!(hud)
+                self.currentTask!(hud, evilGauge)
                 self.currentTask = nil
                 hasToUpdateRank = true
                 self.state = .idle
@@ -784,7 +784,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         return hasToUpdateRank
     }
     
-    private func inVillageUpdate(_ hud: HUD) -> Bool {
+    private func inVillageUpdate(_ hud: HUD, _ evilGauge: EvilGauge) -> Bool {
         var hasToUpdateRank = false
         self.updateAge()
         self.removeAllActions()
@@ -843,7 +843,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                     hud.tutorialCounter.text = String(hud.counter)
                 }
                 
-                self.evilGauge.updateGauge(goblin: nil, value: 1)
+                evilGauge.updateGauge(goblin: nil, value: 1)
                 self.state = .idle
                 self.alpha = 1.0
                 self.position.x += self.position.x - villageCoordinates.x
@@ -1125,7 +1125,13 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         case .academy:
-            if (!self.isGraduated) {
+            var canEnter = true
+            if let academy = self.closeStructure! as? Academy {
+                if academy.goblins.count >= 6 {
+                    canEnter = false
+                }
+            }
+            if (!self.isGraduated && canEnter) {
                 removeAction(forKey: "walk")
                 self.enterAcademy(hud)
             }
@@ -1135,7 +1141,13 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         case .village:
-            if (self.type != .gum) {
+            var canEnter = true
+            if let academy = self.closeStructure! as? Academy {
+                if academy.goblins.count >= 6 {
+                    canEnter = false
+                }
+            }
+            if (self.type != .gum && canEnter) {
                 removeAction(forKey: "walk")
                 self.enterVillage()
             }
@@ -1277,7 +1289,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
     }
     
-    private func throwRock(hud: HUD) {
+    private func throwRock(hud: HUD, _ evilGauge: EvilGauge) {
         
         switch self.type {
         case .rock:
@@ -1325,7 +1337,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.closeStructure = nil
     }
     
-    private func throwSelf(_ hud: HUD) {
+    private func throwSelf(_ hud: HUD, _ evilGauge: EvilGauge) {
         self.removeAllActions()
         gameLogic.removeAnimation(goblin: self)
         gameLogic.isFlyingAnimation(goblin: self)
@@ -1396,7 +1408,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.closeStructure = nil
     }
     
-    private func pickUpRock(_ hud: HUD) {
+    private func pickUpRock(_ hud: HUD, _ evilGauge: EvilGauge) {
         
         switch self.type {
         case .normal:
@@ -1424,7 +1436,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.closeStructure = nil
     }
     
-    private func eatRock(_ hud: HUD) {
+    private func eatRock(_ hud: HUD, _ evilGauge: EvilGauge) {
         let random = Int.random(in: 0...1)
         gameLogic.playSound(node: self,
                             audio: random == 0 ? Audio.EffectFiles.stoneblinTransform1 : Audio.EffectFiles.stoneblinTransform2, wait: false, muted: gameLogic.muted)
@@ -1446,7 +1458,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         self.closeStructure = nil
     }
     
-    private func setFiretoTree(_ hud: HUD) {
+    private func setFiretoTree(_ hud: HUD, _ evilGauge: EvilGauge) {
         setFireParticles()
         if UserDefaults.standard.bool(forKey: "treeTutorial") == false {
         gameLogic.tutorialEvent(index: 3, hud: hud, tutorialSheet: tutorialSheet)
@@ -1472,13 +1484,13 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         gameLogic.playSound(node: self, audio: Audio.EffectFiles.treeOnFire, wait: false, muted: gameLogic.muted)
     
         self.closeStructure!.removeFromParent()
-        self.evilGauge.updateGauge(goblin: nil, value: 1)
+        evilGauge.updateGauge(goblin: nil, value: 1)
         self.HWpoints += 50
         self.fitness = self.getFitness()
         self.closeStructure = nil
     }
     
-    private func setFiretoSelf(_ hud: HUD) {
+    private func setFiretoSelf(_ hud: HUD, _ evilGauge: EvilGauge) {
         setFireParticles()
         if UserDefaults.standard.bool(forKey: "fireTutorial") == false {
         gameLogic.tutorialEvent(index: 4, hud: hud, tutorialSheet: tutorialSheet)

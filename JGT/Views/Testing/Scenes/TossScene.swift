@@ -196,6 +196,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             $0.goblins = []
             if let gate = $0 as? Gate {
                 gate.health = gate.maxHealth
+                gate.texture = SKTexture(imageNamed: "gate")
             }
             if let trap = $0 as? Trap {
                 trap.isActive = false
@@ -287,7 +288,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             var hasToUpdateRank = false
             
             self.population.goblins.forEach {
-                if ($0.update(hud: self.hud)) {
+                if ($0.update(hud: self.hud, evilGauge: evilGauge)) {
                     hasToUpdateRank = true
                 }
                 if ($0.health <= 0) {

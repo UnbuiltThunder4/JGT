@@ -426,10 +426,13 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
             maxRange = 15
         case .rock:
             maxRange = 12
+            goblin.size = CGSize(width: 130, height: 130)
         case .gum:
             maxRange = 13
+            goblin.size = CGSize(width: 130, height: 130)
         case .fire:
             maxRange = 13
+            goblin.size = CGSize(width: 130, height: 130)
         }
               
         for i in 1...maxRange {
@@ -482,6 +485,7 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
         goblin.removeAction(forKey: "attackAnimation")
         goblin.removeAction(forKey: "taskAnimation")
         goblin.removeAction(forKey: "walkAnimation")
+        goblin.size = CGSize(width: 100, height: 100)
         
         switch goblin.type {
         case .normal:
@@ -531,7 +535,7 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
             maxRange = 28
             enemy.size = CGSize(width: 92, height: 120)
         case .bow:
-            maxRange = 5
+            maxRange = 8
             enemy.size = CGSize(width: 120, height: 160)
         case .axe:
             maxRange = 32
@@ -573,7 +577,4 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
         self.gameState = .gameOver
     }
     
-    public func farmEvilPoints(_ tossScene: TossScene){
-        tossScene.evilGauge.updateGauge(goblin: nil, value: 1)
-    }
 }
