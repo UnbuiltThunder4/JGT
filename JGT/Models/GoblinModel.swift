@@ -54,6 +54,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     public var targetQueue: [Enemy] = []
     
     private var destination: CGPoint
+    private var oldPosition: CGPoint? = nil
     
     private var inVillageCounter: Int = 0
     private var inAcademyCounter: Int = 0
@@ -221,6 +222,9 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
     
     public func update(hud: HUD) -> Bool {
         var hasToUpdateRank = false
+        
+        self.shouldFlip()
+        
         switch self.state {
             
         case .idle:
@@ -1641,28 +1645,17 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
     }
  
-//    private func isFlyingAnimation() {
-//        var flyingTextures : [SKTexture] = []
-//        var maxRange = 0
-//        
-//        switch self.type {
-//        case .normal:
-//            maxRange = 15
-//        case .rock:
-//            maxRange = 12
-//        case .gum:
-//            maxRange = 13
-//        case .fire:
-//            maxRange = 13
-//        }
-//              
-//        for i in 1...maxRange {
-//            flyingTextures.append(SKTexture(imageNamed: "\(self.type)_fly (\(i))"))
-//        }
-//        
-//        let flyingAnimation = SKAction.repeatForever(SKAction.animate(with: flyingTextures, timePerFrame: 0.5))
-//        
-//        self.run(flyingAnimation, withKey: "flyingAnimation")
-//    }
-    
+    private func shouldFlip() {
+        
+        if (self.oldPosition != nil) {
+            if Int((self.oldPosition?.x)!) > Int((self.position.x)) {
+                self.xScale = -1
+                
+            } else if Int((self.oldPosition?.x)!) < Int((self.position.x)) {
+                self.xScale = 1
+            }
+        }
+        
+        self.oldPosition = self.position
+    }
 }

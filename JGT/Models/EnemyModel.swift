@@ -50,6 +50,8 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     private var shieldCounter: Int = 0
     private var idleCounter: Int = 0
     
+    private var oldPosition: CGPoint? = nil
+    
     init(type: EnemyType, x: CGFloat, y: CGFloat) {
         var imgname = ""
         var width: CGFloat = 0.0
@@ -122,6 +124,9 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     public func update(_ tossScene: TossScene) -> Bool {
         let Dead = self.checkHealth()
         if (self.health > 0) {
+            
+            self.shouldFlip()
+            
             switch self.state {
                 
             case .idle:
@@ -526,6 +531,20 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                 gameLogic.removeAnimation(enemy: self)
             }
         }
+    }
+    
+    private func shouldFlip() {
+        
+        if (self.oldPosition != nil) {
+            if Int((self.oldPosition?.x)!) > Int((self.position.x)) {
+                self.xScale = -1
+                
+            } else if Int((self.oldPosition?.x)!) < Int((self.position.x)) {
+                self.xScale = 1
+            }
+        }
+        
+        self.oldPosition = self.position
     }
     
 }
