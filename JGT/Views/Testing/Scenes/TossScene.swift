@@ -95,14 +95,67 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         
         switch gameLogic.level {
         case 1:
-        self.enemyPopulation.enemies.append(contentsOf: gnomes)
-        self.structuresList.structures.append(contentsOf: levelstructures)
-        setGoblins(population.goblins, spawnPoint: nil)
-        setEnemies(self.enemyPopulation)
-        setStructures(self.structuresList)
+            goblinmancyCircleCoordinates = goblinmancyCircleCoordinates1
+            tavernCoordinates = tavernCoordinates1
+            academyCoordinates = academyCoordinates1
+            villageCoordinates = villageCoordinates1
+            catapultCoordinates = catapultCoordinates1
+            gateCoordinates = gateCoordinates1
+            backdoorCoordinates = backdoorCoordinates1
+            passageCoordinates = passageCoordinates1
+            self.darkson.position.x = goblinmancyCircleCoordinates.x
+            self.darkson.position.y = goblinmancyCircleCoordinates.y + 300
+            self.darkson.spawnX = goblinmancyCircleCoordinates.x
+            self.darkson.spawnY = goblinmancyCircleCoordinates.y + 300
+            
+            self.enemyPopulation.enemies.append(contentsOf: gnomes1)
+            self.structuresList.structures.append(contentsOf: levelstructures1)
+            setGoblins(population.goblins, spawnPoint: nil)
+            setEnemies(self.enemyPopulation)
+            setStructures(self.structuresList)
+            
+            break
         case 2:
+            goblinmancyCircleCoordinates = goblinmancyCircleCoordinates2
+            tavernCoordinates = tavernCoordinates2
+            academyCoordinates = academyCoordinates2
+            villageCoordinates = villageCoordinates2
+            catapultCoordinates = catapultCoordinates2
+            gateCoordinates = gateCoordinates2
+            backdoorCoordinates = backdoorCoordinates2
+            passageCoordinates = passageCoordinates2
+            self.darkson.position.x = goblinmancyCircleCoordinates.x
+            self.darkson.position.y = goblinmancyCircleCoordinates.y + 300
+            self.darkson.spawnX = goblinmancyCircleCoordinates.x
+            self.darkson.spawnY = goblinmancyCircleCoordinates.y + 300
+            
+            self.enemyPopulation.enemies.append(contentsOf: gnomes2)
+            self.structuresList.structures.append(contentsOf: levelstructures2)
+            setGoblins(population.goblins, spawnPoint: nil)
+            setEnemies(self.enemyPopulation)
+            setStructures(self.structuresList)
+            
             break
         case 3:
+            goblinmancyCircleCoordinates = goblinmancyCircleCoordinates3
+            tavernCoordinates = tavernCoordinates3
+            academyCoordinates = academyCoordinates3
+            villageCoordinates = villageCoordinates3
+            catapultCoordinates = catapultCoordinates3
+            gateCoordinates = gateCoordinates3
+            backdoorCoordinates = backdoorCoordinates3
+            passageCoordinates = passageCoordinates3
+            self.darkson.position.x = goblinmancyCircleCoordinates.x
+            self.darkson.position.y = goblinmancyCircleCoordinates.y + 300
+            self.darkson.spawnX = goblinmancyCircleCoordinates.x
+            self.darkson.spawnY = goblinmancyCircleCoordinates.y + 300
+            
+            self.enemyPopulation.enemies.append(contentsOf: gnomes3)
+            self.structuresList.structures.append(contentsOf: levelstructures3)
+            setGoblins(population.goblins, spawnPoint: nil)
+            setEnemies(self.enemyPopulation)
+            setStructures(self.structuresList)
+            
             break
         default:
             break

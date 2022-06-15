@@ -23,8 +23,8 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     
     public var target: Gate?  = nil
     
-    public var spawnX: CGFloat = goblinmancyCircleCoordinates.x
-    public var spawnY: CGFloat = goblinmancyCircleCoordinates.y + 300
+    public var spawnX: CGFloat?
+    public var spawnY: CGFloat?
     
     public var isDead: Bool = false
     
@@ -34,9 +34,10 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     init() {
         super.init(texture: SKTexture(imageNamed: "darkson"), color: .red, size: CGSize(width: 233, height: 333))
         self.name = "darkson"
-        self.speed = 6.0
-        self.position.x = self.spawnX
-        self.position.y = self.spawnY
+        self.speed = 26.0
+//        self.position.x = self.spawnX
+//        self.position.y = self.spawnY
+        
         self.zPosition = 1
         
         self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: self.size.width * 1.0, height: self.size.height * 0.8))
@@ -104,8 +105,8 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
             
             if (!self.isDead) {
                 self.isDead = true
-                self.position.x = self.spawnX
-                self.position.y = self.spawnY
+                self.position.x = self.spawnX!
+                self.position.y = self.spawnY!
                 self.alpha = 0.0
                 self.respawnCounter += 1
                 self.lives -= 1
@@ -132,8 +133,8 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     private func setFireParticles() {
         let fireParticle = SKEmitterNode(fileNamed: "FireParticle")
         fireParticle!.name = "fireParticle"
-        fireParticle!.position.x = spawnX
-        fireParticle!.position.y = spawnY
+        fireParticle!.position.x = spawnX!
+        fireParticle!.position.y = spawnY!
         fireParticle!.position.y -= 100
         //        fireParticle!.zPosition = -1
         fireParticle!.particleColorSequence = nil
@@ -143,8 +144,8 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
         
         let smokeParticle = SKEmitterNode(fileNamed: "SmokeParticle")
         smokeParticle!.name = "smokeParticle"
-        smokeParticle!.position.x = spawnX
-        smokeParticle!.position.y = spawnY
+        smokeParticle!.position.x = spawnX!
+        smokeParticle!.position.y = spawnY!
         smokeParticle!.position.y -= 100
         //        smokeParticle!.zPosition = -1
         smokeParticle!.setScale(3)
