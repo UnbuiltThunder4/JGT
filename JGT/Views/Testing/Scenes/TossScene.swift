@@ -200,6 +200,8 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             }
             if let trap = $0 as? Trap {
                 trap.isActive = false
+                trap.counter = 0
+                trap.texture = SKTexture(imageNamed: "open-trap")
             }
             if let catapult = $0 as? Catapult {
                 catapult.hasRock = false

@@ -885,8 +885,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 trap.isActive = true
                 let closeTrap = SKAction.setTexture(SKTexture(imageNamed: "closed-trap"))
                 trap.run(closeTrap)
-                if self.health - 80 <= 0 {
-                    
+                if ((self.health - 80) <= 0) {
                     let goblinDeathParticle = SKEmitterNode(fileNamed: "GoblinDeathParticle")
                     goblinDeathParticle!.position = self.position
                     goblinDeathParticle!.name = "goblinDeathParticle"
@@ -940,7 +939,6 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 }
                 if (self.type != .gum) {
                     self.health -= 80
-                    self.HWpoints -= 50
                     self.state = .stunned
                     gameLogic.playSound(node: trap, audio: Audio.EffectFiles.trap, wait: false, muted: gameLogic.muted)
                     
@@ -983,13 +981,23 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                     
                 }
                 else {
-                    self.HWpoints += 50
+//                    self.HWpoints += 50
                 }
-                self.fitness = self.getFitness()
+//                self.fitness = self.getFitness()
                 if (self.health > 0) {
                     hasToUpdateRank = true
                 }
             }
+            else {
+                gameLogic.removeAnimation(goblin: self)
+                self.state = .idle
+                self.closeStructure = nil
+            }
+        }
+        else {
+            gameLogic.removeAnimation(goblin: self)
+            self.state = .idle
+            self.closeStructure = nil
         }
         return hasToUpdateRank
     }
