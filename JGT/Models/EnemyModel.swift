@@ -81,7 +81,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             self.health = 400
             self.maxShield = 150
             self.shield = 150
-            self.attack = 50
+            self.attack = 25
             self.fullName = "Archer Gnome"
             self.desc = "“The ranged soldiers of the gnome army, but everybody knows that ranged weapons are for cowards, so goblins can’t use them.”"
             self.maskmodX = 5
