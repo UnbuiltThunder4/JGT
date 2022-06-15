@@ -10,8 +10,6 @@ import SpriteKit
 import SwiftUI
 
 class ScrollableMenu: SKSpriteNode, ObservableObject {
-    static let shared: ScrollableMenu = ScrollableMenu()
-    
     var nameLabel: SKLabelNode = SKLabelNode()
     var descLabel: SKLabelNode = SKLabelNode()
     var goblinTable: GoblinTable = GoblinTable()
@@ -62,7 +60,7 @@ class ScrollableMenu: SKSpriteNode, ObservableObject {
         
         if structure.type == .tavern || structure.type == .academy || structure.type == .village {
         for i in 0..<structure.goblins.count {
-            goblinTable.addRow(row: GoblinRow(goblin: structure.goblins[i]))
+            goblinTable.addRow(row: GoblinRow(goblin: structure.goblins[i], scrollableMenu: self))
             self.tableSize += self.goblinTable.rows[i].frame.height
         }
         self.hideRow()
@@ -152,8 +150,6 @@ class GoblinTable: SKNode, ObservableObject {
 }
 
 class GoblinRow: SKSpriteNode, Identifiable, ObservableObject {
-    @ObservedObject var scrollableMenu: ScrollableMenu = ScrollableMenu.shared
-
     public let id = UUID()
     
     var goblinID: UUID = UUID()
@@ -161,7 +157,7 @@ class GoblinRow: SKSpriteNode, Identifiable, ObservableObject {
     var goblinName: SKLabelNode = SKLabelNode()
     var goblinStats: SKLabelNode = SKLabelNode()
     
-    init(goblin: Goblin) {
+    init(goblin: Goblin, scrollableMenu: ScrollableMenu) {
         self.goblinFace.name = "goblinFace"
         self.goblinName.name = "goblinName"
         self.goblinStats.name = "goblinStats"

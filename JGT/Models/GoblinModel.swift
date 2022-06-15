@@ -220,7 +220,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         return fit
     }
     
-    public func update(hud: HUD, evilGauge: EvilGauge) -> Bool {
+    public func update(hud: HUD, evilGauge: EvilGauge, scrollableMenu: ScrollableMenu) -> Bool {
         var hasToUpdateRank = false
         
         self.shouldFlip()
@@ -229,7 +229,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             
         case .idle:
             self.actionCloud.alpha = 0.0
-            hasToUpdateRank = idleUpdate(hud)
+            hasToUpdateRank = idleUpdate(hud, scrollableMenu: scrollableMenu)
             break
             
         case .working:
@@ -250,7 +250,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             }
             self.actionCloud.texture = SKTexture(imageNamed: "cloud_fear")
             self.actionCloud.alpha = 1.0
-            fearedUpdate()
+            fearedUpdate(scrollableMenu)
             break
             
         case .intavern:
@@ -261,15 +261,15 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 hud.tutorialCounter.alpha = 1.0
                 hud.tutorialCounter.text = String(hud.counter)
             }
-            inTavernUpdate()
+            inTavernUpdate(scrollableMenu)
             break
             
         case .inacademy:
-            hasToUpdateRank = inAcademyUpdate()
+            hasToUpdateRank = inAcademyUpdate(scrollableMenu)
             break
             
         case .invillage:
-            hasToUpdateRank = inVillageUpdate(hud, evilGauge)
+            hasToUpdateRank = inVillageUpdate(hud, evilGauge, scrollableMenu)
             break
             
         case .intrap:
@@ -311,13 +311,13 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         default:
-            hasToUpdateRank = idleUpdate(hud)
+            hasToUpdateRank = idleUpdate(hud, scrollableMenu: scrollableMenu)
             break
         }
         return hasToUpdateRank
     }
     
-    private func idleUpdate(_ hud: HUD) -> Bool {
+    private func idleUpdate(_ hud: HUD, scrollableMenu: ScrollableMenu) -> Bool {
         var hasToUpdateRank = false
         self.updateAge()
         
@@ -353,7 +353,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                             let targetDistance = CGVector(dx: self.closeStructure!.position.x - self.position.x, dy: self.closeStructure!.position.y - self.position.y)
                             if (isVectorSmallerThan(vector: targetDistance, other: 330)) {
                                 if (self.closeStructure!.type == .trap || self.closeStructure!.type == .backdoor || self.closeStructure!.type == .passage) {
-                                    hasToUpdateRank = self.checkInterations(input: 0, hud: hud)
+                                    hasToUpdateRank = self.checkInterations(input: 0, hud: hud, scrollableMenu: scrollableMenu)
                                 }
                                 if (self.closeStructure!.type != .tavern || !(self.isGraduated && self.closeStructure!.type == .academy)) {
                                     let prediction = self.wit.predict(
@@ -373,7 +373,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                                     if(output > 0) {
                                         self.ignoreThreshold = 0.0
                                         print("action \(output): value \(prediction[output-1])")
-                                        hasToUpdateRank = self.checkInterations(input: output, hud: hud)
+                                        hasToUpdateRank = self.checkInterations(input: output, hud: hud, scrollableMenu: scrollableMenu)
                                     }
                                     else {
                                         print("ignored")
@@ -646,7 +646,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
     }
     
-    private func fearedUpdate() {
+    private func fearedUpdate(_ scrollableMenu: ScrollableMenu) {
         self.updateAge()
         
         if let _ = self.action(forKey: "run") {
@@ -660,7 +660,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         var tavernDistance = CGVector(dx: tavernCoordinates.x - self.position.x, dy: tavernCoordinates.y - self.position.y)
         if (abs(tavernDistance.dx) < 250 && abs(tavernDistance.dy) < 250) {
             self.actionCloud.alpha = 0.0
-            self.enterTavern()
+            self.enterTavern(scrollableMenu)
         }
         if let _ = self.action(forKey: "run") {
             if (self.closeStructure != nil) {
@@ -696,7 +696,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         gameLogic.removeAnimation(goblin: self)
     }
     
-    private func inTavernUpdate() {
+    private func inTavernUpdate(_ scrollableMenu: ScrollableMenu) {
         self.updateAge()
         self.removeAllActions()
         gameLogic.removeAnimation(goblin: self)
@@ -732,7 +732,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.state = .idle
                 self.alpha = 1.0
                 if let tavern = self.closeStructure as? Tavern {
-                    tavern.removeGoblin(self)
+                    tavern.removeGoblin(self, scrollableMenu)
                 }
                 
                 let frenzyParticle = SKEmitterNode(fileNamed: "FrenzyParticle")
@@ -746,7 +746,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
     }
     
-    private func inAcademyUpdate() -> Bool {
+    private func inAcademyUpdate(_ scrollableMenu: ScrollableMenu) -> Bool {
         var hasToUpdateRank = false
         self.updateAge()
         self.removeAllActions()
@@ -775,7 +775,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             
             self.alpha = 1.0
             if let academy = self.closeStructure as? Academy {
-                academy.removeGoblin(self)
+                academy.removeGoblin(self, scrollableMenu)
             }
             self.HWpoints += 100
             self.fitness = self.getFitness()
@@ -784,7 +784,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         return hasToUpdateRank
     }
     
-    private func inVillageUpdate(_ hud: HUD, _ evilGauge: EvilGauge) -> Bool {
+    private func inVillageUpdate(_ hud: HUD, _ evilGauge: EvilGauge, _ scrollableMenu: ScrollableMenu) -> Bool {
         var hasToUpdateRank = false
         self.updateAge()
         self.removeAllActions()
@@ -798,7 +798,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.state = .idle
                 self.alpha = 1.0
                 if let village = self.closeStructure as? Village {
-                    village.removeGoblin(self)
+                    village.removeGoblin(self, scrollableMenu)
                 }
                 self.type = .gum
                 self.texture = SKTexture(imageNamed: "gum_goblin")
@@ -849,7 +849,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.position.x += self.position.x - villageCoordinates.x
                 self.position.y += self.position.y - villageCoordinates.y
                 if let village = self.closeStructure as? Village {
-                    village.removeGoblin(self)
+                    village.removeGoblin(self, scrollableMenu)
                 }
             }
         }
@@ -1116,7 +1116,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         }
     }
     
-    private func checkInterations(input: Int, hud: HUD) -> Bool {
+    private func checkInterations(input: Int, hud: HUD, scrollableMenu: ScrollableMenu) -> Bool {
         var hasToUpdateRank = false
         switch self.closeStructure!.type {
             
@@ -1133,7 +1133,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             }
             if (!self.isGraduated && canEnter) {
                 removeAction(forKey: "walk")
-                self.enterAcademy(hud)
+                self.enterAcademy(hud, scrollableMenu)
             }
             else {
                 self.closeStructure = nil
@@ -1149,7 +1149,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             }
             if (self.type != .gum && canEnter) {
                 removeAction(forKey: "walk")
-                self.enterVillage()
+                self.enterVillage(scrollableMenu)
             }
             else {
                 self.closeStructure = nil
@@ -1253,7 +1253,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         return hasToUpdateRank
     }
     
-    private func enterAcademy(_ hud: HUD) {
+    private func enterAcademy(_ hud: HUD, _ scrollableMenu: ScrollableMenu) {
         self.state = .inacademy
         self.alpha = 0.0
         if let academy = self.closeStructure as? Academy {
@@ -1266,26 +1266,26 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 hud.tutorialCounter.text = String(hud.counter)
             }
             
-            academy.addGoblin(self)
+            academy.addGoblin(self, scrollableMenu)
         }
     }
     
-    private func enterTavern() {
+    private func enterTavern(_ scrollableMenu: ScrollableMenu) {
         self.removeAllActions()
         gameLogic.removeAnimation(goblin: self)
         self.state = .intavern
         self.alpha = 0.0
         if let tavern = self.closeStructure as? Tavern {
-            tavern.addGoblin(self)
+            tavern.addGoblin(self, scrollableMenu)
         }
     }
     
-    private func enterVillage() {
+    private func enterVillage(_ scrollableMenu: ScrollableMenu) {
         self.state = .invillage
         self.alpha = 0.0
         gameLogic.removeAnimation(goblin: self)
         if let village = self.closeStructure as? Village {
-            village.addGoblin(self)
+            village.addGoblin(self, scrollableMenu)
         }
     }
     

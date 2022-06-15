@@ -249,20 +249,20 @@ public enum StructureType: Int {
 }
 
 let goblinmancyCircleCoordinates1 = CGPoint(x: 1672, y: 350)
-let tavernCoordinates1 = CGPoint(x: 2900, y: 1400)
-let academyCoordinates1 = CGPoint(x: 700, y: 2000)
+let academyCoordinates1 = CGPoint(x: 2900, y: 1400)
+let tavernCoordinates1 = CGPoint(x: 700, y: 2000)
 let villageCoordinates1 = CGPoint(x: 1000, y: 2500)
 let catapultCoordinates1 = CGPoint(x: 1350, y: 3000)
 let gateCoordinates1 = CGPoint(x: 1672, y: 3750)
 let backdoorCoordinates1 = CGPoint(x: 2800, y: 3635)
 let passageCoordinates1 = CGPoint(x: 2800, y: 4100)
 
-let goblinmancyCircleCoordinates2 = CGPoint(x: 1000, y: 350)
-let tavernCoordinates2 = CGPoint(x: 1100, y: 950)
-let academyCoordinates2 = CGPoint(x: 2650, y: 1550)
+let goblinmancyCircleCoordinates2 = CGPoint(x: 850, y: 240)
+let tavernCoordinates2 = CGPoint(x: 1572, y: 950)
+let academyCoordinates2 = CGPoint(x: 2900, y: 1250)
 let villageCoordinates2 = CGPoint(x: 1000, y: 2500)
 let catapultCoordinates2 = CGPoint(x: 1350, y: 3000)
-let gateCoordinates2 = CGPoint(x: 2000, y: 3750)
+let gateCoordinates2 = CGPoint(x: 2600, y: 3750)
 let backdoorCoordinates2 = CGPoint(x: 500, y: 3635)
 let passageCoordinates2 = CGPoint(x: 500, y: 4100)
 
@@ -373,39 +373,9 @@ let levelstructures2: [Structure] = [
     Academy(x: academyCoordinates2.x, y: academyCoordinates2.y),
     Structure(type: .passage, x: passageCoordinates2.x, y: passageCoordinates2.y, rotation: 0),
     Structure(type: .goblincircle, x: goblinmancyCircleCoordinates2.x, y: goblinmancyCircleCoordinates2.y, rotation: 0),
-    Structure(type: .tree, x: 350, y: 1350, rotation: 0),
-    Structure(type: .tree, x: 1950, y: 800, rotation: 0),
-    Structure(type: .tree, x: 600, y: 750, rotation: 0),
-    Structure(type: .tree, x: 1850, y: 500, rotation: 0),
-    Structure(type: .tree, x: 2650, y: 370, rotation: 0),
-    Structure(type: .tree, x: 650, y: 3000, rotation: 0),
-    Structure(type: .tree, x: 1250, y: 1700, rotation: 0),
-    Structure(type: .tree, x: 550, y: 1580, rotation: 0),
-    Structure(type: .tree, x: 750, y: 400, rotation: 0),
-    Structure(type: .tree, x: 350, y: 1350, rotation: 0),
-    Structure(type: .tree, x: 1950, y: 800, rotation: 0),
-    Structure(type: .tree, x: 600, y: 750, rotation: 0),
-    Structure(type: .tree, x: 1850, y: 500, rotation: 0),
-    Structure(type: .tree, x: 2650, y: 370, rotation: 0),
-    Structure(type: .tree, x: 650, y: 3000, rotation: 0),
-    Structure(type: .tree, x: 1250, y: 1700, rotation: 0),
-    Structure(type: .tree, x: 550, y: 1580, rotation: 0),
-    Structure(type: .tree, x: 750, y: 400, rotation: 0),
-    Structure(type: .tree, x: 350, y: 1350, rotation: 0),
-    Structure(type: .tree, x: 1950, y: 800, rotation: 0),
-    Structure(type: .tree, x: 600, y: 750, rotation: 0),
-    Structure(type: .tree, x: 1850, y: 500, rotation: 0),
-    Structure(type: .tree, x: 2650, y: 370, rotation: 0),
-    Structure(type: .tree, x: 650, y: 3000, rotation: 0),
-    Structure(type: .tree, x: 1250, y: 1700, rotation: 0),
-    Structure(type: .tree, x: 550, y: 1580, rotation: 0),
-    Structure(type: .tree, x: 750, y: 400, rotation: 0),
-    Structure(type: .tree, x: 1850, y: 500, rotation: 0),
-    Structure(type: .tree, x: 2650, y: 370, rotation: 0),
-    Structure(type: .tree, x: 650, y: 3000, rotation: 0),
-    Structure(type: .tree, x: 1250, y: 1700, rotation: 0),
-    Structure(type: .tree, x: 550, y: 1580, rotation: 0),
-    Structure(type: .tree, x: 750, y: 400, rotation: 0),
+    
+    
+    
     Structure(type: .rock, x: 2100, y: 700, rotation: 0),
     Structure(type: .rock, x: 650, y: 1450, rotation: 0),
     Structure(type: .rock, x: 1950, y: 1350, rotation: 0),

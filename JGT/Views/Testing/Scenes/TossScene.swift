@@ -288,7 +288,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
             var hasToUpdateRank = false
             
             self.population.goblins.forEach {
-                if ($0.update(hud: self.hud, evilGauge: evilGauge)) {
+                if ($0.update(hud: self.hud, evilGauge: self.evilGauge, scrollableMenu: self.scrollableMenu)) {
                     hasToUpdateRank = true
                 }
                 if ($0.health <= 0) {
