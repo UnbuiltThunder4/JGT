@@ -70,11 +70,12 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         playableRect = CGRect(x: 0, y: MainScreenProperties.playableMargin, width: UIScreen.main.bounds.width, height: MainScreenProperties.playableHeight)
         
         super.init(size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        
+                
         self.background.name = "background"
         self.background.anchorPoint = CGPoint(x: 0, y: 0)
         background.zPosition = -1
         self.addChild(background)
+
         
         self.trueBackground.name = "trueBackground"
         self.trueBackground.anchorPoint = CGPoint(x: 0, y: 0)
