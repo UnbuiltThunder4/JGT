@@ -39,6 +39,7 @@ struct Audio {
     
     struct MusicFiles {
         static let background = Music(filename: "Psycho Katana - Instrumental", type: "wav")
+        static let menu = Music(filename: "Wasted Onion", type: "wav")
     }
     
     struct EffectFiles {

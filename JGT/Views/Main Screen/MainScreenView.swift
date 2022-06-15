@@ -125,6 +125,9 @@ class MenuScene: SKScene {
         
         let movingDarkSon = SKAction.move(to: endDarkPosition, duration: 1.0)
         self.darkSon.run(movingDarkSon) {
+            player.play(music: Audio.MusicFiles.menu)
+            player.musicVolume = 0.7
+            
             self.darkSon.texture = SKTexture(imageNamed: "attack1")
             
             let fly = SKAction.move(to: CGPoint(x: self.darkSon.position.x, y: self.darkSon.position.y + 30), duration: self.getDuration(pointA: self.darkSon.position, pointB: CGPoint(x: self.darkSon.position.x, y: self.darkSon.position.y + 30), speed: 30))
