@@ -140,57 +140,80 @@ public enum EnemyType: Int {
     case axe = 2
 }
 
-let gnomes: [Enemy] = [
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .bow, x: 1250, y: 4200),
-    Enemy(type: .bow, x: 2050, y: 4200),
-    Enemy(type: .axe, x: 1350, y: 2800),
-    Enemy(type: .axe, x: 2500, y: 1450)
-]
-
 let gnomes1: [Enemy] = [
     Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
     Enemy(type: .small, x: 800, y: 2300),
     Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
+    
+    Enemy(type: .bow, x: 1150, y: 4200),
     Enemy(type: .bow, x: 1250, y: 4200),
+    Enemy(type: .bow, x: 1350, y: 4200),
     Enemy(type: .bow, x: 2050, y: 4200),
-    Enemy(type: .bow, x: 1250, y: 4200),
     Enemy(type: .bow, x: 2050, y: 4200),
+    Enemy(type: .bow, x: 2050, y: 4200),
+    Enemy(type: .bow, x: 2050, y: 4200),
+
+    
     Enemy(type: .axe, x: 1350, y: 2800),
-    Enemy(type: .axe, x: 2500, y: 1450),
     Enemy(type: .axe, x: 1350, y: 2800),
-    Enemy(type: .axe, x: 2500, y: 1450),
-    Enemy(type: .axe, x: 1350, y: 2800),
-    Enemy(type: .axe, x: 2500, y: 1450),
-    Enemy(type: .axe, x: 1350, y: 2800),
-    Enemy(type: .axe, x: 2500, y: 1450),
     Enemy(type: .axe, x: 1350, y: 2800),
     Enemy(type: .axe, x: 2500, y: 1450)
 ]
 
 let gnomes2: [Enemy] = [
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 1200, y: 2300),
+    Enemy(type: .bow, x: 1250, y: 4200),
+    Enemy(type: .bow, x: 2050, y: 4200),
+    Enemy(type: .bow, x: 1250, y: 4200),
+    Enemy(type: .bow, x: 2050, y: 4200),
+    Enemy(type: .axe, x: 1350, y: 2800),
+    Enemy(type: .axe, x: 2500, y: 1450),
+    Enemy(type: .axe, x: 1350, y: 2800),
+    Enemy(type: .axe, x: 2500, y: 1450),
+    Enemy(type: .axe, x: 1350, y: 2800),
+    Enemy(type: .axe, x: 2500, y: 1450),
+    Enemy(type: .axe, x: 1350, y: 2800),
+    Enemy(type: .axe, x: 2500, y: 1450),
+    Enemy(type: .axe, x: 1350, y: 2800),
+    Enemy(type: .axe, x: 2500, y: 1450)
+]
+
+let gnomes3: [Enemy] = [
     Enemy(type: .small, x: 800, y: 2300),
     Enemy(type: .small, x: 1200, y: 2300),
     Enemy(type: .bow, x: 1250, y: 4200),
@@ -220,16 +243,16 @@ public enum StructureType: Int {
     case wall = 11
 }
 
-let goblinmancyCircleCoordinates = CGPoint(x: 1600, y: 550)
-let tavernCoordinates = CGPoint(x: 1100, y: 950)
-let academyCoordinates = CGPoint(x: 2650, y: 1550)
-let villageCoordinates = CGPoint(x: 1000, y: 2500)
-let catapultCoordinates = CGPoint(x: 1350, y: 3000)
-let gateCoordinates = CGPoint(x: 1600, y: 3750)
-let backdoorCoordinates = CGPoint(x: 500, y: 3635)
-let passageCoordinates = CGPoint(x: 500, y: 4100)
+let goblinmancyCircleCoordinates1 = CGPoint(x: 1600, y: 550)
+let tavernCoordinates1 = CGPoint(x: 1100, y: 950)
+let academyCoordinates1 = CGPoint(x: 2650, y: 1550)
+let villageCoordinates1 = CGPoint(x: 1000, y: 2500)
+let catapultCoordinates1 = CGPoint(x: 1350, y: 3000)
+let gateCoordinates1 = CGPoint(x: 1600, y: 3750)
+let backdoorCoordinates1 = CGPoint(x: 500, y: 3635)
+let passageCoordinates1 = CGPoint(x: 500, y: 4100)
 
-let goblinmancyCircleCoordinates2 = CGPoint(x: 1600, y: 550)
+let goblinmancyCircleCoordinates2 = CGPoint(x: 1000, y: 550)
 let tavernCoordinates2 = CGPoint(x: 1100, y: 950)
 let academyCoordinates2 = CGPoint(x: 2650, y: 1550)
 let villageCoordinates2 = CGPoint(x: 1000, y: 2500)
@@ -247,7 +270,16 @@ let gateCoordinates3 = CGPoint(x: 1600, y: 3750)
 let backdoorCoordinates3 = CGPoint(x: 500, y: 3635)
 let passageCoordinates3 = CGPoint(x: 500, y: 4100)
 
-let levelstructures: [Structure] = [
+var goblinmancyCircleCoordinates = CGPoint()
+var tavernCoordinates = CGPoint()
+var academyCoordinates = CGPoint()
+var villageCoordinates = CGPoint()
+var catapultCoordinates = CGPoint()
+var gateCoordinates = CGPoint()
+var backdoorCoordinates = CGPoint()
+var passageCoordinates = CGPoint()
+
+let levelstructures1: [Structure] = [
     Structure(type: .wall, x: 1680, y: 3900, rotation: 0),
     Gate(x: gateCoordinates.x, y: gateCoordinates.y), // THIS HAS TO BE ON INDEX 1
     Backdoor(x: backdoorCoordinates.x, y: backdoorCoordinates.y),  // THIS HAS TO BE ON INDEX 2
