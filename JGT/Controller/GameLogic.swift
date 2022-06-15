@@ -353,7 +353,7 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
             newGoblin.run(SKAction.move(by: distance, duration: 3.0), completion: {
                 newGoblin.state = .idle
                 let removeFlyingAction = SKAction.run {
-                    self.removeFlyingAnimation(goblin: newGoblin)
+                    self.removeAnimation(goblin: newGoblin)
                 }
                 
                 let removeFlyingSequence = SKAction.sequence([
@@ -441,8 +441,47 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
         goblin.run(flyingAnimation, withKey: "flyingAnimation")
     }
     
-    public func removeFlyingAnimation(goblin: Goblin) {
+    public func isFightingAnimation(goblin: Goblin) {
+        var attackTextures : [SKTexture] = []
+              
+        for i in 1...25 {
+            attackTextures.append(SKTexture(imageNamed: "\(goblin.type)_attack (\(i))"))
+        }
+        
+        let attackAnimation = SKAction.repeatForever(SKAction.animate(with: attackTextures, timePerFrame: 0.5))
+        
+        goblin.run(attackAnimation, withKey: "attackAnimation")
+    }
+    
+    public func isTaskingAnimation(goblin: Goblin) {
+        var taskTextures : [SKTexture] = []
+              
+        for i in 1...16 {
+            taskTextures.append(SKTexture(imageNamed: "\(goblin.type)_task (\(i))"))
+        }
+        
+        let taskAnimation = SKAction.repeatForever(SKAction.animate(with: taskTextures, timePerFrame: 0.5))
+        
+        goblin.run(taskAnimation, withKey: "taskAnimation")
+    }
+    
+    public func isWalkingAnimation(goblin: Goblin) {
+        var walkTextures : [SKTexture] = []
+              
+        for i in 1...8 {
+            walkTextures.append(SKTexture(imageNamed: "\(goblin.type)_walk (\(i))"))
+        }
+        
+        let walkAnimation = SKAction.repeatForever(SKAction.animate(with: walkTextures, timePerFrame: 0.5))
+        
+        goblin.run(walkAnimation, withKey: "walkAnimation")
+    }
+    
+    public func removeAnimation(goblin: Goblin) {
         goblin.removeAction(forKey: "flyingAnimation")
+        goblin.removeAction(forKey: "attackAnimation")
+        goblin.removeAction(forKey: "taskAnimation")
+        goblin.removeAction(forKey: "walkAnimation")
         
         switch goblin.type {
         case .normal:
@@ -456,6 +495,74 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
             break
         case .rock:
             goblin.texture = SKTexture(imageNamed: "rock_goblin")
+            break
+        }
+    }
+    
+    public func isWalkingAnimation(enemy: Enemy) {
+        var walkTextures : [SKTexture] = []
+        var maxRange = 0
+        
+        switch enemy.type {
+        case .small:
+            maxRange = 14
+        case .bow:
+            maxRange = 0
+        case .axe:
+            maxRange = 10
+        }
+        
+        if (maxRange != 0) {
+            for i in 1...maxRange {
+                walkTextures.append(SKTexture(imageNamed: "\(enemy.type)_walk (\(i))"))
+            }
+            let walkAnimation = SKAction.repeatForever(SKAction.animate(with: walkTextures, timePerFrame: 0.5))
+            
+            enemy.run(walkAnimation, withKey: "walkAnimation")
+        }
+    }
+    
+    public func isFightingAnimation(enemy: Enemy) {
+        var attackTextures : [SKTexture] = []
+        var maxRange = 0
+        
+        switch enemy.type {
+        case .small:
+            maxRange = 28
+            enemy.size = CGSize(width: 92, height: 120)
+        case .bow:
+            maxRange = 5
+            enemy.size = CGSize(width: 120, height: 160)
+        case .axe:
+            maxRange = 32
+            enemy.size = CGSize(width: 220, height: 180)
+        }
+        
+        for i in 1...maxRange {
+            attackTextures.append(SKTexture(imageNamed: "\(enemy.type)_attack (\(i))"))
+        }
+        
+        let attackAnimation = SKAction.repeatForever(SKAction.animate(with: attackTextures, timePerFrame: 0.5))
+        
+        enemy.run(attackAnimation, withKey: "attackAnimation")
+    }
+    
+    public func removeAnimation(enemy: Enemy) {
+        enemy.removeAction(forKey: "attackAnimation")
+        enemy.removeAction(forKey: "walkAnimation")
+        
+        switch enemy.type {
+        case .axe:
+            enemy.texture = SKTexture(imageNamed: "gnomeaxe")
+            enemy.size = CGSize(width: 169, height: 144)
+            break
+        case .bow:
+            enemy.texture = SKTexture(imageNamed: "gnomebow")
+            enemy.size = CGSize(width: 80, height: 160)
+            break
+        case .small:
+            enemy.texture = SKTexture(imageNamed: "gnomesmall")
+            enemy.size = CGSize(width: 82, height: 114)
             break
         }
     }

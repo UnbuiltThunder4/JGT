@@ -50,6 +50,8 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     private var shieldCounter: Int = 0
     private var idleCounter: Int = 0
     
+    private var oldPosition: CGPoint? = nil
+    
     init(type: EnemyType, x: CGFloat, y: CGFloat) {
         var imgname = ""
         var width: CGFloat = 0.0
@@ -122,6 +124,9 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     public func update(_ tossScene: TossScene) -> Bool {
         let Dead = self.checkHealth()
         if (self.health > 0) {
+            
+            self.shouldFlip()
+            
             switch self.state {
                 
             case .idle:
@@ -150,6 +155,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     }
     
     private func idleUpdate() {
+        gameLogic.removeAnimation(enemy: self)
         if (self.idleCounter % threeSeconds == 0) {
             self.canRecoverShield = true
             self.idleCounter = 0
@@ -195,6 +201,22 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
         self.canRecoverShield = false
         self.shieldCounter = 0
         self.idleCounter = 0
+        
+        if let _ = self.action(forKey: "walk") {
+            if let _ = self.action(forKey: "walkAnimation") {
+            }
+            else {
+                gameLogic.isWalkingAnimation(enemy: self)
+            }
+        }
+        else {
+            if let _ = self.action(forKey: "attackAnimation") {
+            }
+            else {
+                gameLogic.isFightingAnimation(enemy: self)
+            }
+        }
+        
         if (self.target != nil) {
             let targetType = self.target?.type
             if (self.target!.state != .invillage && self.target!.state != .inacademy && self.target!.state != .intavern) {
@@ -243,15 +265,16 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                             self.state = .idle
                             self.target = nil
                             removeAction(forKey: "walk")
+                            gameLogic.removeAnimation(enemy: self)
                         }
                         else {
                             if let _ = self.action(forKey: "walk") {
-                                
                             }
                             else {
                                 let time = getDuration(distance: walkDistance, speed: self.speed)
                                 let walk = SKAction.move(by: walkDistance, duration: time)
                                 self.run(walk, withKey: "walk")
+                                gameLogic.removeAnimation(enemy: self)
                             }
                         }
                     }
@@ -303,6 +326,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                             
                             self.target = nil
                             self.state = .idle
+                            gameLogic.removeAnimation(enemy: self)
                             removeAction(forKey: "walk")
                             
                             switch targetType {
@@ -326,6 +350,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                     else {
                         self.target = nil
                         self.state = .idle
+                        gameLogic.removeAnimation(enemy: self)
                         removeAction(forKey: "walk")
                     }
                 } else {
@@ -340,12 +365,14 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                             if (self.target!.health <= 0) {
                                 self.target = nil
                                 self.state = .idle
+                                gameLogic.removeAnimation(enemy: self)
                             }
                         }
                     }
                     else {
                         self.target = nil
                         self.state = .idle
+                        gameLogic.removeAnimation(enemy: self)
                     }
                 }
             }
@@ -392,16 +419,17 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                         if (abs(originalPosDistance.dx) > 300 || abs(originalPosDistance.dy) > 300) {
                             self.state = .idle
                             self.darkTarget = nil
+                            gameLogic.removeAnimation(enemy: self)
                             removeAction(forKey: "walk")
                         }
                         else {
                             if let _ = self.action(forKey: "walk") {
-                                
                             }
                             else {
                                 let time = getDuration(distance: walkDistance, speed: self.speed)
                                 let walk = SKAction.move(by: walkDistance, duration: time)
                                 self.run(walk, withKey: "walk")
+                                gameLogic.removeAnimation(enemy: self)
                             }
                         }
                     }
@@ -443,6 +471,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                             parent.run(removeSequence)
                             self.darkTarget = nil
                             self.state = .idle
+                            gameLogic.removeAnimation(enemy: self)
                             removeAction(forKey: "walk")
                             
                         }
@@ -450,12 +479,14 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                     else {
                         self.darkTarget = nil
                         self.state = .idle
+                        gameLogic.removeAnimation(enemy: self)
                         removeAction(forKey: "walk")
                     }
                 }
                 else {
                     self.state = .idle
                     removeAction(forKey: "walk")
+                    gameLogic.removeAnimation(enemy: self)
                 }
             } else {
                 if darkTarget != nil {
@@ -470,16 +501,19 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                             if (self.darkTarget!.health <= 0) {
                                 self.darkTarget = nil
                                 self.state = .idle
+                                gameLogic.removeAnimation(enemy: self)
                             }
                         }
                     }
                     else {
                         self.darkTarget = nil
                         self.state = .idle
+                        gameLogic.removeAnimation(enemy: self)
                     }
                 }
                 else {
                     self.state = .idle
+                    gameLogic.removeAnimation(enemy: self)
                 }
             }
         }
@@ -494,8 +528,23 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                 let time = getDuration(distance: distance, speed: self.speed)
                 let walk = SKAction.move(by: distance, duration: time)
                 self.run(walk, withKey: "walk")
+                gameLogic.removeAnimation(enemy: self)
             }
         }
+    }
+    
+    private func shouldFlip() {
+        
+        if (self.oldPosition != nil) {
+            if Int((self.oldPosition?.x)!) > Int((self.position.x)) {
+                self.xScale = -1
+                
+            } else if Int((self.oldPosition?.x)!) < Int((self.position.x)) {
+                self.xScale = 1
+            }
+        }
+        
+        self.oldPosition = self.position
     }
     
 }
