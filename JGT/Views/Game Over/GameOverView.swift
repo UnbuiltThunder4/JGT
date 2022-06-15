@@ -7,50 +7,52 @@
 
 import SwiftUI
 
-/**
- * # GameOverView
- *   This view is responsible for showing the game over state of the game.
- *  Currently it only present buttons to take the player back to the main screen or restart the game.
- *
- *  You can also present score of the player, present any kind of achievements or rewards the player
- *  might have accomplished during the game session, etc...
- **/
-
 struct GameOverView: View {
-    
-//    @Binding var currentGameState: GameState
-//    @Binding var currentScene: SpriteKitContainer?
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
-
+    
     var body: some View {
         ZStack {
-            Color.white
+            Image("menu-mountains-back")
+                .resizable()
+                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height*4)
                 .ignoresSafeArea()
             
             VStack(alignment: .center) {
-                Spacer()
+                Text("The dark son is dead!")
+                    .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 170 : 85)))
+                    .foregroundColor(.green)
+                    .padding()
                 
-                Button {
-                    withAnimation { self.backToMainScreen() }
-                } label: {
-                    Image(systemName: "arrow.backward")
-                        .foregroundColor(.accentColor)
-                        .font(.title)
+                HStack {
+                    Button {
+                        withAnimation { self.backToMainScreen() }
+                    } label: {
+                        VStack {
+                            Text("Main Menu")
+                                .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 40)))
+                                .foregroundColor(.green)
+                                .padding()
+
+                            Image("menu-on")
+                                .padding()
+                        }
+                    }
+                    .padding(.horizontal)
+                                        
+                    Button {
+                        withAnimation { self.restartGame() }
+                    } label: {
+                        VStack {
+                            Text("Restart")
+                                .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 40)))
+                                .foregroundColor(.green)
+                                .padding()
+                            Image("restart-on")
+                                .padding()
+                        }
+                    }
+                    .padding(.horizontal)
                 }
-                .background(Circle().foregroundColor(Color(uiColor: UIColor.systemGray6)).frame(width: 100, height: 100, alignment: .center))
-                
-                Spacer()
-                
-                Button {
-                    withAnimation { self.restartGame() }
-                } label: {
-                    Image(systemName: "arrow.clockwise")
-                        .foregroundColor(.accentColor)
-                        .font(.title)
-                }
-                .background(Circle().foregroundColor(Color(uiColor: UIColor.systemGray6)).frame(width: 100, height: 100, alignment: .center))
-                
-                Spacer()
             }
         }
         .onAppear{
@@ -68,9 +70,10 @@ struct GameOverView: View {
     }
 }
 
-//struct GameOverView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        GameOverView(currentGameState: .constant(GameState.gameOver))
-//    }
-//}
+struct GameOverView_Previews: PreviewProvider {
+    static var previews: some View {
+        GameOverView()
+            .previewInterfaceOrientation(.landscapeLeft)
+    }
+}
 
