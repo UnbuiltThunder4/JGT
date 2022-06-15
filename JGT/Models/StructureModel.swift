@@ -18,8 +18,6 @@ class StructureList: ObservableObject {
 }
 
 class Structure: SKSpriteNode, ObservableObject {
-    @ObservedObject var scrollableMenu: ScrollableMenu = ScrollableMenu.shared
-    
     var goblins: [Goblin] = []
     var fullName: String?
     var desc: String?
@@ -184,10 +182,10 @@ class Structure: SKSpriteNode, ObservableObject {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func addGoblin(_ goblin: Goblin) {
+    public func addGoblin(_ goblin: Goblin, _ scrollableMenu: ScrollableMenu) {
     }
     
-    public func removeGoblin(_ goblin: Goblin) {
+    public func removeGoblin(_ goblin: Goblin, _ scrollableMenu: ScrollableMenu) {
     }
 }
 
@@ -213,19 +211,19 @@ class Tavern: Structure {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func addGoblin(_ goblin: Goblin) {
+    override func addGoblin(_ goblin: Goblin, _ scrollableMenu: ScrollableMenu) {
         self.goblinCloud.alpha = 1.0
         self.goblinCounter.alpha = 1.0
         self.goblins.append(goblin)
         self.goblinCounter.text = String(self.goblins.count)
         if scrollableMenu.currentStructure == self.name! {
-            scrollableMenu.goblinTable.addRow(row: GoblinRow(goblin: goblin))
+            scrollableMenu.goblinTable.addRow(row: GoblinRow(goblin: goblin, scrollableMenu: scrollableMenu))
             scrollableMenu.tableSize += scrollableMenu.rowsSize.height
             scrollableMenu.hideRow()
         }
     }
     
-    override func removeGoblin(_ goblin: Goblin) {
+    override func removeGoblin(_ goblin: Goblin, _ scrollableMenu: ScrollableMenu) {
         
         if let index = self.goblins.firstIndex(where: { $0.id == goblin.id }) {
             if scrollableMenu.currentStructure == self.name! {
@@ -265,13 +263,13 @@ class Academy: Structure {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func addGoblin(_ goblin: Goblin) {
+    override func addGoblin(_ goblin: Goblin, _ scrollableMenu: ScrollableMenu) {
         self.goblinCloud.alpha = 1.0
         self.goblinCounter.alpha = 1.0
         self.goblins.append(goblin)
         self.goblinCounter.text = String(self.goblins.count)
         if scrollableMenu.currentStructure == self.name! {
-            scrollableMenu.goblinTable.addRow(row: GoblinRow(goblin: goblin))
+            scrollableMenu.goblinTable.addRow(row: GoblinRow(goblin: goblin, scrollableMenu: scrollableMenu))
             scrollableMenu.tableSize += scrollableMenu.rowsSize.height
             scrollableMenu.hideRow()
         }
@@ -290,7 +288,7 @@ class Academy: Structure {
         }
     }
     
-    override func removeGoblin(_ goblin: Goblin) {
+    override func removeGoblin(_ goblin: Goblin, _ scrollableMenu: ScrollableMenu) {
         
         if let index = self.goblins.firstIndex(where: { $0.id == goblin.id }) {
             if scrollableMenu.currentStructure == self.name! {
@@ -328,19 +326,19 @@ class Village: Structure {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func addGoblin(_ goblin: Goblin) {
+    override func addGoblin(_ goblin: Goblin, _ scrollableMenu: ScrollableMenu) {
         self.goblinCloud.alpha = 1.0
         self.goblinCounter.alpha = 1.0
         self.goblins.append(goblin)
         self.goblinCounter.text = String(self.goblins.count)
         if scrollableMenu.currentStructure == self.name! {
-            scrollableMenu.goblinTable.addRow(row: GoblinRow(goblin: goblin))
+            scrollableMenu.goblinTable.addRow(row: GoblinRow(goblin: goblin, scrollableMenu: scrollableMenu))
             scrollableMenu.tableSize += scrollableMenu.rowsSize.height
             scrollableMenu.hideRow()
         }
     }
     
-    override func removeGoblin(_ goblin: Goblin) {
+    override func removeGoblin(_ goblin: Goblin, _ scrollableMenu: ScrollableMenu) {
         
         if let index = self.goblins.firstIndex(where: { $0.id == goblin.id }) {
             if scrollableMenu.currentStructure == self.name! {
