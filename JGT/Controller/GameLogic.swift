@@ -529,10 +529,13 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
         switch enemy.type {
         case .small:
             maxRange = 28
+            enemy.size = CGSize(width: 92, height: 120)
         case .bow:
             maxRange = 5
+            enemy.size = CGSize(width: 120, height: 160)
         case .axe:
             maxRange = 32
+            enemy.size = CGSize(width: 220, height: 180)
         }
         
         for i in 1...maxRange {
@@ -551,12 +554,15 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
         switch enemy.type {
         case .axe:
             enemy.texture = SKTexture(imageNamed: "gnomeaxe")
+            enemy.size = CGSize(width: 169, height: 144)
             break
         case .bow:
             enemy.texture = SKTexture(imageNamed: "gnomebow")
+            enemy.size = CGSize(width: 80, height: 160)
             break
         case .small:
             enemy.texture = SKTexture(imageNamed: "gnomesmall")
+            enemy.size = CGSize(width: 82, height: 114)
             break
         }
     }
