@@ -116,6 +116,7 @@ public enum GoblinState {
     case invillage
     case intrap
     case backdooring
+    case gating
     case passaging
     case stunned
     case paused
@@ -221,8 +222,8 @@ let gnomes2: [Enemy] = [
 let gnomes3: [Enemy] = [
     Enemy(type: .small, x: 800, y: 2300),
     Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .bow, x: 1250, y: 4200),
-    Enemy(type: .bow, x: 2050, y: 4200),
+//    Enemy(type: .bow, x: 1250, y: 4200),
+//    Enemy(type: .bow, x: 2050, y: 4200),
     Enemy(type: .axe, x: 1350, y: 2800),
     Enemy(type: .axe, x: 2500, y: 1450)
 ]

@@ -583,7 +583,7 @@ extension TossScene {
                 structuresList.structures[i].physicsBody?.contactTestBitMask = Collision.Masks.goblin.bitmask
             }
             else if (structuresList.structures[i].type == .gate) {
-                structuresList.structures[i].physicsBody?.contactTestBitMask = Collision.Masks.darkson.bitmask
+                structuresList.structures[i].physicsBody?.contactTestBitMask = Collision.Masks.darkson.bitmask | Collision.Masks.goblin.bitmask
             }
             else {
                 structuresList.structures[i].physicsBody?.collisionBitMask = Collision.Masks.goblin.bitmask

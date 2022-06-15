@@ -77,10 +77,10 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
             break
             
         case .bow:
-            self.maxHealth = 400
-            self.health = 400
-            self.maxShield = 150
-            self.shield = 150
+            self.maxHealth = 200
+            self.health = 200
+            self.maxShield = 0
+            self.shield = 0
             self.attack = 25
             self.fullName = "Archer Gnome"
             self.desc = "“The ranged soldiers of the gnome army, but everybody knows that ranged weapons are for cowards, so goblins can’t use them.”"
