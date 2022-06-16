@@ -66,7 +66,7 @@ struct LevelSelectionView: View {
                             .overlay {
                                 VStack(spacing: 0) {
                                     Text("\(levelNames[gameLogic.level-1])")
-                                        .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 70)))
+                                        .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 90 : 70)))
                                         .foregroundColor(.green)
                                     
                                     Image("menu preview - \((gameLogic.level != 3) ? gameLogic.level : 1)")
@@ -98,7 +98,7 @@ struct LevelSelectionView: View {
                                 }
                             } label: {
                                 Text("Play")
-                                    .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 65)))
+                                    .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 90 : 65)))
                                 
                             }
                             .frame(maxWidth: geometry.size.width * 0.15, maxHeight: geometry.size.height * 0.15)
