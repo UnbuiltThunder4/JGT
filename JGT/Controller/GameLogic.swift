@@ -39,61 +39,61 @@ class GameLogic: ObservableObject {
     
     var tutorials: [TutorialButton] = [TutorialButton(tutorialName: "Goblins 101 - The Dark Lord command", tutorialDesc: """
 “My son, by tapping the cauldronn I can summon goblins with the power of evilness alone, they can help you in many ways, I can throw them by dragging them wherever I want I can long press the terrain to use my evil sight and make them go in a frenzy. “”
-""", screen: SKTexture(imageNamed: "rockHead")),
+""", screen: SKTexture(imageNamed: "Tutorial0")),
                                        TutorialButton(tutorialName: "Goblins 101 - The Dark Lord eyes", tutorialDesc: """
                                    “Once I tap on a Goblin I can see all of their stats, in order, I can see their Health, their Attack Power, how much they Fear death, their age, their wit and how long is their frenzy.”
-                                   """, screen: SKTexture(imageNamed: "Tutorial0")),
+                                   """, screen: SKTexture(imageNamed: "Tutorial1")),
                                        TutorialButton(tutorialName: "Goblins 101 - Sacrificing Goblins", tutorialDesc: """
                                    “If I think some of them are unworthy I can even long press on them to make them explode and get some of my power back. Remember, the older a goblin I sacrifice, the more evilness I will get back.”
-                                   """, screen: SKTexture(imageNamed: "rockHead")),
+                                   """, screen: SKTexture(imageNamed: "Tutorial2")),
                                        TutorialButton(tutorialName: "Lighting Up The Tree", tutorialDesc: """
 “Looks like one of our goblins decided to put a tree on fire for no actual reason, this is wonderful!
 This act of senseless violence is what we need to gain more power!
 I can use the evilness obtained to summon more goblins with the cauldronn.”
-""", screen: SKTexture(imageNamed: "rockHead")),
+""", screen: SKTexture(imageNamed: "Tutorial3")),
                                        TutorialButton(tutorialName: "Flameblins", tutorialDesc: """
 “Seems like one of our goblins accidentally put himself on flames, since this goblins are made of pure evilness the flames don't burn them but they evolved in a new kind of goblin, the flameblin,
 a powerful and reckless fighter, now that i have this new kind of creature i can long press the cauldronn and select it to change the evilness color and summon new flameblin.”
-""", screen: SKTexture(imageNamed: "rockHead")),
+""", screen: SKTexture(imageNamed: "Tutorial4")),
                                        TutorialButton(tutorialName: "Fighting", tutorialDesc: """
 “Once a goblin gets close enough to an enemy it will ignore everything else and start attacking the enemy, remember that a single goblin is useless, the goblins' power comes in the number.”
-""", screen: SKTexture(imageNamed: "rockHead")),
+""", screen: SKTexture(imageNamed: "Tutorial5")),
                                        TutorialButton(tutorialName: "Fear and Tavern", tutorialDesc: """
 “Sadly, goblins are cowards. Based on their Fear goblins will try to flee once they get to a certain amount of health left, the tavern is full of potions and beer to help them recover and go back to fight once they’re ready.”
-""", screen: SKTexture(imageNamed: "rockHead")),
+""", screen: SKTexture(imageNamed: "Tutorial6")),
                                        TutorialButton(tutorialName: "Frenzy", tutorialDesc: """
                                                       “Be it with the power of my evil sight or the power of the potions in the tavern, goblins can go in frenzy, once in this state their attack power is doubled and they fear nothing, the frenzy is not endless by tapping on a goblin I can see the duration of it’s frenzy.”
-                                                      """, screen: SKTexture(imageNamed: "rockHead")),
+                                                      """, screen: SKTexture(imageNamed: "Tutorial7")),
                                        TutorialButton(tutorialName: "Academy", tutorialDesc: """
 “By attending the Academy, goblins can learn many things, helping them complete tasks in a quicker and more efficient way. once a goblin finishes his studies it gets a title, because it deserves it!”
-""", screen: SKTexture(imageNamed: "rockHead")),
+""", screen: SKTexture(imageNamed: "Tutorial8")),
                                        TutorialButton(tutorialName: "Gate", tutorialDesc: """
  “Good work my son, keep attacking the gates, once they’re gone our enemies will have no way to resist, but pay attention!
  If there are no goblins to defend you the risk is death!
  My powers can bring you back but no more than five times so I need to use the goblins to defend you as much as you need.”
- """, screen: SKTexture(imageNamed: "rockHead")),
+ """, screen: SKTexture(imageNamed: "Tutorial9")),
                                        TutorialButton(tutorialName: "Backdoor", tutorialDesc: """
                                                       “Our goblins have found a backdoor, once they destroy it they can use the passage to attack enemies on the enemy walls and help you attack the gates without taking any damage.”
-                                                      """, screen: SKTexture(imageNamed: "rockHead")),
+                                                      """, screen: SKTexture(imageNamed: "Tutorial10")),
                                        TutorialButton(tutorialName: "Rocks", tutorialDesc: """
                                                       “One of our goblins picked up a rock, it can be used in many ways, combat is just one of them.”
-                                                      """, screen: SKTexture(imageNamed: "rockHead")),
+                                                      """, screen: SKTexture(imageNamed: "Tutorial11")),
                                        TutorialButton(tutorialName: "Stoneblins", tutorialDesc: """
                                                       “Eating a rock has a strange effect on goblins, turning them into Stoneblins, a tougher and dumber kind of Goblin, perfect for combat!”
-                                                      """, screen: SKTexture(imageNamed: "rockHead")),
+                                                      """, screen: SKTexture(imageNamed: "Tutorial12")),
                                        TutorialButton(tutorialName: "Candyland", tutorialDesc: """
                                                       “One of our goblins entered the gnomes village! There it can make us gain power by stealing candies and bringing chaos!”
-                                                      """, screen: SKTexture(imageNamed: "rockHead")),
+                                                      """, screen: SKTexture(imageNamed: "Tutorial13")),
                                        TutorialButton(tutorialName: "Gumblins", tutorialDesc: """
  “Eating too many candies can make a goblin evolve into a Gumblin, they act just like normal goblin but their bodies are much more resistant to arrows and practically immune to lightning!”
  """, screen: SKTexture(imageNamed: "rockHead")),
                                        TutorialButton(tutorialName: "Catapult", tutorialDesc: """
                                                       “The Catapult is a complex siege weapon for goblins, if they understand how to use it our enemies will have no hope of surviving!
                                                       They just need to understand that a normal goblin body is not the best siege ammunition.”
-                                                      """, screen: SKTexture(imageNamed: "rockHead")),
+                                                      """, screen: SKTexture(imageNamed: "Tutorial14")),
                                        TutorialButton(tutorialName: "Trap", tutorialDesc: """
                                                       “The gnomes have started building electric traps to stop our goblins, if they step on one the damage will be really hard for them to survive and the electricity will make them stop for a while, the traps need some time to recharge, we need to exploit that to make our army advance, at all costs!”
-                                                      """, screen: SKTexture(imageNamed: "rockHead"))
+                                                      """, screen: SKTexture(imageNamed: "Tutorial15"))
     ]
     
     // Function responsible to set up the game before it starts.
