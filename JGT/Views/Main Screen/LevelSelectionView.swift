@@ -92,9 +92,9 @@ struct LevelSelectionView: View {
                         VStack {
                             Button {
                                 withAnimation {
-                                    if gameLogic.level != 3 {
+//                                    if gameLogic.level != 3 {
                                         gameLogic.gameState = .playing
-                                    }
+//                                    }
                                 }
                             } label: {
                                 Text("Play")
