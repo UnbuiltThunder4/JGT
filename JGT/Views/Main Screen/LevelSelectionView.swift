@@ -35,7 +35,7 @@ struct LevelSelectionView: View {
                         .ignoresSafeArea()
                     VStack {
                         Spacer()
-
+                        
                         Image("menu-mountains-back")
                             .resizable()
                             .ignoresSafeArea()
@@ -43,7 +43,7 @@ struct LevelSelectionView: View {
                     }
                     VStack {
                         Spacer()
-
+                        
                         Image("menu-mountains-front")
                             .resizable()
                             .ignoresSafeArea()
@@ -74,17 +74,6 @@ struct LevelSelectionView: View {
                                         .aspectRatio(contentMode: .fill)
                                         .frame(maxWidth: ((UIDevice.current.userInterfaceIdiom == .pad) ? UIScreen.main.bounds.width/2.5 : UIScreen.main.bounds.width/2.5), maxHeight: ((UIDevice.current.userInterfaceIdiom == .pad) ? UIScreen.main.bounds.width/4 : UIScreen.main.bounds.width/4.8))
                                         .cornerRadius(15)
-                                        .blur(radius: (gameLogic.level == 3) ? 3.5 : 0)
-                                        .overlay {
-                                            if gameLogic.level == 3 {
-                                                Text("Coming Soon")
-                                                    .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 70)))
-                                                    .foregroundColor(.red)
-                                                    .padding()
-                                            }
-                                        }
-                                        
-                                        
                                 }
                                 .padding()
                             }
@@ -92,9 +81,9 @@ struct LevelSelectionView: View {
                         VStack {
                             Button {
                                 withAnimation {
-//                                    if gameLogic.level != 3 {
-                                        gameLogic.gameState = .playing
-//                                    }
+                                    //                                    if gameLogic.level != 3 {
+                                    gameLogic.gameState = .playing
+                                    //                                    }
                                 }
                             } label: {
                                 Text("Play")

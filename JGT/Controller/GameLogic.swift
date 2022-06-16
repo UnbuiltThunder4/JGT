@@ -105,6 +105,7 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
         self.sessionDuration = 0
         
         self.isGameOver = false
+        self.youWin = false
     }
     
     // Keeps track of the current score of the player
@@ -134,6 +135,7 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
     
     // Game Over Conditions
     @Published var isGameOver: Bool = false
+    @Published var youWin: Bool = false
     
 //    func genocideFunction(_ tossScene: TossScene) {
 //        //        if self.isGameOver == true {

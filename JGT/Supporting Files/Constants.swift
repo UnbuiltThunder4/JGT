@@ -536,6 +536,8 @@ let levelstructures3: [Structure] = [
     
 //    let villageCoordinates3 = CGPoint(x: 1872, y: 2350)
     
+    Structure(type: .rock, x: 2150, y: 2650, rotation: 0),
+    Structure(type: .rock, x: 1550, y: 2650, rotation: 0),
     Structure(type: .tree, x: 1672, y: 2550, rotation: 0),
     Structure(type: .tree, x: 1772, y: 2550, rotation: 0),
     Structure(type: .tree, x: 1972, y: 2550, rotation: 0),
@@ -549,7 +551,8 @@ let levelstructures3: [Structure] = [
     Structure(type: .tree, x: 1772, y: 2200, rotation: 0),
     Structure(type: .tree, x: 1972, y: 2200, rotation: 0),
     Structure(type: .tree, x: 1872, y: 2200, rotation: 0),
-    
+    Structure(type: .rock, x: 2150, y: 2100, rotation: 0),
+    Structure(type: .rock, x: 1550, y: 2100, rotation: 0),
     
     Structure(type: .tree, x: 1550, y: 550, rotation: 0),
     Structure(type: .tree, x: 1750, y: 550, rotation: 0),
@@ -560,16 +563,42 @@ let levelstructures3: [Structure] = [
     Structure(type: .rock, x: 1660, y: 1600, rotation: 0),
     
     Structure(type: .rock, x: 2490, y: 1500, rotation: 0),
-    Structure(type: .rock, x: 2660, y: 1700, rotation: 0),
     
     Structure(type: .tree, x: 600, y: 2200, rotation: 0), //left center
     Structure(type: .tree, x: 500, y: 2100, rotation: 0),
     Structure(type: .tree, x: 700, y: 1950, rotation: 0),
     Structure(type: .rock, x: 800, y: 2050, rotation: 0),
-    Structure(type: .rock, x: 600, y: 1700, rotation: 0)
+    Structure(type: .rock, x: 600, y: 1700, rotation: 0),
     
-//    Enemy(type: .small, x: 500, y: 1950), //left center
-//    Enemy(type: .small, x: 700, y: 2150),
+    Structure(type: .rock, x: 2760, y: 2600, rotation: 0),
+    Structure(type: .rock, x: 2600, y: 2300, rotation: 0),
+    Structure(type: .tree, x: 2750, y: 2250, rotation: 0),
+    Structure(type: .tree, x: 2600, y: 2150, rotation: 0), //center right upper
+    Structure(type: .tree, x: 2850, y: 2150, rotation: 0),
+    
+    Structure(type: .rock, x: 2560, y: 2000, rotation: 0),
+    Structure(type: .tree, x: 2500, y: 1950, rotation: 0), //center right upper
+    Structure(type: .tree, x: 2750, y: 1950, rotation: 0),
+    Structure(type: .tree, x: 2650, y: 1850, rotation: 0),
+    Structure(type: .rock, x: 2860, y: 1700, rotation: 0),
+    
+//    let catapultCoordinates3 = CGPoint(x: 850, y: 2750)
+    
+    Structure(type: .rock, x: 650, y: 2650, rotation: 0),
+    Structure(type: .rock, x: 450, y: 2550, rotation: 0),
+    Structure(type: .rock, x: 700, y: 2450, rotation: 0),
+    
+//    let tavernCoordinates3 = CGPoint(x: 2950, y: 1350)
+//    let academyCoordinates3 = CGPoint(x: 850, y: 550)
+    
+    Structure(type: .rock, x: 600, y: 1250, rotation: 0), //center right upper
+    Structure(type: .rock, x: 850, y: 1150, rotation: 0),
+    
+    Structure(type: .rock, x: 2250, y: 550, rotation: 0),
+    Structure(type: .tree, x: 2700, y: 1000, rotation: 0), //center right upper
+    Structure(type: .tree, x: 2950, y: 950, rotation: 0),
+    
+    Structure(type: .tree, x: 1800, y: 1000, rotation: 0)
 ]
 
 public enum ProjectileType {
