@@ -678,7 +678,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
         
         var tavernDistance = CGVector(dx: tavernCoordinates.x - self.position.x, dy: tavernCoordinates.y - self.position.y)
         if (abs(tavernDistance.dx) < 250 && abs(tavernDistance.dy) < 250) {
-            self.actionCloud.alpha = 0.0
+//            self.actionCloud.alpha = 0.0
             self.enterTavern(scrollableMenu)
         }
         if let _ = self.action(forKey: "run") {

@@ -37,6 +37,8 @@ struct GameOverView: View {
             }
             
             VStack(alignment: .center) {
+                Spacer(minLength: 15)
+                
                 Text("\(gameOverString)")
                     .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 170 : 90)))
                     .foregroundColor(.green)
@@ -51,7 +53,7 @@ struct GameOverView: View {
                         }
                     } label: {
                         VStack {
-                            Text("Main Menu")
+                            Text("Levels")
                                 .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 55)))
                                 .foregroundColor(.green)
                                 .padding()
@@ -63,7 +65,9 @@ struct GameOverView: View {
                     .padding(.horizontal)
                     
                     Button {
-                        withAnimation { self.restartGame() }
+                        withAnimation {
+                            self.restartGame()
+                        }
                     } label: {
                         VStack {
                             Text("Restart")
@@ -75,6 +79,29 @@ struct GameOverView: View {
                         }
                     }
                     .padding(.horizontal)
+                    
+                    if (self.gameOverString == "You Win!") {
+                        Button {
+                            withAnimation {
+                                if gameLogic.level < 3 {
+                                    gameLogic.level += 1
+                                    self.restartGame()
+                                }
+                            }
+                        } label: {
+                            VStack {
+                                Text("Next")
+                                    .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 55)))
+                                    .foregroundColor(.green)
+                                    .padding()
+                                Image("back-button")
+                                    .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
+                                    .grayscale((gameLogic.level == 3) ? 1.0 : 0.0)
+                                    .padding()
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
                 }
                 Spacer()
             }

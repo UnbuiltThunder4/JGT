@@ -59,12 +59,12 @@ struct LevelSelectionView: View {
                     
                     HStack {
                         RoundedRectangle(cornerRadius: 15)
-                            .frame(maxWidth: geometry.size.width * 0.5, maxHeight: (UIDevice.current.userInterfaceIdiom == .pad ? (geometry.size.height * 0.65) : (geometry.size.height * 0.55)))
+                            .frame(width: geometry.size.width * 0.5, height: (UIDevice.current.userInterfaceIdiom == .pad ? (geometry.size.height * 0.65) : (geometry.size.height * 0.55)))
                             .padding()
                             .foregroundColor(.clear)
                             .cornerRadius(15.0)
                             .overlay {
-                                VStack(spacing: 0) {
+                                VStack(spacing: ((UIDevice.current.userInterfaceIdiom == .pad)) ? 50 : 10) {
                                     Text("\(levelNames[gameLogic.level-1])")
                                         .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 90 : 70)))
                                         .foregroundColor(.green)

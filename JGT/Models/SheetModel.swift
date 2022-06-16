@@ -99,17 +99,21 @@ class Sheet: SKSpriteNode {
         self.ageLabel.alpha = 0.0
         self.witLabel.alpha = 0.0
         self.frenzyLabel.alpha = 0.0
+        self.typeLabel.alpha = 0.0
         self.nameLabel.text = enemy.fullName
+        self.nameLabel.fontColor = .white
         self.descLabel.text = enemy.desc
+
+        self.texture = SKTexture(imageNamed: "structure sheet wide")
         
-        switch enemy.type {
-        case .small:
-            self.typeLabel.texture = SKTexture()
-        case .bow:
-            self.typeLabel.texture = SKTexture()
-        case .axe:
-            self.typeLabel.texture = SKTexture()
-        }
+        self.nameLabel.verticalAlignmentMode = .center
+        self.descLabel.verticalAlignmentMode = .top
+        
+        self.nameLabel.position = CGPoint(x: -self.frame.maxX * 0.1,
+                                           y: self.frame.maxY * 0.75)
+        self.descLabel.position = CGPoint(x: 0, y: self.frame.maxY * 0.55)
+        
+        
     }
     
     func updateSheet(darkSon: DarkSon) {
@@ -119,9 +123,21 @@ class Sheet: SKSpriteNode {
         self.ageLabel.alpha = 0.0
         self.witLabel.alpha = 0.0
         self.frenzyLabel.alpha = 0.0
+        self.typeLabel.alpha = 0.0
         self.nameLabel.text = "Dark Son"
+        self.nameLabel.fontColor = .white
         self.descLabel.text = darkSon.desc
         self.typeLabel.texture = SKTexture(imageNamed: "dark-son-lives")
+        
+        self.texture = SKTexture(imageNamed: "structure sheet wide")
+        
+        self.nameLabel.verticalAlignmentMode = .center
+        self.descLabel.verticalAlignmentMode = .top
+        
+        self.nameLabel.position = CGPoint(x: -self.frame.maxX * 0.1,
+                                           y: self.frame.maxY * 0.75)
+        self.descLabel.position = CGPoint(x: 0,
+                                                    y: self.frame.maxY * 0.55)
     }
     
     required init?(coder aDecoder: NSCoder) {

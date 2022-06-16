@@ -18,7 +18,7 @@ enum HUDSettings {
     static var statsFontSize: CGFloat = 15
     static var nameFontColor: UIColor = .orange
     static var descFontColor: UIColor = .brown
-    static var tutorialNameFontSize: CGFloat = 50
+    static var tutorialNameFontSize: CGFloat = 55
     static var tutorialCounterFontSize: CGFloat = ((UIDevice.current.userInterfaceIdiom == .pad) ? 50 : 25)
     static var tutorialDescFontSize: CGFloat = 40
 }
@@ -223,55 +223,59 @@ class HUD: SKNode, ObservableObject {
         
         pauseScreen.pauseSign.size = CGSize(width: UIScreen.main.bounds.width/1.2, height: UIScreen.main.bounds.height/1.2)
         
-        pauseScreen.continueMessage.fontSize = HUDSettings.tutorialNameFontSize
+        pauseScreen.continueMessage.fontSize = UIDevice.current.userInterfaceIdiom == .pad ?
+        HUDSettings.tutorialNameFontSize : 35
         pauseScreen.continueMessage.fontName = HUDSettings.nameFont
-        pauseScreen.continueMessage.fontColor = HUDSettings.nameFontColor
+        pauseScreen.continueMessage.fontColor = .brown
         pauseScreen.continueMessage.text = "Continue"
         pauseScreen.continueMessage.position = CGPoint(x:-pauseScreen.pauseSign.size.width/3.3, y: pauseScreen.pauseSign.size.height/5.5)
         pauseScreen.continueMessage.zPosition = 5
         
-        pauseScreen.exitMessage.fontSize = HUDSettings.tutorialNameFontSize
+        pauseScreen.exitMessage.fontSize = UIDevice.current.userInterfaceIdiom == .pad ?
+        HUDSettings.tutorialNameFontSize : 35
         pauseScreen.exitMessage.fontName = HUDSettings.nameFont
-        pauseScreen.exitMessage.fontColor = HUDSettings.nameFontColor
+        pauseScreen.exitMessage.fontColor = .brown
         pauseScreen.exitMessage.text = "Level Selection"
         pauseScreen.exitMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/3.3, y: pauseScreen.pauseSign.size.height/5.5)
         pauseScreen.exitMessage.zPosition = 5
 
-        pauseScreen.restartMessage.fontSize = HUDSettings.tutorialNameFontSize
+        pauseScreen.restartMessage.fontSize = UIDevice.current.userInterfaceIdiom == .pad ?
+        HUDSettings.tutorialNameFontSize : 35
         pauseScreen.restartMessage.fontName = HUDSettings.nameFont
-        pauseScreen.restartMessage.fontColor = HUDSettings.nameFontColor
+        pauseScreen.restartMessage.fontColor = .brown
         pauseScreen.restartMessage.text = "Restart"
         pauseScreen.restartMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/10, y: pauseScreen.pauseSign.size.height/5.5)
         pauseScreen.restartMessage.zPosition = 5
         
-        pauseScreen.tutorialMessage.fontSize = HUDSettings.tutorialNameFontSize
+        pauseScreen.tutorialMessage.fontSize = UIDevice.current.userInterfaceIdiom == .pad ?
+        HUDSettings.tutorialNameFontSize : 35
         pauseScreen.tutorialMessage.fontName = HUDSettings.nameFont
-        pauseScreen.tutorialMessage.fontColor = HUDSettings.nameFontColor
+        pauseScreen.tutorialMessage.fontColor = .brown
         pauseScreen.tutorialMessage.text = "Tutorial"
         pauseScreen.tutorialMessage.position = CGPoint(x: -pauseScreen.pauseSign.size.width/10, y: pauseScreen.pauseSign.size.height/5.5)
         pauseScreen.tutorialMessage.zPosition = 5
         
-        pauseScreen.continueButton.size = CGSize(width: pauseScreen.pauseSign.size.width/5.5, height: pauseScreen.pauseSign.size.width/5.5)
+        pauseScreen.continueButton.size = UIDevice.current.userInterfaceIdiom == .pad ? CGSize(width: pauseScreen.pauseSign.size.width/5.5, height: pauseScreen.pauseSign.size.width/5.5) : CGSize(width: pauseScreen.pauseSign.size.width/6.5, height: pauseScreen.pauseSign.size.width/6.5)
         pauseScreen.continueButton.zPosition = 5
         pauseScreen.continueButton.position = CGPoint(x: pauseScreen.continueMessage.position.x, y: pauseScreen.pauseSign.frame.midY*2)
         
-        pauseScreen.quitButton.size = CGSize(width: pauseScreen.pauseSign.size.width/5.5, height: pauseScreen.pauseSign.size.width/5.5)
+        pauseScreen.quitButton.size = UIDevice.current.userInterfaceIdiom == .pad ? CGSize(width: pauseScreen.pauseSign.size.width/5.5, height: pauseScreen.pauseSign.size.width/5.5) : CGSize(width: pauseScreen.pauseSign.size.width/6.5, height: pauseScreen.pauseSign.size.width/6.5)
         pauseScreen.quitButton.position = CGPoint(x: pauseScreen.exitMessage.position.x, y: pauseScreen.pauseSign.frame.midY*2)
         pauseScreen.quitButton.zPosition = 10
         
-        pauseScreen.tutorialButton.size = CGSize(width: pauseScreen.pauseSign.size.width/5.5, height: pauseScreen.pauseSign.size.width/5.5)
+        pauseScreen.tutorialButton.size = UIDevice.current.userInterfaceIdiom == .pad ? CGSize(width: pauseScreen.pauseSign.size.width/5.5, height: pauseScreen.pauseSign.size.width/5.5) : CGSize(width: pauseScreen.pauseSign.size.width/6.5, height: pauseScreen.pauseSign.size.width/6.5)
         pauseScreen.tutorialButton.position = CGPoint(x: pauseScreen.tutorialMessage.position.x, y: pauseScreen.pauseSign.frame.midY*2)
         pauseScreen.tutorialButton.zPosition = 10
     
-        pauseScreen.restartButton.size = CGSize(width: pauseScreen.pauseSign.size.width/5.5, height: pauseScreen.pauseSign.size.width/5.5)
+        pauseScreen.restartButton.size = UIDevice.current.userInterfaceIdiom == .pad ? CGSize(width: pauseScreen.pauseSign.size.width/5.5, height: pauseScreen.pauseSign.size.width/5.5) : CGSize(width: pauseScreen.pauseSign.size.width/6.5, height: pauseScreen.pauseSign.size.width/6.5)
         pauseScreen.restartButton.position = CGPoint(x: pauseScreen.restartMessage.position.x, y: pauseScreen.pauseSign.frame.midY*2)
         pauseScreen.restartButton.zPosition = 5
         
-        pauseScreen.musicButton.size = CGSize(width: pauseScreen.pauseSign.size.width/10, height: pauseScreen.pauseSign.size.width/10)
+        pauseScreen.musicButton.size = UIDevice.current.userInterfaceIdiom == .pad ? CGSize(width: pauseScreen.pauseSign.size.width/10, height: pauseScreen.pauseSign.size.width/10) : CGSize(width: pauseScreen.pauseSign.size.width/10.5, height: pauseScreen.pauseSign.size.width/10.5)
         pauseScreen.musicButton.position = CGPoint(x: pauseScreen.pauseSign.frame.maxX/2.2, y: pauseScreen.pauseSign.frame.minY/1.5)
         pauseScreen.musicButton.zPosition = 5
         
-        pauseScreen.effectButton.size = CGSize(width: pauseScreen.pauseSign.size.width/10, height: pauseScreen.pauseSign.size.width/10)
+        pauseScreen.effectButton.size = UIDevice.current.userInterfaceIdiom == .pad ? CGSize(width: pauseScreen.pauseSign.size.width/10, height: pauseScreen.pauseSign.size.width/10) : CGSize(width: pauseScreen.pauseSign.size.width/10.5, height: pauseScreen.pauseSign.size.width/10.5)
         pauseScreen.effectButton.position = CGPoint(x: pauseScreen.pauseSign.frame.maxX/1.5, y: pauseScreen.pauseSign.frame.minY/1.5)
         pauseScreen.effectButton.zPosition = 5
     }
@@ -289,9 +293,9 @@ class HUD: SKNode, ObservableObject {
         tutorialButton.zPosition = 20
         tutorialButton.position = position
         self.tutorialCounter.fontColor = .red
-        self.tutorialCounter.fontSize = 50
+        self.tutorialCounter.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 50 : 40
         self.tutorialCounter.fontName = HUDSettings.nameFont
-        self.tutorialCounter.position = CGPoint(x: UIScreen.main.bounds.width/2.5, y: -UIScreen.main.bounds.height/2.8)
+        self.tutorialCounter.position = UIDevice.current.userInterfaceIdiom == .pad ? CGPoint(x: UIScreen.main.bounds.width/2.5, y: -UIScreen.main.bounds.height/2.8) : CGPoint(x: UIScreen.main.bounds.width/2.5, y: -UIScreen.main.bounds.height/3)
         self.tutorialCounter.alpha = 1.0
         
         addChild(tutorialButton)
@@ -307,17 +311,20 @@ class HUD: SKNode, ObservableObject {
         tutorialSheet.backButton.zPosition = 20
         tutorialSheet.backButton.position = CGPoint(x: tutorialSheet.tutorialSign.frame.minX/1.3,
                                                     y: tutorialSheet.tutorialSign.frame.maxY/1.3)
-        tutorialSheet.backButton.size = CGSize(width: tutorialSheet.tutorialSign.frame.width/10, height: tutorialSheet.tutorialSign.frame.width/10)
+        tutorialSheet.backButton.size = UIDevice.current.userInterfaceIdiom == .pad ? CGSize(width: tutorialSheet.tutorialSign.frame.width/10, height: tutorialSheet.tutorialSign.frame.width/10) :
+        CGSize(width: tutorialSheet.tutorialSign.frame.width/17, height: tutorialSheet.tutorialSign.frame.width/17)
         
         tutorialSheet.rightTutorial.zPosition = 20
         tutorialSheet.rightTutorial.position = CGPoint(x: tutorialSheet.tutorialSign.frame.maxX/1.5,
                                                        y: tutorialSheet.tutorialSign.frame.minY/1.4)
-        tutorialSheet.rightTutorial.size = CGSize(width: tutorialSheet.tutorialSign.frame.width/10, height: tutorialSheet.tutorialSign.frame.width/10)
+        tutorialSheet.rightTutorial.size = UIDevice.current.userInterfaceIdiom == .pad ? CGSize(width: tutorialSheet.tutorialSign.frame.width/10, height: tutorialSheet.tutorialSign.frame.width/10) :
+        CGSize(width: tutorialSheet.tutorialSign.frame.width/17, height: tutorialSheet.tutorialSign.frame.width/17)
         
         tutorialSheet.leftTutorial.zPosition = 20
         tutorialSheet.leftTutorial.position = CGPoint(x: -tutorialSheet.tutorialSign.frame.maxX/1.5,
                                                        y: tutorialSheet.tutorialSign.frame.minY/1.4)
-        tutorialSheet.leftTutorial.size = CGSize(width: tutorialSheet.tutorialSign.frame.width/10, height: tutorialSheet.tutorialSign.frame.width/10)
+        tutorialSheet.leftTutorial.size = UIDevice.current.userInterfaceIdiom == .pad ? CGSize(width: tutorialSheet.tutorialSign.frame.width/10, height: tutorialSheet.tutorialSign.frame.width/10) :
+        CGSize(width: tutorialSheet.tutorialSign.frame.width/17, height: tutorialSheet.tutorialSign.frame.width/17)
         
         tutorialSheet.tutorialName.position = CGPoint(x: 0,
                                                       y: tutorialSheet.tutorialSign.frame.maxY * 0.75)
@@ -327,11 +334,15 @@ class HUD: SKNode, ObservableObject {
         tutorialSheet.tutorialCounterLabel.fontColor = .white
         tutorialSheet.tutorialCounterLabel.fontSize = HUDSettings.tutorialCounterFontSize
         tutorialSheet.tutorialCounterLabel.fontName = HUDSettings.nameFont
+        
+        tutorialSheet.tutorialName.verticalAlignmentMode = .center
         tutorialSheet.tutorialName.fontColor = .black
-        tutorialSheet.tutorialName.fontSize = HUDSettings.tutorialNameFontSize
+        tutorialSheet.tutorialName.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? HUDSettings.tutorialNameFontSize :
+        HUDSettings.tutorialNameFontSize - 20
         tutorialSheet.tutorialName.fontName = HUDSettings.nameFont
         tutorialSheet.tutorialDesc.fontColor = HUDSettings.descFontColor
-        tutorialSheet.tutorialDesc.fontSize = HUDSettings.tutorialDescFontSize - 2
+        tutorialSheet.tutorialDesc.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? HUDSettings.tutorialDescFontSize - 2 :
+        HUDSettings.tutorialDescFontSize - 21
         tutorialSheet.tutorialDesc.fontName = HUDSettings.descFont
         tutorialSheet.tutorialDesc.verticalAlignmentMode = .top
         tutorialSheet.tutorialDesc.preferredMaxLayoutWidth = tutorialSheet.tutorialSign.frame.width - tutorialSheet.tutorialSign.frame.width/2
@@ -339,13 +350,15 @@ class HUD: SKNode, ObservableObject {
         tutorialSheet.tutorialDesc.position = CGPoint(x: -tutorialSheet.frame.width/7.5,
                                                       y: tutorialSheet.frame.height/4.5)
         
-        tutorialSheet.darkLordEye.size = CGSize(width: tutorialSheet.tutorialSign.frame.width/6.5,
-                                                height: tutorialSheet.tutorialSign.frame.width/6.5)
+        tutorialSheet.darkLordEye.size = UIDevice.current.userInterfaceIdiom == .pad ? CGSize(width: tutorialSheet.tutorialSign.frame.width/6.5,
+                                                                                              height: tutorialSheet.tutorialSign.frame.width/6.5) : CGSize(width: tutorialSheet.tutorialSign.frame.width/10.5,
+                                                                                                                                                           height: tutorialSheet.tutorialSign.frame.width/10.5)
+        
         tutorialSheet.darkLordEye.position = CGPoint(x: 0,
                                                        y: tutorialSheet.tutorialSign.frame.minY/1.4)
         tutorialSheet.tutorialCounterLabel.position = tutorialSheet.darkLordEye.position
-        tutorialSheet.screen.size = CGSize(width: tutorialSheet.tutorialSign.frame.width/3.7,
-                                           height: tutorialSheet.tutorialSign.frame.height/3.2)
+        tutorialSheet.screen.size = UIDevice.current.userInterfaceIdiom == .pad ? CGSize(width: tutorialSheet.tutorialSign.frame.width/3.7,
+                                                                                         height: tutorialSheet.tutorialSign.frame.height/3.2) : CGSize(width: tutorialSheet.tutorialSign.frame.width/4.7,                  height: tutorialSheet.tutorialSign.frame.height/2.3)
         tutorialSheet.screen.position.x = tutorialSheet.tutorialSign.frame.maxX/2.0
         addChild(tutorialSheet)
     }
