@@ -39,6 +39,8 @@ struct LoadingScene: View {
         }
         .onAppear {
             withAnimation{
+//                player.play(music: Audio.MusicFiles.background)
+//                player.musicVolume = 0.7
                 self.gameLogic.gameState = .playing
             }
         }

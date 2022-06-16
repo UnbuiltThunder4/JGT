@@ -38,7 +38,7 @@ class GameLogic: ObservableObject {
     var currentScale = ZoomProperties.initialScale
     
     var tutorials: [TutorialButton] = [TutorialButton(tutorialName: "Goblins 101 - The Dark Lord command", tutorialDesc: """
-“My son, by tapping the cauldronn I can summon goblins with the power of evilness alone, they can help you in many ways, I can throw them by dragging them wherever I want I can long press the terrain to use my evil sight and make them go in a frenzy. “”
+“My son, by tapping the cauldronn I can summon goblins with the power of evilness alone, they can help you in many ways, I can throw them by dragging them wherever I want I can long press the terrain to use my evil sight and make them go in a frenzy.“
 """, screen: SKTexture(imageNamed: "Tutorial0")),
                                        TutorialButton(tutorialName: "Goblins 101 - The Dark Lord eyes", tutorialDesc: """
                                    “Once I tap on a Goblin I can see all of their stats, in order, I can see their Health, their Attack Power, how much they Fear death, their age, their wit and how long is their frenzy.”
@@ -70,7 +70,7 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
                                        TutorialButton(tutorialName: "Gate", tutorialDesc: """
  “Good work my son, keep attacking the gates, once they’re gone our enemies will have no way to resist, but pay attention!
  If there are no goblins to defend you the risk is death!
- My powers can bring you back but no more than five times so I need to use the goblins to defend you as much as you need.”
+ My powers can bring you back but no more than ten times so I need to use the goblins to defend you as much as you need.”
  """, screen: SKTexture(imageNamed: "Tutorial9")),
                                        TutorialButton(tutorialName: "Backdoor", tutorialDesc: """
                                                       “Our goblins have found a backdoor, once they destroy it they can use the passage to attack enemies on the enemy walls and help you attack the gates without taking any damage.”
