@@ -29,10 +29,27 @@ struct LevelSelectionView: View {
         GeometryReader { geometry in
             
             ZStack {
-                Image("menu-mountains-back")
-                    .resizable()
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height*4)
-                    .ignoresSafeArea()
+                ZStack {
+                    Image("menu-background")
+                        .resizable()
+                        .ignoresSafeArea()
+                    VStack {
+                        Spacer()
+
+                        Image("menu-mountains-back")
+                            .resizable()
+                            .ignoresSafeArea()
+                            .frame(maxHeight: UIScreen.main.bounds.maxY * 0.9)
+                    }
+                    VStack {
+                        Spacer()
+
+                        Image("menu-mountains-front")
+                            .resizable()
+                            .ignoresSafeArea()
+                            .frame(maxHeight: UIScreen.main.bounds.maxY * 0.55)
+                    }
+                }
                 
                 VStack {
                     Text("Level Selection")
@@ -47,15 +64,17 @@ struct LevelSelectionView: View {
                             .foregroundColor(.clear)
                             .cornerRadius(15.0)
                             .overlay {
-                                VStack {
+                                VStack(spacing: 0) {
                                     Text("\(levelNames[gameLogic.level-1])")
-                                        .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 65)))
+                                        .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 70)))
                                         .foregroundColor(.green)
                                     
                                     Image("menu preview - 1")
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
-                                        .frame(maxWidth: UIScreen.main.bounds.width/3, maxHeight: UIScreen.main.bounds.height/1.5)
+                                        .frame(maxWidth: ((UIDevice.current.userInterfaceIdiom == .pad) ? UIScreen.main.bounds.width/2.5 : UIScreen.main.bounds.width/2.5), maxHeight: ((UIDevice.current.userInterfaceIdiom == .pad) ? UIScreen.main.bounds.width/4 : UIScreen.main.bounds.width/4.8))
+                                        .cornerRadius(15)
+                                        
                                 }
                                 .padding()
                             }
