@@ -331,7 +331,7 @@ class HUD: SKNode, ObservableObject {
         
         tutorialSheet.tutorialCounterLabel.zPosition = 20
         
-        tutorialSheet.tutorialCounterLabel.fontColor = .white
+        tutorialSheet.tutorialCounterLabel.fontColor = .black
         tutorialSheet.tutorialCounterLabel.fontSize = HUDSettings.tutorialCounterFontSize
         tutorialSheet.tutorialCounterLabel.fontName = HUDSettings.nameFont
         
@@ -356,7 +356,8 @@ class HUD: SKNode, ObservableObject {
         
         tutorialSheet.darkLordEye.position = CGPoint(x: 0,
                                                        y: tutorialSheet.tutorialSign.frame.minY/1.4)
-        tutorialSheet.tutorialCounterLabel.position = tutorialSheet.darkLordEye.position
+        tutorialSheet.tutorialCounterLabel.position.x = tutorialSheet.darkLordEye.position.x
+        tutorialSheet.tutorialCounterLabel.position.y = tutorialSheet.darkLordEye.position.y - (tutorialSheet.darkLordEye.frame.height * 0.1)
         tutorialSheet.screen.size = UIDevice.current.userInterfaceIdiom == .pad ? CGSize(width: tutorialSheet.tutorialSign.frame.width/3.7,
                                                                                          height: tutorialSheet.tutorialSign.frame.height/3.2) : CGSize(width: tutorialSheet.tutorialSign.frame.width/4.7,                  height: tutorialSheet.tutorialSign.frame.height/2.3)
         tutorialSheet.screen.position.x = tutorialSheet.tutorialSign.frame.maxX/2.0
