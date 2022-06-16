@@ -19,7 +19,7 @@ enum HUDSettings {
     static var nameFontColor: UIColor = .orange
     static var descFontColor: UIColor = .brown
     static var tutorialNameFontSize: CGFloat = 50
-    static var tutorialCounterFontSize: CGFloat = 50
+    static var tutorialCounterFontSize: CGFloat = ((UIDevice.current.userInterfaceIdiom == .pad) ? 50 : 25)
     static var tutorialDescFontSize: CGFloat = 40
 }
 
@@ -349,6 +349,8 @@ class HUD: SKNode, ObservableObject {
     func addDarkSonLives(position: CGPoint) {
         let dsFace: SKSpriteNode = SKSpriteNode(imageNamed: "dark-son-lives")
         dsFace.name = "dark-son-lives"
+        dsFace.size = ((UIDevice.current.userInterfaceIdiom == .pad) ? CGSize(width: (dsFace.texture?.size().width)!, height: (dsFace.texture?.size().height)!) : CGSize(width: UIScreen.main.bounds.width/10.5, height: UIScreen.main.bounds.height/5.5))
+        dsFace.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         dsFace.position = position
         dsFace.zPosition = 5
         addChild(dsFace)

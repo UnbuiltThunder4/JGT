@@ -8,15 +8,6 @@
 import SwiftUI
 import UIKit
 
-/**
- * # MainScreenView
- *
- *   This view is responsible for presenting the game name, the game intructions and to start the game.
- *  - Customize it as much as you want.
- *  - Experiment with colors and effects on the interface
- *  - Adapt the "Insert a Coin Button" to the visual identity of your game
- **/
-
 struct LevelSelectionView: View {
     
     // The game state is used to transition between the different states of the game
@@ -33,7 +24,7 @@ struct LevelSelectionView: View {
     let accentColor: Color = MainScreenProperties.accentColor
     
     @State var index: Int = 0
-        
+    
     var body: some View {
         GeometryReader { geometry in
             
@@ -45,38 +36,38 @@ struct LevelSelectionView: View {
                 
                 VStack {
                     Text("Level Selection")
-                        .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 170 : 85)))
+                        .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 170 : 100)))
                         .foregroundColor(.green)
                         .padding()
                     
                     HStack {
                         RoundedRectangle(cornerRadius: 15)
-                            .frame(maxWidth: geometry.size.width * 0.5, maxHeight: geometry.size.height * 0.65)
+                            .frame(maxWidth: geometry.size.width * 0.5, maxHeight: (UIDevice.current.userInterfaceIdiom == .pad ? (geometry.size.height * 0.65) : (geometry.size.height * 0.55)))
                             .padding()
                             .foregroundColor(.clear)
                             .cornerRadius(15.0)
                             .overlay {
                                 VStack {
-                                    Text("Level \(gameLogic.level)")
-                                        .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 55)))
+                                    Text("\(levelNames[gameLogic.level-1])")
+                                        .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 65)))
                                         .foregroundColor(.green)
                                     
-                                    Image("sheet")
+                                    Image("menu preview - 1")
                                         .resizable()
-                                        .frame(maxWidth: 400, maxHeight: 400)
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(maxWidth: UIScreen.main.bounds.width/3, maxHeight: UIScreen.main.bounds.height/1.5)
                                 }
+                                .padding()
                             }
                         
                         VStack {
                             Button {
                                 withAnimation {
-//                                    gameLogic.level = 1
                                     gameLogic.gameState = .playing
-//                                    print(gameLogic.level)
                                 }
                             } label: {
                                 Text("Play")
-                                    .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 55)))
+                                    .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 65)))
                                 
                             }
                             .frame(maxWidth: geometry.size.width * 0.15, maxHeight: geometry.size.height * 0.15)
@@ -91,13 +82,13 @@ struct LevelSelectionView: View {
                                         if gameLogic.level > 1 {
                                             gameLogic.level -= 1
                                         }
-//                                        gameLogic.gameState = .playing
-//                                        print(gameLogic.level)
                                     }
                                 } label: {
                                     Image("back-button")
+                                        .resizable()
+                                    
                                 }
-                                .frame(maxWidth: geometry.size.width * 0.15, maxHeight: geometry.size.height * 0.15)
+                                .frame(maxWidth: ((UIDevice.current.userInterfaceIdiom == .pad) ? geometry.size.width * 0.15 : geometry.size.width * 0.1), maxHeight: ((UIDevice.current.userInterfaceIdiom == .pad) ? geometry.size.width * 0.15 : geometry.size.width * 0.1))
                                 .padding()
                                 .foregroundColor(.white)
                                 .background(.clear)
@@ -108,15 +99,14 @@ struct LevelSelectionView: View {
                                         if gameLogic.level < 3 {
                                             gameLogic.level += 1
                                         }
-//                                        gameLogic.gameState = .playing
-//                                        print(gameLogic.level)
                                     }
                                 } label: {
                                     Image("back-button")
+                                        .resizable()
                                         .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                                     
                                 }
-                                .frame(maxWidth: geometry.size.width * 0.15, maxHeight: geometry.size.height * 0.15)
+                                .frame(maxWidth: ((UIDevice.current.userInterfaceIdiom == .pad) ? geometry.size.width * 0.15 : geometry.size.width * 0.1), maxHeight: ((UIDevice.current.userInterfaceIdiom == .pad) ? geometry.size.width * 0.15 : geometry.size.width * 0.1))
                                 .padding()
                                 .foregroundColor(.white)
                                 .background(.clear)
@@ -124,42 +114,6 @@ struct LevelSelectionView: View {
                             }
                         }
                         .frame(maxWidth: geometry.size.width * 0.5, maxHeight: geometry.size.height * 0.65)
-                        
-                        
-//                        Button {
-//                            withAnimation {
-//                                gameLogic.level = 2
-//                                gameLogic.gameState = .playing
-//                                print(gameLogic.level)
-//                            }
-//                        } label: {
-//                            Text("Level 2")
-//                                .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 60 : 35)))
-//
-//                        }
-//                        .frame(maxWidth: geometry.size.width * 0.25, maxHeight: geometry.size.height * 0.3)
-//                        .padding(.vertical)
-//                        .foregroundColor(.white)
-//                        .background(.green)
-//                        .cornerRadius(15.0)
-//
-//                        Button {
-//                            withAnimation {
-//                                gameLogic.level = 3
-//                                gameLogic.gameState = .playing
-//                                print(gameLogic.level)
-//                            }
-//                        } label: {
-//                            Text("Level 3")
-//                                .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 60 : 35)))
-//
-//                        }
-//                        .frame(maxWidth: geometry.size.width * 0.25, maxHeight: geometry.size.height * 0.3)
-//                        .padding(.vertical)
-//                        .foregroundColor(.white)
-//                        .background(.green)
-//                        .cornerRadius(15.0)
-                        
                     }
                 }
                 
@@ -174,8 +128,13 @@ struct LevelSelectionView: View {
 
 struct LevelSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        LevelSelectionView()
-            .previewInterfaceOrientation(.landscapeLeft)
+        Group {
+            LevelSelectionView()
+                .previewInterfaceOrientation(.landscapeLeft)
+            LevelSelectionView()
+                .previewDevice(PreviewDevice(rawValue: "iPhone 11"))
+                .previewInterfaceOrientation(.landscapeLeft)
+        }
     }
 }
 

@@ -8,21 +8,6 @@
 import Foundation
 import SwiftUI
 
-/**
- * # Constants
- *
- * This file gathers contant values that are shared all around the project.
- * Modifying the values of these constants will reflect along the complete interface of the application.
- *
- **/
-
-
-/**
- * # GameState
- * Defines the different states of the game.
- * Used for supporting the navigation in the project template.
- */
-
 enum GaugeHUDSetting {
     static let ipadSize = CGSize(width: UIScreen.main.bounds.width/4, height: UIScreen.main.bounds.height/1.2)
     static let iphoneSize = CGSize(width: UIScreen.main.bounds.width/6, height: UIScreen.main.bounds.height/1.2)
@@ -54,16 +39,15 @@ enum GameState {
 
 typealias Instruction = (icon: String, title: String, description: String)
 
-/**
- * # MainScreenProperties
- *
- * Keeps the information that shows up on the main screen of the game.
- *
- */
+let levelNames: [String] = [
+    "The First Assault",
+    "The Siege Weapons",
+    "The Shocking Stand"
+]
 
 struct MainScreenProperties {
     static let gameTitle: String = "Throw Da Goblin"
-    
+        
     static let gameInstructions: [Instruction] = [
         (icon: "hand.raised", title: "Instruction 1", description: "Instruction description."),
         (icon: "hand.tap", title: "Instruction 2", description: "Instruction description."),
