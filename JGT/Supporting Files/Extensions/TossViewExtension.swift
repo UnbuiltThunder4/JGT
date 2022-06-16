@@ -616,11 +616,11 @@ extension TossScene {
         switch UIDevice.current.userInterfaceIdiom {
             
         case .phone:
-            ZoomProperties.initialScale = 3.0
-            ZoomProperties.maximumZoom = 4.0
+            ZoomProperties.initialScale = 2.5
+            ZoomProperties.maximumZoom = 3.5
             ZoomProperties.minimumZoom = 1.5
-            ZoomProperties.cameraOffsetx = 130.0
-            ZoomProperties.cameraOffsety = 90.0
+            ZoomProperties.cameraOffsetx = 120.0
+            ZoomProperties.cameraOffsety = 70.0
             ZoomProperties.initialOffsetx = 230.0
             ZoomProperties.initialOffsety = 120.0
             cameraNode.xScale = ZoomProperties.initialScale
