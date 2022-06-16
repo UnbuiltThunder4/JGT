@@ -69,7 +69,7 @@ struct LevelSelectionView: View {
                                         .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 90 : 70)))
                                         .foregroundColor(.green)
                                     
-                                    Image("menu preview - \((gameLogic.level != 3) ? gameLogic.level : 1)")
+                                    Image("menu preview - \(gameLogic.level)")
                                         .resizable()
                                         .aspectRatio(contentMode: .fill)
                                         .frame(maxWidth: ((UIDevice.current.userInterfaceIdiom == .pad) ? UIScreen.main.bounds.width/2.5 : UIScreen.main.bounds.width/2.5), maxHeight: ((UIDevice.current.userInterfaceIdiom == .pad) ? UIScreen.main.bounds.width/4 : UIScreen.main.bounds.width/4.8))
