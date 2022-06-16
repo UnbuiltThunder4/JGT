@@ -409,6 +409,9 @@ class Gate: Structure {
 //            gameLogic.playSound(node: nil, audio: Audio.EffectFiles.darkSonGateDestroyed, wait: false)
             //HERE YOU WIN
             self.health = -101
+            
+            gameLogic.finishTheGame(tossScene)
+            gameLogic.youWin = true
         }
         else {
             let healthpercentage: Float = (Float(self.health) / Float(self.maxHealth)) * 100.0
@@ -425,8 +428,6 @@ class Gate: Structure {
                 break
             case 0:
                 self.texture = SKTexture(imageNamed: "gate_break_4")
-                gameLogic.finishTheGame(tossScene)
-                gameLogic.youWin = true
                 break
             default:
                 break

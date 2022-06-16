@@ -49,7 +49,7 @@ struct GameOverView: View {
                 HStack {
                     Button {
                         withAnimation {
-                            self.backToMainScreen()
+                            self.backToLevelScreen()
                         }
                     } label: {
                         VStack {
@@ -114,6 +114,10 @@ struct GameOverView: View {
     
     private func backToMainScreen() {
         gameLogic.gameState = .mainScreen
+    }
+    
+    private func backToLevelScreen() {
+        gameLogic.gameState = .selection
     }
     
     private func restartGame() {
