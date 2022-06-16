@@ -301,31 +301,28 @@ struct MainScreenView: View {
                     //                .foregroundColor(.white)
                     
                     //                Spacer()
-                    
-                    Button {
-                        self.startGame()
-                    } label: {
-                        Text("Play")
-                            .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 150 : 100)))
+
+                        Text("Tap to Play")
+                            .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 80)))
                             .opacity(textOpacity)
                             .onAppear{
                                 withAnimation{
                                     textOpacity = 0.0
                                 }
                             }
+                            .frame(maxWidth: geometry.size.width * 0.5, maxHeight: geometry.size.height * 0.3)
+                            .padding()
+                            .foregroundColor(.green)
+                            .cornerRadius(15.0)
                             .animation(Animation.easeInOut(duration:1.5).repeatForever(autoreverses:true))
-                        
-                    }
-                    .frame(maxWidth: geometry.size.width * 0.5, maxHeight: geometry.size.height * 0.3)
-                    .padding(5)
-                    .foregroundColor(.green)
-                    .background(.clear)
-                    .cornerRadius(15.0)
-                    
+
                 }
                 .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height)
             .statusBar(hidden: true)
             }
+        }
+        .onTapGesture {
+            self.startGame()
         }
     }
     
