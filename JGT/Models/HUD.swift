@@ -221,6 +221,8 @@ class HUD: SKNode, ObservableObject {
         pauseScreen.pauseSign.zPosition = 5
         pauseScreen.pauseSign.position = CGPoint.zero
         
+        pauseScreen.pauseSign.size = CGSize(width: UIScreen.main.bounds.width/1.2, height: UIScreen.main.bounds.height/1.2)
+        
         pauseScreen.continueMessage.fontSize = HUDSettings.tutorialNameFontSize
         pauseScreen.continueMessage.fontName = HUDSettings.nameFont
         pauseScreen.continueMessage.fontColor = HUDSettings.nameFontColor
@@ -300,6 +302,8 @@ class HUD: SKNode, ObservableObject {
         tutorialSheet.zPosition = 300
         tutorialSheet.position = position
         
+        tutorialSheet.tutorialSign.size = CGSize(width: UIScreen.main.bounds.width/1.2, height: UIScreen.main.bounds.height/1.2)
+        
         tutorialSheet.backButton.zPosition = 20
         tutorialSheet.backButton.position = CGPoint(x: tutorialSheet.tutorialSign.frame.minX/1.3,
                                                     y: tutorialSheet.tutorialSign.frame.maxY/1.3)
@@ -327,7 +331,7 @@ class HUD: SKNode, ObservableObject {
         tutorialSheet.tutorialName.fontSize = HUDSettings.tutorialNameFontSize
         tutorialSheet.tutorialName.fontName = HUDSettings.nameFont
         tutorialSheet.tutorialDesc.fontColor = HUDSettings.descFontColor
-        tutorialSheet.tutorialDesc.fontSize = HUDSettings.tutorialDescFontSize
+        tutorialSheet.tutorialDesc.fontSize = HUDSettings.tutorialDescFontSize - 2
         tutorialSheet.tutorialDesc.fontName = HUDSettings.descFont
         tutorialSheet.tutorialDesc.verticalAlignmentMode = .top
         tutorialSheet.tutorialDesc.preferredMaxLayoutWidth = tutorialSheet.tutorialSign.frame.width - tutorialSheet.tutorialSign.frame.width/2
