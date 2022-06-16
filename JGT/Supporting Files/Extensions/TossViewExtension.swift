@@ -111,6 +111,10 @@ extension TossScene {
                 gameLogic.ejectGoblin(scrollableMenu: scrollableMenu, goblinRow: goblinRow, structure: lastSelectedStructure as! Structure)
             }
             
+            if selectedNode?.name == "goblinName" || selectedNode?.name == "goblinFace" || selectedNode?.name == "goblinStats" {
+                gameLogic.ejectGoblin(scrollableMenu: scrollableMenu, goblinRow: selectedNode?.parent as! GoblinRow, structure: lastSelectedStructure as! Structure)
+            }
+            
             if selectedNode is Cauldron || selectedNode?.name! == "goblinsNumber" {
                 if UserDefaults.standard.bool(forKey: "goblins101") == false {
                     gameLogic.tutorialEvent(index: 2, hud: hud, tutorialSheet: tutorialSheet)
