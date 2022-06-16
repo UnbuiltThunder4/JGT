@@ -36,7 +36,7 @@ struct ContentView: View {
             GameOverView()
             
         case .selection:
-            LevelSelectionView(currentGameState: $currentGameState)
+            LevelSelectionView()
         }
     }
 }

@@ -599,6 +599,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                         else {
                             let attackParticle = SKEmitterNode(fileNamed: "AttackParticle")
                             attackParticle!.position = CGPoint(x: 0, y: 0)
+                            attackParticle!.xScale = self.xScale
                             attackParticle!.name = "attackParticle"
                             let addParticle = SKAction.run({
                                 self.addChild(attackParticle!)
@@ -1049,6 +1050,25 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 if (self.attackCounter % attackTime == 0) {
                     self.attackCounter = 0
                     
+                    let attackParticle = SKEmitterNode(fileNamed: "AttackParticle")
+                    attackParticle!.position = CGPoint(x: 0, y: 0)
+                    attackParticle!.xScale = self.xScale
+                    attackParticle!.name = "attackParticle"
+                    let addParticle = SKAction.run({
+                        self.addChild(attackParticle!)
+                    })
+                    let removeParticle = SKAction.run({
+                        attackParticle!.removeFromParent()
+                    })
+                    
+                    let sequence = SKAction.sequence([
+                        addParticle,
+                        .wait(forDuration: 0.5),
+                        removeParticle
+                    ])
+                    
+                    self.run(sequence, withKey: "attackParticle")
+                    
                     var dmg = self.attack
                     if (self.isFrenzied) {
                         dmg += self.attack
@@ -1092,6 +1112,25 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
             self.attackCounter += 1
             if (self.attackCounter % attackTime == 0) {
                 self.attackCounter = 0
+                
+                let attackParticle = SKEmitterNode(fileNamed: "AttackParticle")
+                attackParticle!.position = CGPoint(x: 0, y: 0)
+                attackParticle!.xScale = self.xScale
+                attackParticle!.name = "attackParticle"
+                let addParticle = SKAction.run({
+                    self.addChild(attackParticle!)
+                })
+                let removeParticle = SKAction.run({
+                    attackParticle!.removeFromParent()
+                })
+                
+                let sequence = SKAction.sequence([
+                    addParticle,
+                    .wait(forDuration: 0.5),
+                    removeParticle
+                ])
+                
+                self.run(sequence, withKey: "attackParticle")
                 
                 var dmg = 1
                 if (self.isFrenzied) {

@@ -29,6 +29,15 @@ class MenuScene: SKScene {
     var gameTitle = SKSpriteNode(imageNamed: "title")
     
     override func didMove(to view: SKView) {
+//        switch UIDevice.current.userInterfaceIdiom {
+//        case .phone:
+//            break
+//        case .pad:
+//            break
+//        @unknown default:
+//            break
+//        }
+        
         self.background.name = "background"
         self.background.size = UIScreen.main.bounds.size
         self.background.anchorPoint = CGPoint(x: 0, y: 0)
@@ -45,14 +54,14 @@ class MenuScene: SKScene {
         self.addChild(mountainsBack)
         
         self.darkLordTower.name = "darkLordTower"
-        self.darkLordTower.size = CGSize(width: 300, height: 600)
+        self.darkLordTower.size = CGSize(width: (UIDevice.current.userInterfaceIdiom == .pad ? UIScreen.main.bounds.width/5 : UIScreen.main.bounds.width/7), height: UIScreen.main.bounds.height/1.75)
         self.darkLordTower.anchorPoint = CGPoint(x: 0, y: 0)
         self.darkLordTower.position = CGPoint(x: UIScreen.main.bounds.maxX * 0.05, y: UIScreen.main.bounds.maxY * 0.2)
         self.darkLordTower.zPosition = 2
         self.addChild(darkLordTower)
         
         self.darkLordEye.name = "darkLordEye"
-        self.darkLordEye.size = CGSize(width: 119, height: 131)
+        self.darkLordEye.size = CGSize(width: self.darkLordTower.size.width/2.5, height: self.darkLordTower.size.width/2.3)
         self.darkLordEye.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.darkLordEye.position = CGPoint(x: self.darkLordTower.frame.midX, y: self.darkLordTower.frame.maxY * 0.94)
         self.darkLordEye.alpha = 0.0
@@ -77,7 +86,7 @@ class MenuScene: SKScene {
         
         for i in 0...2 {
             self.goblins[i].name = "goblin"
-            self.goblins[i].size = CGSize(width: 100, height: 100)
+            self.goblins[i].size = CGSize(width: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 70), height: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 70))
             self.goblins[i].anchorPoint = CGPoint(x: 0.5, y: 0.5)
             self.goblins[i].position = CGPoint(x: UIScreen.main.bounds.maxX + CGFloat((i+1)*100), y: UIScreen.main.bounds.maxY * 0.1)
             self.goblinSpawn[i] = self.goblins[i].position
@@ -86,7 +95,7 @@ class MenuScene: SKScene {
         }
         
         self.darkSon.name = "darkSon"
-        self.darkSon.size = CGSize(width: 233, height: 333)
+        self.darkSon.size = CGSize(width: (UIDevice.current.userInterfaceIdiom == .pad ? 233 : 117), height: (UIDevice.current.userInterfaceIdiom == .pad ? 333 : 166))
         self.darkSon.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.darkSon.position = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.maxY + 100)
         self.darkSon.zPosition = 4
@@ -94,7 +103,8 @@ class MenuScene: SKScene {
         
         self.gameTitle.name = "gameTitle"
         self.gameTitle.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        self.gameTitle.position = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.maxY * 0.85)
+        self.gameTitle.size = CGSize(width: (UIDevice.current.userInterfaceIdiom == .pad ? UIScreen.main.bounds.width/1.4 : UIScreen.main.bounds.width/1.5), height: (UIDevice.current.userInterfaceIdiom == .pad ? UIScreen.main.bounds.height/6.5 : UIScreen.main.bounds.height/5))
+        self.gameTitle.position = CGPoint(x: UIScreen.main.bounds.midX, y: (UIDevice.current.userInterfaceIdiom == .pad ? UIScreen.main.bounds.maxY * 0.85 : UIScreen.main.bounds.maxY * 0.8))
         self.gameTitle.zPosition = 100
         self.addChild(gameTitle)
         
@@ -111,8 +121,13 @@ class MenuScene: SKScene {
         fireParticle!.particleColorBlendFactor = 1.0
         fireParticle!.particleColor = UIColor(red: 125/255, green: 15/255, blue: 204/255, alpha: 1.0)
         fireParticle!.zPosition = 4
-        fireParticle!.particleScaleSpeed = -1.2
-        fireParticle!.setScale(2)
+        if UIDevice.current.userInterfaceIdiom == .pad  {
+            fireParticle!.particleScaleSpeed = -1.2
+            fireParticle!.setScale(2)
+        } else {
+            fireParticle!.particleScaleSpeed = -1.8
+            fireParticle!.setScale(1.3)
+        }
         
         let addFireParticle = SKAction.run({
             self.addChild(fireParticle!)
@@ -130,9 +145,9 @@ class MenuScene: SKScene {
             
             self.darkSon.texture = SKTexture(imageNamed: "attack1")
             
-            let fly = SKAction.move(to: CGPoint(x: self.darkSon.position.x, y: self.darkSon.position.y + 30), duration: self.getDuration(pointA: self.darkSon.position, pointB: CGPoint(x: self.darkSon.position.x, y: self.darkSon.position.y + 30), speed: 30))
+            let fly = SKAction.move(to: CGPoint(x: self.darkSon.position.x, y: self.darkSon.position.y + 10), duration: self.getDuration(pointA: self.darkSon.position, pointB: CGPoint(x: self.darkSon.position.x, y: self.darkSon.position.y + 10), speed: 10))
             
-            let flyBack = SKAction.move(to: CGPoint(x: self.darkSon.position.x, y: self.darkSon.position.y - 30), duration: self.getDuration(pointA: self.darkSon.position, pointB: CGPoint(x: self.darkSon.position.x, y: self.darkSon.position.y - 30), speed: 30))
+            let flyBack = SKAction.move(to: CGPoint(x: self.darkSon.position.x, y: self.darkSon.position.y - 10), duration: self.getDuration(pointA: self.darkSon.position, pointB: CGPoint(x: self.darkSon.position.x, y: self.darkSon.position.y - 10), speed: 10))
                         
             let flySequence = SKAction.sequence([
                 fly,
@@ -286,31 +301,28 @@ struct MainScreenView: View {
                     //                .foregroundColor(.white)
                     
                     //                Spacer()
-                    
-                    Button {
-                        self.startGame()
-                    } label: {
-                        Text("Play")
-                            .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 150 : 15)))
+
+                        Text("Tap to Play")
+                            .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 100 : 80)))
                             .opacity(textOpacity)
                             .onAppear{
                                 withAnimation{
                                     textOpacity = 0.0
                                 }
                             }
+                            .frame(maxWidth: geometry.size.width * 0.5, maxHeight: geometry.size.height * 0.3)
+                            .padding()
+                            .foregroundColor(.green)
+                            .cornerRadius(15.0)
                             .animation(Animation.easeInOut(duration:1.5).repeatForever(autoreverses:true))
-                        
-                    }
-                    .frame(maxWidth: geometry.size.width * 0.5, maxHeight: geometry.size.height * 0.3)
-                    .padding(5)
-                    .foregroundColor(.green)
-                    .background(.clear)
-                    .cornerRadius(15.0)
-                    
+
                 }
                 .frame(maxWidth: geometry.size.width, maxHeight: geometry.size.height)
             .statusBar(hidden: true)
             }
+        }
+        .onTapGesture {
+            self.startGame()
         }
     }
     

@@ -18,6 +18,8 @@ class Projectile: SKSpriteNode, ObservableObject {
     let width: CGFloat
     let height: CGFloat
     let damage: Int
+    
+    var oldPosition: CGPoint? = nil
         
     init(type: ProjectileType, x: CGFloat, y: CGFloat, rotation: Double) {
         var img = ""
@@ -72,5 +74,25 @@ class Projectile: SKSpriteNode, ObservableObject {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }    
+    }
+    
+    func update() {
+        if (self.oldPosition != nil) {
+            if Int((self.oldPosition?.x)!) > Int((self.position.x)) {
+                self.xScale = -1
+                
+            } else if Int((self.oldPosition?.x)!) < Int((self.position.x)) {
+                self.xScale = 1
+            }
+            if Int((self.oldPosition?.y)!) > Int((self.position.y)) {
+                self.yScale = 1
+                
+            } else if Int((self.oldPosition?.y)!) < Int((self.position.y)) {
+                self.yScale = -1
+            }
+        }
+        
+        self.oldPosition = self.position
+    }
+    
 }

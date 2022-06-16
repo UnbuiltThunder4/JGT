@@ -8,21 +8,6 @@
 import Foundation
 import SwiftUI
 
-/**
- * # Constants
- *
- * This file gathers contant values that are shared all around the project.
- * Modifying the values of these constants will reflect along the complete interface of the application.
- *
- **/
-
-
-/**
- * # GameState
- * Defines the different states of the game.
- * Used for supporting the navigation in the project template.
- */
-
 enum GaugeHUDSetting {
     static let ipadSize = CGSize(width: UIScreen.main.bounds.width/4, height: UIScreen.main.bounds.height/1.2)
     static let iphoneSize = CGSize(width: UIScreen.main.bounds.width/6, height: UIScreen.main.bounds.height/1.2)
@@ -54,16 +39,15 @@ enum GameState {
 
 typealias Instruction = (icon: String, title: String, description: String)
 
-/**
- * # MainScreenProperties
- *
- * Keeps the information that shows up on the main screen of the game.
- *
- */
+let levelNames: [String] = [
+    "The First Assault",
+    "The Siege Weapons",
+    "The Shocking Stand"
+]
 
 struct MainScreenProperties {
     static let gameTitle: String = "Throw Da Goblin"
-    
+        
     static let gameInstructions: [Instruction] = [
         (icon: "hand.raised", title: "Instruction 1", description: "Instruction description."),
         (icon: "hand.tap", title: "Instruction 2", description: "Instruction description."),
@@ -167,8 +151,8 @@ let gnomes1: [Enemy] = [
     
     Enemy(type: .small, x: 750, y: 3050), //upper left gnome
     
-    Enemy(type: .bow, x: 1870, y: 4200), //on gate gnomes
-    Enemy(type: .bow, x: 1470, y: 4200),
+    Enemy(type: .bow, x: 1672, y: 4200), //on gate gnomes
+//    Enemy(type: .bow, x: 1470, y: 4200),
 
 
     Enemy(type: .axe, x: 1250, y: 2350), //near academy gnomes
@@ -200,16 +184,30 @@ let gnomes2: [Enemy] = [
     Enemy(type: .small, x: 800, y: 2300),
     Enemy(type: .small, x: 1200, y: 2300),
     Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .bow, x: 1250, y: 4200),
-    Enemy(type: .bow, x: 2050, y: 4200),
-    Enemy(type: .bow, x: 1250, y: 4200),
-    Enemy(type: .bow, x: 2050, y: 4200),
-    Enemy(type: .axe, x: 1350, y: 2800),
-    Enemy(type: .axe, x: 2500, y: 1450),
-    Enemy(type: .axe, x: 1350, y: 2800),
+    
+    Enemy(type: .bow, x: 2600, y: 4200), //gate
+    Enemy(type: .bow, x: 2800, y: 4200),
+    
+    Enemy(type: .axe, x: 2650, y: 3600), //gate
+    Enemy(type: .axe, x: 2750, y: 3500),
+    Enemy(type: .axe, x: 2850, y: 3600),
+    Enemy(type: .small, x: 2650, y: 3300),
+    Enemy(type: .small, x: 2750, y: 3300),
+    Enemy(type: .small, x: 2850, y: 3300),
+    
+    Enemy(type: .axe, x: 400, y: 3600), //backdoor
+    Enemy(type: .axe, x: 600, y: 3600),
+    Enemy(type: .axe, x: 500, y: 3300),
+    
+    Enemy(type: .small, x: 1600, y: 3600), //catapult
+    Enemy(type: .small, x: 1800, y: 3600),
+    Enemy(type: .axe, x: 1500, y: 3600),
+    Enemy(type: .axe, x: 1900, y: 3600),
+    Enemy(type: .axe, x: 1550, y: 3300),
+    Enemy(type: .axe, x: 1850, y: 3300),
+    Enemy(type: .small, x: 1600, y: 3100),
+    Enemy(type: .small, x: 1800, y: 3100),
+    
     Enemy(type: .axe, x: 2500, y: 1450),
     Enemy(type: .axe, x: 1350, y: 2800),
     Enemy(type: .axe, x: 2500, y: 1450),
@@ -260,8 +258,8 @@ let goblinmancyCircleCoordinates2 = CGPoint(x: 350, y: 240)
 let tavernCoordinates2 = CGPoint(x: 1572, y: 950)
 let academyCoordinates2 = CGPoint(x: 2900, y: 1250)
 let villageCoordinates2 = CGPoint(x: 1000, y: 2500)
-let catapultCoordinates2 = CGPoint(x: 1350, y: 3000)
-let gateCoordinates2 = CGPoint(x: 2600, y: 3750)
+let catapultCoordinates2 = CGPoint(x: 1680, y: 3400)
+let gateCoordinates2 = CGPoint(x: 2700, y: 3750)
 let backdoorCoordinates2 = CGPoint(x: 500, y: 3635)
 let passageCoordinates2 = CGPoint(x: 500, y: 4100)
 
@@ -373,55 +371,81 @@ let levelstructures2: [Structure] = [
     Structure(type: .passage, x: passageCoordinates2.x, y: passageCoordinates2.y, rotation: 0),
     Structure(type: .goblincircle, x: goblinmancyCircleCoordinates2.x, y: goblinmancyCircleCoordinates2.y, rotation: 0),
     
-    
-    
-    Structure(type: .rock, x: 1450, y: 500, rotation: 0), //rock low center
+    Structure(type: .rock, x: 1450, y: 500, rotation: 0), //low center
     Structure(type: .rock, x: 1910, y: 500, rotation: 0),
-    Structure(type: .rock, x: 1350, y: 150, rotation: 0),
-    Structure(type: .rock, x: 1930, y: 150, rotation: 0),
+    Structure(type: .rock, x: 1350, y: 130, rotation: 0),
+    Structure(type: .rock, x: 1960, y: 130, rotation: 0),
+    Structure(type: .tree, x: 1670, y: 500, rotation: 0),
+    Structure(type: .tree, x: 1500, y: 350, rotation: 0),
+    Structure(type: .tree, x: 1700, y: 325, rotation: 0),
+    Structure(type: .tree, x: 1900, y: 340, rotation: 0),
     
-    Structure(type: .rock, x: 100, y: 1110, rotation: 0), //rock left above circle
+    Structure(type: .rock, x: 100, y: 1110, rotation: 0), //left above circle
     Structure(type: .rock, x: 450, y: 1160, rotation: 0),
+    Structure(type: .tree, x: 200, y: 1010, rotation: 0),
+    Structure(type: .tree, x: 350, y: 1060, rotation: 0),
     
-    Structure(type: .rock, x: 2340, y: 900, rotation: 0), //rock alone
+    Structure(type: .rock, x: 2370, y: 910, rotation: 0), //rock alone
+    Structure(type: .tree, x: 2480, y: 1100, rotation: 0), // tree friend
     
-    Structure(type: .rock, x: 2040, y: 1550, rotation: 0), //far apart group on right
+    Structure(type: .rock, x: 2050, y: 1530, rotation: 0), //far apart group on right
     Structure(type: .rock, x: 2360, y: 1700, rotation: 0),
     Structure(type: .rock, x: 2800, y: 1850, rotation: 0),
     Structure(type: .rock, x: 2510, y: 2020, rotation: 0),
+    Structure(type: .tree, x: 1930, y: 1610, rotation: 0),
+    Structure(type: .tree, x: 2790, y: 1850, rotation: 0),
+    Structure(type: .tree, x: 2940, y: 1800, rotation: 0),
     
-    Structure(type: .rock, x: 360, y: 2000, rotation: 0), //left triangle
-    Structure(type: .rock, x: 660, y: 2000, rotation: 0),
-    Structure(type: .rock, x: 460, y: 2200, rotation: 0),
+    Structure(type: .rock, x: 360, y: 1800, rotation: 0), //left triangle
+    Structure(type: .rock, x: 760, y: 1800, rotation: 0),
+    Structure(type: .rock, x: 560, y: 2020, rotation: 0),
+    Structure(type: .tree, x: 580, y: 1800, rotation: 0),
     
-    Structure(type: .rock, x: 750, y: 2600, rotation: 0), //left 2 that do a \
-    Structure(type: .rock, x: 550, y: 2800, rotation: 0),
+    Structure(type: .rock, x: 800, y: 2500, rotation: 0), //left 2 that do a \
+    Structure(type: .rock, x: 600, y: 2700, rotation: 0),
     
-    Structure(type: .rock, x: 1470, y: 2900, rotation: 0), //one on top of the other
-    Structure(type: .rock, x: 1470, y: 2550, rotation: 0)
+    Structure(type: .rock, x: 1450, y: 2600, rotation: 0), //one on top of the other
+    Structure(type: .rock, x: 1495, y: 2350, rotation: 0),
+    Structure(type: .tree, x: 1380, y: 2400, rotation: 0),
+    
+    Structure(type: .rock, x: 2470, y: 2920, rotation: 0), //last ones of the top right
+    Structure(type: .rock, x: 2750, y: 2500, rotation: 0),
 
+    Structure(type: .rock, x: 1180, y: 3500, rotation: 0), //around the catapult
+    Structure(type: .rock, x: 2180, y: 3500, rotation: 0),
+    Structure(type: .rock, x: 1350, y: 3330, rotation: 0),
+    Structure(type: .rock, x: 2010, y: 3330, rotation: 0),
+    Structure(type: .rock, x: 1680, y: 3200, rotation: 0),
+    Structure(type: .rock, x: 1250, y: 3130, rotation: 0),
+    Structure(type: .rock, x: 2110, y: 3130, rotation: 0),
+    Structure(type: .rock, x: 1680, y: 2900, rotation: 0),
     
-//    Structure(type: .rock, x: 2100, y: 700, rotation: 0),
-//    Structure(type: .rock, x: 650, y: 1450, rotation: 0),
-//    Structure(type: .rock, x: 1950, y: 1350, rotation: 0),
-//    Structure(type: .rock, x: 1400, y: 350, rotation: 0),
-//    Structure(type: .rock, x: 1300, y: 2660, rotation: 0),
-//    Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
-//    Structure(type: .rock, x: 1890, y: 1720, rotation: 0),
-//    Structure(type: .rock, x: 2690, y: 2620, rotation: 0),
-//    Structure(type: .rock, x: 2100, y: 700, rotation: 0),
-//    Structure(type: .rock, x: 650, y: 1450, rotation: 0),
-//    Structure(type: .rock, x: 1950, y: 1350, rotation: 0),
-//    Structure(type: .rock, x: 1400, y: 350, rotation: 0),
-//    Structure(type: .rock, x: 1300, y: 2660, rotation: 0),
-//    Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
-//    Structure(type: .rock, x: 1890, y: 1720, rotation: 0),
-//    Structure(type: .rock, x: 2690, y: 2620, rotation: 0),
-//    Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
-//    Structure(type: .rock, x: 1890, y: 1720, rotation: 0),
-//    Structure(type: .rock, x: 2690, y: 2620, rotation: 0),
-//    Structure(type: .rock, x: 2690, y: 2620, rotation: 0),
-//    Structure(type: .rock, x: 2690, y: 2620, rotation: 0)
+    Structure(type: .tree, x: 2800, y: 3050, rotation: 0), //tree cross
+    Structure(type: .tree, x: 2800, y: 2900, rotation: 0),
+    Structure(type: .tree, x: 2800, y: 2750, rotation: 0),
+    Structure(type: .tree, x: 2650, y: 2900, rotation: 0),
+    Structure(type: .tree, x: 2950, y: 2900, rotation: 0),
+         
+    Structure(type: .tree, x: 700, y: 3550, rotation: 0), //trees near backdoor
+    Structure(type: .tree, x: 750, y: 3400, rotation: 0),
+    
+    Structure(type: .tree, x: 650, y: 3250, rotation: 0),
+    Structure(type: .tree, x: 600, y: 3100, rotation: 0),
+   
+    Structure(type: .tree, x: 775, y: 3250, rotation: 0),
+    Structure(type: .tree, x: 725, y: 3100, rotation: 0),
+    
+    Structure(type: .tree, x: 150, y: 3100, rotation: 0),
+    Structure(type: .tree, x: 300, y: 3100, rotation: 0),
+    Structure(type: .tree, x: 450, y: 3100, rotation: 0),
+    Structure(type: .tree, x: 100, y: 2900, rotation: 0),
+    Structure(type: .tree, x: 250, y: 2900, rotation: 0),
+    Structure(type: .tree, x: 400, y: 2900, rotation: 0),
+    Structure(type: .tree, x: 100, y: 2700, rotation: 0),
+    Structure(type: .tree, x: 250, y: 2700, rotation: 0),
+    Structure(type: .tree, x: 400, y: 2700, rotation: 0),
+    
+    Structure(type: .tree, x: 550, y: 2950, rotation: 0)
 ]
 
 let levelstructures3: [Structure] = [
