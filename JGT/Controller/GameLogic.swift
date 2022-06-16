@@ -415,7 +415,7 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
     }
     
     public func tutorialEvent(index: Int, hud: HUD, tutorialSheet: TutorialSheet) {
-        hud.addTutorialButton(tutorialButton: tutorials[index], position: CGPoint(x: hud.position.x + UIScreen.main.bounds.width/2.5, y: 0))
+        hud.addTutorialButton(tutorialButton: tutorials[index], position: CGPoint(x: UIScreen.main.bounds.width/2 - tutorials[index].size.width*1.7, y: -UIScreen.main.bounds.height/2.5))
     }
     
     public func isFlyingAnimation(goblin: Goblin) {

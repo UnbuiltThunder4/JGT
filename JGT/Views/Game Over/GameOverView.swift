@@ -90,7 +90,7 @@ struct GameOverView: View {
     }
     
     private func restartGame() {
-        gameLogic.gameState = .playing
+        gameLogic.gameState = .loading
     }
 }
 

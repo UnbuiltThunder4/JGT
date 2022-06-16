@@ -35,6 +35,7 @@ enum GameState {
     case playing
     case selection
     case gameOver
+    case loading
 }
 
 typealias Instruction = (icon: String, title: String, description: String)
