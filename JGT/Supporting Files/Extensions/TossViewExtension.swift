@@ -232,14 +232,14 @@ extension TossScene {
             }
             
             if selectedNode?.name! == "RestartBtn" {
+                self.cleanScene()
                 
+                gameLogic.gameState = .loading
             }
             
             if selectedNode?.name! == "QuitBtn" {
-                
                 self.cleanScene()
                 gameLogic.gameState = .selection
-                
             }
             
             if selectedNode?.name! == "musicButton" {

@@ -144,8 +144,8 @@ class HUD: SKNode, ObservableObject {
         
         sheet.nameLabel.position = CGPoint(x: sheet.frame.maxX * -0.08,
                                            y: sheet.frame.maxY * 0.55)
-        sheet.typeLabel.position = CGPoint(x: sheet.frame.maxX * -0.233,
-                                           y: sheet.frame.maxY * 0.42)
+        sheet.typeLabel.position = CGPoint(x: ((UIDevice.current.userInterfaceIdiom == .pad) ? sheet.frame.maxX * -0.233 : sheet.frame.maxX * -0.22),
+                                           y: sheet.frame.maxY * 0.40)
         sheet.descLabel.position = CGPoint(x: 0,
                                            y: sheet.frame.minY * 0.08)
         sheet.healthLabel.position = CGPoint(x: sheet.frame.maxX * -0.037, y: sheet.frame.maxY * 0.3)
