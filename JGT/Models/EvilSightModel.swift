@@ -52,8 +52,8 @@ class EvilSight: SKSpriteNode {
     
     public func dispatchSight() {
         self.setScale(1.0)
-        self.alpha = 0.0
         self.position.x = UIScreen.main.bounds.width
+        self.alpha = 0.0
         self.currentRadius = 0.0
     }
 }

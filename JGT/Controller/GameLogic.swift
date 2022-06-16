@@ -86,14 +86,14 @@ a powerful and reckless fighter, now that i have this new kind of creature i can
                                                       """, screen: SKTexture(imageNamed: "Tutorial13")),
                                        TutorialButton(tutorialName: "Gumblins", tutorialDesc: """
  “Eating too many candies can make a goblin evolve into a Gumblin, they act just like normal goblin but their bodies are much more resistant to arrows and practically immune to lightning!”
- """, screen: SKTexture(imageNamed: "rockHead")),
+ """, screen: SKTexture(imageNamed: "Tutorial14")),
                                        TutorialButton(tutorialName: "Catapult", tutorialDesc: """
                                                       “The Catapult is a complex siege weapon for goblins, if they understand how to use it our enemies will have no hope of surviving!
                                                       They just need to understand that a normal goblin body is not the best siege ammunition.”
-                                                      """, screen: SKTexture(imageNamed: "Tutorial14")),
+                                                      """, screen: SKTexture(imageNamed: "Tutorial15")),
                                        TutorialButton(tutorialName: "Trap", tutorialDesc: """
                                                       “The gnomes have started building electric traps to stop our goblins, if they step on one the damage will be really hard for them to survive and the electricity will make them stop for a while, the traps need some time to recharge, we need to exploit that to make our army advance, at all costs!”
-                                                      """, screen: SKTexture(imageNamed: "Tutorial15"))
+                                                      """, screen: SKTexture(imageNamed: "Tutorial16"))
     ]
     
     // Function responsible to set up the game before it starts.

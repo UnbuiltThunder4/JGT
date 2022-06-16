@@ -185,7 +185,6 @@ class GoblinRow: SKSpriteNode, Identifiable, ObservableObject {
             break
         }
         
-        self.goblinFace.setScale(0.1)
         self.goblinFace.position.x = self.frame.minX + goblinFace.size.width
         
         self.goblinName.fontName = HUDSettings.nameFont
