@@ -226,7 +226,7 @@ class HUD: SKNode, ObservableObject {
         pauseScreen.continueMessage.fontSize = UIDevice.current.userInterfaceIdiom == .pad ?
         HUDSettings.tutorialNameFontSize : 35
         pauseScreen.continueMessage.fontName = HUDSettings.nameFont
-        pauseScreen.continueMessage.fontColor = HUDSettings.nameFontColor
+        pauseScreen.continueMessage.fontColor = .brown
         pauseScreen.continueMessage.text = "Continue"
         pauseScreen.continueMessage.position = CGPoint(x:-pauseScreen.pauseSign.size.width/3.3, y: pauseScreen.pauseSign.size.height/5.5)
         pauseScreen.continueMessage.zPosition = 5
@@ -234,7 +234,7 @@ class HUD: SKNode, ObservableObject {
         pauseScreen.exitMessage.fontSize = UIDevice.current.userInterfaceIdiom == .pad ?
         HUDSettings.tutorialNameFontSize : 35
         pauseScreen.exitMessage.fontName = HUDSettings.nameFont
-        pauseScreen.exitMessage.fontColor = HUDSettings.nameFontColor
+        pauseScreen.exitMessage.fontColor = .brown
         pauseScreen.exitMessage.text = "Level Selection"
         pauseScreen.exitMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/3.3, y: pauseScreen.pauseSign.size.height/5.5)
         pauseScreen.exitMessage.zPosition = 5
@@ -242,7 +242,7 @@ class HUD: SKNode, ObservableObject {
         pauseScreen.restartMessage.fontSize = UIDevice.current.userInterfaceIdiom == .pad ?
         HUDSettings.tutorialNameFontSize : 35
         pauseScreen.restartMessage.fontName = HUDSettings.nameFont
-        pauseScreen.restartMessage.fontColor = HUDSettings.nameFontColor
+        pauseScreen.restartMessage.fontColor = .brown
         pauseScreen.restartMessage.text = "Restart"
         pauseScreen.restartMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/10, y: pauseScreen.pauseSign.size.height/5.5)
         pauseScreen.restartMessage.zPosition = 5
@@ -250,7 +250,7 @@ class HUD: SKNode, ObservableObject {
         pauseScreen.tutorialMessage.fontSize = UIDevice.current.userInterfaceIdiom == .pad ?
         HUDSettings.tutorialNameFontSize : 35
         pauseScreen.tutorialMessage.fontName = HUDSettings.nameFont
-        pauseScreen.tutorialMessage.fontColor = HUDSettings.nameFontColor
+        pauseScreen.tutorialMessage.fontColor = .brown
         pauseScreen.tutorialMessage.text = "Tutorial"
         pauseScreen.tutorialMessage.position = CGPoint(x: -pauseScreen.pauseSign.size.width/10, y: pauseScreen.pauseSign.size.height/5.5)
         pauseScreen.tutorialMessage.zPosition = 5
@@ -293,9 +293,9 @@ class HUD: SKNode, ObservableObject {
         tutorialButton.zPosition = 20
         tutorialButton.position = position
         self.tutorialCounter.fontColor = .red
-        self.tutorialCounter.fontSize = 50
+        self.tutorialCounter.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? 50 : 40
         self.tutorialCounter.fontName = HUDSettings.nameFont
-        self.tutorialCounter.position = CGPoint(x: UIScreen.main.bounds.width/2.5, y: -UIScreen.main.bounds.height/2.8)
+        self.tutorialCounter.position = UIDevice.current.userInterfaceIdiom == .pad ? CGPoint(x: UIScreen.main.bounds.width/2.5, y: -UIScreen.main.bounds.height/2.8) : CGPoint(x: UIScreen.main.bounds.width/2.5, y: -UIScreen.main.bounds.height/3)
         self.tutorialCounter.alpha = 1.0
         
         addChild(tutorialButton)
