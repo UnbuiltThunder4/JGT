@@ -18,7 +18,7 @@ enum HUDSettings {
     static var statsFontSize: CGFloat = 15
     static var nameFontColor: UIColor = .orange
     static var descFontColor: UIColor = .brown
-    static var tutorialNameFontSize: CGFloat = 50
+    static var tutorialNameFontSize: CGFloat = 55
     static var tutorialCounterFontSize: CGFloat = ((UIDevice.current.userInterfaceIdiom == .pad) ? 50 : 25)
     static var tutorialDescFontSize: CGFloat = 40
 }
@@ -311,17 +311,20 @@ class HUD: SKNode, ObservableObject {
         tutorialSheet.backButton.zPosition = 20
         tutorialSheet.backButton.position = CGPoint(x: tutorialSheet.tutorialSign.frame.minX/1.3,
                                                     y: tutorialSheet.tutorialSign.frame.maxY/1.3)
-        tutorialSheet.backButton.size = CGSize(width: tutorialSheet.tutorialSign.frame.width/10, height: tutorialSheet.tutorialSign.frame.width/10)
+        tutorialSheet.backButton.size = UIDevice.current.userInterfaceIdiom == .pad ? CGSize(width: tutorialSheet.tutorialSign.frame.width/10, height: tutorialSheet.tutorialSign.frame.width/10) :
+        CGSize(width: tutorialSheet.tutorialSign.frame.width/17, height: tutorialSheet.tutorialSign.frame.width/17)
         
         tutorialSheet.rightTutorial.zPosition = 20
         tutorialSheet.rightTutorial.position = CGPoint(x: tutorialSheet.tutorialSign.frame.maxX/1.5,
                                                        y: tutorialSheet.tutorialSign.frame.minY/1.4)
-        tutorialSheet.rightTutorial.size = CGSize(width: tutorialSheet.tutorialSign.frame.width/10, height: tutorialSheet.tutorialSign.frame.width/10)
+        tutorialSheet.rightTutorial.size = UIDevice.current.userInterfaceIdiom == .pad ? CGSize(width: tutorialSheet.tutorialSign.frame.width/10, height: tutorialSheet.tutorialSign.frame.width/10) :
+        CGSize(width: tutorialSheet.tutorialSign.frame.width/17, height: tutorialSheet.tutorialSign.frame.width/17)
         
         tutorialSheet.leftTutorial.zPosition = 20
         tutorialSheet.leftTutorial.position = CGPoint(x: -tutorialSheet.tutorialSign.frame.maxX/1.5,
                                                        y: tutorialSheet.tutorialSign.frame.minY/1.4)
-        tutorialSheet.leftTutorial.size = CGSize(width: tutorialSheet.tutorialSign.frame.width/10, height: tutorialSheet.tutorialSign.frame.width/10)
+        tutorialSheet.leftTutorial.size = UIDevice.current.userInterfaceIdiom == .pad ? CGSize(width: tutorialSheet.tutorialSign.frame.width/10, height: tutorialSheet.tutorialSign.frame.width/10) :
+        CGSize(width: tutorialSheet.tutorialSign.frame.width/17, height: tutorialSheet.tutorialSign.frame.width/17)
         
         tutorialSheet.tutorialName.position = CGPoint(x: 0,
                                                       y: tutorialSheet.tutorialSign.frame.maxY * 0.75)
@@ -331,11 +334,15 @@ class HUD: SKNode, ObservableObject {
         tutorialSheet.tutorialCounterLabel.fontColor = .white
         tutorialSheet.tutorialCounterLabel.fontSize = HUDSettings.tutorialCounterFontSize
         tutorialSheet.tutorialCounterLabel.fontName = HUDSettings.nameFont
+        
+        tutorialSheet.tutorialName.verticalAlignmentMode = .center
         tutorialSheet.tutorialName.fontColor = .black
-        tutorialSheet.tutorialName.fontSize = HUDSettings.tutorialNameFontSize
+        tutorialSheet.tutorialName.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? HUDSettings.tutorialNameFontSize :
+        HUDSettings.tutorialNameFontSize - 20
         tutorialSheet.tutorialName.fontName = HUDSettings.nameFont
         tutorialSheet.tutorialDesc.fontColor = HUDSettings.descFontColor
-        tutorialSheet.tutorialDesc.fontSize = HUDSettings.tutorialDescFontSize - 2
+        tutorialSheet.tutorialDesc.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? HUDSettings.tutorialDescFontSize - 2 :
+        HUDSettings.tutorialDescFontSize - 21
         tutorialSheet.tutorialDesc.fontName = HUDSettings.descFont
         tutorialSheet.tutorialDesc.verticalAlignmentMode = .top
         tutorialSheet.tutorialDesc.preferredMaxLayoutWidth = tutorialSheet.tutorialSign.frame.width - tutorialSheet.tutorialSign.frame.width/2
@@ -343,13 +350,15 @@ class HUD: SKNode, ObservableObject {
         tutorialSheet.tutorialDesc.position = CGPoint(x: -tutorialSheet.frame.width/7.5,
                                                       y: tutorialSheet.frame.height/4.5)
         
-        tutorialSheet.darkLordEye.size = CGSize(width: tutorialSheet.tutorialSign.frame.width/6.5,
-                                                height: tutorialSheet.tutorialSign.frame.width/6.5)
+        tutorialSheet.darkLordEye.size = UIDevice.current.userInterfaceIdiom == .pad ? CGSize(width: tutorialSheet.tutorialSign.frame.width/6.5,
+                                                                                              height: tutorialSheet.tutorialSign.frame.width/6.5) : CGSize(width: tutorialSheet.tutorialSign.frame.width/10.5,
+                                                                                                                                                           height: tutorialSheet.tutorialSign.frame.width/10.5)
+        
         tutorialSheet.darkLordEye.position = CGPoint(x: 0,
                                                        y: tutorialSheet.tutorialSign.frame.minY/1.4)
         tutorialSheet.tutorialCounterLabel.position = tutorialSheet.darkLordEye.position
-        tutorialSheet.screen.size = CGSize(width: tutorialSheet.tutorialSign.frame.width/3.7,
-                                           height: tutorialSheet.tutorialSign.frame.height/3.2)
+        tutorialSheet.screen.size = UIDevice.current.userInterfaceIdiom == .pad ? CGSize(width: tutorialSheet.tutorialSign.frame.width/3.7,
+                                                                                         height: tutorialSheet.tutorialSign.frame.height/3.2) : CGSize(width: tutorialSheet.tutorialSign.frame.width/4.7,                  height: tutorialSheet.tutorialSign.frame.height/2.3)
         tutorialSheet.screen.position.x = tutorialSheet.tutorialSign.frame.maxX/2.0
         addChild(tutorialSheet)
     }
