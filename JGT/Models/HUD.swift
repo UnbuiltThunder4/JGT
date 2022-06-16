@@ -13,6 +13,7 @@ enum HUDSettings {
     static var sheetSize = CGSize()
     static var descFont = "Chalk-Regular"
     static var nameFont = "Nightmare"
+    static var statsFont = "CrayonHandRegular2016Demo"
     static var nameFontSize: CGFloat = 40
     static var descFontSize: CGFloat = 25
     static var statsFontSize: CGFloat = 15
@@ -89,13 +90,13 @@ class HUD: SKNode, ObservableObject {
     func addSheet(sheet: Sheet, position: CGPoint) {
         switch UIDevice.current.userInterfaceIdiom {
         case .phone:
-            HUDSettings.sheetSize = CGSize(width: UIScreen.main.bounds.width/2.9, height: UIScreen.main.bounds.height/1.1)
+            HUDSettings.sheetSize = CGSize(width: UIScreen.main.bounds.width/2.9, height: UIScreen.main.bounds.height/1.3)
             HUDSettings.nameFontSize = 25
             HUDSettings.descFontSize = 15
             HUDSettings.statsFontSize = 8
             break
         case .pad:
-            HUDSettings.sheetSize = CGSize(width: UIScreen.main.bounds.width/2.6, height: UIScreen.main.bounds.height/1.5)
+            HUDSettings.sheetSize = CGSize(width: UIScreen.main.bounds.width/2.7, height: UIScreen.main.bounds.height/1.6)
             HUDSettings.nameFontSize = 35
             HUDSettings.descFontSize = 25
             HUDSettings.statsFontSize = 15
@@ -113,13 +114,12 @@ class HUD: SKNode, ObservableObject {
         sheet.nameLabel.fontName = HUDSettings.nameFont
         sheet.descLabel.fontName = HUDSettings.descFont
         
-        sheet.healthLabel.fontName = HUDSettings.descFont
-        sheet.attackLabel.fontName = HUDSettings.descFont
-        sheet.fearLabel.fontName = HUDSettings.descFont
-        sheet.ageLabel.fontName = HUDSettings.descFont
-        sheet.witLabel.fontName = HUDSettings.descFont
-        sheet.frenzyLabel.fontName = HUDSettings.descFont
-
+        sheet.healthLabel.fontName = HUDSettings.statsFont
+        sheet.attackLabel.fontName = HUDSettings.statsFont
+        sheet.fearLabel.fontName = HUDSettings.statsFont
+        sheet.ageLabel.fontName = HUDSettings.statsFont
+        sheet.witLabel.fontName = HUDSettings.statsFont
+        sheet.frenzyLabel.fontName = HUDSettings.statsFont
         
         sheet.nameLabel.fontSize = HUDSettings.nameFontSize
         sheet.descLabel.fontSize = HUDSettings.descFontSize
@@ -235,7 +235,7 @@ class HUD: SKNode, ObservableObject {
         HUDSettings.tutorialNameFontSize : 35
         pauseScreen.exitMessage.fontName = HUDSettings.nameFont
         pauseScreen.exitMessage.fontColor = .brown
-        pauseScreen.exitMessage.text = "Level Selection"
+        pauseScreen.exitMessage.text = "Levels"
         pauseScreen.exitMessage.position = CGPoint(x: pauseScreen.pauseSign.size.width/3.3, y: pauseScreen.pauseSign.size.height/5.5)
         pauseScreen.exitMessage.zPosition = 5
 

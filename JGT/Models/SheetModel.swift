@@ -61,6 +61,7 @@ class Sheet: SKSpriteNode {
         
         self.healthLabel.alpha = 1.0
         self.attackLabel.alpha = 1.0
+        self.typeLabel.alpha = 1.0
         self.fearLabel.alpha = 1.0
         self.ageLabel.alpha = 1.0
         self.witLabel.alpha = 1.0
@@ -80,6 +81,24 @@ class Sheet: SKSpriteNode {
             typeLabel.texture = SKTexture(imageNamed: "gumHead")
             break
         }
+        
+        self.texture = SKTexture(imageNamed: "sheet")
+        self.size = HUDSettings.sheetSize
+        
+        self.nameLabel.position = CGPoint(x: self.frame.maxX * -0.08,
+                                           y: self.frame.maxY * 0.55)
+        self.typeLabel.position = CGPoint(x: ((UIDevice.current.userInterfaceIdiom == .pad) ? self.frame.maxX * -0.233 : self.frame.maxX * -0.22),
+                                           y: self.frame.maxY * 0.40)
+        self.descLabel.position = CGPoint(x: 0,
+                                           y: self.frame.minY * 0.08)
+        self.healthLabel.position = CGPoint(x: self.frame.maxX * -0.037, y: self.frame.maxY * 0.3)
+        self.attackLabel.position = CGPoint(x: self.frame.maxX * 0.1, y: self.frame.maxY * 0.3)
+        self.fearLabel.position = CGPoint(x: self.frame.maxX * 0.23, y: self.frame.maxY * 0.3)
+        self.ageLabel.position = CGPoint(x: self.frame.maxX * -0.037, y: self.frame.maxY * 0.18)
+        self.witLabel.position = CGPoint(x: self.frame.maxX * 0.1, y: self.frame.maxY * 0.18)
+        self.frenzyLabel.position = CGPoint(x: self.frame.maxX * 0.23, y: self.frame.maxY * 0.18)
+        
+        self.nameLabel.fontColor = HUDSettings.nameFontColor
         
         nameLabel.text = goblin.fullName
         descLabel.text = goblin.backstory
@@ -105,6 +124,7 @@ class Sheet: SKSpriteNode {
         self.descLabel.text = enemy.desc
 
         self.texture = SKTexture(imageNamed: "structure sheet wide")
+        self.size = UIDevice.current.userInterfaceIdiom == .phone ? CGSize(width: UIScreen.main.bounds.width/2.7, height: UIScreen.main.bounds.height/1.6) : CGSize(width: UIScreen.main.bounds.width/2.5, height: UIScreen.main.bounds.height/1.8)
         
         self.nameLabel.verticalAlignmentMode = .center
         self.descLabel.verticalAlignmentMode = .top
@@ -130,6 +150,7 @@ class Sheet: SKSpriteNode {
         self.typeLabel.texture = SKTexture(imageNamed: "dark-son-lives")
         
         self.texture = SKTexture(imageNamed: "structure sheet wide")
+        self.size = UIDevice.current.userInterfaceIdiom == .phone ? CGSize(width: UIScreen.main.bounds.width/2.7, height: UIScreen.main.bounds.height/1.6) : CGSize(width: UIScreen.main.bounds.width/2.5, height: UIScreen.main.bounds.height/1.8)
         
         self.nameLabel.verticalAlignmentMode = .center
         self.descLabel.verticalAlignmentMode = .top
