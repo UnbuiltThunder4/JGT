@@ -425,6 +425,8 @@ class Gate: Structure {
                 break
             case 0:
                 self.texture = SKTexture(imageNamed: "gate_break_4")
+                gameLogic.finishTheGame(tossScene)
+                gameLogic.youWin = true
                 break
             default:
                 break

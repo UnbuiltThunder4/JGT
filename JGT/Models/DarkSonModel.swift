@@ -18,7 +18,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     public var lives: Int = 10
     public let maxHealth: Int = 500
     public var health: Int = 500
-    public let attack: Int = 10
+    public let attack: Int = 200
     public let desc: String = "“It’s my stupid and spoiled son, he’s strong as much as he’s stupid but I need to help him to become my successor”"
     
     public var target: Gate?  = nil
@@ -34,7 +34,7 @@ class DarkSon: SKSpriteNode, Identifiable, ObservableObject {
     init() {
         super.init(texture: SKTexture(imageNamed: "darkson"), color: .red, size: CGSize(width: 233, height: 333))
         self.name = "darkson"
-        self.speed = 6.0
+        self.speed = 36.0
         
         self.zPosition = 1
         

@@ -10,7 +10,7 @@ import SwiftUI
 struct GameOverView: View {
     @ObservedObject var gameLogic: GameLogic = GameLogic.shared
     
-    @State var gameOverString: String = "Game Over"
+//    @State var gameOverString: String = "Game Over"
     
     var body: some View {
         ZStack {
@@ -39,7 +39,7 @@ struct GameOverView: View {
             VStack(alignment: .center) {
                 Spacer(minLength: 15)
                 
-                Text("\(gameOverString)")
+                Text("\((gameLogic.youWin == true) ? "Dark Son Win" : "Game Over")")
                     .font(.custom("Nightmare", size: (UIDevice.current.userInterfaceIdiom == .pad ? 170 : 90)))
                     .foregroundColor(.green)
                     .padding()
@@ -80,7 +80,7 @@ struct GameOverView: View {
                     }
                     .padding(.horizontal)
                     
-                    if (self.gameOverString == "You Win!") {
+                    if (gameLogic.youWin) {
                         Button {
                             withAnimation {
                                 if gameLogic.level < 3 {
