@@ -213,55 +213,51 @@ let gnomes2: [Enemy] = [
 ]
 
 let gnomes3: [Enemy] = [
-    Enemy(type: .small, x: 1672, y: 2850), //village
-    Enemy(type: .small, x: 1672, y: 1850),
-    Enemy(type: .small, x: 1972, y: 2100),
-    Enemy(type: .small, x: 1372, y: 2600),
-    Enemy(type: .axe, x: 1552, y: 2850),
-    Enemy(type: .axe, x: 1792, y: 2850),
-    Enemy(type: .axe, x: 1552, y: 2100),
-    Enemy(type: .axe, x: 1792, y: 2100),
-    Enemy(type: .axe, x: 1972, y: 2600),
-    Enemy(type: .axe, x: 1372, y: 2100),
+    Enemy(type: .small, x: 1872, y: 2650), //village top
+    Enemy(type: .small, x: 1872, y: 2300), //village bottom
     
-    Enemy(type: .axe, x: 650, y: 1900), //alone
-    Enemy(type: .small, x: 800, y: 1700),
-
+    Enemy(type: .small, x: 2172, y: 2400), //village sides
+    Enemy(type: .small, x: 1572, y: 2500),
+    Enemy(type: .axe, x: 2172, y: 2500),
+    Enemy(type: .axe, x: 1572, y: 2400),
     
-    Enemy(type: .bow, x: 800, y: 4200), //gate
-    Enemy(type: .axe, x: 600, y: 3500),
+    Enemy(type: .axe, x: 1752, y: 2450), //village top
+    Enemy(type: .axe, x: 1992, y: 2450),
+    Enemy(type: .axe, x: 1752, y: 2250), //village bottom
+    Enemy(type: .axe, x: 1992, y: 2250),
+    
+    Enemy(type: .axe, x: 1150, y: 2300), //alone
+    Enemy(type: .small, x: 1250, y: 2100),
+    
+    Enemy(type: .bow, x: 600, y: 4200), //gate
+    Enemy(type: .axe, x: 450, y: 3500),
+    Enemy(type: .axe, x: 1100, y: 3500),
     Enemy(type: .axe, x: 1300, y: 3500),
-    Enemy(type: .axe, x: 1400, y: 3500),
+    Enemy(type: .axe, x: 550, y: 3300),
     Enemy(type: .axe, x: 700, y: 3300),
-    Enemy(type: .axe, x: 900, y: 3300),
-    Enemy(type: .axe, x: 1350, y: 3300),
-    Enemy(type: .axe, x: 1100, y: 3200),
-    Enemy(type: .small, x: 600, y: 3100),
-    Enemy(type: .small, x: 800, y: 3100),
-    Enemy(type: .small, x: 1000, y: 3100),
+    Enemy(type: .axe, x: 1150, y: 3300),
+    Enemy(type: .axe, x: 900, y: 3200),
+    Enemy(type: .small, x: 500, y: 2900),
+    Enemy(type: .small, x: 650, y: 2900),
+    Enemy(type: .small, x: 850, y: 2900),
     
-    Enemy(type: .small, x: 1550, y: 3100), //above
-    Enemy(type: .small, x: 1750, y: 3300),
-    Enemy(type: .small, x: 1350, y: 3300),
+    Enemy(type: .small, x: 1800, y: 3100), //above
+    Enemy(type: .small, x: 2000, y: 3300),
+    Enemy(type: .small, x: 1600, y: 3300),
     
-    Enemy(type: .small, x: 600, y: 1650), //right center
-    Enemy(type: .small, x: 800, y: 1850),
+    Enemy(type: .small, x: 500, y: 1950), //left center
+    Enemy(type: .small, x: 700, y: 2150),
     
-    Enemy(type: .small, x: 1800, y: 1250), //center
-    Enemy(type: .small, x: 1600, y: 1550),
-    Enemy(type: .small, x: 1300, y: 1050),
-    Enemy(type: .small, x: 1100, y: 1350),
+    Enemy(type: .small, x: 2400, y: 1550), //center
+    Enemy(type: .small, x: 2100, y: 1250),
+    Enemy(type: .small, x: 1600, y: 1350),
+    Enemy(type: .small, x: 1400, y: 1050),
     
-    Enemy(type: .small, x: 2400, y: 850), //above tavern
-    Enemy(type: .small, x: 2200, y: 1050),
-    Enemy(type: .small, x: 1700, y: 850),
-    Enemy(type: .small, x: 1500, y: 1050),
+    Enemy(type: .small, x: 2600, y: 950), //tavern
+    Enemy(type: .axe, x: 2450, y: 750),
     
-    Enemy(type: .small, x: 2700, y: 1050), //tavern
-    Enemy(type: .axe, x: 2500, y: 850),
-    
-    Enemy(type: .small, x: 1100, y: 1820), //right center
-    Enemy(type: .small, x: 1400, y: 1680),
+    Enemy(type: .small, x: 1560, y: 220), //right center
+    Enemy(type: .small, x: 1760, y: 380),
     
     Enemy(type: .small, x: 600, y: 650), //academy
     Enemy(type: .small, x: 1100, y: 650),
@@ -275,8 +271,7 @@ let gnomes3: [Enemy] = [
     Enemy(type: .small, x: 1000, y: 350),
     
     Enemy(type: .axe, x: 2700, y: 3100), //backdoor
-    Enemy(type: .axe, x: 2900, y: 3100),
-    
+    Enemy(type: .axe, x: 2900, y: 3100)
 ]
 
 public enum ProficencyType {
@@ -321,7 +316,7 @@ let passageCoordinates2 = CGPoint(x: 500, y: 4100)
 let goblinmancyCircleCoordinates3 = CGPoint(x: 2950, y: 400)
 let tavernCoordinates3 = CGPoint(x: 2950, y: 1350)
 let academyCoordinates3 = CGPoint(x: 850, y: 550)
-let villageCoordinates3 = CGPoint(x: 1672, y: 2350)
+let villageCoordinates3 = CGPoint(x: 1872, y: 2350)
 let catapultCoordinates3 = CGPoint(x: 850, y: 2750)
 let gateCoordinates3 = CGPoint(x: 600, y: 3750)
 let backdoorCoordinates3 = CGPoint(x: 2700, y: 3635)
@@ -540,23 +535,25 @@ let levelstructures3: [Structure] = [
     Structure(type: .passage, x: passageCoordinates3.x, y: passageCoordinates3.y, rotation: 0),
     Structure(type: .goblincircle, x: goblinmancyCircleCoordinates3.x, y: goblinmancyCircleCoordinates3.y, rotation: 0),
     
-    Structure(type: .tree, x: 350, y: 1350, rotation: 0),
-    Structure(type: .tree, x: 1950, y: 800, rotation: 0),
-    Structure(type: .tree, x: 600, y: 750, rotation: 0),
-    Structure(type: .tree, x: 1850, y: 500, rotation: 0),
-    Structure(type: .tree, x: 2650, y: 370, rotation: 0),
-    Structure(type: .tree, x: 650, y: 3000, rotation: 0),
-    Structure(type: .tree, x: 1250, y: 1700, rotation: 0),
-    Structure(type: .tree, x: 550, y: 1580, rotation: 0),
-    Structure(type: .tree, x: 750, y: 400, rotation: 0),
-    Structure(type: .rock, x: 2100, y: 700, rotation: 0),
-    Structure(type: .rock, x: 650, y: 1450, rotation: 0),
-    Structure(type: .rock, x: 1950, y: 1350, rotation: 0),
-    Structure(type: .rock, x: 1400, y: 350, rotation: 0),
-    Structure(type: .rock, x: 1300, y: 2660, rotation: 0),
-    Structure(type: .rock, x: 1150, y: 2080, rotation: 0),
-    Structure(type: .rock, x: 1890, y: 1720, rotation: 0),
-    Structure(type: .rock, x: 2690, y: 2620, rotation: 0)
+    Structure(type: .tree, x: 1550, y: 550, rotation: 0),
+    Structure(type: .tree, x: 1750, y: 550, rotation: 0),
+    Structure(type: .tree, x: 1550, y: 350, rotation: 0),
+    Structure(type: .tree, x: 1350, y: 350, rotation: 0),
+    
+    Structure(type: .rock, x: 1450, y: 1400, rotation: 0),
+    Structure(type: .rock, x: 1660, y: 1600, rotation: 0),
+    
+    Structure(type: .rock, x: 2490, y: 1500, rotation: 0),
+    Structure(type: .rock, x: 2660, y: 1700, rotation: 0),
+    
+    Structure(type: .tree, x: 600, y: 2200, rotation: 0), //left center
+    Structure(type: .tree, x: 500, y: 2100, rotation: 0),
+    Structure(type: .tree, x: 700, y: 1950, rotation: 0),
+    Structure(type: .rock, x: 800, y: 2050, rotation: 0),
+    Structure(type: .rock, x: 600, y: 1700, rotation: 0)
+    
+//    Enemy(type: .small, x: 500, y: 1950), //left center
+//    Enemy(type: .small, x: 700, y: 2150),
 ]
 
 public enum ProjectileType {
