@@ -185,17 +185,18 @@ class GoblinRow: SKSpriteNode, Identifiable, ObservableObject {
             break
         }
         
-        self.goblinFace.position.x = self.frame.minX + goblinFace.size.width
+        self.goblinFace.position.x = -self.size.width/2.5
+        self.goblinFace.size = CGSize(width: self.size.width/7, height: self.size.height/1.5)
         
         self.goblinName.fontName = HUDSettings.nameFont
-        self.goblinName.fontSize = HUDSettings.nameFontSize
+        self.goblinName.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? HUDSettings.nameFontSize : HUDSettings.nameFontSize - 5
         self.goblinName.fontColor = HUDSettings.nameFontColor
         self.goblinName.position = CGPoint(x: self.frame.minX + goblinName.frame.width, y: self.frame.midY)
         self.goblinName.verticalAlignmentMode = .center
         self.goblinName.horizontalAlignmentMode = .center
         
         self.goblinStats.fontName = HUDSettings.nameFont
-        self.goblinStats.fontSize = HUDSettings.statsFontSize
+        self.goblinStats.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? HUDSettings.nameFontSize : HUDSettings.statsFontSize + 5
         self.goblinStats.fontColor = HUDSettings.descFontColor
         self.goblinStats.position = CGPoint(x: self.frame.maxX - goblinStats.frame.width, y: self.frame.midY)
         self.goblinStats.verticalAlignmentMode = .center
