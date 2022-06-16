@@ -44,6 +44,8 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
     public let maskmodX: CGFloat
     public let maskmodY: CGFloat
     
+    public var projectile: Projectile? = nil
+    
     private var canRecoverShield: Bool = true
     
     private var attackCounter: Int = 0
@@ -126,6 +128,10 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
         if (self.health > 0) {
             
             self.shouldFlip()
+            
+            if (self.projectile != nil) {
+                self.projectile!.update()
+            }
             
             switch self.state {
                 
@@ -360,7 +366,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                         self.attackCounter += 1
                         if (self.attackCounter % attackTime == 0) {
                             self.attackCounter = 0
-                            gameLogic.spawnProjectile(tossScene, spawnPoint: self.position, destinationPoint: self.target!.position, type: .arrow)
+                            self.projectile = gameLogic.spawnProjectile(tossScene, spawnPoint: self.position, destinationPoint: self.target!.position, type: .arrow)
                         }
                         if (self.target != nil) {
                             if (self.target!.health <= 0) {
@@ -497,7 +503,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                         self.attackCounter += 1
                         if (self.attackCounter % attackTime == 0) {
                             self.attackCounter = 0
-                            gameLogic.spawnProjectile(tossScene, spawnPoint: self.position, destinationPoint: self.darkTarget!.position, type: .arrow)
+                            self.projectile = gameLogic.spawnProjectile(tossScene, spawnPoint: self.position, destinationPoint: self.darkTarget!.position, type: .arrow)
                         }
                         if (self.darkTarget != nil) {
                             if (self.darkTarget!.health <= 0) {
