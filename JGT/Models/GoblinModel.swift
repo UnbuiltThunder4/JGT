@@ -346,7 +346,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 else {
                     if let _ = self.action(forKey: "walk") {
                         self.stuckCounter += 1
-                        if (self.stuckCounter % fiveSeconds == 0) {
+                        if (self.stuckCounter % fiveSeconds == 0 && closeStructure?.type != .wall && closeStructure?.type != .passage) {
                             self.stuckCounter = 0
                             self.destination = CGPoint(
                                 x: Double.random(in: 60...MainScreenProperties.bgwidth - 60),
@@ -1026,10 +1026,23 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 if (self.climbCounter % self.goblinTaskTime == 0) {
                     self.climbCounter = 0
                     self.position.x += abs(self.position.x - passageCoordinates.x) + 50
-                    self.position.y += abs(self.position.y - passageCoordinates.y) + 25
+                    self.position.y += abs(self.position.y - passageCoordinates.y) + 35
+                    
+                    if (passageCoordinates.x - gateCoordinates.x) < 0 {
+                        self.position.x += 150.0
+                        self.position.y += 100
+                        self.destination = CGPoint(x: self.position.x + 4050, y: self.position.y + 100)
+                    } else {
+                        self.position.x -= 150.0
+                        self.position.y += 100
+                        self.destination = CGPoint(x: self.position.x - 4050, y: self.position.y + 100)
+                    }
+                    
+                    
                     self.state = .idle
                     self.alpha = 1.0
                     gameLogic.removeAnimation(goblin: self)
+                    
                 }
             }
             else {
