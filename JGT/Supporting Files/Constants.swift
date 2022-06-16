@@ -213,7 +213,7 @@ let gnomes2: [Enemy] = [
 ]
 
 let gnomes3: [Enemy] = [
-    Enemy(type: .small, x: 1872, y: 2650), //village top
+    Enemy(type: .small, x: 1872, y: 2800), //village top
     Enemy(type: .small, x: 1872, y: 2300), //village bottom
     
     Enemy(type: .small, x: 2172, y: 2400), //village sides
@@ -221,8 +221,8 @@ let gnomes3: [Enemy] = [
     Enemy(type: .axe, x: 2172, y: 2500),
     Enemy(type: .axe, x: 1572, y: 2400),
     
-    Enemy(type: .axe, x: 1752, y: 2450), //village top
-    Enemy(type: .axe, x: 1992, y: 2450),
+    Enemy(type: .axe, x: 1752, y: 2600), //village top
+    Enemy(type: .axe, x: 1992, y: 2600),
     Enemy(type: .axe, x: 1752, y: 2250), //village bottom
     Enemy(type: .axe, x: 1992, y: 2250),
     
@@ -241,9 +241,9 @@ let gnomes3: [Enemy] = [
     Enemy(type: .small, x: 650, y: 2900),
     Enemy(type: .small, x: 850, y: 2900),
     
-    Enemy(type: .small, x: 1800, y: 3100), //above
-    Enemy(type: .small, x: 2000, y: 3300),
-    Enemy(type: .small, x: 1600, y: 3300),
+    Enemy(type: .small, x: 2800, y: 3100), //above left
+    Enemy(type: .small, x: 3000, y: 3300),
+    Enemy(type: .small, x: 2600, y: 3300),
     
     Enemy(type: .small, x: 500, y: 1950), //left center
     Enemy(type: .small, x: 700, y: 2150),
@@ -270,8 +270,8 @@ let gnomes3: [Enemy] = [
     Enemy(type: .small, x: 700, y: 350),
     Enemy(type: .small, x: 1000, y: 350),
     
-    Enemy(type: .axe, x: 2700, y: 3100), //backdoor
-    Enemy(type: .axe, x: 2900, y: 3100)
+    Enemy(type: .axe, x: 1900, y: 3100), //backdoor
+    Enemy(type: .axe, x: 2100, y: 3100)
 ]
 
 public enum ProficencyType {
@@ -319,8 +319,8 @@ let academyCoordinates3 = CGPoint(x: 850, y: 550)
 let villageCoordinates3 = CGPoint(x: 1872, y: 2350)
 let catapultCoordinates3 = CGPoint(x: 850, y: 2750)
 let gateCoordinates3 = CGPoint(x: 600, y: 3750)
-let backdoorCoordinates3 = CGPoint(x: 2700, y: 3635)
-let passageCoordinates3 = CGPoint(x: 2700, y: 4100)
+let backdoorCoordinates3 = CGPoint(x: 2000, y: 3635)
+let passageCoordinates3 = CGPoint(x: 2000, y: 4100)
 
 var goblinmancyCircleCoordinates = CGPoint()
 var tavernCoordinates = CGPoint()
@@ -504,12 +504,12 @@ let levelstructures3: [Structure] = [
     Backdoor(x: backdoorCoordinates3.x, y: backdoorCoordinates3.y),  // THIS HAS TO BE ON INDEX 2
     Catapult(x: catapultCoordinates3.x, y: catapultCoordinates3.y), // THIS HAS TO BE ON INDEX 3
     
-    Trap(x: 2700, y: 3500),  // THIS HAS TO BE ON INDEX 4
-    Trap(x: 2500, y: 3500),  // THIS HAS TO BE ON INDEX 4
-    Trap(x: 2900, y: 3500),  // THIS HAS TO BE ON INDEX 4
-    Trap(x: 2700, y: 3300),  // THIS HAS TO BE ON INDEX 4
-    Trap(x: 2500, y: 3300),  // THIS HAS TO BE ON INDEX 4
-    Trap(x: 2900, y: 3300),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 2000, y: 3500),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 1800, y: 3500),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 2200, y: 3500),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 2000, y: 3300),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 1800, y: 3300),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 2200, y: 3300),  // THIS HAS TO BE ON INDEX 4
     
     Trap(x: 600, y: 3500),  // THIS HAS TO BE ON INDEX 4
     Trap(x: 400, y: 3500),  // THIS HAS TO BE ON INDEX 4
@@ -531,9 +531,25 @@ let levelstructures3: [Structure] = [
     
     Tavern(x: tavernCoordinates3.x, y: tavernCoordinates3.y),
     Academy(x: academyCoordinates3.x, y: academyCoordinates3.y),
-    Village(x: villageCoordinates3.x, y: villageCoordinates3.y),
     Structure(type: .passage, x: passageCoordinates3.x, y: passageCoordinates3.y, rotation: 0),
     Structure(type: .goblincircle, x: goblinmancyCircleCoordinates3.x, y: goblinmancyCircleCoordinates3.y, rotation: 0),
+    
+//    let villageCoordinates3 = CGPoint(x: 1872, y: 2350)
+    
+    Structure(type: .tree, x: 1672, y: 2550, rotation: 0),
+    Structure(type: .tree, x: 1772, y: 2550, rotation: 0),
+    Structure(type: .tree, x: 1972, y: 2550, rotation: 0),
+    Structure(type: .tree, x: 1872, y: 2550, rotation: 0),
+    Structure(type: .tree, x: 2072, y: 2550, rotation: 0),
+    Village(x: villageCoordinates3.x, y: villageCoordinates3.y),
+    Structure(type: .tree, x: 1672, y: 2350, rotation: 0),
+    Structure(type: .tree, x: 2072, y: 2350, rotation: 0),
+    Structure(type: .tree, x: 1672, y: 2200, rotation: 0),
+    Structure(type: .tree, x: 2072, y: 2200, rotation: 0),
+    Structure(type: .tree, x: 1772, y: 2200, rotation: 0),
+    Structure(type: .tree, x: 1972, y: 2200, rotation: 0),
+    Structure(type: .tree, x: 1872, y: 2200, rotation: 0),
+    
     
     Structure(type: .tree, x: 1550, y: 550, rotation: 0),
     Structure(type: .tree, x: 1750, y: 550, rotation: 0),
