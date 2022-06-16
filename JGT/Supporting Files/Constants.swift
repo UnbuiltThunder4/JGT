@@ -544,7 +544,16 @@ let levelstructures3: [Structure] = [
     Structure(type: .rock, x: 1660, y: 1600, rotation: 0),
     
     Structure(type: .rock, x: 2490, y: 1500, rotation: 0),
-    Structure(type: .rock, x: 2660, y: 1700, rotation: 0)
+    Structure(type: .rock, x: 2660, y: 1700, rotation: 0),
+    
+    Structure(type: .tree, x: 600, y: 2200, rotation: 0), //left center
+    Structure(type: .tree, x: 500, y: 2100, rotation: 0),
+    Structure(type: .tree, x: 700, y: 1950, rotation: 0),
+    Structure(type: .rock, x: 800, y: 2050, rotation: 0),
+    Structure(type: .rock, x: 600, y: 1700, rotation: 0)
+    
+//    Enemy(type: .small, x: 500, y: 1950), //left center
+//    Enemy(type: .small, x: 700, y: 2150),
 ]
 
 public enum ProjectileType {
