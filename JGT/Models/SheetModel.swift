@@ -120,7 +120,7 @@ class Sheet: SKSpriteNode {
         self.frenzyLabel.alpha = 0.0
         self.typeLabel.alpha = 0.0
         self.nameLabel.text = enemy.fullName
-        self.nameLabel.fontColor = .white
+        self.nameLabel.fontColor = .black
         self.descLabel.text = enemy.desc
 
         self.texture = SKTexture(imageNamed: "structure sheet wide")
@@ -145,7 +145,7 @@ class Sheet: SKSpriteNode {
         self.frenzyLabel.alpha = 0.0
         self.typeLabel.alpha = 0.0
         self.nameLabel.text = "Dark Son"
-        self.nameLabel.fontColor = .white
+        self.nameLabel.fontColor = .black
         self.descLabel.text = darkSon.desc
         self.typeLabel.texture = SKTexture(imageNamed: "dark-son-lives")
         
