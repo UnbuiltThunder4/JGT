@@ -619,7 +619,7 @@ extension TossScene {
             ZoomProperties.initialScale = 2
             ZoomProperties.maximumZoom = 3
             ZoomProperties.minimumZoom = 1.5
-            ZoomProperties.cameraOffsetx = 100.0
+            ZoomProperties.cameraOffsetx = 200.0
             ZoomProperties.cameraOffsety = 70.0
             ZoomProperties.initialOffsetx = 220.0
             ZoomProperties.initialOffsety = 120.0
