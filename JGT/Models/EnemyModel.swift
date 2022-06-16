@@ -242,6 +242,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                             self.attackCounter = 0
                             let attackParticle = SKEmitterNode(fileNamed: "AttackParticle")
                             attackParticle!.position = CGPoint(x: 0, y: 0)
+                            attackParticle!.xScale = self.xScale
                             attackParticle!.name = "attackParticle"
                             let addParticle = SKAction.run({
                                 self.addChild(attackParticle!)
@@ -397,6 +398,7 @@ class Enemy: SKSpriteNode, Identifiable, ObservableObject {
                             self.attackCounter = 0
                             let attackParticle = SKEmitterNode(fileNamed: "AttackParticle")
                             attackParticle!.position = CGPoint(x: 0, y: 0)
+                            attackParticle!.xScale = self.xScale
                             attackParticle!.name = "attackParticle"
                             let addParticle = SKAction.run({
                                 self.addChild(attackParticle!)
