@@ -49,6 +49,7 @@ class TutorialSheet: SKSpriteNode, ObservableObject {
         self.addChild(screen)
         self.screen.name = "screen"
         self.addChild(darkLordEye)
+        self.darkLordEye.alpha = 0.5
         self.darkLordEye.name = "darkLordEye"
     }
     
