@@ -163,27 +163,13 @@ let gnomes1: [Enemy] = [
 ]
 
 let gnomes2: [Enemy] = [
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .small, x: 800, y: 2300),
+    Enemy(type: .small, x: 3180, y: 1400), //academy
+    Enemy(type: .small, x: 2630, y: 1400),
+    Enemy(type: .small, x: 3180, y: 1100),
+    Enemy(type: .small, x: 2630, y: 1100),
+    
+    Enemy(type: .small, x: 2900, y: 600), //below academy
+    Enemy(type: .small, x: 2630, y: 300),
     
     Enemy(type: .bow, x: 2600, y: 4200), //gate
     Enemy(type: .bow, x: 2800, y: 4200),
@@ -199,6 +185,22 @@ let gnomes2: [Enemy] = [
     Enemy(type: .axe, x: 600, y: 3600),
     Enemy(type: .axe, x: 500, y: 3300),
     
+    Enemy(type: .small, x: 620, y: 2600), //below backdoor
+    Enemy(type: .small, x: 900, y: 2320),
+    
+    Enemy(type: .small, x: 600, y: 1550), //below below backdoor
+    Enemy(type: .small, x: 420, y: 1320),
+    
+    Enemy(type: .small, x: 800, y: 1100), //path
+    Enemy(type: .small, x: 1200, y: 1100),
+    
+    Enemy(type: .small, x: 1650, y: 2450),
+    Enemy(type: .small, x: 1650, y: 2000),
+    
+    Enemy(type: .small, x: 2410, y: 1960),
+    
+    Enemy(type: .small, x: 2700, y: 2350),
+    
     Enemy(type: .small, x: 1600, y: 3600), //catapult
     Enemy(type: .small, x: 1800, y: 3600),
     Enemy(type: .axe, x: 1500, y: 3600),
@@ -207,14 +209,6 @@ let gnomes2: [Enemy] = [
     Enemy(type: .axe, x: 1850, y: 3300),
     Enemy(type: .small, x: 1600, y: 3100),
     Enemy(type: .small, x: 1800, y: 3100),
-    
-    Enemy(type: .axe, x: 2500, y: 1450),
-    Enemy(type: .axe, x: 1350, y: 2800),
-    Enemy(type: .axe, x: 2500, y: 1450),
-    Enemy(type: .axe, x: 1350, y: 2800),
-    Enemy(type: .axe, x: 2500, y: 1450),
-    Enemy(type: .axe, x: 1350, y: 2800),
-    Enemy(type: .axe, x: 2500, y: 1450)
 ]
 
 let gnomes3: [Enemy] = [
