@@ -605,7 +605,7 @@ extension TossScene {
         pauseScreen.zPosition = 300
         hud.addPauseButton(pauseButton: pauseButton, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/10, y: cameraNode.position.y - pauseButton.size.height*1.1))
         hud.addTutorialSheet(tutorialSheet: tutorialSheet, position: CGPoint(x: cameraNode.position.x - UIScreen.main.bounds.width/2, y: cameraNode.position.y - UIScreen.main.bounds.height/2))
-        hud.addDarkSonLives(position: CGPoint(x: -(cameraNode.position.x - UIScreen.main.bounds.width/10), y: cameraNode.position.y - pauseButton.size.height*1.1))
+        hud.addDarkSonLives(position: ((UIDevice.current.userInterfaceIdiom == .pad) ? CGPoint(x: -(cameraNode.position.x - UIScreen.main.bounds.width/10), y: cameraNode.position.y - pauseButton.size.height*1.1) : CGPoint(x: -(cameraNode.position.x - UIScreen.main.bounds.width/14.5), y: cameraNode.position.y - pauseButton.size.height/1.5)))
     }
     
     func setupCamera() {
