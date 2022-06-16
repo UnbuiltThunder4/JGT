@@ -261,7 +261,7 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
         camera = cameraNode
         cameraNode.position = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
         
-        setupHUD()
+//        setupHUD()
         setupCamera()
         
         UserDefaults.standard.set(false, forKey: "goblins101")
