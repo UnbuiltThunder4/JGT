@@ -362,8 +362,10 @@ class TossScene: SKScene, UIGestureRecognizerDelegate {
                     structure.update(self)
                 }
                 
-                if let structure = self.structuresList.structures[4] as? Trap {
-                    structure.update(self)
+                for i in 4...25 {
+                    if let structure = self.structuresList.structures[i] as? Trap {
+                        structure.update(self)
+                    }
                 }
             }
             

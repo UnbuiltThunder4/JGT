@@ -208,14 +208,29 @@ let gnomes2: [Enemy] = [
     Enemy(type: .axe, x: 1550, y: 3300),
     Enemy(type: .axe, x: 1850, y: 3300),
     Enemy(type: .small, x: 1600, y: 3100),
-    Enemy(type: .small, x: 1800, y: 3100),
+    Enemy(type: .small, x: 1800, y: 3100)
 ]
 
 let gnomes3: [Enemy] = [
-    Enemy(type: .small, x: 800, y: 2300),
-    Enemy(type: .small, x: 1200, y: 2300),
-    Enemy(type: .axe, x: 1350, y: 2800),
-    Enemy(type: .axe, x: 2500, y: 1450)
+//    let villageCoordinates3 = CGPoint(x: 1672, y: 2250)
+    Enemy(type: .small, x: 1672, y: 2750), //village
+    Enemy(type: .small, x: 1672, y: 1750),
+    Enemy(type: .small, x: 1972, y: 2000),
+    Enemy(type: .small, x: 1372, y: 2500),
+    Enemy(type: .axe, x: 1552, y: 2750),
+    Enemy(type: .axe, x: 1792, y: 2750),
+    Enemy(type: .axe, x: 1552, y: 2000),
+    Enemy(type: .axe, x: 1792, y: 2000),
+    Enemy(type: .axe, x: 1972, y: 2500),
+    Enemy(type: .axe, x: 1372, y: 2000),
+    
+    Enemy(type: .axe, x: 650, y: 1900), //alone
+    
+    Enemy(type: .bow, x: 800, y: 4200), //gate
+    
+    Enemy(type: .axe, x: 2600, y: 3100), //backdoor
+    Enemy(type: .axe, x: 2800, y: 3100),
+    
 ]
 
 public enum ProficencyType {
@@ -257,14 +272,14 @@ let gateCoordinates2 = CGPoint(x: 2700, y: 3750)
 let backdoorCoordinates2 = CGPoint(x: 500, y: 3635)
 let passageCoordinates2 = CGPoint(x: 500, y: 4100)
 
-let goblinmancyCircleCoordinates3 = CGPoint(x: 1600, y: 550)
-let tavernCoordinates3 = CGPoint(x: 1100, y: 950)
-let academyCoordinates3 = CGPoint(x: 2650, y: 1550)
-let villageCoordinates3 = CGPoint(x: 1000, y: 2500)
-let catapultCoordinates3 = CGPoint(x: 1350, y: 3000)
-let gateCoordinates3 = CGPoint(x: 1600, y: 3750)
-let backdoorCoordinates3 = CGPoint(x: 500, y: 3635)
-let passageCoordinates3 = CGPoint(x: 500, y: 4100)
+let goblinmancyCircleCoordinates3 = CGPoint(x: 2950, y: 400)
+let tavernCoordinates3 = CGPoint(x: 2950, y: 950)
+let academyCoordinates3 = CGPoint(x: 850, y: 550)
+let villageCoordinates3 = CGPoint(x: 1672, y: 2250)
+let catapultCoordinates3 = CGPoint(x: 850, y: 2750)
+let gateCoordinates3 = CGPoint(x: 600, y: 3750)
+let backdoorCoordinates3 = CGPoint(x: 2700, y: 3635)
+let passageCoordinates3 = CGPoint(x: 2700, y: 4100)
 
 var goblinmancyCircleCoordinates = CGPoint()
 var tavernCoordinates = CGPoint()
@@ -447,12 +462,38 @@ let levelstructures3: [Structure] = [
     Gate(x: gateCoordinates3.x, y: gateCoordinates3.y), // THIS HAS TO BE ON INDEX 1
     Backdoor(x: backdoorCoordinates3.x, y: backdoorCoordinates3.y),  // THIS HAS TO BE ON INDEX 2
     Catapult(x: catapultCoordinates3.x, y: catapultCoordinates3.y), // THIS HAS TO BE ON INDEX 3
-    Trap(x: catapultCoordinates3.x + 1000, y: catapultCoordinates3.y),  // THIS HAS TO BE ON INDEX 4
+    
+    Trap(x: 2700, y: 3500),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 2500, y: 3500),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 2900, y: 3500),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 2700, y: 3300),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 2500, y: 3300),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 2900, y: 3300),  // THIS HAS TO BE ON INDEX 4
+    
+    Trap(x: 600, y: 3500),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 400, y: 3500),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 200, y: 3500),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 800, y: 3500),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 1000, y: 3500),  // THIS HAS TO BE ON INDEX 4
+    
+    Trap(x: 600, y: 3300),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 400, y: 3300),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 200, y: 3300),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 800, y: 3300),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 1000, y: 3300),  // THIS HAS TO BE ON INDEX 4
+    
+    Trap(x: 600, y: 3100),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 400, y: 3100),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 200, y: 3100),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 800, y: 3100),  // THIS HAS TO BE ON INDEX 4
+    Trap(x: 1000, y: 3100),  // THIS HAS TO BE ON INDEX 4
+    
     Tavern(x: tavernCoordinates3.x, y: tavernCoordinates3.y),
     Academy(x: academyCoordinates3.x, y: academyCoordinates3.y),
     Village(x: villageCoordinates3.x, y: villageCoordinates3.y),
-    Structure(type: .passage, x: passageCoordinates2.x, y: passageCoordinates2.y, rotation: 0),
-    Structure(type: .goblincircle, x: goblinmancyCircleCoordinates2.x, y: goblinmancyCircleCoordinates2.y, rotation: 0),
+    Structure(type: .passage, x: passageCoordinates3.x, y: passageCoordinates3.y, rotation: 0),
+    Structure(type: .goblincircle, x: goblinmancyCircleCoordinates3.x, y: goblinmancyCircleCoordinates3.y, rotation: 0),
+    
     Structure(type: .tree, x: 350, y: 1350, rotation: 0),
     Structure(type: .tree, x: 1950, y: 800, rotation: 0),
     Structure(type: .tree, x: 600, y: 750, rotation: 0),
