@@ -18,7 +18,7 @@ enum HUDSettings {
     static var statsFontSize: CGFloat = 15
     static var nameFontColor: UIColor = .orange
     static var descFontColor: UIColor = .brown
-    static var tutorialNameFontSize: CGFloat = 50
+    static var tutorialNameFontSize: CGFloat = 55
     static var tutorialCounterFontSize: CGFloat = ((UIDevice.current.userInterfaceIdiom == .pad) ? 50 : 25)
     static var tutorialDescFontSize: CGFloat = 40
 }
@@ -338,7 +338,7 @@ class HUD: SKNode, ObservableObject {
         tutorialSheet.tutorialName.verticalAlignmentMode = .center
         tutorialSheet.tutorialName.fontColor = .black
         tutorialSheet.tutorialName.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? HUDSettings.tutorialNameFontSize :
-        HUDSettings.tutorialNameFontSize - 15
+        HUDSettings.tutorialNameFontSize - 20
         tutorialSheet.tutorialName.fontName = HUDSettings.nameFont
         tutorialSheet.tutorialDesc.fontColor = HUDSettings.descFontColor
         tutorialSheet.tutorialDesc.fontSize = UIDevice.current.userInterfaceIdiom == .pad ? HUDSettings.tutorialDescFontSize - 2 :
