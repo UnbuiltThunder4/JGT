@@ -80,7 +80,7 @@ struct GameOverView: View {
                     }
                     .padding(.horizontal)
                     
-//                    if (self.gameOverString == "You Win!") {
+                    if (self.gameOverString == "You Win!") {
                         Button {
                             withAnimation {
                                 if gameLogic.level < 3 {
@@ -101,7 +101,7 @@ struct GameOverView: View {
                             }
                         }
                         .padding(.horizontal)
-//                    }
+                    }
                 }
                 Spacer()
             }
