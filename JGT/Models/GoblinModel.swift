@@ -1274,7 +1274,7 @@ class Goblin: SKSpriteNode, Identifiable, ObservableObject {
                 self.state = .working
                 self.currentTask = self.throwRock
             }
-            else if (input == 1) {
+            else if (input == 1 || (input == 2 && self.hasRock == false)) {
                 removeAction(forKey: "walk")
                 if let catapult = self.closeStructure as? Catapult {
                     catapult.texture = SKTexture(imageNamed: "catapult-down")
